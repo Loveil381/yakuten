@@ -12,9 +12,6 @@ export default defineConfig({
       defaultLocale: 'zh',
       locales: {
         zh: { label: '中文', lang: 'zh-CN' },
-        en: { label: 'English', lang: 'en' },
-        ja: { label: '日本語', lang: 'ja' },
-        ko: { label: '한국어', lang: 'ko' },
       },
       customCss: [
         './src/styles/global.css',
@@ -57,10 +54,6 @@ export default defineConfig({
           slug: 'dose-limits',
         },
         {
-          label: '乳房发育专题',
-          slug: 'breast-development',
-        },
-        {
           label: '血检指南与自查工具',
           slug: 'blood-tests',
         },
@@ -69,23 +62,15 @@ export default defineConfig({
           slug: 'risks',
         },
         {
-          label: '中国现实',
-          slug: 'china-reality',
-        },
-        {
           label: '工具',
           items: [
-            { label: 'AI 问答助手', slug: 'tools/ai-assistant' },
             { label: '血检自查工具', slug: 'tools/blood-checker' },
-            { label: '剂量模拟器', slug: 'tools/dose-simulator' },
             { label: '注射剂量换算', slug: 'tools/injection-calculator' },
           ],
         },
         {
           label: '附录',
           items: [
-            { label: '对现有资源的批判性评估', slug: 'appendix-a' },
-            { label: '完整参考文献库', slug: 'appendix-b' },
             { label: '关于本站', slug: 'about' },
           ],
         },

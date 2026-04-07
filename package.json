@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/validate-content.mjs && astro build",
     "preview": "astro preview",
-    "check": "astro check",
+    "check": "node scripts/validate-content.mjs && astro check",
+    "validate:content": "node scripts/validate-content.mjs",
     "astro": "astro"
   },
   "dependencies": {
