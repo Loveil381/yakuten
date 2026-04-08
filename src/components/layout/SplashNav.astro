@@ -1,0 +1,97 @@
+---
+/**
+ * SplashNav — 首页水平导航栏
+ * 在 Starlight splash 页面中替代侧边栏，提供主要页面入口。
+ * 玻璃面板样式，固定在 header 下方。
+ */
+import { t, getLocale } from '../../i18n/ui';
+
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
+const prefix = locale === 'en' ? '/en' : '/zh';
+
+const navItems: NavItem[] = [
+  { label: t(locale, 'nav.before'), href: `${prefix}/before-you-start/` },
+  { label: t(locale, 'nav.pathway'), href: `${prefix}/pathway/` },
+  { label: t(locale, 'nav.medications'), href: `${prefix}/medications/estrogens/estradiol-valerate/` },
+  { label: t(locale, 'nav.doseLimits'), href: `${prefix}/dose-limits/` },
+  { label: t(locale, 'nav.bloodTests'), href: `${prefix}/blood-tests/` },
+  { label: t(locale, 'nav.risks'), href: `${prefix}/risks/` },
+  { label: t(locale, 'nav.tools'), href: `${prefix}/tools/blood-checker/` },
+];
+---
+
+<nav class="splash-nav glass-panel" aria-label={t(locale, 'nav.ariaLabel')}>
+  <div class="splash-nav__inner">
+    {navItems.map((item) => (
+      <a href={item.href} class="splash-nav__link">
+        {item.label}
+      </a>
+    ))}
+  </div>
+</nav>
+
+<style>
+  .splash-nav {
+    position: sticky;
+    top: var(--sl-nav-height, 3.5rem);
+    z-index: 100;
+    border-bottom: 1px solid var(--color-outline-20);
+    padding: 0 var(--space-lg);
+  }
+
+  .splash-nav__inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .splash-nav__inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .splash-nav__link,
+  :global(.sl-markdown-content) .splash-nav__link {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-md);
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition:
+      color var(--transition-fast),
+      border-color var(--transition-fast);
+  }
+
+  .splash-nav__link:hover,
+  :global(.sl-markdown-content) .splash-nav__link:hover {
+    color: var(--color-primary-light);
+    border-bottom-color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .splash-nav__inner {
+      justify-content: flex-start;
+      padding: var(--space-xs) 0;
+    }
+
+    .splash-nav__link {
+      font-size: 0.8125rem;
+      padding: var(--space-xs) var(--space-sm);
+    }
+  }
+</style>

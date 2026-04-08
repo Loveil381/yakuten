@@ -4,19 +4,23 @@
  * Designed for the splash template on the zh/index.mdx page.
  *
  * @prop subtitle - English subtitle displayed above the main title
- * @prop title - Main title text (default: "HRT薬典")
+ * @prop title - Main title text (default: localized)
  * @prop slogan - Slogan text in gold
  */
+import { t, getLocale } from '../../i18n/ui';
+
 interface Props {
   subtitle?: string;
   title?: string;
   slogan?: string;
 }
 
+const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
+
 const {
   subtitle = 'THE CELESTIAL PHARMACOPEIA',
-  title = 'HRT薬典',
-  slogan = '愿此行，抵达真实的自己',
+  title = t(locale, 'hero.title'),
+  slogan = t(locale, 'hero.slogan'),
 } = Astro.props;
 ---
 
@@ -37,8 +41,8 @@ const {
   .hero-section {
     position: relative;
     z-index: 10;
-    padding-top: 5rem;
-    padding-bottom: 8rem;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
     padding-inline: var(--space-lg);
     overflow: hidden;
   }

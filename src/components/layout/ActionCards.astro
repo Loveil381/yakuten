@@ -8,6 +8,7 @@
  *   2. "I'm already on HRT" (primary / pink)
  *   3. "Something feels wrong" (danger / red)
  */
+import { t, getLocale } from '../../i18n/ui';
 
 interface CardData {
   title: string;
@@ -18,35 +19,38 @@ interface CardData {
   icon: string; // SVG path data or identifier
 }
 
+const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
+const prefix = locale === 'en' ? '/en' : '/zh';
+
 const cards: CardData[] = [
   {
-    title: '我还没开始用药',
-    description: '了解基线检查和禁忌症，为您的医疗旅程建立科学的安全起点。',
+    title: t(locale, 'action.notStarted.title'),
+    description: t(locale, 'action.notStarted.desc'),
     cta: 'Explore Baseline',
-    href: '/zh/before-you-start/',
+    href: `${prefix}/before-you-start/`,
     color: 'safe',
     icon: 'clipboard',
   },
   {
-    title: '我已经在用药',
-    description: '查看你的用药路径图，追踪生理变化指标，优化长期健康管理方案。',
+    title: t(locale, 'action.onHRT.title'),
+    description: t(locale, 'action.onHRT.desc'),
     cta: 'Trace Pathway',
-    href: '/zh/pathway/',
+    href: `${prefix}/pathway/`,
     color: 'primary',
     icon: 'pathway',
   },
   {
-    title: '我觉得身体出了问题',
-    description: '识别危险信号，掌握紧急自救指南。生命安全永远是首要准则。',
+    title: t(locale, 'action.problem.title'),
+    description: t(locale, 'action.problem.desc'),
     cta: 'Emergency Action',
-    href: '/zh/risks/',
+    href: `${prefix}/risks/`,
     color: 'danger',
     icon: 'alert',
   },
 ];
 ---
 
-<section class="action-cards" aria-label="快速入口">
+<section class="action-cards" aria-label={t(locale, 'action.ariaLabel')}>
   <div class="action-cards__grid">
     {cards.map((card) => (
       <a

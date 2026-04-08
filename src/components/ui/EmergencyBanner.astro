@@ -4,23 +4,28 @@
  * 红色背景 + 白色文字，不可关闭，固定在页面最顶部。
  * 显示需要立即就医的紧急症状清单。
  */
+import { t, getLocale } from '../../i18n/ui';
+
 interface Props {
   linkHref?: string;
   linkText?: string;
   class?: string;
 }
 
+const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
+const defaultLinkHref = locale === 'en' ? '/en/risks/' : '/zh/risks/';
+
 const {
-  linkHref = '/zh/risks/',
-  linkText = '查看详情并立即行动',
+  linkHref = defaultLinkHref,
+  linkText = t(locale, 'emergency.link'),
   class: className = '',
 } = Astro.props;
 ---
 
 <div class:list={['emergency-banner', className]} role="alert" aria-live="assertive">
-  <strong>如果你正在经历以下任何情况，请立即停药并就医：</strong>
+  <strong>{t(locale, 'emergency.text')}</strong>
   <span class="emergency-banner__symptoms">
-    单侧小腿肿胀疼痛 · 突发严重头痛伴视力变化 · 胸痛或呼吸困难 · 皮肤/眼白发黄 · 持续严重情绪崩溃或自杀意念
+    {t(locale, 'emergency.symptoms')}
   </span>
   <a href={linkHref}>{linkText}</a>
 </div>

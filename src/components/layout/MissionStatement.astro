@@ -4,23 +4,26 @@
  * Displays the 84% statistic and safety baseline message.
  * Glass panel with clipped corners and gold accent bar.
  */
+import { t, getLocale } from '../../i18n/ui';
+
+const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
 ---
 
-<section class="mission" aria-label="使命声明">
+<section class="mission" aria-label={t(locale, 'mission.ariaLabel')}>
   <div class="mission__card clipped-card glass-panel">
     <div class="mission__accent-bar" aria-hidden="true"></div>
     <div class="mission__content">
       <div class="mission__stat-block">
         <p class="mission__label">The Critical Reality</p>
         <h2 class="mission__headline">
-          在中国，超过
-          <span class="mission__stat">84%</span>
-          的跨性别激素使用者没有任何医疗指导。
+          {t(locale, 'mission.stat.before')}
+          <span class="mission__stat">{t(locale, 'mission.stat.number')}</span>
+          {t(locale, 'mission.stat.after')}
         </h2>
       </div>
       <div class="mission__rule" aria-hidden="true"></div>
       <p class="mission__body">
-        本站的建立，是为了在你找到愿意接诊的医生之前，<br class="mission__br" />给你一条<span class="mission__highlight">安全的底线</span>。
+        {t(locale, 'mission.body.before')}<br class="mission__br" />{t(locale, 'mission.body.give')}<span class="mission__highlight">{t(locale, 'mission.body.baseline')}</span>。
       </p>
     </div>
   </div>

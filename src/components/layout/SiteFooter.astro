@@ -3,28 +3,31 @@
  * SiteFooter — Four-column footer with disclaimer, privacy, sources, dev docs.
  * Matches the Stitch design: mono font labels, muted text, gold headings.
  */
+import { t, getLocale } from '../../i18n/ui';
 
 interface FooterColumn {
   title: string;
   text: string;
 }
 
+const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
+
 const columns: FooterColumn[] = [
   {
-    title: '免责声明',
-    text: '本站内容仅供参考，不构成医疗建议。在开始任何激素治疗前，请务必咨询专业医疗人员。',
+    title: t(locale, 'footer.disclaimer.title'),
+    text: t(locale, 'footer.disclaimer.text'),
   },
   {
-    title: '隐私权协议',
-    text: '我们重视您的隐私，采用去中心化存储技术，确保您的浏览记录不被非法追踪。',
+    title: t(locale, 'footer.privacy.title'),
+    text: t(locale, 'footer.privacy.text'),
   },
   {
-    title: '药理来源',
-    text: '所有数据均来自 WPATH SOC8 指南及经过同行评审的最新内分泌学研究论文。',
+    title: t(locale, 'footer.sources.title'),
+    text: t(locale, 'footer.sources.text'),
   },
   {
-    title: '开发者文档',
-    text: '项目基于开源精神构建，欢迎所有愿意为跨性别社群贡献的技术力量加入我们。',
+    title: t(locale, 'footer.dev.title'),
+    text: t(locale, 'footer.dev.text'),
   },
 ];
 ---
@@ -41,11 +44,11 @@ const columns: FooterColumn[] = [
     </div>
 
     <div class="site-footer__bottom">
-      <div class="site-footer__brand">HRT薬典</div>
+      <div class="site-footer__brand">{t(locale, 'footer.brand')}</div>
       <p class="site-footer__statement">
-        本站不提供处方、不销售药物、不收集个人信息。
+        {t(locale, 'footer.notice')}
       </p>
-      <nav class="site-footer__links" aria-label="底部链接">
+      <nav class="site-footer__links" aria-label={t(locale, 'footer.navLabel')}>
         <a href="/zh/about/">PRIVACY POLICY</a>
         <a href="/zh/about/">MEDICAL DISCLAIMER</a>
         <a href="https://github.com" rel="noopener noreferrer" target="_blank">GITHUB PROJECT</a>
