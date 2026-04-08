@@ -96,3 +96,85 @@ nav.sidebar-content a[aria-current="page"] {
   color: var(--color-primary-light);
   font-weight: 600;
 }
+
+/* ============================================================
+   Pagefind Search UI — 毛玻璃风格覆盖
+   ============================================================ */
+
+/* 搜索触发按钮 */
+site-search button[data-open-modal] {
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  color: var(--color-text-secondary);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+site-search button[data-open-modal]:hover {
+  border-color: rgba(200, 75, 124, 0.4);
+  color: var(--color-text-primary);
+}
+
+/* 搜索模态框 */
+site-search dialog {
+  background: rgba(13, 11, 20, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(200, 75, 124, 0.2);
+}
+
+/* 遮罩层 */
+site-search dialog::backdrop {
+  background: rgba(13, 11, 20, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* 搜索输入框 */
+#starlight__search .pagefind-ui__search-input {
+  background: rgba(26, 22, 37, 0.8);
+  border-color: rgba(200, 75, 124, 0.2);
+  color: var(--color-text-primary);
+}
+
+#starlight__search .pagefind-ui__search-input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(200, 75, 124, 0.15);
+}
+
+/* 搜索结果高亮 */
+#starlight__search mark {
+  background: rgba(200, 75, 124, 0.25);
+  color: var(--color-primary-light);
+  padding: 0 2px;
+}
+
+/* 结果卡片 */
+#starlight__search .pagefind-ui__result {
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+#starlight__search .pagefind-ui__result:hover {
+  border-color: rgba(200, 75, 124, 0.3);
+}
+
+/* 结果标题 */
+#starlight__search .pagefind-ui__result-title {
+  color: var(--color-primary-light);
+}
+
+/* 结果摘要 */
+#starlight__search .pagefind-ui__result-excerpt {
+  color: var(--color-text-secondary);
+}
+
+/* "无结果"提示 */
+#starlight__search .pagefind-ui__message {
+  color: var(--color-text-muted);
+}
