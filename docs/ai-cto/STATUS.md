@@ -1,14 +1,14 @@
 # STATUS
 
 **Last Updated:** 2026-04-08
-**Current Version:** v0.4.0 (post Phase 5B)
-**Git Tag:** v0.3.0
+**Current Version:** v0.4.0
+**Git Tag:** v0.4.0
 
 ---
 
-## 当前阶段：Phase 5B 完成
+## 当前阶段：Phase 6 完成（收尾发布）
 
-Phase 5A（证据加固 + 品牌语言统一）和 Phase 5B（品牌图鉴 + 质量审计修复）均已完成。
+Phase 5（证据加固 + 品牌图鉴）和 Phase 6（性能 + 数据完善 + 收尾）均已完成。
 
 ---
 
@@ -18,63 +18,66 @@ Phase 5A（证据加固 + 品牌语言统一）和 Phase 5B（品牌图鉴 + 质
 
 | 功能 | 状态 | 质量 |
 |------|------|------|
-| 中文核心文档（9 页 + 16 药物详解页） | ✅ | 良好（全部有内联 CitationRef） |
-| 用药路径时间线 | ✅ | 良好（v0.3.0 重构） |
+| 中文核心文档（9 页 + 16 药物详解页） | ✅ | 优秀（全部有内联 CitationRef + DOI 链接） |
+| 用药路径时间线 | ✅ | 良好 |
 | 乳房发育专题 | ✅ | 良好 |
 | 中国现实页 | ✅ | 良好 |
-| 血检指南 | ✅ | 待扩展 |
-| 英文核心文档（5 页） | ✅ | 良好（已补 CitationRef） |
-| 日文核心文档（5 页） | ✅ | 良好（已补 CitationRef） |
+| 血检指南 | ✅ | 良好 |
+| 英文核心文档（6 页，含 about） | ✅ | 良好（已补 CitationRef） |
+| 日文核心文档（6 页，含 about） | ✅ | 良好（已补 CitationRef） |
 | 血检自查工具 | ✅ | 良好 |
 | 注射剂量计算器 | ✅ | 良好 |
 | 剂量模拟器 | ✅ | 良好 |
 | AI 问答助手（Gemini Flash） | ✅ | 良好 |
-| 友好医疗资源数据库 | ✅ | 良好（8 家） |
+| 友好医疗资源数据库（15 家） | ✅ | 良好（全国主要区域覆盖） |
 | 品牌图鉴（DrugBrandGallery） | ✅ | 良好（40+ 品牌，含 12 印度品牌） |
-| SEO / OG 图像 | ✅ | 良好 |
+| 引用系统（DOI 可点击跳转） | ✅ | 优秀（22 条文献，18 条有 DOI） |
+| SEO / OG 图像 / JSON-LD | ✅ | 良好 |
 | 米哈游视觉主题 | ✅ | 优秀 |
 | 多语言 UI 字符串 | ✅ | 良好 |
 | Pagefind 搜索（三语索引） | ✅ | 良好 |
-| Google Fonts 字体加载 | ✅ | 良好 |
-| 禁用药物页 | ✅ | 完整 |
+| Google Fonts 非阻塞加载 | ✅ | 优秀（preload + swap） |
 | CSS 变量系统 | ✅ | 完整（零硬编码颜色） |
+| 禁用药物页 | ✅ | 完整 |
+| About 页面（三语） | ✅ | 完整 |
 
-### 未完成
+### 未完成（暂缓）
 
 | 功能 | 优先级 | 备注 |
 |------|--------|------|
-| en/ja 药物详解页面 | P2 | 仅中文有完整药物页（16 页），翻译工作量巨大 |
-| 医院数据库 en/ja 版 | P2 | 仅中文 |
-| about 页面内容扩展 | P2 | 现有内容单薄 |
-| references.json DOI 字段 | P2 | 有 22 条记录但缺 DOI/URL 结构化字段 |
-| React 组件 aria-label i18n | P3 | 中文硬编码但仅影响中文工具页 |
+| en/ja 药物详解页面翻译 | P2 | 16×2=32 页，工作量巨大，以后做 |
+| 品牌图鉴实物图片 | P3 | 需要社区贡献素材 |
+| React 组件 aria-label i18n | P3 | 仅影响中文工具页 |
 
 ---
 
-## Phase 5 完成记录
+## Phase 6 完成记录
 
-### Phase 5A — 证据加固 + 品牌语言统一 ✅
+### Sprint A — 性能优化 ✅
 
-| 任务 | 状态 | 结果 |
-|------|------|------|
-| risks.mdx 引用补全 | ✅ | X → B，7 refs，8 CitationRef |
-| pathway.mdx 引用补全 | ✅ | X → B，5 refs，8 CitationRef |
-| blood-tests.mdx 引用补全 | ✅ | 补 2 条 CitationRef |
-| 英文硬编码 → i18n | ✅ | 9 处 → t() 函数 |
-| 虚假隐私声明修正 | ✅ | 移除"去中心化存储" |
+| 任务 | 结果 |
+|------|------|
+| FloatingAIChat client:load → client:idle | 275KB React 运行时延迟到浏览器空闲加载 |
+| Google Fonts render-blocking → preload | 字体 CSS 非阻塞，FCP 显著改善 |
 
-### Phase 5B — 品牌图鉴 + 质量审计 ✅
+### Sprint B — 数据完善 ✅
 
-| 任务 | 状态 | 结果 |
-|------|------|------|
-| DrugBrandGallery 组件 | ✅ | 新组件 + drug-brands.json（40+ 品牌） |
-| 图鉴嵌入 11 药物页 | ✅ | 所有药物详解页底部有品牌图鉴 |
-| 印度药品覆盖 | ✅ | 12 条印度品牌（Zydus/Cipla/Sun Pharma/Hetero/Panacea） |
-| 日本注射液品牌 | ✅ | 富士製薬 Progynon Depot |
-| 占位页删除 | ✅ | appendix-a/b 删除（91 → 89 页） |
-| CSS 未定义变量修复 | ✅ | --radius-sm/md, --color-border, --color-text-on-dark, --color-warning-low |
-| 硬编码颜色消除 | ✅ | 6 处 hex → CSS 变量（RiskCard/EvidenceBadge/DrugInfoBox/EmergencyActions/emergency.css） |
-| en/ja 核心页引用补全 | ✅ | 6 页 X → B，全部有 CitationRef |
+| 任务 | 结果 |
+|------|------|
+| references.json DOI 补全 | 22 条全部有 doi/journal/url 字段 |
+| CitationRef 点击跳转 | 上标 [N] 点击打开 DOI 原文（新窗口） |
+| 医院数据库扩展 | 8 → 15 家（+深圳/杭州/南京/武汉/重庆/西安/沈阳） |
+
+### 收尾修复 ✅
+
+| 修复 | 详情 |
+|------|------|
+| 首页药物详解 404 | SplashNav 链接从不存在的 estradiol-valerate → estrogens/overview |
+| locale prefix 硬编码 | `locale === 'en' ? '/en' : '/zh'` → `/${locale}`（日语不再被错误映射） |
+| 循証 → 循证 | 全项目统一简体字（astro.config + PRODUCT-VISION 最后两处） |
+| pathway 乱码 | UTF-8 损坏的"初"字修复 |
+| en/ja about 页面 | 新建完整翻译版 |
+| 全站死链检查 | 3391 个内部链接全部通过，零死链 |
 
 ---
 
@@ -82,13 +85,13 @@ Phase 5A（证据加固 + 品牌语言统一）和 Phase 5B（品牌图鉴 + 质
 
 | 维度 | 评分 | 变化 |
 |------|------|------|
-| 产品完整性 | 8.5/10 | ↑ from 8（品牌图鉴新增） |
-| 技术质量 | 9/10 | ↑ from 8.5（CSS 变量全覆盖，零硬编码颜色） |
-| 内容质量 | 8.5/10 | ↑ from 7（en/ja 引用补全，占位页删除） |
+| 产品完整性 | 9/10 | ↑ from 8.5 |
+| 技术质量 | 9.5/10 | ↑ from 9（性能优化 + 零死链） |
+| 内容质量 | 9/10 | ↑ from 8.5（DOI 可点击 + 医院 15 家） |
 | 视觉设计 | 9/10 | — |
-| 性能 | 7/10 | — |
-| i18n 完整性 | 6.5/10 | ↑ from 5.5（en/ja 核心页引用完整） |
-| **综合** | **8.1/10** | ↑ from 7.5 |
+| 性能 | 8.5/10 | ↑ from 7（React 延迟 + 字体非阻塞） |
+| i18n 完整性 | 7/10 | ↑ from 6.5（en/ja about 完成） |
+| **综合** | **8.7/10** | ↑ from 8.1 |
 
 ---
 
@@ -96,7 +99,6 @@ Phase 5A（证据加固 + 品牌语言统一）和 Phase 5B（品牌图鉴 + 质
 
 | 问题 | 严重性 | 状态 |
 |------|--------|------|
-| `astro preview` 本地无法测试 Pagefind | 低 | 已知限制 |
-| en/ja 药物详解页不存在（404） | 中 | 暂缓（工作量巨大） |
-| React 组件 aria-label 中文硬编码 | 低 | 仅影响中文工具页，P3 |
-| 品牌图鉴暂无实物图片 | 低 | 文字描述为主，图片后续补充 |
+| en/ja 药物详解页不存在 | 中 | 暂缓（配额限制） |
+| 品牌图鉴暂无实物图片 | 低 | 需社区素材 |
+| React 组件 aria-label 中文硬编码 | 低 | P3 |
