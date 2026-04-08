@@ -8,7 +8,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'HRT药典',
-      description: '循証 · 减害 · 引导就医 — 面向跨性别女性的 HRT 安全底线信息站',
+      description: '循证 · 减害 · 引导就医 — 面向跨性别女性的 HRT 安全底线信息站',
       defaultLocale: 'zh',
       locales: {
         zh: { label: '中文', lang: 'zh-CN' },
@@ -143,9 +143,16 @@ export default defineConfig({
         {
           tag: 'link',
           attrs: {
-            rel: 'stylesheet',
+            rel: 'preload',
+            as: 'style',
             href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+SC:wght@400;600&family=Noto+Serif+SC:wght@400;700&display=swap',
+            onload: "this.onload=null;this.rel='stylesheet'",
           },
+        },
+        // Fallback for no-JS browsers
+        {
+          tag: 'noscript',
+          content: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+SC:wght@400;600&family=Noto+Serif+SC:wght@400;700&display=swap" />',
         },
         // Dark theme default
         {
