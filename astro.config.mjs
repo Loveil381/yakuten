@@ -2,9 +2,13 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import react from '@astrojs/react';
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   site: 'https://hrtyaku.com',
+  adapter: vercel({
+    webAnalytics: { enabled: true },
+  }),
   integrations: [
     starlight({
       title: 'HRT薬典',
