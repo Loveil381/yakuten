@@ -13,6 +13,9 @@ export default defineConfig({
       locales: {
         zh: { label: '中文', lang: 'zh-CN' },
       },
+      components: {
+        Head: './src/components/Head.astro',
+      },
       customCss: [
         './src/styles/global.css',
         './src/styles/glass.css',
