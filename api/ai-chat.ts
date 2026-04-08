@@ -150,7 +150,7 @@ export default async function handler(req: Request) {
     const recentMessages = messages.slice(-10);
 
     const result = streamText({
-      model: google('gemini-3-flash-preview'),
+      model: google('gemini-2.0-flash'),
       system: SYSTEM_PROMPT,
       messages: recentMessages,
       maxOutputTokens: 2048,
