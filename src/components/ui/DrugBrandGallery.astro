@@ -1,0 +1,183 @@
+---
+/**
+ * DrugBrandGallery — 药物品牌图鉴卡片组
+ * 展示某药物在各国的品牌、规格和外观信息。
+ * 玻璃拟态卡片，符合「二相乐园」设计风格。
+ *
+ * @prop drugId - 药物 ID（对应 drug-brands.json 的 key）
+ * @prop title  - 板块标题（默认："品牌图鉴"）
+ */
+import brandData from '../../data/drug-brands.json';
+
+interface Props {
+  drugId: string;
+  title?: string;
+}
+
+const { drugId, title = '品牌图鉴' } = Astro.props;
+
+type BrandEntry = {
+  name: string;
+  manufacturer: string;
+  country: string;
+  countryName: string;
+  spec: string;
+  appearance: string;
+  notes: string;
+};
+
+const brands: BrandEntry[] = (brandData as Record<string, BrandEntry[]>)[drugId] ?? [];
+
+/** Country code → flag emoji */
+function flag(code: string): string {
+  const chars = [...code.toUpperCase()].map(
+    (c) => String.fromCodePoint(0x1f1e6 - 65 + c.charCodeAt(0))
+  );
+  return chars.join('');
+}
+---
+
+{brands.length > 0 && (
+  <section class="brand-gallery" aria-label={title}>
+    <h2 class="brand-gallery__title">{title}</h2>
+    <div class="brand-gallery__grid">
+      {brands.map((b) => (
+        <div class="brand-card glass-card glass-card--sm glass-card--static">
+          <div class="brand-card__header">
+            <span class="brand-card__flag" aria-hidden="true">{flag(b.country)}</span>
+            <span class="brand-card__country">{b.countryName}</span>
+          </div>
+          <h3 class="brand-card__name">{b.name}</h3>
+          <dl class="brand-card__details">
+            <div class="brand-card__row">
+              <dt>厂商</dt>
+              <dd>{b.manufacturer}</dd>
+            </div>
+            <div class="brand-card__row">
+              <dt>规格</dt>
+              <dd>{b.spec}</dd>
+            </div>
+            <div class="brand-card__row">
+              <dt>外观</dt>
+              <dd>{b.appearance}</dd>
+            </div>
+          </dl>
+          {b.notes && (
+            <p class="brand-card__notes">{b.notes}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .brand-gallery {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid rgba(86, 65, 71, 0.2);
+  }
+
+  .brand-gallery__title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 var(--space-xl) 0;
+  }
+
+  .brand-gallery__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  @media (min-width: 640px) {
+    .brand-gallery__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .brand-gallery__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* --- Brand card --- */
+  .brand-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .brand-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .brand-card__flag {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .brand-card__country {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .brand-card__name {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  /* --- Detail list --- */
+  .brand-card__details {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .brand-card__row {
+    display: flex;
+    gap: var(--space-sm);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .brand-card__row dt {
+    flex-shrink: 0;
+    width: 2.5rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding-top: 1px;
+  }
+
+  .brand-card__row dd {
+    margin: 0;
+    color: var(--color-text-secondary);
+  }
+
+  /* --- Notes --- */
+  .brand-card__notes {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: var(--space-xs) 0 0 0;
+    padding-top: var(--space-xs);
+    border-top: 1px solid rgba(86, 65, 71, 0.15);
+  }
+</style>

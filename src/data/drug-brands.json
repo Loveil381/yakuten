@@ -1,0 +1,375 @@
+{
+  "estradiol-oral": [
+    {
+      "name": "补佳乐 Progynova",
+      "manufacturer": "拜耳 (Bayer)",
+      "country": "DE",
+      "countryName": "德国",
+      "spec": "2mg × 21片",
+      "appearance": "蓝色糖衣片",
+      "notes": "原研药，欧洲/国际版包装"
+    },
+    {
+      "name": "补佳乐 Progynova",
+      "manufacturer": "拜耳 (Bayer China)",
+      "country": "CN",
+      "countryName": "中国",
+      "spec": "1mg × 21片",
+      "appearance": "白色小圆糖衣片",
+      "notes": "中国大陆最常见制剂，线下药房可购，需处方"
+    },
+    {
+      "name": "Progynova",
+      "manufacturer": "拜耳 (Bayer Thailand)",
+      "country": "TH",
+      "countryName": "泰国",
+      "spec": "2mg × 28片",
+      "appearance": "蓝色糖衣片",
+      "notes": "泰国版，常见于代购渠道，与德国原研同配方"
+    },
+    {
+      "name": "Progynova",
+      "manufacturer": "Zydus (拜耳印度授权)",
+      "country": "IN",
+      "countryName": "印度",
+      "spec": "2mg × 28片",
+      "appearance": "蓝色糖衣片，印度包装",
+      "notes": "拜耳授权 Zydus Cadila 生产，价格较低，与原研同配方"
+    },
+    {
+      "name": "Estrofem",
+      "manufacturer": "Novo Nordisk",
+      "country": "TH",
+      "countryName": "泰国",
+      "spec": "2mg × 28片",
+      "appearance": "蓝色三角形薄膜衣片",
+      "notes": "微粉化雌二醇（非戊酸酯），适合舌下含服，泰国代购常见"
+    }
+  ],
+  "estradiol-sublingual": [
+    {
+      "name": "Estrofem",
+      "manufacturer": "Novo Nordisk",
+      "country": "TH",
+      "countryName": "泰国",
+      "spec": "2mg × 28片",
+      "appearance": "蓝色三角形薄膜衣片",
+      "notes": "最常用于舌下含服的制剂，微粉化雌二醇"
+    },
+    {
+      "name": "补佳乐 Progynova",
+      "manufacturer": "拜耳 / Zydus",
+      "country": "CN",
+      "countryName": "中国/印度",
+      "spec": "1mg / 2mg",
+      "appearance": "糖衣片",
+      "notes": "可舌下含服但非官方适应症，糖衣影响含服速度"
+    }
+  ],
+  "estradiol-patch": [
+    {
+      "name": "Climara",
+      "manufacturer": "拜耳 (Bayer)",
+      "country": "DE",
+      "countryName": "德国",
+      "spec": "50µg/24h · 100µg/24h",
+      "appearance": "透明椭圆形薄膜贴片",
+      "notes": "每周更换一次，储库型贴片"
+    },
+    {
+      "name": "Estradot",
+      "manufacturer": "Novartis",
+      "country": "CH",
+      "countryName": "瑞士",
+      "spec": "25/37.5/50/75/100µg/24h",
+      "appearance": "小型透明圆形贴片",
+      "notes": "每周更换两次（每3-4天），基质型贴片"
+    },
+    {
+      "name": "Estraderm",
+      "manufacturer": "Novartis",
+      "country": "US",
+      "countryName": "美国",
+      "spec": "50µg/24h · 100µg/24h",
+      "appearance": "透明圆形贴片",
+      "notes": "早期储库型贴片，部分地区已被 Estradot 替代"
+    }
+  ],
+  "estradiol-gel": [
+    {
+      "name": "Oestrogel",
+      "manufacturer": "Besins Healthcare",
+      "country": "FR",
+      "countryName": "法国",
+      "spec": "0.06% · 80g 管装",
+      "appearance": "透明无色凝胶，泵头设计",
+      "notes": "法国原研，每泵 1.5mg E2，最常见的凝胶制剂"
+    },
+    {
+      "name": "Oestrogel",
+      "manufacturer": "Besins Healthcare (Thailand)",
+      "country": "TH",
+      "countryName": "泰国",
+      "spec": "0.06% · 80g",
+      "appearance": "透明无色凝胶",
+      "notes": "泰国版，常见于代购渠道"
+    },
+    {
+      "name": "Sandrena",
+      "manufacturer": "Orion Pharma",
+      "country": "FI",
+      "countryName": "芬兰",
+      "spec": "0.5mg / 1mg 独立小包装",
+      "appearance": "白色凝胶小袋",
+      "notes": "单次剂量小包装，计量精确"
+    },
+    {
+      "name": "Divigel",
+      "manufacturer": "Orion Pharma",
+      "country": "FI",
+      "countryName": "芬兰",
+      "spec": "0.5mg / 1mg 独立小包装",
+      "appearance": "透明凝胶小袋",
+      "notes": "与 Sandrena 类似的单剂量包装"
+    }
+  ],
+  "estradiol-injection": [
+    {
+      "name": "Progynon Depot",
+      "manufacturer": "Zydus (拜耳印度授权)",
+      "country": "IN",
+      "countryName": "印度",
+      "spec": "10mg/mL × 1mL 安瓿",
+      "appearance": "透明油状溶液，玻璃安瓿",
+      "notes": "印度产戊酸雌二醇注射液，拜耳授权生产"
+    },
+    {
+      "name": "Progynon Depot",
+      "manufacturer": "拜耳 (Bayer)",
+      "country": "DE",
+      "countryName": "德国",
+      "spec": "10mg/mL × 1mL",
+      "appearance": "透明油状溶液，安瓿",
+      "notes": "原研注射用戊酸雌二醇"
+    },
+    {
+      "name": "プロギノン・デポー (Progynon Depot)",
+      "manufacturer": "富士製薬工業 (Fuji Pharma)",
+      "country": "JP",
+      "countryName": "日本",
+      "spec": "10mg/mL × 1mL 安瓿",
+      "appearance": "透明油状溶液，玻璃安瓿",
+      "notes": "日本产戊酸雌二醇注射液，富士製薬独家授权生产，注射间隔通常为每周一次"
+    },
+    {
+      "name": "Pelangi (EV)",
+      "manufacturer": "多种厂商",
+      "country": "ID",
+      "countryName": "印尼",
+      "spec": "10mg/mL",
+      "appearance": "油状溶液，小瓶装",
+      "notes": "印尼产，在东南亚 DIY 社区有流通"
+    }
+  ],
+  "cyproterone-acetate": [
+    {
+      "name": "Androcur",
+      "manufacturer": "拜耳 (Bayer)",
+      "country": "DE",
+      "countryName": "德国",
+      "spec": "50mg × 20片",
+      "appearance": "白色圆形片，一面有十字刻痕（可四分）",
+      "notes": "原研 CPA，十字刻痕方便切为 12.5mg 使用"
+    },
+    {
+      "name": "色谱龙 Androcur",
+      "manufacturer": "拜耳 (Bayer Taiwan)",
+      "country": "TW",
+      "countryName": "台湾",
+      "spec": "50mg × 20片",
+      "appearance": "白色圆形片，十字刻痕",
+      "notes": "台湾版，中文圈最常见来源之一"
+    },
+    {
+      "name": "Androcur",
+      "manufacturer": "Zydus (拜耳印度授权)",
+      "country": "IN",
+      "countryName": "印度",
+      "spec": "50mg × 10片",
+      "appearance": "白色圆形片",
+      "notes": "印度产 CPA，价格显著低于欧洲/台湾版"
+    },
+    {
+      "name": "Cypotero",
+      "manufacturer": "多种印度仿制药厂",
+      "country": "IN",
+      "countryName": "印度",
+      "spec": "50mg",
+      "appearance": "白色圆形片",
+      "notes": "印度仿制 CPA，确认厂商资质后可用"
+    },
+    {
+      "name": "Siterone",
+      "manufacturer": "AFT Pharmaceuticals",
+      "country": "NZ",
+      "countryName": "新西兰",
+      "spec": "50mg / 100mg",
+      "appearance": "白色圆形片",
+      "notes": "新西兰产，部分经印度渠道流通"
+    }
+  ],
+  "spironolactone": [
+    {
+      "name": "螺内酯 / 安体舒通",
+      "manufacturer": "多种国产厂商",
+      "country": "CN",
+      "countryName": "中国",
+      "spec": "20mg × 100片",
+      "appearance": "白色小圆片",
+      "notes": "中国大陆最廉价易得的抗雄药物，OTC 可购"
+    },
+    {
+      "name": "Aldactone",
+      "manufacturer": "RPG Life Sciences / Pfizer India",
+      "country": "IN",
+      "countryName": "印度",
+      "spec": "25mg / 50mg / 100mg",
+      "appearance": "白色至类白色圆形片",
+      "notes": "印度版螺内酯，多种规格可选"
+    },
+    {
+      "name": "Aldactone",
+      "manufacturer": "Pfizer",
+      "country": "US",
+      "countryName": "美国",
+      "spec": "25mg / 50mg / 100mg",
+      "appearance": "白色/黄色薄膜衣片",
+      "notes": "原研品牌，美国 HRT 最常用抗雄"
+    }
+  ],
+  "bicalutamide": [
+    {
+      "name": "康士得 Casodex",
+      "manufacturer": "阿斯利康 (AstraZeneca)",
+      "country": "GB",
+      "countryName": "英国",
+      "spec": "50mg × 28片",
+      "appearance": "白色薄膜衣片",
+      "notes": "原研比卡鲁胺，价格较高"
+    },
+    {
+      "name": "Calutide",
+      "manufacturer": "Cipla",
+      "country": "IN",
+      "countryName": "印度",
+      "spec": "50mg",
+      "appearance": "白色薄膜衣片",
+      "notes": "Cipla 仿制比卡鲁胺，价格为原研的 1/5-1/10"
+    },
+    {
+      "name": "Bicalox",
+      "manufacturer": "多种印度厂商",
+      "country": "IN",
+      "countryName": "印度",
+      "spec": "50mg",
+      "appearance": "白色薄膜衣片",
+      "notes": "印度仿制比卡鲁胺"
+    },
+    {
+      "name": "Bicatero",
+      "manufacturer": "Hetero",
+      "country": "IN",
+      "countryName": "印度",
+      "spec": "50mg",
+      "appearance": "白色薄膜衣片",
+      "notes": "Hetero 集团生产，全球仿制药大厂"
+    }
+  ],
+  "progesterone": [
+    {
+      "name": "安琪坦 Utrogestan",
+      "manufacturer": "Besins Healthcare",
+      "country": "FR",
+      "countryName": "法国",
+      "spec": "100mg / 200mg 软胶囊",
+      "appearance": "黄色圆形软胶囊",
+      "notes": "原研微粉化黄体酮，法国产"
+    },
+    {
+      "name": "Susten",
+      "manufacturer": "Sun Pharma",
+      "country": "IN",
+      "countryName": "印度",
+      "spec": "100mg / 200mg / 300mg / 400mg 软胶囊",
+      "appearance": "黄色/类白色软胶囊",
+      "notes": "印度 Sun Pharma 产微粉化黄体酮，规格齐全，价格远低于原研"
+    },
+    {
+      "name": "Naturogest",
+      "manufacturer": "Zydus Cadila",
+      "country": "IN",
+      "countryName": "印度",
+      "spec": "100mg / 200mg 软胶囊",
+      "appearance": "软胶囊",
+      "notes": "Zydus 产微粉化黄体酮"
+    },
+    {
+      "name": "Microgest",
+      "manufacturer": "Panacea Biotec",
+      "country": "IN",
+      "countryName": "印度",
+      "spec": "100mg / 200mg 软胶囊",
+      "appearance": "软胶囊",
+      "notes": "Panacea 产微粉化黄体酮"
+    },
+    {
+      "name": "Prometrium",
+      "manufacturer": "AbbVie",
+      "country": "US",
+      "countryName": "美国",
+      "spec": "100mg / 200mg 软胶囊",
+      "appearance": "桃色圆形软胶囊",
+      "notes": "美国原研微粉化黄体酮"
+    }
+  ],
+  "gnrh-agonist": [
+    {
+      "name": "抑那通 / 亮丙瑞林",
+      "manufacturer": "武田 (Takeda) / AbbVie",
+      "country": "JP",
+      "countryName": "日本",
+      "spec": "3.75mg / 11.25mg 注射剂",
+      "appearance": "预填充注射器，白色冻干粉末",
+      "notes": "需皮下/肌肉注射，每月或每3月一次，价格极高"
+    },
+    {
+      "name": "达菲林 / 曲普瑞林",
+      "manufacturer": "Ipsen",
+      "country": "FR",
+      "countryName": "法国",
+      "spec": "3.75mg / 11.25mg",
+      "appearance": "注射用冻干粉末",
+      "notes": "法国产 GnRH 激动剂，作用与亮丙瑞林类似"
+    }
+  ],
+  "hydroxyprogesterone": [
+    {
+      "name": "Proluton Depot",
+      "manufacturer": "拜耳 (Bayer)",
+      "country": "DE",
+      "countryName": "德国",
+      "spec": "250mg/mL × 1mL 安瓿",
+      "appearance": "油状溶液，玻璃安瓿",
+      "notes": "注射用己酸羟孕酮，每周一次"
+    },
+    {
+      "name": "Proluton Depot",
+      "manufacturer": "Zydus (拜耳印度授权)",
+      "country": "IN",
+      "countryName": "印度",
+      "spec": "250mg/mL / 500mg/mL",
+      "appearance": "油状溶液",
+      "notes": "印度产注射用己酸羟孕酮"
+    }
+  ]
+}
