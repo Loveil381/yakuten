@@ -1,11 +1,12 @@
 ---
 title: HRT Clinical Pathway
 description: Complete HRT pathway from baseline labs to maintenance, including stage goals, decision nodes, and monitoring schedules.
-evidenceLevel: X
+evidenceLevel: B
 lastReviewed: 2026-04-07
-references: []
+references: [coleman-2022, hembree-2017, rothman-2024, ucsf-2016]
 ---
 
+import CitationRef from '../../../components/ui/CitationRef.astro';
 import PhaseBlock from '../../../components/ui/PhaseBlock.astro';
 import DecisionNode from '../../../components/ui/DecisionNode.astro';
 import DecisionBranch from '../../../components/ui/DecisionBranch.astro';
@@ -17,7 +18,7 @@ import '../../../styles/pathway.css';
 <div class="pathway-wrapper">
 
 <p class="phase-block__desc" style="text-align:center; max-width:40rem; margin:0 auto var(--space-3xl);">
-  This pathway is based on WPATH SOC 8 and Endocrine Society Clinical Practice Guidelines, providing a standardized framework for transfeminine HRT initiation and maintenance.
+  This pathway is based on WPATH SOC 8<CitationRef id="coleman-2022" num={1} authors="Coleman et al." year={2022} title="Standards of Care v8" /> and Endocrine Society 2017<CitationRef id="hembree-2017" num={2} authors="Hembree et al." year={2017} title="Endocrine Treatment of Gender-Dysphoric/Gender-Incongruent Persons" />, providing a standardized framework for transfeminine HRT initiation and maintenance.
 </p>
 
 <div class="pathway-timeline">
@@ -61,14 +62,14 @@ import '../../../styles/pathway.css';
     <DoseTable
       headers={['Route', 'Starting Dose', 'Source']}
       rows={[
-        ['Oral estradiol', '2.0 mg / day', 'Endocrine Society 2017'],
-        ['Transdermal patch', '50-100 µg / 24h', 'Endocrine Society 2017'],
-        ['Topical gel', '1.5 mg / day', 'Endocrine Society 2017'],
-        ['IM estradiol valerate', '1-2 mg / week', 'Rothman 2024'],
+        ['Oral estradiol', '2.0 mg / day', '[2]'],
+        ['Transdermal patch', '50-100 µg / 24h', '[2]'],
+        ['Topical gel', '1.5 mg / day', '[2]'],
+        ['IM estradiol valerate', '1-2 mg / week', '[3]'],
       ]}
     />
     <p class="phase-block__desc" style="margin-top: var(--space-sm); margin-bottom: var(--space-sm);">
-      Anti-androgen (if needed): CPA 5-12.5 mg/day or spironolactone 50-100 mg/day
+      Anti-androgen (if needed): CPA 5-12.5 mg/day or spironolactone 50-100 mg/day. [2] = Hembree et al. 2017<CitationRef id="hembree-2017" num={2} authors="Hembree et al." year={2017} />; [3] = Rothman 2024<CitationRef id="rothman-2024" num={3} authors="Rothman et al." year={2024} title="Injectable estradiol valerate dosing" />
     </p>
     <div class="phase-stats">
       <div class="phase-stat">
@@ -214,13 +215,10 @@ import '../../../styles/pathway.css';
 <div class="pathway-end">
   <div class="pathway-end-box">
     <p class="pathway-end-title">END OF INITIAL PHASE</p>
-    <p class="pathway-end-sub">System Active | Monitoring Continued</p>
+    <p class="pathway-end-sub">Ongoing Monitoring</p>
   </div>
 </div>
 
 </div>
 </div>
 
----
-
-**Sources**: Hembree et al. 2017 (Endocrine Society); Coleman et al. 2022 (WPATH SOC 8); UCSF Transgender Care Guidelines; Rothman 2024.

@@ -1,11 +1,12 @@
 ---
 title: HRT経路マップ
 description: ベースライン検査から維持期まで、各段階の目標値、判断ポイント、モニタリングスケジュールを含む包括的なHRT経路。
-evidenceLevel: X
+evidenceLevel: B
 lastReviewed: 2026-04-07
-references: []
+references: [coleman-2022, hembree-2017, rothman-2024, ucsf-2016]
 ---
 
+import CitationRef from '../../../components/ui/CitationRef.astro';
 import PhaseBlock from '../../../components/ui/PhaseBlock.astro';
 import DecisionNode from '../../../components/ui/DecisionNode.astro';
 import DecisionBranch from '../../../components/ui/DecisionBranch.astro';
@@ -17,7 +18,7 @@ import '../../../styles/pathway.css';
 <div class="pathway-wrapper">
 
 <p class="phase-block__desc" style="text-align:center; max-width:40rem; margin:0 auto var(--space-3xl);">
-  本経路はWPATH SOC 8およびEndocrine Society臨床実践ガイドラインに基づき、トランスフェミニンHRTの開始から維持までの標準的な枠組みを提供します。
+  本経路はWPATH SOC 8<CitationRef id="coleman-2022" num={1} authors="Coleman et al." year={2022} title="Standards of Care for the Health of Transgender and Gender Diverse People, Version 8" />およびEndocrine Society臨床実践ガイドライン<CitationRef id="hembree-2017" num={2} authors="Hembree et al." year={2017} title="Endocrine treatment of gender-dysphoric/gender-incongruent persons" />に基づき、トランスフェミニンHRTの開始から維持までの標準的な枠組みを提供します。
 </p>
 
 <div class="pathway-timeline">
@@ -221,6 +222,3 @@ import '../../../styles/pathway.css';
 </div>
 </div>
 
----
-
-**出典**: Hembree et al. 2017 (Endocrine Society); Coleman et al. 2022 (WPATH SOC 8); UCSF Transgender Care Guidelines; Rothman 2024.
