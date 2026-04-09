@@ -1,0 +1,126 @@
+---
+title: 注射用エストラジオール (プロギノンデポー 等)
+description: プロギノンデポーに代表される注射用エストラジオールの完全ガイド。薬物動態、筋肉注射と皮下注射の違い、モノセラピー（単剤療法）の可能性、そして「メガドーズ」に関する致命的な警告。
+evidenceLevel: A
+sidebar:
+  order: 5
+lastReviewed: 2026-04-07
+references: [aly-2021, coleman-2022, fuji-2023, hembree-2017, herndon-2023, kanin-2025, misakian-2025, oriowo-1980, poage-2026, rothman-2024]
+---
+
+import DrugInfoBox from '../../../../../components/ui/DrugInfoBox.astro';
+import DoseTable from '../../../../../components/ui/DoseTable.astro';
+import WarningBox from '../../../../../components/ui/WarningBox.astro';
+import DangerBox from '../../../../../components/ui/DangerBox.astro';
+import CitationRef from '../../../../../components/ui/CitationRef.astro';
+import DrugBrandGallery from '../../../../../components/ui/DrugBrandGallery.astro';
+
+<DrugInfoBox
+  name="Injectable Estradiol (Progynon Depot, etc.)"
+  nameCN="注射用エストラジオール（プロギノンデポー等）"
+  category="estrogen"
+  route="筋肉注射 (IM) / 皮下注射 (SC)"
+  evidenceLevel="A"
+>
+注射用エストラジオールは、トランス女性のHRTにおいて最も強烈な力を持つ投与手段です。肝臓の初回通過効果を完全にバイパスし、非常に高レベルで予測可能なエストロゲン濃度をもたらします。特筆すべきことに、注射を使用するユーザーの約82.6%が、抗アンドロゲン剤（ブロッカー）を一切使わずにテストステロンを完全に抑制する「モノセラピー」に成功しています<CitationRef id="misakian-2025" num={1} authors="Misakian AL et al." year={2025} title="Injectable Estradiol Monotherapy in Transgender Individuals" />。しかしながら、日本国内のDIYコミュニティでは常軌を逸した「高用量神話」が蔓延しており、その誤用による健康被害が後を絶ちません。
+</DrugInfoBox>
+
+## 薬物動態（エステルの種類）
+
+注射用エストラジオールには、血中への放出速度を遅らせるための「エステル（脂肪酸の鎖）」が結合しています。最も一般的な3つは以下の通りです：
+
+- **吉草酸エストラジオール (Estradiol Valerate = EV)**: 半減期が最も短い（約4〜5日）。血中濃度が急激に跳ね上がり（ピーク）、急激に落ち込み（トラフ）ます。頻繁な注射が必要です。**日本の「プロギノンデポー（ペラニンデポー）」はこの「EV」に該当します**<CitationRef id="oriowo-1980" num={2} authors="Oriowo MA et al." year={1980} title="Pharmacokinetics of Estradiol Esters" />。
+- **シピオン酸エストラジオール (Estradiol Cypionate = EC)**: 中程度の半減期（約8〜10日）。EVよりもピークが平坦で滑らかな曲線を描きます。
+- **エナント酸エストラジオール (Estradiol Enanthate = EEn)**: 半減期が非常に長い。7〜14日ごとの注射で安定したレベルを提供します（海外のDIY市場で主流）。
+
+このガイドでは、日本で最も普及している「プロギノンデポー（ペラニンデポー）」などの **吉草酸エストラジオール (EV)** を前提として解説します<CitationRef id="aly-2021" num={3} authors="Aly" year={2021} title="Injectable Estradiol Meta-Analysis" />。
+
+## 用量に関する致命的な誤解（EVの場合）
+
+### 大人の推奨用量
+
+<DoseTable
+  headers={['フェーズ', '用量 (EV)', 'ガイドラインの指示']}
+  rows={[
+    ['開始時の低用量', '1〜2 mg / 週', '最初の半年間。乳管の枝分かれを守るための絶対的な要件。'],
+    ['維持期', '2〜4 mg / 週', '血液検査のトラフ値に基づいて微調整。目標 E2 は 100〜200 pg/mL。'],
+    ['絶対最大用量', '5 mg / 週', '安全性の上限。どんな理由があろうとこれを超えてブラインドで注射してはいけない。'],
+  ]}
+/>
+
+これらの数値は、WPATH SOC 8<CitationRef id="coleman-2022" num={4} authors="Coleman E et al." year={2022} title="Standards of Care for the Health of Transgender and Gender Diverse People, Version 8" /> および Endocrine Society ガイドライン<CitationRef id="hembree-2017" num={5} authors="Hembree WC et al." year={2017} title="Endocrine Treatment of Gender-Dysphoric/Gender-Incongruent Persons" /> と完全に一致しており、世界的なコンセンサスです。
+
+<WarningBox title="プロギノンデポー「1アンプル全部」は危険すぎる">
+日本の医療機関や個人輸入で手に入るプロギノンデポー（Progynon Depot）のアンプルは、通常 **1アンプルにつき 10mg** の成分が入っています。
+これを「週に1回、1アンプル（10mg）全部打つ」といった狂気とも言える「メガドーズ（超高用量投与）」がネット上では推奨されがちですが、これは**致死的な血栓リスクを引き起こすオーバードーズ**であり、乳房の発育を根本から破壊します（詳細は「[乳房の形成](/ja/breast-development/)」を参照）。
+決して「10mg全部」を一気に打たないでください。
+</WarningBox>
+
+### 血液検査のタイミング
+
+注射を使用している場合、採血は必ず「**注射を打つ当日の朝、注射を打つ直前**」に行わなければなりません。これはあなたの最もE2濃度が低くなる「**トラフ値**」を測定するためです。
+- **目標トラフ値:** 100〜200 pg/mL
+- **警告:** EV（プロギノンデポー）で注射直前のトラフ値が 200 pg/mL を超えているということは、注射後1〜2日目の「ピーク時」の血中濃度は 500〜1000 pg/mL という殺人的な数値になっていることを意味します。これは心血管リスクを爆発させるだけで、女性化を早める効果はゼロです。
+- 1週間に1回の注射でどうしてもトラフ値が 50 を切って更年期症状が出る場合は、1回に打つ「量」を増やすのではなく、注射の「間隔」を短くする（例: 7日おきから5日おきにし、その分1回の注射量を減らす）ことで、血中濃度を平坦に（フラットに）すべきです。
+
+## 皮下注射 (SC) vs 筋肉注射 (IM)
+
+何十年もの間、ホルモン注射は太い針を筋肉の奥深くへ突き刺す「筋肉注射（IM）」しか手段がないと考えられてきました。しかし現在の大規模な臨床データは、お腹や太ももの脂肪をつまんで細く短い針で打つ「皮下注射（SC）」が**完全に同等の効果を持つ**ことを証明しています<CitationRef id="herndon-2023" num={6} authors="Herndon JS et al." year={2023} title="Subcutaneous vs Intramuscular Estradiol Valerate" /><CitationRef id="poage-2026" num={7} authors="Poage AC et al." year={2026} title="Subcutaneous vs Intramuscular Estradiol Valerate Injection" />：
+
+<DoseTable
+  headers={['比較項目', '皮下注射 (SC)', '筋肉注射 (IM)']}
+  rows={[
+    ['E2 血中濃度', '筋肉注射と完全に同一', '歴史的な標準'],
+    ['T（男性ホルモン）抑制', '筋肉注射と完全に同一', '歴史的な標準'],
+    ['痛みの強さ', '蚊に刺される程度（ほぼ無痛）', '筋肉の奥深くが数日痛むことがある'],
+    ['針の太さ', '非常に細い (25-27G 等)', '太く、そして長い (21-23G 等)'],
+    ['自己注射の難易度', '非常に簡単', 'お尻に打つためパートナーや介助が必要な場合がある'],
+  ]}
+/>
+
+**結論:** 自分自身で注射（自己注射）を行う場合、皮下注射 (SC) の方が安全で、痛みがなく、心理的トラウマを与えません。
+
+## モノセラピー（単剤療法）の絶大なメリット
+
+注射用エストラジオールは、飲み薬に比べてテストステロン（T）を抑制する力が桁違いに強力です。2025年の研究では、注射用エストラジオールを使用したトランス女性の **82.6%** が、シプロテロン（Androcur / CPA）やスピロノラクトンなどを一切使わずにテストステロンの完全な抑制（T < 50 ng/dL）に成功しました<CitationRef id="misakian-2025" num={1} authors="Misakian AL et al." year={2025} />。
+
+- これにより、CPA（シプロテロン）による肝臓への劇毒や髄膜腫リスクを完全に排除できます。
+- 同様に、スピロノラクトンの利尿作用や高カリウム血症リスクも排除できます。
+
+<WarningBox title="無謀にモノセラピーを追求しない">
+しかし、裏を返せば約17％の人には生物学的にモノセラピーが効きません。もしあなたがガイドラインの上限である「週5mg（EV）」を注射しているにもかかわらず T が 300 ng/dL から下がらないのであれば、**絶対に注射量を「8mg」や「10mg」に増やしてはいけません**。あなたは「効かない17％」に入っています。現実を受け入れ、低用量の抗アンドロゲン剤（ブロッカー）を追加してください。
+</WarningBox>
+
+## ガラスアンプル問題（日本特有の課題）
+
+世界的には再利用可能な「ゴム栓付きのバイアル（瓶）」から必要な分だけ吸い出すのが主流ですが、日本やアジアの一部では、**プロギノンデポー等に代表される「1回使い切りのガラスアンプル（折るタイプ）」**が主流です。
+
+- アンプルには防腐剤（ベンジルアルコールなど）が入っていません。
+- **ガラスの首を折った瞬間から、中の薬液は無菌状態ではなくなります**。
+- 日本のDIYユーザーの間で「10mgのアンプルを折って、半分だけ打って、残りを注射器の中に入れたまま冷蔵庫で数日〜1週間保管してまた打つ」という行為が散見されますが、これは**極めて高い細菌感染リスク（最悪の場合は致命的な敗血症・ショック死）**を伴います。
+- クリニックで処方される場合、通常は「1アンプル全部」をその場で筋肉注射されるため、過剰投与になりがちです（多くの医師は、半量だけ打って残りを廃棄するという「もったいない」行為を嫌がります）。
+
+<DangerBox title="絶対に越えてはいけないレッドライン">
+大事故を防ぐため、以下の行為は「いかなる理由があろうとも」絶対に避けてください。
+
+- **1回に 10mg 以上を打つメガドーズ:** 「月に1〜2回、10mgアンプルを全量打てばいい」という古い慣習は、打った翌日に血中E2濃度を >1000 pg/mL に爆発させ、血栓症（肺塞栓など）による突然死のリスクを極端に跳ね上げます<CitationRef id="rothman-2024" num={8} authors="Rothman MS et al." year={2024} title="Injectable Estradiol Dosing in Transgender Individuals" />。
+- **高用量を短い間隔で打つ（例：3日おきに5mgなど）:** 半減期の積み重なりにより血中濃度が無限に上昇し続け、生理学的な毒性上限（オーバーロード）に達します<CitationRef id="kanin-2025" num={9} authors="Kanin M et al." year={2025} title="Injectable Estradiol Dosing Regimens" />。
+
+適切な量（週2〜4mg）でテストステロンが下がらないなら、ブロッカーを併用するのが世界の常識です。自分の体を歩くバイオハザードにしないでください。
+</DangerBox>
+
+---
+
+**参考文献**
+
+1. <span id="ref-misakian-2025">Misakian AL et al. Injectable Estradiol Monotherapy in Transgender Individuals. *Endocrine Practice* 2025.</span>
+2. <span id="ref-oriowo-1980">Oriowo MA et al. Pharmacokinetics of Estradiol Esters. *Contraception* 1980.</span>
+3. <span id="ref-aly-2021">Aly. Injectable Estradiol Meta-Analysis. *Transfemscience.org* 2021/2025.</span>
+4. <span id="ref-coleman-2022">Coleman E et al. Standards of Care for the Health of Transgender and Gender Diverse People, Version 8. *Int J Transgend Health* 2022;23(S1):S1-S259. DOI:10.1080/26895269.2022.2100644</span>
+5. <span id="ref-hembree-2017">Hembree WC et al. Endocrine Treatment of Gender-Dysphoric/Gender-Incongruent Persons. *J Clin Endocrinol Metab* 2017;102(11):3869-3903. DOI:10.1210/jc.2017-01658</span>
+6. <span id="ref-herndon-2023">Herndon JS et al. Subcutaneous vs Intramuscular Estradiol Valerate. *Endocr Pract* 2023;29(5):356-361.</span>
+7. <span id="ref-poage-2026">Poage AC et al. Subcutaneous vs Intramuscular Estradiol Valerate Injection. PMC12922051, 2026.</span>
+8. <span id="ref-rothman-2024">Rothman MS et al. Injectable Estradiol Dosing in Transgender Individuals. *Transgender Health* 2024;9(6):463-465.</span>
+9. <span id="ref-kanin-2025">Kanin M et al. Injectable Estradiol Dosing Regimens. *J Endocr Soc* 2025;9(5):bvaf004.</span>
+
+<DrugBrandGallery drugId="estradiol-injection" />

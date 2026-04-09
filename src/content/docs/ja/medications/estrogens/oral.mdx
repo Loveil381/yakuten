@@ -1,0 +1,127 @@
+---
+title: 経口エストラジオール（飲み薬）
+description: 飲み薬としてのエストラジオールの完全な薬理学的プロファイル、推奨用量、血栓(VTE)リスクのデータ、および絶対に避けるべき危険な組み合わせの警告。
+evidenceLevel: A
+lastReviewed: 2026-04-07
+references: [canonico-2018, coleman-2022, hembree-2017, kuhl-2005, lee-2022, patel-2021, ucsf-2016]
+sidebar:
+  order: 2
+---
+
+import DrugInfoBox from '../../../../../components/ui/DrugInfoBox.astro';
+import DoseTable from '../../../../../components/ui/DoseTable.astro';
+import EvidenceBadge from '../../../../../components/ui/EvidenceBadge.astro';
+import CitationRef from '../../../../../components/ui/CitationRef.astro';
+import WarningBox from '../../../../../components/ui/WarningBox.astro';
+import DangerBox from '../../../../../components/ui/DangerBox.astro';
+import DrugBrandGallery from '../../../../../components/ui/DrugBrandGallery.astro';
+
+<DrugInfoBox
+  name="Oral Estradiol (Progynova, Estrace)"
+  nameCN="経口エストラジオール（プロギノバ等）"
+  category="estrogen"
+  route="経口（飲み薬）"
+  evidenceLevel="A"
+>
+錠剤を飲み込む「経口エストラジオール」は、世界中で最も一般的にアクセス可能なエストロゲン製剤です。静脈血栓塞栓症（VTE）のリスクは経皮パッチなどに比べて「わずかに高い」ものの、血栓リスクファクターを持っていない若年で健康なユーザーにとっては、現在でも標準的で十分に許容できる第一選択薬の一つです。
+</DrugInfoBox>
+
+## 薬理学
+
+### 初回通過効果 (First-Pass Metabolism)
+
+飲み薬としてエストラジオールを飲み込むと、胃や腸で吸収された後、全身を巡る血流に乗る**前**に、必ず「肝臓」を通過する必要があります。これを「初回通過効果」と呼びます<CitationRef id="kuhl-2005" num={1} authors="Kuhl" year={2005} title="Pharmacology of estrogens and progestogens: influence of different routes of administration" />：
+
+- 肝臓にエストロゲンの「原液」とも言える濃い血液が直撃するため、肝臓が刺激され、血液を凝固させる因子（凝固因子）の合成を強力に促します。これがVTEリスクを上昇させる根本的な理由です。
+- さらに SHBG（性ホルモン結合グロブリン）や中性脂肪のレベルにも影響を与えます。
+- 肝臓を通過する過程で、薬効成分の大部分が破壊・代謝されてしまうため、最終的な**経口バイオアベイラビリティ（全身に届く割合）はわずか 3〜5% にすぎません**。
+- 日本の個人輸入等でよく使われる 吉草酸エストラジオール（プロギノバ / Progynova）などの形態は、肝臓内で純粋なエストラジオールに分解（開裂）されてから効き始めます。
+
+### 用量の換算（プロギノバは少し弱い）
+
+経口薬の成分によって、「純粋なエストロゲン」への換算量が異なります<CitationRef id="kuhl-2005" num={1} authors="Kuhl" year={2005} />：
+
+> **2 mg の 吉草酸エストラジオール (例: プロギノバ / Progynova) ≈ 1.5 mg の 17β-エストラジオール (例: エストレース / Estrace)**
+
+アメリカの掲示板等で「2mg 飲んでる」と言われている時、それは Estrace（純度が高い）を指すことが多い一方、日本やアジアで「2mg 飲んでる」と言う時は プロギノバ（少し弱い）を指すことが多いため、他人の用量を参考にする際は注意してください。
+
+### VTE (血栓症) リスクのデータ
+
+<DoseTable
+  headers={['投与経路', '相対リスク (RR)', '95% 信頼区間', '備考']}
+  rows={[
+    ['経口エストラジオール', '1.48', '1.27 - 1.72', '血栓リスクが約 48% 増加する'],
+    ['経皮パッチ (比較基準)', '0.97', '0.79 - 1.19', 'HRT非使用者と統計的差なし'],
+  ]}
+/>
+
+経口エストラジオールは、非服薬の一般層と比較して VTE リスクを約 48% (RR ≈ 1.48) 増加させます<CitationRef id="canonico-2018" num={2} authors="Canonico et al." year={2018} title="Estrogen therapy and venous thromboembolism: an updated meta-analysis" />。ただし、「相対的なリスク」は跳ね上がりますが、若くて健康な人の「絶対的なベースラインリスク」自体がそもそも非常に低いため（年間 1万人に 1〜2人 程度）、元々健康な人であれば経口投与でも安全マージンの範囲内に収まります。
+
+<DangerBox title="致命的なコンボ：経口エストロゲン ＋ 経口シプロテロン（CPA）">
+経口エストロゲンを、個人輸入でよく買われる抗アンドロゲン剤である「シプロテロン錠（Androcur / CPA）」と一緒に飲むと、**血栓リスクが「二重掛け」になります**。CPAはそれ自体に血液を凝固させる作用があります<CitationRef id="lee-2022" num={3} authors="Lee et al." year={2022} title="Cyproterone acetate and meningioma risk" />。これを肝臓に負担をかける経口エストロゲンと併用すると、血栓を生み出す脅威が相乗効果で跳ね上がります。もしCPAをブロッカーとして使いたいなら、エストロゲン側は絶対に経皮（パッチやジェル）に変更すべきです。「[用量限界と禁忌](/ja/dose-limits/)」のページも参照してください。
+</DangerBox>
+
+## 推奨用量
+
+以下の範囲は、Endocrine Society 2017<CitationRef id="hembree-2017" num={4} authors="Hembree et al." year={2017} title="Endocrine Treatment of Gender-Dysphoric/Gender-Incongruent Persons" /> および WPATH SOC 8<CitationRef id="coleman-2022" num={5} authors="Coleman et al." year={2022} title="Standards of Care for the Health of Transgender and Gender Diverse People, Version 8" /> ガイドラインから統合されたデータです：
+
+<DoseTable
+  headers={['ステージ', '用量 (E2ベース)', '目標 E2 トラフ値 (pg/mL)', 'スケジュール']}
+  rows={[
+    ['開始時の低用量', '2 mg/日', '50-100', '1〜6ヶ月'],
+    ['中等度への増量', '4 mg/日', '100-200', '6〜12ヶ月'],
+    ['維持期', '4-6 mg/日', '100-200', '12ヶ月以降〜'],
+    ['最大用量', '8 mg/日', '200 を超えないこと', '特別な事情のみ'],
+  ]}
+/>
+
+<WarningBox title="低用量の段階を飛ばさないでください">
+たとえ最初の低用量で「何も起こっていない」と感じたとしても、最初の半年のスローペースな増量プロセスは、健康的な乳管の「枝分かれ」を育むために致命的に重要です。「思春期をRTA（タイムアタック）したいから」と最初から 6mg や 8mg を飲むと、乳腺の早熟な癒合（成長ストップ）を強引に引き起こし、最終的なスリーサイズを永久に台無しにします<CitationRef id="patel-2021" num={6} authors="Patel et al." year={2021} title="Breast development in transgender women on hormone therapy" />。詳しくは「[乳房の形成](/ja/breast-development/)」のページを確認してください。
+</WarningBox>
+
+### 飲み方のポイント
+
+- 毎日ほぼ同じ時間に薬を飲み、血中濃度を一定のリズムに保ちましょう。
+- もし 1日 4mg を飲んでいるなら、それを「朝 2mg ＋ 夜 2mg」に分割することで、血中濃度の乱高下（ピークと谷）をかなり穏やかにできます。
+- 食事と一緒に摂ることで吸収率がわずかに向上しますが、それよりも「毎日同じスケジュールで飲む」ことのほうが重要です。
+- 飲み忘れたら、慌てず「次の予定時間」に通常の1回分だけ飲んでください。2回分まとめて飲むのは絶対にやめましょう。
+
+## 対象となる人・ならない人
+
+経口エストラジオールは、以下のようなプロフィールの方に適応します<CitationRef id="hembree-2017" num={4} authors="Hembree et al." year={2017} /><CitationRef id="coleman-2022" num={5} authors="Coleman et al." year={2022} />：
+
+**強く推奨される人:**
+- VTE（血栓）のリスク要因がない
+- 40歳未満
+- BMI < 30（肥満ではない）
+- タバコを吸わない（非喫煙者）
+- 深部静脈血栓症の既往歴・家族歴がない
+
+**経口投与を使用してはいけない人 (経皮パッチ/ジェルに変更すべき):**
+- 40歳以上
+- BMI ≥ 30
+- 現在タバコを吸っている、またはごく最近禁煙した
+- 本人または家族に血栓症の強い病歴がある
+- 血液凝固異常の素因がある
+- **現在 CPA（シプロテロン/Androcur）を使用している**
+- 前兆を伴う偏頭痛の既往歴がある
+
+## 日本と世界でのアクセス
+
+飲み薬は、世界中の大部分において「標準の入り口」となっています：
+
+- **日本 (個人輸入)**: オオサカ堂などで「プロギノバ (Progynova)」やジュリナ（Julina）のジェネリックが極めて安価に大量流通しています。そのため、日本のDIYユーザーの圧倒的多数がこの経口薬からHRTをスタートします。
+- **欧米のガイドライン**: 保険適用が利きやすく、医療機関でも最初に処方されることが多い最もポピュラーな薬です。
+
+## モニタリング（血液検査）のアドバイス
+
+- **いつ採血するか**: 必ず、**次に薬を飲む直前（トラフ値）**の血液を測ってください。これがあなたの真のベースラインです<CitationRef id="ucsf-2016" num={7} authors="Deutsch" year={2016} title="Guidelines for the Primary and Gender-Affirming Care of Transgender and Gender Nonbinary People" />。
+- **初期フェーズ**: 採血と肝機能の確認を定期的に行ってください。
+- **臨床目標**: トラフ E2 が 100〜200 pg/mL の間にあり、T が 50 ng/dL を切っていること。
+- **安全マージン**: もしトラフ E2 が 200 pg/mL を大きく超えているなら、錠剤の数を減らすか、経皮投与（パッチ等）への移行を真剣に検討してください。
+
+## 舌下投与（Sublingual）との関係性
+
+通常のエストラジオール錠（プロギノバなどは不可な場合がありますが、Estrace等）を「舌の下で溶かす（舌下投与）」ことができます。これにより、肝臓の初回通過効果を大幅にバイパスでき、血中に取り込まれる量の割合が劇的に上がります。ただし、1日に何度も溶かす必要があり、血中濃度が極端な「ジェットコースター」のように乱高下します。この摂取方法の詳しいリスクとメリットについては、私たちの「[舌下投与](/ja/medications/estrogens/sublingual/)」ページをご覧ください。
+
+<DrugBrandGallery drugId="estradiol-oral" />
