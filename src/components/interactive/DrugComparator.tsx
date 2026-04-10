@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, type ReactNode } from 'react';
 import type { CSSProperties } from 'react';
 
 type Locale = 'zh' | 'en' | 'ja';
@@ -350,14 +350,14 @@ function getVteColor(rr: number): string {
   return 'var(--color-danger)';
 }
 
-function getVteLabel(rr: number, ui: typeof UI_COPY['zh']): string {
+function getVteLabel(rr: number, ui: (typeof UI_COPY)[Locale]): string {
   if (rr <= 1.0) return ui.riskLow;
   if (rr <= 1.5) return ui.riskModerate;
   if (rr <= 2.0) return ui.riskHigh;
   return ui.riskVeryHigh;
 }
 
-function getCategoryLabel(cat: string, ui: typeof UI_COPY['zh']): string {
+function getCategoryLabel(cat: string, ui: (typeof UI_COPY)[Locale]): string {
   if (cat === 'estrogen') return ui.catEstrogen;
   if (cat === 'antiandrogen') return ui.catAntiandrogen;
   return ui.catProgestogen;
@@ -565,7 +565,7 @@ export default function DrugComparator() {
   const getFreq = (d: DrugCompare) => d.frequency[locale];
   const getContra = (d: DrugCompare) => d.contraindications[locale];
 
-  function renderRow(label: string, cells: (string | JSX.Element)[]) {
+  function renderRow(label: string, cells: (string | ReactNode)[]) {
     return (
       <tr key={label}>
         <td style={s.tdLabel}>{label}</td>
@@ -576,7 +576,7 @@ export default function DrugComparator() {
     );
   }
 
-  function renderMonoRow(label: string, cells: (string | JSX.Element)[]) {
+  function renderMonoRow(label: string, cells: (string | ReactNode)[]) {
     return (
       <tr key={label}>
         <td style={s.tdLabel}>{label}</td>

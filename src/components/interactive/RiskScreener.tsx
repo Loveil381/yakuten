@@ -244,6 +244,27 @@ const QUESTIONS: Question[] = [
    Risk Scoring
    ================================ */
 
+const RISK_ANCHORS: Record<Locale, { vte: string; liver: string; meningioma: string; cardiovascular: string }> = {
+  zh: {
+    vte: '#深静脉血栓-dvt',
+    liver: '#肝功能损伤',
+    meningioma: '#脑膜瘤',
+    cardiovascular: '#心血管并发症',
+  },
+  en: {
+    vte: '#deep-vein-thrombosis-dvt',
+    liver: '#hepatic-injury',
+    meningioma: '#meningioma',
+    cardiovascular: '#cardiovascular-complications',
+  },
+  ja: {
+    vte: '#深部静脈血栓症-dvt',
+    liver: '#肝障害',
+    meningioma: '#髄膜腫',
+    cardiovascular: '#心血管系合併症',
+  },
+};
+
 type RiskLevel = 'low' | 'moderate' | 'high' | 'very_high';
 
 interface RiskResult {
@@ -273,12 +294,13 @@ function computeRisks(answers: Record<string, string>, locale: Locale): RiskResu
   }
   if (answers.migraine === 'with_aura') { vteScore += 1; vteFactors.push(ui.q7_c); }
 
+  const anchors = RISK_ANCHORS[locale];
   results.push({
     category: ui.cat_vte,
     categoryKey: 'vte',
     level: vteScore >= 5 ? 'very_high' : vteScore >= 3 ? 'high' : vteScore >= 1 ? 'moderate' : 'low',
     factors: vteFactors,
-    anchor: '#7-1-hrt-的已知风险',
+    anchor: anchors.vte,
   });
 
   // Liver Risk
@@ -296,7 +318,7 @@ function computeRisks(answers: Record<string, string>, locale: Locale): RiskResu
     categoryKey: 'liver',
     level: liverScore >= 4 ? 'very_high' : liverScore >= 3 ? 'high' : liverScore >= 1 ? 'moderate' : 'low',
     factors: liverFactors,
-    anchor: '#7-1-hrt-的已知风险',
+    anchor: anchors.liver,
   });
 
   // Meningioma Risk
@@ -310,7 +332,7 @@ function computeRisks(answers: Record<string, string>, locale: Locale): RiskResu
     categoryKey: 'meningioma',
     level: meningiomaScore >= 4 ? 'very_high' : meningiomaScore >= 2 ? 'high' : meningiomaScore >= 1 ? 'moderate' : 'low',
     factors: meningiomaFactors,
-    anchor: '#7-1-hrt-的已知风险',
+    anchor: anchors.meningioma,
   });
 
   // Cardiovascular Risk
@@ -328,7 +350,7 @@ function computeRisks(answers: Record<string, string>, locale: Locale): RiskResu
     categoryKey: 'cardiovascular',
     level: cvScore >= 5 ? 'very_high' : cvScore >= 3 ? 'high' : cvScore >= 1 ? 'moderate' : 'low',
     factors: cvFactors,
-    anchor: '#7-1-hrt-的已知风险',
+    anchor: anchors.cardiovascular,
   });
 
   return results;

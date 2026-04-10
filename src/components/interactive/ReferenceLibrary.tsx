@@ -344,7 +344,7 @@ export default function ReferenceLibrary() {
                   rel="noopener noreferrer"
                   style={s.cardDoi}
                 >
-                  {ref.doi ? `DOI: ${ref.doi}` : '→ Link'}
+                  {ref.doi ? `DOI: ${ref.doi}` : 'Link'}
                 </a>
               )}
             </div>
