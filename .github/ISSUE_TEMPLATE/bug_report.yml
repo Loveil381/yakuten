@@ -1,0 +1,60 @@
+name: Bug Report / 问题反馈
+description: Report a bug or issue with the site
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你的反馈！请尽可能详细地描述问题。
+        Thank you for reporting! Please describe the issue in detail.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category / 类别
+      options:
+        - Display / 显示问题
+        - Content / 内容错误
+        - Tool / 工具故障
+        - i18n / 翻译问题
+        - Performance / 性能
+        - Other / 其他
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description / 描述
+      placeholder: What happened? What did you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce / 复现步骤
+      placeholder: |
+        1. Go to...
+        2. Click on...
+        3. See error...
+
+  - type: input
+    id: url
+    attributes:
+      label: Page URL / 页面链接
+      placeholder: https://yakuten.vercel.app/zh/...
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser / 浏览器
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Mobile Safari
+        - Mobile Chrome
+        - Other

@@ -1,0 +1,55 @@
+name: Content Correction / 内容纠错
+description: Report incorrect or outdated medical information
+title: "[Content] "
+labels: ["content", "medical-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        医学内容的准确性是本站的生命线。感谢你帮助我们保持信息的可靠性。
+        Accuracy of medical content is critical. Thank you for helping us stay reliable.
+
+  - type: input
+    id: page
+    attributes:
+      label: Affected Page / 相关页面
+      placeholder: e.g., /zh/medications/estrogens/oral
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current Content / 当前内容
+      placeholder: Quote the specific text that needs correction
+    validations:
+      required: true
+
+  - type: textarea
+    id: correction
+    attributes:
+      label: Suggested Correction / 建议修正
+      placeholder: What should it say instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reference
+    attributes:
+      label: Reference / 参考文献
+      placeholder: |
+        Please provide DOI or citation supporting the correction.
+        e.g., https://doi.org/10.1210/jc.2017-01658
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity / 严重程度
+      options:
+        - Critical (safety risk) / 危急（安全风险）
+        - Major (incorrect dose/data) / 重要（剂量/数据错误）
+        - Minor (wording/translation) / 轻微（措辞/翻译）
+    validations:
+      required: true
