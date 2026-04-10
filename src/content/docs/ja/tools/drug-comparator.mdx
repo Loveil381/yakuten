@@ -1,0 +1,34 @@
+---
+title: 薬物比較ツール
+description: 異なるHRT薬のパラメータを並べて比較します。フロントエンド専用ツール — データは送信されません。
+evidenceLevel: X
+lastReviewed: 2026-04-10
+references: []
+pagefind: false
+---
+
+import DrugComparator from '../../../../components/interactive/DrugComparator.tsx';
+
+## 薬剤パラメータ比較
+
+2-3種類の薬剤を選択して、主要パラメータの違いを素早く比較できます。
+
+**このツールで理解できること：**
+
+- エストロゲン投与経路によるVTEリスクの違い（経口 vs 経皮 vs 注射）
+- 抗アンドロゲン薬のモニタリング要件と禁忌の違い
+- 各薬剤のエビデンスレベルと用量範囲
+
+<DrugComparator client:visible />
+
+## 比較結果の読み方
+
+- **VTEリスク (RR)**：相対リスク値。RR=1.0が基準、>1.5は有意な増加を示す
+- **エビデンスレベル**：A = RCT/メタ分析、B = 単一RCT/コホート研究、C = 症例報告/専門家意見
+- **モニタリング**：薬剤使用中に定期的に必要な血液検査項目
+
+<div class="warning-box">
+<div class="warning-box__title">⚠ 参考情報のみ</div>
+
+このツールは医学的助言を構成するものではありません。薬剤の選択には、個人の病歴、リスク要因、入手可能性、費用を総合的に考慮する必要があります。**医療専門家の指導の下で判断してください。**
+</div>

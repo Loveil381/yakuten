@@ -65,6 +65,7 @@ export const ui = {
     'footer.link.privacy': '隐私政策',
     'footer.link.disclaimer': '免责声明',
     'footer.link.github': '开源项目',
+    'footer.link.feedback': '意见反馈',
     'footer.copy': 'HRT药典 · 循证 · 减害 · 引导就医',
   },
 
@@ -128,6 +129,7 @@ export const ui = {
     'footer.link.privacy': 'Privacy Policy',
     'footer.link.disclaimer': 'Medical Disclaimer',
     'footer.link.github': 'GitHub Project',
+    'footer.link.feedback': 'Feedback',
     'footer.copy': 'HRT Yakuten · Evidence-Based · Harm Reduction',
   },
 
@@ -191,6 +193,7 @@ export const ui = {
     'footer.link.privacy': 'プライバシーポリシー',
     'footer.link.disclaimer': '免責事項',
     'footer.link.github': 'オープンソース',
+    'footer.link.feedback': 'フィードバック',
     'footer.copy': 'HRT药典 · エビデンス · 害軽減 · 医療ガイド',
   },
 } as const;

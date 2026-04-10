@@ -1,0 +1,33 @@
+---
+title: 风险自评工具
+description: 回答简短问题，了解你的个人 HRT 风险因素概况。纯前端工具，不上传任何数据。
+evidenceLevel: X
+lastReviewed: 2026-04-10
+references: []
+pagefind: false
+---
+
+import RiskScreener from '../../../../components/interactive/RiskScreener.tsx';
+
+## HRT 风险因素自我评估
+
+通过 7 个简短问题，快速了解你的个人风险因素。
+
+**本工具帮助你识别：**
+
+- VTE（深静脉血栓/肺栓塞）的个人风险等级
+- 肝脏相关的药物安全风险
+- 脑膜瘤风险（与 CPA 剂量相关）
+- 心血管风险的综合评估
+
+<RiskScreener client:visible />
+
+## 重要说明
+
+<div class="warning-box">
+<div class="warning-box__title">⚠ 不是医学诊断</div>
+
+本工具**不能替代**专业的医疗评估。风险评分基于已知的群体统计数据，无法反映你的完整个人健康状况。请将评估结果带给你的医疗服务提供者，作为讨论的起点。
+
+**高风险不意味着不能使用 HRT**，而是意味着可能需要更频繁的监测、不同的给药途径、或特定的预防措施。
+</div>

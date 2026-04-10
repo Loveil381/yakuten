@@ -98,6 +98,8 @@ export default defineConfig({
             { label: '剂量模拟器', translations: { en: 'Dose Simulator', ja: '用量シミュレーター' }, slug: 'tools/dose-simulator' },
             { label: 'AI 问答助手', translations: { en: 'AI Assistant', ja: 'AIアシスタント' }, slug: 'tools/ai-assistant' },
             { label: '友好医疗资源', translations: { en: 'Medical Directory', ja: '医療施設情報' }, slug: 'tools/hospital-finder' },
+            { label: '药物比较器', translations: { en: 'Drug Comparator', ja: '薬物比較ツール' }, slug: 'tools/drug-comparator' },
+            { label: '风险自评', translations: { en: 'Risk Screener', ja: 'リスク自己評価' }, slug: 'tools/risk-screener' },
           ],
         },
         {
@@ -105,6 +107,7 @@ export default defineConfig({
           translations: { en: 'Appendix', ja: '付録' },
           items: [
             { label: '关于本站', translations: { en: 'About', ja: 'サイトについて' }, slug: 'about' },
+            { label: '参考文献库', translations: { en: 'Reference Library', ja: '参考文献ライブラリ' }, slug: 'appendix-references' },
           ],
         },
       ],

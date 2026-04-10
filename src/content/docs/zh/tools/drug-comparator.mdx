@@ -1,0 +1,34 @@
+---
+title: 药物比较器
+description: 并排对比不同 HRT 药物的剂量、风险、监测项目等关键参数。纯前端工具，不上传任何数据。
+evidenceLevel: X
+lastReviewed: 2026-04-10
+references: []
+pagefind: false
+---
+
+import DrugComparator from '../../../../components/interactive/DrugComparator.tsx';
+
+## 药物参数对比
+
+选择 2-3 种药物，快速对比它们的核心参数差异。
+
+**本工具帮助你理解：**
+
+- 不同雌激素途径的 VTE 风险差异（口服 vs 经皮 vs 注射）
+- 抗雄药物的监测要求和禁忌症区别
+- 各药物的证据等级和剂量范围
+
+<DrugComparator client:visible />
+
+## 如何使用对比结果
+
+- **VTE 风险 (RR)**：相对风险值。RR=1.0 为基线，>1.5 提示显著增加
+- **证据等级**：A = 随机对照试验/荟萃分析，B = 单项 RCT/队列研究，C = 病例报告/专家意见
+- **监测项目**：使用该药物期间需要定期检查的血检指标
+
+<div class="warning-box">
+<div class="warning-box__title">⚠ 仅供参考</div>
+
+本工具不构成用药建议。药物选择需综合考虑个人病史、风险因素、可及性和经济条件。**请在医疗专业人员指导下做出决定。**
+</div>
