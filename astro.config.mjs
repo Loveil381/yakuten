@@ -252,6 +252,7 @@ export default defineConfig({
         {
           label: '工具',
           translations: { en: 'Tools', ja: 'ツール' },
+          collapsed: true,
           items: [
             { label: '血检自查工具', translations: { en: 'Blood Test Checker', ja: '血液検査チェッカー' }, slug: 'tools/blood-checker' },
             { label: '注射剂量换算', translations: { en: 'Injection Calculator', ja: '注射量計算機' }, slug: 'tools/injection-calculator' },
@@ -266,6 +267,7 @@ export default defineConfig({
         {
           label: '附录',
           translations: { en: 'Appendix', ja: '付録' },
+          collapsed: true,
           items: [
             { label: '关于本站', translations: { en: 'About', ja: 'サイトについて' }, slug: 'about' },
             { label: '参考文献库', translations: { en: 'Reference Library', ja: '参考文献ライブラリ' }, slug: 'appendix-references' },
