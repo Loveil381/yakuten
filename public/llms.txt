@@ -1,0 +1,85 @@
+# HRT药典 / HRT Yakuten
+
+> Evidence-based harm reduction HRT safety information for transgender women.
+> 循証 · 减害 · 引导就医 — 面向跨性别女性的 HRT 安全底线信息站
+
+## About
+
+HRT Yakuten is a multilingual (Chinese/English/Japanese) medical reference site providing evidence-based HRT safety information. All medical claims are backed by DOI-linked citations from peer-reviewed literature (WPATH SOC 8, Endocrine Society 2017, UCSF Guidelines). This site does not prescribe medications, sell drugs, or collect personal data.
+
+## Content Structure
+
+### Clinical Pathway
+- /zh/before-you-start/ — Baseline labs, contraindications, informed consent
+- /zh/pathway/ — Complete HRT pathway from initiation to maintenance
+- /zh/dose-limits/ — Maximum doses and dangerous combinations
+- /zh/blood-tests/ — Required monitoring and lab interpretation
+- /zh/risks/ — Risk identification and emergency recognition
+- /zh/breast-development/ — Breast development physiology and realistic expectations
+
+### Medications (20 drugs covered)
+- /zh/medications/estrogens/overview/ — Estrogen selection guide
+- /zh/medications/estrogens/oral/ — Oral estradiol (Progynova)
+- /zh/medications/estrogens/sublingual/ — Sublingual estradiol
+- /zh/medications/estrogens/gel/ — Transdermal gel
+- /zh/medications/estrogens/transdermal-patch/ — Transdermal patches
+- /zh/medications/estrogens/injection/ — Injectable estradiol valerate (EV)
+- /zh/medications/estrogens/cypionate/ — Estradiol cypionate (EC)
+- /zh/medications/estrogens/enanthate/ — Estradiol enanthate (EEn)
+- /zh/medications/estrogens/undecylate/ — Estradiol undecylate (EU)
+- /zh/medications/antiandrogens/overview/ — Anti-androgen selection
+- /zh/medications/antiandrogens/cpa/ — Cyproterone acetate (CPA)
+- /zh/medications/antiandrogens/spironolactone/ — Spironolactone
+- /zh/medications/antiandrogens/bicalutamide/ — Bicalutamide
+- /zh/medications/antiandrogens/gnrh-agonists/ — GnRH agonists
+- /zh/medications/progestogens/overview/ — Progestogens (optional)
+- /zh/medications/progestogens/progesterone/ — Micronized progesterone
+- /zh/medications/five-alpha-reductase/overview/ — 5α-reductase inhibitors
+- /zh/medications/banned-drugs/ — Banned medications (EE, CEE)
+
+### Interactive Tools
+- /zh/tools/blood-checker/ — Blood test self-check tool (runs locally, no data sent)
+- /zh/tools/dose-simulator/ — Dose pharmacokinetics simulator
+- /zh/tools/injection-calculator/ — Injection dose calculator
+- /zh/tools/drug-comparator/ — Multi-drug comparison tool
+- /zh/tools/risk-screener/ — Personal risk assessment questionnaire
+- /zh/tools/brand-index/ — Global drug brand identification index
+- /zh/tools/hospital-finder/ — Trans-friendly medical directory (China)
+- /zh/tools/ai-assistant/ — AI-powered Q&A assistant
+
+### Regional Information
+- /zh/china-reality/ — HRT access reality in mainland China
+
+## Languages
+
+All content pages are available in three languages:
+- Chinese (zh-CN): /zh/... (primary)
+- English (en): /en/...
+- Japanese (ja): /ja/...
+
+## Evidence Standards
+
+- Evidence Level A: Multiple RCTs or meta-analyses
+- Evidence Level B: Single RCT or cohort study
+- Evidence Level C: Case reports or expert opinion
+- Every medical claim requires a DOI-linked citation
+- Dose data cross-validated from WPATH SOC 8 + Endocrine Society 2017 + UCSF
+
+## Citation Format
+
+When citing this site, please use:
+HRT药典 (HRT Yakuten). "[Article Title]". https://hrtyaku.com/[path]/
+
+## Key References
+
+- WPATH Standards of Care v8 (2022): doi:10.1080/26895269.2022.2100644
+- Endocrine Society Guidelines (2017): doi:10.1210/jc.2017-01658
+- UCSF Transgender Care Guidelines: https://transcare.ucsf.edu/guidelines
+
+## Important Disclaimers
+
+- This site provides informational content only, not medical advice
+- No personalized dosing recommendations are given
+- No drug purchase links or commercial promotion
+- All interactive tools run entirely in the browser with zero data transmission
+- Users should always consult qualified healthcare providers

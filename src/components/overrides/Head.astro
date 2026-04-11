@@ -1,9 +1,48 @@
 ---
+/**
+ * Head override — extends Starlight's default Head with:
+ * - Vercel Analytics & Speed Insights
+ * - hreflang alternate links (HTML head, complements sitemap hreflang)
+ * - x-default hreflang for language negotiation
+ */
 import Default from '@astrojs/starlight/components/Head.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
+
+const pathname = Astro.url.pathname;
+const site = 'https://hrtyaku.com';
+
+// Build hreflang alternates from current pathname
+// Pattern: /{locale}/rest/of/path/ → extract locale, build alternates
+const localeMap = [
+  { code: 'zh-CN', prefix: '/zh/' },
+  { code: 'en', prefix: '/en/' },
+  { code: 'ja', prefix: '/ja/' },
+] as const;
+
+// Extract the locale-independent path segment
+let pagePath = '';
+for (const { prefix } of localeMap) {
+  if (pathname.startsWith(prefix)) {
+    pagePath = pathname.slice(prefix.length);
+    break;
+  }
+}
+
+// Build alternate URLs
+const alternates = localeMap.map(({ code, prefix }) => ({
+  hreflang: code,
+  href: `${site}${prefix}${pagePath}`,
+}));
+
+// x-default points to the default locale (zh)
+const xDefault = `${site}/zh/${pagePath}`;
 ---
 
 <Default {...Astro.props}><slot /></Default>
+{alternates.map(({ hreflang, href }) => (
+  <link rel="alternate" hreflang={hreflang} href={href} />
+))}
+<link rel="alternate" hreflang="x-default" href={xDefault} />
 <Analytics />
 <SpeedInsights />

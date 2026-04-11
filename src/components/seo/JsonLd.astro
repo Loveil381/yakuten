@@ -1,67 +1,168 @@
 ---
 /**
- * JSON-LD Structured Data for SEO
- * Injects Organization + WebSite schemas on every page.
+ * JSON-LD Structured Data for SEO & AEO
+ * Injects Organization + WebSite + MedicalWebPage schemas on every page.
+ * Adds per-page Drug schema on medication pages.
+ * Adds citation ScholarlyArticle schema when references are present.
  */
+import drugData from '../../data/drugs.json';
+import refData from '../../data/references.json';
+
+const route = Astro.locals.starlightRoute;
+const pageUrl = Astro.url.href;
+const pathname = Astro.url.pathname;
+const locale = route?.lang ?? 'zh-CN';
+
+// Extract page frontmatter
+const entry = route?.entry;
+const title = entry?.data?.title ?? 'HRT药典';
+const description = entry?.data?.description ?? '';
+const evidenceLevel = entry?.data?.evidenceLevel ?? 'X';
+const lastReviewed = entry?.data?.lastReviewed
+  ? new Date(entry.data.lastReviewed).toISOString().split('T')[0]
+  : '2026-04-12';
+const referenceIds: string[] = entry?.data?.references ?? [];
+
+// Detect if this is a medication page
+const isMedPage = pathname.includes('/medications/') && !pathname.includes('overview') && !pathname.includes('banned');
+
+// Try to find matching drug data for medication pages
+type DrugEntry = { id: string; names?: { generic?: string; zh?: string }; category?: string; routes?: { route?: string }[] };
+let drugInfo: DrugEntry | null = null;
+if (isMedPage) {
+  const drugs = drugData as DrugEntry[];
+  // Extract drug slug from URL (e.g., /zh/medications/estrogens/oral → estradiol-oral)
+  const pathParts = pathname.split('/').filter(Boolean);
+  const drugSlug = pathParts[pathParts.length - 1]; // e.g., "oral", "cpa", "progesterone"
+
+  // Map common slugs to drug IDs
+  const slugMap: Record<string, string> = {
+    'oral': 'estradiol-oral',
+    'sublingual': 'estradiol-sublingual',
+    'gel': 'estradiol-gel',
+    'transdermal-patch': 'estradiol-patch',
+    'injection': 'estradiol-injection',
+    'cypionate': 'estradiol-cypionate',
+    'enanthate': 'estradiol-enanthate',
+    'undecylate': 'estradiol-undecylate',
+    'cpa': 'cyproterone-acetate',
+    'spironolactone': 'spironolactone',
+    'bicalutamide': 'bicalutamide',
+    'gnrh-agonists': 'gnrh-agonist',
+    'progesterone': 'progesterone',
+    'hydroxyprogesterone': 'hydroxyprogesterone',
+    'dydrogesterone': 'dydrogesterone',
+    'drospirenone': 'drospirenone',
+    'finasteride': 'finasteride',
+    'dutasteride': 'dutasteride',
+  };
+  const drugId = slugMap[drugSlug];
+  if (drugId) {
+    drugInfo = drugs.find((d: DrugEntry) => d.id === drugId) ?? null;
+  }
+}
+
+// Build reference citations for ScholarlyArticle schema
+type RefEntry = { id: string; authors: string; year: number; title: string; journal: string; doi: string | null; url: string | null };
+const refs = refData as RefEntry[];
+const citedRefs = referenceIds
+  .map((id: string) => refs.find((r: RefEntry) => r.id === id))
+  .filter((r): r is RefEntry => r !== undefined)
+  .slice(0, 5); // Limit to 5 for schema size
+
+// Build the @graph array
+const graph: Record<string, unknown>[] = [
+  // 1. Organization (global)
+  {
+    "@type": "Organization",
+    "@id": "https://hrtyaku.com/#organization",
+    "name": "HRT药典",
+    "alternateName": "HRT Yakuten",
+    "url": "https://hrtyaku.com",
+    "description": "Evidence-based harm reduction HRT safety information for transgender women.",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hrtyaku.com/og-image.svg",
+      "width": 1200,
+      "height": 630
+    },
+    "sameAs": ["https://github.com/Loveil381/yakuten"]
+  },
+  // 2. WebSite (global)
+  {
+    "@type": "WebSite",
+    "@id": "https://hrtyaku.com/#website",
+    "url": "https://hrtyaku.com",
+    "name": "HRT药典",
+    "alternateName": "HRT Yakuten",
+    "description": "循证 · 减害 · 引导就医 — Evidence-based HRT safety baseline for transgender women",
+    "publisher": { "@id": "https://hrtyaku.com/#organization" },
+    "inLanguage": ["zh-CN", "en", "ja"],
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://hrtyaku.com/zh/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  // 3. MedicalWebPage (per-page)
+  {
+    "@type": "MedicalWebPage",
+    "url": pageUrl,
+    "name": title,
+    "description": description,
+    "inLanguage": locale,
+    "about": {
+      "@type": "MedicalCondition",
+      "name": "Gender Dysphoria",
+      "code": {
+        "@type": "MedicalCode",
+        "code": "F64.0",
+        "codingSystem": "ICD-10"
+      }
+    },
+    "medicalAudience": {
+      "@type": "MedicalAudience",
+      "audienceType": "Patient"
+    },
+    "lastReviewed": lastReviewed,
+    "reviewedBy": {
+      "@type": "Organization",
+      "name": "HRT药典 Editorial Team"
+    },
+    "isPartOf": { "@id": "https://hrtyaku.com/#website" }
+  }
+];
+
+// 4. Drug schema (medication pages only)
+if (drugInfo) {
+  const route0 = drugInfo.routes?.[0];
+  graph.push({
+    "@type": "Drug",
+    "name": drugInfo.names?.generic ?? title,
+    "nonProprietaryName": drugInfo.names?.zh ?? drugInfo.names?.generic,
+    "url": pageUrl,
+    "administrationRoute": route0?.route ?? undefined,
+    "isPartOf": { "@id": "https://hrtyaku.com/#website" }
+  });
+}
+
+// 5. Citation schemas (pages with references)
+if (citedRefs.length > 0) {
+  for (const ref of citedRefs) {
+    graph.push({
+      "@type": "ScholarlyArticle",
+      "headline": ref.title,
+      "author": ref.authors,
+      "datePublished": String(ref.year),
+      "isPartOf": { "name": ref.journal },
+      ...(ref.doi ? { "sameAs": `https://doi.org/${ref.doi}` } : {}),
+      ...(ref.url ? { "url": ref.url } : {})
+    });
+  }
+}
 ---
 
 <script is:inline type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://hrtyaku.com/#organization",
-      "name": "HRT药典",
-      "alternateName": "HRT Yakuten",
-      "url": "https://hrtyaku.com",
-      "description": "Evidence-based harm reduction HRT safety information for transgender women.",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://hrtyaku.com/og-image.png",
-        "width": 1200,
-        "height": 630
-      },
-      "sameAs": []
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://hrtyaku.com/#website",
-      "url": "https://hrtyaku.com",
-      "name": "HRT药典",
-      "alternateName": "HRT Yakuten",
-      "description": "循证 · 减害 · 引导就医 — Evidence-based HRT safety baseline for transgender women",
-      "publisher": { "@id": "https://hrtyaku.com/#organization" },
-      "inLanguage": ["zh-CN", "en", "ja"],
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://hrtyaku.com/zh/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    },
-    {
-      "@type": "MedicalWebPage",
-      "@id": "https://hrtyaku.com/#medicalwebpage",
-      "url": "https://hrtyaku.com",
-      "name": "HRT药典 — HRT Safety Baseline",
-      "about": {
-        "@type": "MedicalCondition",
-        "name": "Gender Dysphoria",
-        "code": {
-          "@type": "MedicalCode",
-          "code": "F64.0",
-          "codingSystem": "ICD-10"
-        }
-      },
-      "medicalAudience": {
-        "@type": "MedicalAudience",
-        "audienceType": "Patient"
-      },
-      "lastReviewed": "2026-04-07",
-      "reviewedBy": {
-        "@type": "Organization",
-        "name": "HRT药典 Editorial Team"
-      },
-      "isPartOf": { "@id": "https://hrtyaku.com/#website" }
-    }
-  ]
+  "@graph": graph
 })} />
