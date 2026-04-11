@@ -454,27 +454,72 @@
   ],
   "gnrh-agonist": [
     {
-      "name": "抑那通 / 亮丙瑞林",
+      "name": "抑那通 / リュープリン (Lupron)",
       "manufacturer": "武田 (Takeda) / AbbVie",
       "country": "JP",
       "countryName": "日本",
-      "spec": "3.75mg / 11.25mg 注射剂",
+      "spec": "3.75mg / 11.25mg / 22.5mg 注射剂",
       "appearance": "预填充注射器，白色冻干粉末",
-      "notes": "需皮下/肌肉注射，每月或每3月一次，价格极高",
+      "notes": "日本最常用的 GnRH 激动剂，需皮下/肌肉注射，月剂型或季度剂型",
       "activeIngredient": "亮丙瑞林",
       "status": "prescription"
     },
     {
-      "name": "达菲林 / 曲普瑞林",
+      "name": "贝依 / 抑那通",
+      "manufacturer": "丽珠集团 / AbbVie (中国)",
+      "country": "CN",
+      "countryName": "中国",
+      "spec": "3.75mg / 11.25mg",
+      "appearance": "注射用白色冻干粉末",
+      "notes": "中国大陆可获取的亮丙瑞林制剂，有国药准字批号，约 1000-2000 元/支",
+      "activeIngredient": "亮丙瑞林",
+      "status": "prescription"
+    },
+    {
+      "name": "诺雷得 Zoladex",
+      "manufacturer": "阿斯利康 (AstraZeneca)",
+      "country": "GB",
+      "countryName": "英国",
+      "spec": "3.6mg / 10.8mg 皮下植入剂",
+      "appearance": "预填充注射器 + 固体缓释棒（16G 粗针）",
+      "notes": "皮下植入型 GnRH 激动剂，针头较粗，需医护操作。中国大陆有进口，有国药准字批号",
+      "activeIngredient": "戈舍瑞林",
+      "status": "prescription",
+      "url": "https://www.astrazeneca.com"
+    },
+    {
+      "name": "达菲林 Decapeptyl",
       "manufacturer": "Ipsen",
       "country": "FR",
       "countryName": "法国",
-      "spec": "3.75mg / 11.25mg",
+      "spec": "3.75mg / 11.25mg / 22.5mg",
       "appearance": "注射用冻干粉末",
-      "notes": "法国产 GnRH 激动剂，作用与亮丙瑞林类似",
+      "notes": "法国产曲普瑞林，需肌肉注射。中国大陆有进口",
       "activeIngredient": "曲普瑞林",
       "status": "prescription",
       "url": "https://www.ipsen.com"
+    },
+    {
+      "name": "Suprefact (布舍瑞林)",
+      "manufacturer": "赛诺菲 (Sanofi)",
+      "country": "DE",
+      "countryName": "德国",
+      "spec": "鼻喷剂 100µg/喷 · 注射液",
+      "appearance": "鼻喷瓶 / 注射液",
+      "notes": "唯一可用鼻喷剂型的 GnRH 激动剂，无需注射。每日 2-3 次喷鼻，全球供应有限",
+      "activeIngredient": "布舍瑞林",
+      "status": "prescription"
+    },
+    {
+      "name": "Supprelin LA (组氨瑞林)",
+      "manufacturer": "Endo Pharmaceuticals",
+      "country": "US",
+      "countryName": "美国",
+      "spec": "65µg/天 × 12 个月皮下植入棒",
+      "appearance": "小型柱状皮下植入棒",
+      "notes": "持续 12 个月的皮下植入棒，一年一次手术更换。价格极高（美国约 $45,000/年），主要用于青春期阻断",
+      "activeIngredient": "组氨瑞林",
+      "status": "prescription"
     }
   ],
   "hydroxyprogesterone": [
