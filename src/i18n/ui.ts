@@ -67,6 +67,9 @@ export const ui = {
     'footer.link.github': '开源项目',
     'footer.link.feedback': '意见反馈',
     'footer.copy': 'HRT药典 · 循证 · 减害 · 引导就医',
+
+    // DrugBrandGallery
+    'brandGallery.viewAll': '查看全部品牌索引 →',
   },
 
   en: {
@@ -131,6 +134,9 @@ export const ui = {
     'footer.link.github': 'GitHub Project',
     'footer.link.feedback': 'Feedback',
     'footer.copy': 'HRT Yakuten · Evidence-Based · Harm Reduction',
+
+    // DrugBrandGallery
+    'brandGallery.viewAll': 'View full brand index →',
   },
 
   ja: {
@@ -195,6 +201,9 @@ export const ui = {
     'footer.link.github': 'オープンソース',
     'footer.link.feedback': 'フィードバック',
     'footer.copy': 'HRT药典 · エビデンス · 害軽減 · 医療ガイド',
+
+    // DrugBrandGallery
+    'brandGallery.viewAll': 'すべてのブランド索引を見る →',
   },
 } as const;
 

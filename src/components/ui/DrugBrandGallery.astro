@@ -8,13 +8,16 @@
  * @prop title  - 板块标题（默认："品牌图鉴"）
  */
 import brandData from '../../data/drug-brands.json';
+import { t, getLocale } from '../../i18n/ui';
 
 interface Props {
   drugId: string;
   title?: string;
 }
 
+const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
 const { drugId, title = '品牌图鉴' } = Astro.props;
+const indexPath = `/${locale}/tools/brand-index/`;
 
 type BrandEntry = {
   name: string;
@@ -68,6 +71,9 @@ function flag(code: string): string {
         </div>
       ))}
     </div>
+    <p class="brand-gallery__index-link">
+      <a href={indexPath}>{t(locale, 'brandGallery.viewAll')}</a>
+    </p>
   </section>
 )}
 
@@ -169,6 +175,25 @@ function flag(code: string): string {
   .brand-card__row dd {
     margin: 0;
     color: var(--color-text-secondary);
+  }
+
+  /* --- Index link --- */
+  .brand-gallery__index-link {
+    margin-top: var(--space-lg);
+    text-align: right;
+    font-size: 0.8125rem;
+  }
+
+  .brand-gallery__index-link a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+    transition: opacity 0.15s;
+  }
+
+  .brand-gallery__index-link a:hover {
+    opacity: 0.8;
   }
 
   /* --- Notes --- */
