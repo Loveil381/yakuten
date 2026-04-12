@@ -1,0 +1,291 @@
+---
+/**
+ * PKCurveChart — Pure SVG pharmacokinetic concentration-time curve.
+ * Generates a single-dose + multi-dose overlay from drug parameters.
+ * Zero JS, fully static, dark/light theme via CSS variables.
+ *
+ * @prop label        - Drug display name
+ * @prop halfLifeH    - Terminal half-life in hours
+ * @prop peakH        - Time to peak concentration (Tmax) in hours
+ * @prop doseMg       - Typical maintenance dose
+ * @prop freqH        - Dosing interval in hours (24 = daily, 120 = every 5 days)
+ * @prop targetMin    - Lower target range (pg/mL)
+ * @prop targetMax    - Upper target range (pg/mL)
+ * @prop dangerMax    - Danger threshold (optional)
+ * @prop color        - Curve color (CSS variable or hex)
+ */
+import { t, getLocale } from '../../i18n/ui';
+
+interface Props {
+  label: string;
+  halfLifeH: number;
+  peakH: number;
+  doseMg: number;
+  freqH: number;
+  targetMin: number;
+  targetMax: number;
+  dangerMax?: number;
+  color?: string;
+}
+
+const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
+const {
+  label,
+  halfLifeH,
+  peakH,
+  doseMg,
+  freqH,
+  targetMin,
+  targetMax,
+  dangerMax,
+  color = 'var(--color-primary, #C84B7C)',
+} = Astro.props;
+
+// ── PK model (single-compartment, first-order absorption + elimination) ──
+const ke = Math.LN2 / halfLifeH;
+const ka = 3 / peakH; // absorption rate constant
+const doses = 3; // show 3 dose cycles
+const totalH = freqH * doses;
+const points = 200;
+
+// Compute concentration at each time point (superposition of multiple doses)
+function C(tH: number): number {
+  let conc = 0;
+  for (let d = 0; d < doses; d++) {
+    const td = tH - d * freqH;
+    if (td < 0) continue;
+    conc += (ka / (ka - ke)) * (Math.exp(-ke * td) - Math.exp(-ka * td));
+  }
+  return conc * doseMg * 50; // scale factor for display
+}
+
+const data: number[] = [];
+let cMax = 0;
+for (let i = 0; i <= points; i++) {
+  const tH = (i / points) * totalH;
+  const c = C(tH);
+  data.push(c);
+  if (c > cMax) cMax = c;
+}
+
+// Normalize Y axis — scale so target range is visually prominent
+const yMax = Math.max(cMax * 1.15, dangerMax ?? targetMax * 1.5);
+const W = 400;
+const H = 200;
+const PAD_L = 45;
+const PAD_R = 10;
+const PAD_T = 15;
+const PAD_B = 30;
+const plotW = W - PAD_L - PAD_R;
+const plotH = H - PAD_T - PAD_B;
+
+function x(i: number): number { return PAD_L + (i / points) * plotW; }
+function y(v: number): number { return PAD_T + plotH - (v / yMax) * plotH; }
+
+// Build SVG path
+const pathD = data.map((c, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y(c).toFixed(1)}`).join(' ');
+
+// Target zone rect
+const tMinY = y(targetMin);
+const tMaxY = y(targetMax);
+const tZoneH = tMinY - tMaxY;
+
+// Danger line
+const dangerY = dangerMax ? y(dangerMax) : null;
+
+// Y-axis ticks
+const yTicks = [0, targetMin, targetMax, ...(dangerMax ? [dangerMax] : [])].filter(v => v <= yMax);
+
+// X-axis ticks (at each dose interval)
+const xTicks: number[] = [];
+for (let d = 0; d <= doses; d++) xTicks.push(d * freqH);
+
+// Labels
+const i18n = {
+  zh: { time: '时间 (h)', conc: '浓度', target: '目标范围', danger: '上限' },
+  en: { time: 'Time (h)', conc: 'Conc.', target: 'Target', danger: 'Limit' },
+  ja: { time: '時間 (h)', conc: '濃度', target: '目標範囲', danger: '上限' },
+  ko: { time: '시간 (h)', conc: '농도', target: '목표', danger: '상한' },
+} as Record<string, Record<string, string>>;
+const L = i18n[locale] ?? i18n.en;
+---
+
+<figure class="pk-chart" role="img" aria-label={`${label} — ${L.conc}`}>
+  <svg
+    viewBox={`0 0 ${W} ${H}`}
+    xmlns="http://www.w3.org/2000/svg"
+    class="pk-chart__svg"
+  >
+    <!-- Target zone (green band) -->
+    <rect
+      x={PAD_L} y={tMaxY}
+      width={plotW} height={tZoneH}
+      fill="rgba(76, 175, 80, 0.12)"
+      stroke="none"
+    />
+
+    <!-- Danger line -->
+    {dangerY !== null && (
+      <line
+        x1={PAD_L} y1={dangerY}
+        x2={PAD_L + plotW} y2={dangerY}
+        stroke="var(--color-danger, #dc2626)"
+        stroke-width="1"
+        stroke-dasharray="4 3"
+        opacity="0.6"
+      />
+    )}
+
+    <!-- Target range borders -->
+    <line x1={PAD_L} y1={tMaxY} x2={PAD_L + plotW} y2={tMaxY} stroke="rgba(76,175,80,0.4)" stroke-width="0.5" />
+    <line x1={PAD_L} y1={tMinY} x2={PAD_L + plotW} y2={tMinY} stroke="rgba(76,175,80,0.4)" stroke-width="0.5" />
+
+    <!-- Dose interval markers -->
+    {xTicks.slice(1, -1).map((h) => (
+      <line
+        x1={PAD_L + (h / totalH) * plotW}
+        y1={PAD_T}
+        x2={PAD_L + (h / totalH) * plotW}
+        y2={PAD_T + plotH}
+        stroke="var(--sl-color-gray-5, rgba(200,175,190,0.15))"
+        stroke-width="0.5"
+        stroke-dasharray="2 4"
+      />
+    ))}
+
+    <!-- PK curve -->
+    <path
+      d={pathD}
+      fill="none"
+      stroke={color}
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="pk-chart__curve"
+    />
+
+    <!-- Axes -->
+    <line x1={PAD_L} y1={PAD_T} x2={PAD_L} y2={PAD_T + plotH} stroke="var(--sl-color-gray-4, #555)" stroke-width="1" />
+    <line x1={PAD_L} y1={PAD_T + plotH} x2={PAD_L + plotW} y2={PAD_T + plotH} stroke="var(--sl-color-gray-4, #555)" stroke-width="1" />
+
+    <!-- Y-axis labels -->
+    {yTicks.map((v) => (
+      <text
+        x={PAD_L - 4}
+        y={y(v) + 3}
+        text-anchor="end"
+        class="pk-chart__tick"
+      >
+        {v}
+      </text>
+    ))}
+
+    <!-- X-axis labels -->
+    {xTicks.map((h) => (
+      <text
+        x={PAD_L + (h / totalH) * plotW}
+        y={PAD_T + plotH + 14}
+        text-anchor="middle"
+        class="pk-chart__tick"
+      >
+        {h}h
+      </text>
+    ))}
+
+    <!-- Target zone label -->
+    <text
+      x={PAD_L + plotW - 2}
+      y={tMaxY + tZoneH / 2 + 3}
+      text-anchor="end"
+      class="pk-chart__label pk-chart__label--target"
+    >
+      {L.target}
+    </text>
+
+    <!-- Danger label -->
+    {dangerY !== null && (
+      <text
+        x={PAD_L + plotW - 2}
+        y={dangerY - 4}
+        text-anchor="end"
+        class="pk-chart__label pk-chart__label--danger"
+      >
+        {L.danger}
+      </text>
+    )}
+
+    <!-- Drug name -->
+    <text x={PAD_L + 4} y={PAD_T + 12} class="pk-chart__title">{label}</text>
+  </svg>
+  <figcaption class="pk-chart__caption">{label} — {doseMg}mg, T½={halfLifeH}h, {L.time}</figcaption>
+</figure>
+
+<style>
+  .pk-chart {
+    margin: var(--space-lg) 0;
+    padding: 0;
+  }
+
+  .pk-chart__svg {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    background: var(--sl-color-bg-nav, rgba(26, 22, 37, 0.4));
+    border: 1px solid var(--sl-color-gray-5, rgba(86, 65, 71, 0.2));
+    border-radius: 8px;
+    padding: 8px;
+  }
+
+  .pk-chart__tick {
+    font-family: var(--font-mono, monospace);
+    font-size: 8px;
+    fill: var(--sl-color-gray-3, var(--color-text-muted, #888));
+  }
+
+  .pk-chart__label {
+    font-family: var(--font-mono, monospace);
+    font-size: 7px;
+  }
+
+  .pk-chart__label--target {
+    fill: rgba(76, 175, 80, 0.7);
+  }
+
+  .pk-chart__label--danger {
+    fill: var(--color-danger, #dc2626);
+    opacity: 0.7;
+  }
+
+  .pk-chart__title {
+    font-family: var(--font-display, serif);
+    font-size: 10px;
+    font-weight: 600;
+    fill: var(--sl-color-text, var(--color-text-primary, #fff));
+  }
+
+  .pk-chart__curve {
+    animation: pk-draw 1.5s ease-out forwards;
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+  }
+
+  @keyframes pk-draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pk-chart__curve {
+      animation: none;
+      stroke-dasharray: none;
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .pk-chart__caption {
+    margin-top: var(--space-xs);
+    font-family: var(--font-mono, monospace);
+    font-size: 0.6875rem;
+    color: var(--sl-color-gray-3, var(--color-text-muted, #888));
+    text-align: center;
+  }
+</style>

@@ -14,6 +14,8 @@ import WarningBox from '../../../../../components/ui/WarningBox.astro';
 import DangerBox from '../../../../../components/ui/DangerBox.astro';
 import CitationRef from '../../../../../components/ui/CitationRef.astro';
 import DrugBrandGallery from '../../../../../components/ui/DrugBrandGallery.astro';
+import PKCurveChart from '../../../../../components/ui/PKCurveChart.astro';
+import InjectionSiteSVG from '../../../../../components/ui/InjectionSiteSVG.astro';
 
 <DrugInfoBox
   name="Injectable Estradiol (Progynon Depot, etc.)"
@@ -24,6 +26,8 @@ import DrugBrandGallery from '../../../../../components/ui/DrugBrandGallery.astr
 >
 注射用エストラジオールは、トランス女性のHRTにおいて最も強烈な力を持つ投与手段です。肝臓の初回通過効果を完全にバイパスし、非常に高レベルで予測可能なエストロゲン濃度をもたらします。特筆すべきことに、注射を使用するユーザーの約82.6%が、抗アンドロゲン剤（ブロッカー）を一切使わずにテストステロンを完全に抑制する「モノセラピー」に成功しています<CitationRef id="misakian-2025" num={1} authors="Misakian AL et al." year={2025} title="Injectable Estradiol Monotherapy in Transgender Individuals" />。しかしながら、日本国内のDIYコミュニティでは常軌を逸した「高用量神話」が蔓延しており、その誤用による健康被害が後を絶ちません。
 </DrugInfoBox>
+
+<PKCurveChart label="Injectable Estradiol (EV)" halfLifeH={80} peakH={24} doseMg={4} freqH={120} targetMin={100} targetMax={200} dangerMax={500} color="var(--color-accent, #D4A853)" />
 
 ## 薬物動態（エステルの種類）
 
@@ -122,5 +126,7 @@ import DrugBrandGallery from '../../../../../components/ui/DrugBrandGallery.astr
 7. <span id="ref-poage-2026">Poage AC et al. Subcutaneous vs Intramuscular Estradiol Valerate Injection. PMC12922051, 2026.</span>
 8. <span id="ref-rothman-2024">Rothman MS et al. Injectable Estradiol Dosing in Transgender Individuals. *Transgender Health* 2024;9(6):463-465.</span>
 9. <span id="ref-kanin-2025">Kanin M et al. Injectable Estradiol Dosing Regimens. *J Endocr Soc* 2025;9(5):bvaf004.</span>
+
+<InjectionSiteSVG />
 
 <DrugBrandGallery drugId="estradiol-injection" />

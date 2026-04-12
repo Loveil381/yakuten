@@ -1,0 +1,118 @@
+---
+/**
+ * InjectionSiteSVG — Simplified body outline showing SC injection sites.
+ * Pure SVG, zero JS, dark/light theme via CSS variables.
+ */
+import { getLocale } from '../../i18n/ui';
+
+const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
+
+const L = {
+  zh: { title: '皮下注射部位', abdomen: '腹部', thigh: '大腿', avoid: '避免区域', rotate: '轮换注射', navel: '脐', site: '注射点' },
+  en: { title: 'Subcutaneous Injection Sites', abdomen: 'Abdomen', thigh: 'Thigh', avoid: 'Avoid', rotate: 'Rotate sites', navel: 'Navel', site: 'Site' },
+  ja: { title: '皮下注射部位', abdomen: '腹部', thigh: '大腿', avoid: '避けるべき範囲', rotate: '部位をローテーション', navel: '臍', site: '注射部位' },
+  ko: { title: '피하주사 부위', abdomen: '복부', thigh: '대퇴', avoid: '피해야 할 부위', rotate: '부위를 교대', navel: '배꼽', site: '주사 부위' },
+}[locale] ?? { title: 'Injection Sites', abdomen: 'Abdomen', thigh: 'Thigh', avoid: 'Avoid', rotate: 'Rotate', navel: 'Navel', site: 'Site' };
+---
+
+<figure class="inj-site" role="img" aria-label={L.title}>
+  <svg viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg" class="inj-site__svg">
+    <!-- Torso outline -->
+    <path
+      d="M150 30 C120 30 95 50 85 80 L75 130 C70 155 72 180 80 200 L90 230 C95 245 110 260 130 265 L150 268 L170 265 C190 260 205 245 210 230 L220 200 C228 180 230 155 225 130 L215 80 C205 50 180 30 150 30Z"
+      fill="none"
+      stroke="var(--sl-color-gray-4, #666)"
+      stroke-width="1.5"
+      opacity="0.5"
+    />
+
+    <!-- Navel -->
+    <circle cx="150" cy="160" r="4" fill="none" stroke="var(--sl-color-gray-4, #666)" stroke-width="1" opacity="0.6" />
+    <text x="150" y="175" text-anchor="middle" class="inj-site__label-sm">{L.navel}</text>
+
+    <!-- Avoid zone (2cm around navel) -->
+    <circle cx="150" cy="160" r="20" fill="rgba(220,53,69,0.1)" stroke="var(--color-danger, #dc2626)" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5" />
+
+    <!-- Injection site 1: Left abdomen -->
+    <circle cx="110" cy="145" r="8" fill="rgba(76,175,80,0.25)" stroke="rgba(76,175,80,0.8)" stroke-width="1.5" />
+    <text x="110" y="148" text-anchor="middle" class="inj-site__num">1</text>
+
+    <!-- Injection site 2: Right abdomen -->
+    <circle cx="190" cy="145" r="8" fill="rgba(76,175,80,0.25)" stroke="rgba(76,175,80,0.8)" stroke-width="1.5" />
+    <text x="190" y="148" text-anchor="middle" class="inj-site__num">2</text>
+
+    <!-- Injection site 3: Left lower abdomen -->
+    <circle cx="115" cy="190" r="8" fill="rgba(76,175,80,0.25)" stroke="rgba(76,175,80,0.8)" stroke-width="1.5" />
+    <text x="115" y="193" text-anchor="middle" class="inj-site__num">3</text>
+
+    <!-- Injection site 4: Right lower abdomen -->
+    <circle cx="185" cy="190" r="8" fill="rgba(76,175,80,0.25)" stroke="rgba(76,175,80,0.8)" stroke-width="1.5" />
+    <text x="185" y="193" text-anchor="middle" class="inj-site__num">4</text>
+
+    <!-- Labels -->
+    <text x="150" y="22" text-anchor="middle" class="inj-site__title">{L.title}</text>
+
+    <!-- Legend -->
+    <circle cx="30" cy="290" r="5" fill="rgba(76,175,80,0.25)" stroke="rgba(76,175,80,0.8)" stroke-width="1" />
+    <text x="40" y="293" class="inj-site__legend">{L.site}</text>
+
+    <circle cx="130" cy="290" r="5" fill="rgba(220,53,69,0.1)" stroke="var(--color-danger, #dc2626)" stroke-width="0.8" stroke-dasharray="3 2" />
+    <text x="140" y="293" class="inj-site__legend">{L.avoid}</text>
+
+    <!-- Rotate hint -->
+    <text x="150" y="310" text-anchor="middle" class="inj-site__hint">↻ {L.rotate} (1→2→3→4)</text>
+  </svg>
+</figure>
+
+<style>
+  .inj-site {
+    margin: var(--space-lg) 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .inj-site__svg {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    background: var(--sl-color-bg-nav, rgba(26, 22, 37, 0.4));
+    border: 1px solid var(--sl-color-gray-5, rgba(86, 65, 71, 0.2));
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  .inj-site__title {
+    font-family: var(--font-display, serif);
+    font-size: 11px;
+    font-weight: 600;
+    fill: var(--sl-color-text, var(--color-text-primary, #fff));
+  }
+
+  .inj-site__num {
+    font-family: var(--font-mono, monospace);
+    font-size: 9px;
+    font-weight: 700;
+    fill: rgba(76, 175, 80, 0.9);
+  }
+
+  .inj-site__label-sm {
+    font-family: var(--font-mono, monospace);
+    font-size: 7px;
+    fill: var(--sl-color-gray-3, var(--color-text-muted, #888));
+  }
+
+  .inj-site__legend {
+    font-family: var(--font-mono, monospace);
+    font-size: 8px;
+    fill: var(--sl-color-gray-3, var(--color-text-muted, #888));
+  }
+
+  .inj-site__hint {
+    font-family: var(--font-mono, monospace);
+    font-size: 8px;
+    fill: var(--color-accent, #D4A853);
+    opacity: 0.8;
+  }
+</style>

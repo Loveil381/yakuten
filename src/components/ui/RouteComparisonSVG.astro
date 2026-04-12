@@ -1,0 +1,155 @@
+---
+/**
+ * RouteComparisonSVG — Visual comparison of 5 estradiol delivery routes.
+ * Shows bioavailability, VTE risk, half-life, and frequency for each route.
+ * Pure SVG, zero JS, i18n built-in.
+ */
+import { getLocale } from '../../i18n/ui';
+
+const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
+
+const L = {
+  zh: { title: '雌二醇给药途径对比', bio: '生物利用度', vte: 'VTE 风险', hl: '半衰期', freq: '频率',
+    routes: ['口服', '舌下', '凝胶', '贴片', '注射'] },
+  en: { title: 'Estradiol Route Comparison', bio: 'Bioavail.', vte: 'VTE Risk', hl: 'Half-life', freq: 'Frequency',
+    routes: ['Oral', 'Sublingual', 'Gel', 'Patch', 'Injection'] },
+  ja: { title: 'エストラジオール投与経路の比較', bio: '生物学的利用能', vte: 'VTEリスク', hl: '半減期', freq: '頻度',
+    routes: ['経口', '舌下', 'ゲル', 'パッチ', '注射'] },
+  ko: { title: '에스트라디올 투여 경로 비교', bio: '생체이용률', vte: 'VTE 위험', hl: '반감기', freq: '빈도',
+    routes: ['경구', '설하', '젤', '패치', '주사'] },
+}[locale] ?? {
+  title: 'Route Comparison', bio: 'Bioavail.', vte: 'VTE', hl: 'Half-life', freq: 'Freq.',
+  routes: ['Oral', 'Sublingual', 'Gel', 'Patch', 'Injection'],
+};
+
+const routes = [
+  { bio: 5, vte: 1.48, hl: 16, freq: '1×/d', icon: '💊', color: 'var(--color-primary, #C84B7C)' },
+  { bio: 25, vte: 1.1, hl: 16, freq: '2-4×/d', icon: '👅', color: 'var(--color-primary-light, #E76395)' },
+  { bio: 10, vte: 0.97, hl: 36, freq: '1×/d', icon: '🧴', color: 'var(--color-tertiary, #7C8CF0)' },
+  { bio: 10, vte: 0.97, hl: 36, freq: '2×/wk', icon: '🩹', color: 'var(--color-accent, #D4A853)' },
+  { bio: 100, vte: 1.0, hl: 80, freq: '1×/5d', icon: '💉', color: 'var(--color-safe, #4CAF50)' },
+];
+
+const colW = 90;
+const W = 40 + colW * 5;
+const H = 260;
+const barMaxH = 60;
+---
+
+<figure class="route-cmp" role="img" aria-label={L.title}>
+  <svg viewBox={`0 0 ${W} ${H}`} xmlns="http://www.w3.org/2000/svg" class="route-cmp__svg">
+    <!-- Title -->
+    <text x={W / 2} y="18" text-anchor="middle" class="route-cmp__title">{L.title}</text>
+
+    {routes.map((r, i) => {
+      const cx = 40 + i * colW + colW / 2;
+      const baseY = 40;
+
+      // Bio bar (scaled: 5% → tiny, 100% → full)
+      const bioH = (r.bio / 100) * barMaxH;
+
+      // VTE indicator color
+      const vteColor = r.vte > 1.2 ? 'var(--color-danger, #dc2626)' : r.vte > 1.0 ? 'var(--color-caution, #e0a800)' : 'rgba(76,175,80,0.8)';
+
+      return (
+        <g>
+          {/* Route icon */}
+          <text x={cx} y={baseY + 10} text-anchor="middle" font-size="20">{r.icon}</text>
+
+          {/* Route name */}
+          <text x={cx} y={baseY + 28} text-anchor="middle" class="route-cmp__name">{L.routes[i]}</text>
+
+          {/* Bioavailability bar */}
+          <rect
+            x={cx - 15} y={baseY + 35 + (barMaxH - bioH)}
+            width="30" height={bioH}
+            rx="3"
+            fill={r.color}
+            opacity="0.6"
+          />
+          <text x={cx} y={baseY + 35 + barMaxH + 12} text-anchor="middle" class="route-cmp__val">{r.bio}%</text>
+          {i === 0 && (
+            <text x={20} y={baseY + 35 + barMaxH / 2 + 3} text-anchor="end" class="route-cmp__axis">{L.bio}</text>
+          )}
+
+          {/* VTE risk dot */}
+          <circle cx={cx} cy={baseY + barMaxH + 60} r="6" fill={vteColor} opacity="0.8" />
+          <text x={cx} y={baseY + barMaxH + 63} text-anchor="middle" class="route-cmp__vte-val">{r.vte.toFixed(1)}×</text>
+          <text x={cx} y={baseY + barMaxH + 78} text-anchor="middle" class="route-cmp__val-sm">{L.vte}</text>
+
+          {/* Half-life */}
+          <text x={cx} y={baseY + barMaxH + 100} text-anchor="middle" class="route-cmp__val">{r.hl}h</text>
+          {i === 0 && (
+            <text x={20} y={baseY + barMaxH + 103} text-anchor="end" class="route-cmp__axis">{L.hl}</text>
+          )}
+
+          {/* Frequency */}
+          <text x={cx} y={baseY + barMaxH + 118} text-anchor="middle" class="route-cmp__val-sm">{r.freq}</text>
+          {i === 0 && (
+            <text x={20} y={baseY + barMaxH + 121} text-anchor="end" class="route-cmp__axis">{L.freq}</text>
+          )}
+        </g>
+      );
+    })}
+  </svg>
+</figure>
+
+<style>
+  .route-cmp {
+    margin: var(--space-lg) 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .route-cmp__svg {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    background: var(--sl-color-bg-nav, rgba(26, 22, 37, 0.4));
+    border: 1px solid var(--sl-color-gray-5, rgba(86, 65, 71, 0.2));
+    border-radius: 8px;
+    padding: 8px;
+    overflow: visible;
+  }
+
+  .route-cmp__title {
+    font-family: var(--font-display, serif);
+    font-size: 11px;
+    font-weight: 600;
+    fill: var(--sl-color-text, var(--color-text-primary, #fff));
+  }
+
+  .route-cmp__name {
+    font-family: var(--font-body, sans-serif);
+    font-size: 9px;
+    font-weight: 600;
+    fill: var(--sl-color-text, var(--color-text-primary, #fff));
+  }
+
+  .route-cmp__val {
+    font-family: var(--font-mono, monospace);
+    font-size: 8px;
+    font-weight: 600;
+    fill: var(--sl-color-text, var(--color-text-secondary, #ccc));
+  }
+
+  .route-cmp__val-sm {
+    font-family: var(--font-mono, monospace);
+    font-size: 7px;
+    fill: var(--sl-color-gray-3, var(--color-text-muted, #888));
+  }
+
+  .route-cmp__vte-val {
+    font-family: var(--font-mono, monospace);
+    font-size: 7px;
+    font-weight: 700;
+    fill: #fff;
+  }
+
+  .route-cmp__axis {
+    font-family: var(--font-mono, monospace);
+    font-size: 6.5px;
+    fill: var(--sl-color-gray-3, var(--color-text-muted, #888));
+  }
+</style>

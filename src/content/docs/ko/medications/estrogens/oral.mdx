@@ -15,6 +15,7 @@ import CitationRef from '../../../../../components/ui/CitationRef.astro';
 import WarningBox from '../../../../../components/ui/WarningBox.astro';
 import DangerBox from '../../../../../components/ui/DangerBox.astro';
 import DrugBrandGallery from '../../../../../components/ui/DrugBrandGallery.astro';
+import PKCurveChart from '../../../../../components/ui/PKCurveChart.astro';
 
 <DrugInfoBox
   name="Oral Estradiol (Estrace, Progynova)"
@@ -25,6 +26,8 @@ import DrugBrandGallery from '../../../../../components/ui/DrugBrandGallery.astr
 >
   Oral estradiol (swallowing pills) is the most globally accessible formulation of estrogen. While VTE (blood clot) risks are slightly higher than transdermal administration, it remains a highly acceptable and standard choice for young users without preexisting risk factors.
 </DrugInfoBox>
+
+<PKCurveChart label="Oral Estradiol (EV)" halfLifeH={16} peakH={4} doseMg={4} freqH={24} targetMin={100} targetMax={200} dangerMax={400} />
 
 ## Pharmacology
 

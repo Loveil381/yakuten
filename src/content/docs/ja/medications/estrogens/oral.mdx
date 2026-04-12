@@ -15,6 +15,7 @@ import CitationRef from '../../../../../components/ui/CitationRef.astro';
 import WarningBox from '../../../../../components/ui/WarningBox.astro';
 import DangerBox from '../../../../../components/ui/DangerBox.astro';
 import DrugBrandGallery from '../../../../../components/ui/DrugBrandGallery.astro';
+import PKCurveChart from '../../../../../components/ui/PKCurveChart.astro';
 
 <DrugInfoBox
   name="Oral Estradiol (Progynova, Estrace)"
@@ -25,6 +26,8 @@ import DrugBrandGallery from '../../../../../components/ui/DrugBrandGallery.astr
 >
 錠剤を飲み込む「経口エストラジオール」は、世界中で最も一般的にアクセス可能なエストロゲン製剤です。静脈血栓塞栓症（VTE）のリスクは経皮パッチなどに比べて「わずかに高い」ものの、血栓リスクファクターを持っていない若年で健康なユーザーにとっては、現在でも標準的で十分に許容できる第一選択薬の一つです。
 </DrugInfoBox>
+
+<PKCurveChart label="Oral Estradiol (EV)" halfLifeH={16} peakH={4} doseMg={4} freqH={24} targetMin={100} targetMax={200} dangerMax={400} />
 
 ## 薬理学
 
