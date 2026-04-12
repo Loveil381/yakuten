@@ -190,6 +190,31 @@ for (const filePath of mdxFiles) {
   }
 }
 
+// ── Content freshness check (warn, not fail) ──
+const FRESHNESS_DAYS = 90;
+const now = new Date();
+const stalePages = [];
+
+for (const filePath of mdxFiles) {
+  const content = await readFile(filePath, 'utf8');
+  const lastReviewedMatch = content.match(/lastReviewed:\s*(\d{4}-\d{2}-\d{2})/);
+  if (lastReviewedMatch) {
+    const reviewDate = new Date(lastReviewedMatch[1]);
+    const daysSince = Math.floor((now - reviewDate) / (1000 * 60 * 60 * 24));
+    if (daysSince > FRESHNESS_DAYS) {
+      stalePages.push({ file: path.relative(rootDir, filePath), lastReviewed: lastReviewedMatch[1], daysSince });
+    }
+  }
+}
+
+if (stalePages.length > 0) {
+  console.warn(`\nContent freshness warning: ${stalePages.length} page(s) not reviewed in ${FRESHNESS_DAYS}+ days:\n`);
+  for (const { file, lastReviewed, daysSince } of stalePages) {
+    console.warn(`  ⚠ ${file} — last reviewed ${lastReviewed} (${daysSince} days ago)`);
+  }
+  console.warn('');
+}
+
 if (errors.length > 0) {
   console.error('Content validation failed:\n');
   for (const error of errors) {
