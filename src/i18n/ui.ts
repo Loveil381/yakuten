@@ -75,7 +75,7 @@ export const ui = {
   en: {
     // HeroSection
     'hero.title': 'HRT Yakuten',
-    'hero.slogan': 'May this journey bring you closer to your true self',
+    'hero.slogan': 'May this journey lead you to your true self',
 
     // SplashNav
     'nav.before': 'Before You Start',
@@ -142,7 +142,7 @@ export const ui = {
   ja: {
     // HeroSection
     'hero.title': 'HRT药典',
-    'hero.slogan': 'この旅が、本当の自分に届きますように',
+    'hero.slogan': '願わくばこの旅路が、真の自分に届かんことを',
 
     // SplashNav
     'nav.before': '服薬前の準備',
