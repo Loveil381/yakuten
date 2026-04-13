@@ -166,6 +166,7 @@ const s: Record<string, CSSProperties> = {
     fontSize: '0.75rem',
     cursor: 'pointer',
     transition: 'all var(--transition-fast)',
+    outline: 'none',
   },
   tabActive: {
     padding: '4px var(--space-sm)',

@@ -130,6 +130,7 @@ const S: Record<string, CSSProperties> = {
     cursor: 'pointer',
     transition: 'all 0.15s',
     fontFamily: 'var(--font-body, sans-serif)',
+    outline: 'none',
   },
   filterBtnActive: {
     background: 'var(--sl-color-accent-low, rgba(200, 75, 124, 0.25))',
