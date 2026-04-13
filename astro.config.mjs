@@ -246,7 +246,7 @@ export default defineConfig({
           slug: 'risks',
         },
         {
-          label: '中国 HRT 路径图',
+          label: '中国 HRT 现实路径图',
           translations: { en: 'China HRT Guide', ja: '中国HRTガイド' },
           slug: 'china-reality',
         },
