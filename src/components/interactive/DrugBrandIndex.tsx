@@ -222,7 +222,7 @@ const S: Record<string, CSSProperties> = {
     WebkitTapHighlightColor: 'transparent',
     padding: '0.375rem 0.75rem',
     borderRadius: '6px',
-    border: '1px solid transparent',
+    border: '1px solid var(--sl-color-gray-5, rgba(200, 175, 190, 0.2))',
     background: 'var(--sl-color-bg-nav, rgba(26, 22, 37, 0.4))',
     color: 'var(--sl-color-text-accent, #aaa)',
     fontSize: '0.75rem',
@@ -461,13 +461,6 @@ export default function DrugBrandIndex() {
         .dbi-filter-btn:focus-visible,
         .dbi-filter-btn:active {
           outline: none !important;
-          box-shadow: inset 0 0 0 1px var(--color-outline-20) !important;
-        }
-
-        .dbi-filter-btn[aria-pressed="true"],
-        .dbi-filter-btn[aria-pressed="true"]:focus,
-        .dbi-filter-btn[aria-pressed="true"]:focus-visible,
-        .dbi-filter-btn[aria-pressed="true"]:active {
           box-shadow: none !important;
         }
 
