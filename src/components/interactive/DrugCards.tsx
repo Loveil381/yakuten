@@ -121,6 +121,8 @@ const S: Record<string, CSSProperties> = {
     justifyContent: 'center',
   },
   filterBtn: {
+    appearance: 'none' as const,
+    WebkitAppearance: 'none' as const,
     padding: '0.375rem 0.75rem',
     borderRadius: '6px',
     border: '1px solid var(--sl-color-gray-5, rgba(200, 175, 190, 0.2))',
@@ -297,7 +299,7 @@ export default function DrugCards() {
           <button
             key={c.key}
             className="dc-filter-btn"
-            onClick={() => setCategory(c.key)}
+            onClick={(e) => { setCategory(c.key); (e.target as HTMLElement).blur(); }}
             style={{ ...S.filterBtn, ...(category === c.key ? S.filterBtnActive : {}) }}
             aria-pressed={category === c.key}
           >

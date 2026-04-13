@@ -158,6 +158,8 @@ const s: Record<string, CSSProperties> = {
     marginBottom: 'var(--space-lg)',
   },
   tab: {
+    appearance: 'none' as const,
+    WebkitAppearance: 'none' as const,
     padding: '4px var(--space-sm)',
     background: 'transparent',
     color: 'var(--color-text-muted)',
@@ -301,7 +303,7 @@ export default function ReferenceLibrary() {
           role="tab"
           aria-selected={category === 'all'}
           style={category === 'all' ? s.tabActive : s.tab}
-          onClick={() => setCategory('all')}
+          onClick={(e) => { setCategory('all'); (e.target as HTMLElement).blur(); }}
         >
           {ui.all} ({REFS.length})
         </button>
@@ -316,7 +318,7 @@ export default function ReferenceLibrary() {
               role="tab"
               aria-selected={category === cat}
               style={category === cat ? s.tabActive : s.tab}
-              onClick={() => setCategory(cat)}
+              onClick={(e) => { setCategory(cat); (e.target as HTMLElement).blur(); }}
             >
               {getCatLabel(cat)} ({count})
             </button>
