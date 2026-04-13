@@ -1,6 +1,6 @@
 ---
-title: 用药路径图
-description: 从基线检查到维持期的完整 HRT 用药路径，包含阶段目标、决策节点和复查时间表。
+title: HRT 用药路径图：从零到稳定
+description: 从基线血检到长期维持的完整 HRT 路径。每个阶段的目标剂量、决策节点、复查时间表，以及中国大陆的药物可及性提示。
 evidenceLevel: B
 lastReviewed: 2026-04-08
 references: [coleman-2022, hembree-2017, patel-2021, rothman-2024, ucsf-2016]
@@ -17,6 +17,59 @@ import InlineValue from '../../../components/ui/InlineValue.astro';
 
 import '../../../styles/pathway.css';
 
+<div class="pathway-hero not-content">
+  <div class="pathway-hero__box">
+    <p class="pathway-hero__lead">找到你现在的阶段，看下一步该做什么。</p>
+    <div class="pathway-hero__actions">
+      <a href="#phase0" class="pathway-hero__btn">还没开始</a>
+      <a href="#phase1" class="pathway-hero__btn">1-6 个月</a>
+      <a href="#phase2" class="pathway-hero__btn">6-12 个月</a>
+      <a href="#phase3" class="pathway-hero__btn">1 年以上</a>
+    </div>
+  </div>
+</div>
+
+<style>{`
+  .pathway-hero { margin-bottom: var(--space-xl); }
+  .pathway-hero__box {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    clip-path: var(--clip-corner);
+    padding: var(--space-lg) var(--space-xl);
+    text-align: center;
+  }
+  .pathway-hero__lead {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 var(--space-md);
+  }
+  .pathway-hero__actions {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .pathway-hero__btn {
+    padding: var(--space-xs) var(--space-lg);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-outline);
+    transition: border-color var(--transition-fast), background var(--transition-fast);
+  }
+  .pathway-hero__btn:hover {
+    border-color: var(--color-primary);
+    background: rgba(200, 75, 124, 0.08);
+    color: var(--color-primary);
+  }
+`}</style>
+
 <EvidenceBadge level="B" />
 
 <div class="pathway-wrapper">
@@ -29,7 +82,7 @@ import '../../../styles/pathway.css';
 
 {/* ======== PHASE 0: Baseline ======== */}
 
-<div class="phase-row">
+<div class="phase-row" id="phase0">
   <div class="phase-marker phase-marker--green" />
   <div class="phase-label" style="color: var(--color-safe);">WEEK 0</div>
   <PhaseBlock phase={0} title="基线检查" color="green">
@@ -59,7 +112,7 @@ import '../../../styles/pathway.css';
 
 {/* ======== PHASE 1: Low Dose ======== */}
 
-<div class="phase-row">
+<div class="phase-row" id="phase1">
   <div class="phase-marker phase-marker--green" />
   <div class="phase-label" style="color: var(--color-safe);">INITIATION · 1-6 MONTHS</div>
   <PhaseBlock phase={1} title="低剂量起步" color="green" week="1-6 MONTHS">
@@ -74,6 +127,9 @@ import '../../../styles/pathway.css';
     />
     <p class="phase-block__desc" style="margin-top: var(--space-sm); margin-bottom: var(--space-sm);">
       抗雄（如需）：CPA <InlineValue value="5–12.5" unit="mg/天" /> 或 螺内酯 <InlineValue value="50–100" unit="mg/天" /><CitationRef id="coleman-2022" num={1} authors="Coleman et al." year={2022} />
+    </p>
+    <p class="phase-block__desc" style="margin-top: var(--space-xs); margin-bottom: var(--space-sm); padding: var(--space-xs) var(--space-sm); border-left: 2px solid var(--color-caution); font-size: 0.75rem; color: var(--color-caution);">
+      🇨🇳 中国大陆：补佳乐（口服 E2 2mg）最容易获取。贴片几乎无供应，凝胶需医院处方，注射剂无正规渠道。螺内酯是合法可获取的抗雄。<a href="/zh/china-reality/#step3" style="color: var(--color-primary);">详见中国路径图</a>
     </p>
     <div class="phase-stats">
       <div class="phase-stat">
@@ -104,11 +160,11 @@ import '../../../styles/pathway.css';
   <DecisionNode title="DECISION" timepoint="3 MONTH">
     <DecisionBranch
       outcome="green"
-      text={'E2 30–100\u00A0pg/mL 且 T 下降 → 继续当前方案至 6 个月'}
+      text={'E2 30–100\u00A0pg/mL 且 T 下降 → 一切正常，继续当前方案（不要加量）'}
     />
     <DecisionBranch
       outcome="yellow"
-      text={'E2 <30\u00A0pg/mL → 考虑升至阶段 2 剂量'}
+      text={'E2 <30\u00A0pg/mL → 药物可能没吸收好，和医生讨论是否调整给药方式或剂量'}
     />
     <DecisionBranch
       outcome="red"
@@ -119,7 +175,7 @@ import '../../../styles/pathway.css';
 
 {/* ======== PHASE 2: Moderate Dose ======== */}
 
-<div class="phase-row">
+<div class="phase-row" id="phase2">
   <div class="phase-marker phase-marker--yellow" />
   <div class="phase-label" style="color: var(--color-accent);">TITRATION · 6-12 MONTHS</div>
   <PhaseBlock phase={2} title="剂量滴定" color="yellow" week="6-12 MONTHS">
@@ -174,7 +230,7 @@ import '../../../styles/pathway.css';
     />
     <DecisionBranch
       outcome="yellow"
-      text="T >50 但 E2 已达标 → 调整抗雄方案（不要靠增加 E2 来压 T）"
+      text="T >50 但 E2 已达标 → 雌激素够了但睾酮还没降够，需要加强抗雄（不是加 E2）"
     />
     <DecisionBranch
       outcome="yellow"
@@ -185,7 +241,7 @@ import '../../../styles/pathway.css';
 
 {/* ======== PHASE 3: Maintenance ======== */}
 
-<div class="phase-row">
+<div class="phase-row" id="phase3">
   <div class="phase-marker phase-marker--pink" />
   <div class="phase-label" style="color: var(--color-primary);">STEADY STATE · 12 MONTHS+</div>
   <PhaseBlock phase={3} title="长期维持" color="pink" week="12 MONTHS+">
@@ -213,6 +269,13 @@ import '../../../styles/pathway.css';
     </div>
   </PhaseBlock>
 </div>
+
+<WarningBox title="接下来你可能需要">
+- [血检自查工具](/zh/blood-tests/#tool) — 每次复查后对照结果
+- [乳房发育专题](/zh/breast-development/) — 发育预期和孕激素添加时机
+- [风险与急症识别](/zh/risks/) — 什么情况必须停药就医
+- [中国 HRT 路径图](/zh/china-reality/) — 在中国大陆怎么找医生、买药、做血检
+</WarningBox>
 
 {/* ======== End Marker ======== */}
 
