@@ -123,7 +123,7 @@ const columns: FooterColumn[] = [
   .site-footer__column-text {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: rgba(203, 194, 221, 0.5);
+    color: var(--color-text-muted, rgba(203, 194, 221, 0.7));
     letter-spacing: 0.1em;
     text-transform: uppercase;
     line-height: 1.8;
@@ -167,7 +167,7 @@ const columns: FooterColumn[] = [
     font-family: var(--font-mono);
     font-size: 0.75rem;
     letter-spacing: -0.02em;
-    color: rgba(203, 194, 221, 0.3);
+    color: var(--color-text-muted, rgba(203, 194, 221, 0.5));
     text-decoration: none;
     transition: color var(--transition-fast);
   }
@@ -179,7 +179,7 @@ const columns: FooterColumn[] = [
   .site-footer__copy {
     font-family: var(--font-mono);
     font-size: 0.625rem;
-    color: rgba(203, 194, 221, 0.3);
+    color: var(--color-text-muted, rgba(203, 194, 221, 0.5));
     letter-spacing: 0.4em;
     text-transform: uppercase;
     margin: 0;
