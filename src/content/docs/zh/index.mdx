@@ -29,6 +29,88 @@ import SiteFooter from '../../../components/layout/SiteFooter.astro';
 
 <ActionCards />
 
+<div class="quick-tools">
+  <div class="quick-tools__inner">
+    <div class="quick-tools__stats">
+      覆盖 <strong>20 种药物</strong> · <strong>25 家</strong>友好医院 · 全部引用标注 DOI
+    </div>
+    <div class="quick-tools__links">
+      <a href="/zh/tools/blood-checker/" class="quick-tools__link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/></svg>
+        血检自查
+      </a>
+      <a href="/zh/tools/hospital-finder/" class="quick-tools__link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        查找医院
+      </a>
+      <a href="/zh/tools/drug-comparator/" class="quick-tools__link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        药物对比
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>{`
+  .quick-tools {
+    position: relative;
+    z-index: 10;
+    padding: 0 var(--space-lg) var(--space-xl);
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+  .quick-tools__inner {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    clip-path: var(--clip-corner);
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+  .quick-tools__stats {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
+  }
+  .quick-tools__stats strong {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+  .quick-tools__links {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+  .quick-tools__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-md);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-primary-light);
+    border: 1px solid var(--color-outline-20);
+    text-decoration: none;
+    transition: border-color var(--transition-fast), background var(--transition-fast);
+  }
+  .quick-tools__link:hover {
+    border-color: var(--color-primary);
+    background: rgba(200, 75, 124, 0.08);
+  }
+  @media (max-width: 640px) {
+    .quick-tools__inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+`}</style>
+
 <MissionStatement />
 
 <SiteFooter />
