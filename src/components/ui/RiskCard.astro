@@ -29,6 +29,8 @@ const severityMap = {
   orange: 'risk-card--orange',
   yellow: 'risk-card--yellow',
 };
+
+const hasFooter = Astro.slots.has('default');
 ---
 
 <article class:list={['risk-card glass-panel clipped-card', severityMap[severity], className]}>
@@ -48,6 +50,11 @@ const severityMap = {
       <p class="risk-card__signs-text">{signs}</p>
     </div>
   </div>
+  {hasFooter && (
+    <div class="risk-card__footer">
+      <slot />
+    </div>
+  )}
 </article>
 
 <style>
@@ -160,5 +167,14 @@ const severityMap = {
     color: var(--color-text-primary);
     margin: 0;
     line-height: 1.5;
+  }
+
+  .risk-card__footer {
+    margin-top: auto;
+    padding-top: var(--space-md);
+  }
+
+  .risk-card__footer :global(.risk-citation) {
+    margin-top: 0;
   }
 </style>

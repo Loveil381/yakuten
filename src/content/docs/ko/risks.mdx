@@ -31,12 +31,11 @@ The risk profiles below are derived from the Endocrine Society 2017 guidelines<C
     drug="Oral estradiol (E2)"
     probability="< 0.5% (annual)"
     signs="Unilateral lower leg redness, swelling, warmth, severe pain."
-  />
-
+  >
   <p class="risk-citation">Oral estradiol VTE risk is significantly higher than transdermal routes<CitationRef id="canonico-2018" num={1} authors="Canonico et al." year={2018} title="Hormone therapy and venous thromboembolism" />. Annual incidence approximately 0.2-0.5%; smoking and age further increase risk.</p>
+  </RiskCard>
   </div>
   <div class="risk-item">
-
   <RiskCard
     title="Hepatic Injury"
     category="Hepatic Risk"
@@ -44,12 +43,11 @@ The risk profiles below are derived from the Endocrine Society 2017 guidelines<C
     drug="CPA / oral medications"
     probability="Rare (monitor LFTs)"
     signs="Yellowing of eyes/skin, dark urine, extreme fatigue."
-  />
-
+  >
   <p class="risk-citation">Both CPA and bicalutamide have hepatotoxicity case reports. EMA has issued warnings regarding CPA liver injury risk<CitationRef id="ema-2020" num={2} authors="EMA" year={2020} title="Restrictions on use of cyproterone due to meningioma risk" /><CitationRef id="lee-2022" num={3} authors="Lee et al." year={2022} title="Cyproterone acetate and meningioma risk" />.</p>
+  </RiskCard>
   </div>
   <div class="risk-item">
-
   <RiskCard
     title="Cardiovascular Complications"
     category="Cardiac Risk"
@@ -57,12 +55,11 @@ The risk profiles below are derived from the Endocrine Society 2017 guidelines<C
     drug="All E2 formulations"
     probability="Higher with age / smoking"
     signs="Palpitations, unexplained chest pressure."
-  />
-
+  >
   <p class="risk-citation">Oral route carries higher cardiovascular risk than transdermal due to hepatic first-pass effect on coagulation factors<CitationRef id="canonico-2018" num={1} authors="Canonico et al." year={2018} />.</p>
+  </RiskCard>
   </div>
   <div class="risk-item">
-
   <RiskCard
     title="Meningioma"
     category="Neural Risk"
@@ -70,12 +67,11 @@ The risk profiles below are derived from the Endocrine Society 2017 guidelines<C
     drug="High-dose CPA"
     probability="Cumulative dose > 10g"
     signs="Vision changes, hearing loss, unusual headaches."
-  />
-
+  >
   <p class="risk-citation">CPA daily dose ≥25 mg: meningioma risk OR=12.36<CitationRef id="lee-2022" num={3} authors="Lee et al." year={2022} /><CitationRef id="hudelist-2026" num={4} authors="Hudelist et al." year={2026} title="CPA-associated meningioma in transgender women" />. EMA restricts doses ≥25 mg/day<CitationRef id="ema-2020" num={2} authors="EMA" year={2020} />.</p>
+  </RiskCard>
   </div>
   <div class="risk-item">
-
   <RiskCard
     title="Mood Changes & Depression"
     category="Psych Risk"
@@ -83,12 +79,11 @@ The risk profiles below are derived from the Endocrine Society 2017 guidelines<C
     drug="CPA / low E2 levels"
     probability="Common (5-15%)"
     signs="Suicidal ideation, unexplained crying, loss of motivation."
-  />
-
+  >
   <p class="risk-citation">CPA progestogenic activity can cause mood changes and depression, incidence approximately 5-15%<CitationRef id="meyer-2020" num={5} authors="Meyer et al." year={2020} title="Safety and rapid efficacy of guideline-based gender-affirming hormone therapy" />.</p>
+  </RiskCard>
   </div>
   <div class="risk-item">
-
   <RiskCard
     title="Prolactin Elevation"
     category="Endo Risk"
@@ -96,9 +91,9 @@ The risk profiles below are derived from the Endocrine Society 2017 guidelines<C
     drug="Estradiol / CPA"
     probability="Requires periodic monitoring"
     signs="Nipple discharge, persistent severe headache."
-  />
-
+  >
   <p class="risk-citation">Both estradiol and CPA can elevate prolactin. PRL >50 ng/mL requires pituitary prolactinoma workup<CitationRef id="hembree-2017" num={6} authors="Hembree et al." year={2017} />.</p>
+  </RiskCard>
   </div>
 </div>
 
@@ -220,10 +215,13 @@ If you are experiencing severe psychological distress or thoughts of self-harm, 
   .risk-item {
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
 
   .risk-item > :global(.risk-card) {
-    flex: 1 0 auto;
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 0;
   }
 
   .risk-citation {
