@@ -218,6 +218,8 @@ const S: Record<string, CSSProperties> = {
   filterBtn: {
     appearance: 'none' as const,
     WebkitAppearance: 'none' as const,
+    MozAppearance: 'none' as const,
+    WebkitTapHighlightColor: 'transparent',
     padding: '0.375rem 0.75rem',
     borderRadius: '6px',
     border: '1px solid var(--sl-color-gray-5, rgba(200, 175, 190, 0.2))',
@@ -447,9 +449,25 @@ export default function DrugBrandIndex() {
     return <span style={{ ...S.badge, ...entry.style }}>{entry.label}</span>;
   }
 
+  function releasePointerFocus(button: HTMLButtonElement) {
+    window.requestAnimationFrame(() => button.blur());
+  }
+
   return (
     <div style={S.container}>
-      <style>{`.dbi-filter-btn:focus, .dbi-filter-btn:focus-visible { outline: none !important; box-shadow: none !important; }`}</style>
+      <style>{`
+        .dbi-filter-btn,
+        .dbi-filter-btn:focus,
+        .dbi-filter-btn:focus-visible,
+        .dbi-filter-btn:active {
+          outline: none !important;
+          box-shadow: none !important;
+        }
+
+        .dbi-filter-btn::-moz-focus-inner {
+          border: 0 !important;
+        }
+      `}</style>
       {/* Disclaimer banner */}
       <div style={S.disclaimer} role="alert">
         {t.disclaimer}
@@ -471,9 +489,11 @@ export default function DrugBrandIndex() {
       <div style={S.filterRow} role="radiogroup" aria-label={t.regionAll}>
         {regions.map((r) => (
           <button
+            type="button"
             key={r.key}
             className="dbi-filter-btn"
-            onClick={(e) => { setRegion(r.key); (e.target as HTMLElement).blur(); }}
+            onClick={() => setRegion(r.key)}
+            onPointerUp={(e) => releasePointerFocus(e.currentTarget)}
             style={{
               ...S.filterBtn,
               ...(region === r.key ? S.filterBtnActive : {}),
@@ -489,9 +509,11 @@ export default function DrugBrandIndex() {
       <div style={S.filterRow} role="radiogroup" aria-label={t.categoryAll}>
         {categories.map((c) => (
           <button
+            type="button"
             key={c.key}
             className="dbi-filter-btn"
-            onClick={(e) => { setCategory(c.key); (e.target as HTMLElement).blur(); }}
+            onClick={() => setCategory(c.key)}
+            onPointerUp={(e) => releasePointerFocus(e.currentTarget)}
             style={{
               ...S.filterBtn,
               ...(category === c.key ? S.filterBtnActive : {}),
