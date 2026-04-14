@@ -292,6 +292,30 @@
     {"id":"cpa-pill-splitting-ko","type":"diagrams-i18n","subdir":"ko","filename":"cpa-pill-splitting.webp","width":800,"height":400,
       "refFile":"cpa-pill-splitting.webp",
       "prompt":"Recreate this exact pill splitting diagram faithfully with the same layout, tablet, pill cutter, and quarter pieces. Replace ALL English text with Korean: '50 mg'→'50 mg 정제', '12.5 mg'→'12.5 mg/조각', 'Pill cutter'→'알약 커터', 'Quarter'→'4분의 1'. Keep everything else identical.",
-      "alt":"CPA 알약 분할도: 알약 커터로 50mg 십자 눈금 정제를 12.5mg 4조각으로 분할"}
+      "alt":"CPA 알약 분할도: 알약 커터로 50mg 십자 눈금 정제를 12.5mg 4조각으로 분할"},
+
+    {
+      "id": "cpa-meningioma-risk",
+      "type": "diagrams",
+      "filename": "cpa-meningioma-risk.webp",
+      "width": 800,
+      "height": 450,
+      "prompt": "Clean medical bar chart diagram showing meningioma risk at different CPA doses. Four vertical bars increasing dramatically in height from left to right. Bar 1: '5-12.5 mg' labeled 'Very Low Risk' in green, short bar. Bar 2: '25 mg' labeled 'Significantly Elevated' in orange, medium bar. Bar 3: '50 mg' labeled 'OR ≈ 12' in red, tall bar. Bar 4: '100 mg' labeled 'Highest Risk' in dark red, tallest bar. A horizontal dashed red line across the chart labeled 'EMA restriction threshold (≥25 mg)' between bar 1 and bar 2. Y-axis labeled 'Meningioma Risk (Odds Ratio)'. X-axis labeled 'Daily CPA Dose'. Simple clean chart style, white background, medical illustration.",
+      "alt": "CPA dose-dependent meningioma risk chart: risk increases dramatically above 25mg daily",
+      "page": "/zh/medications/antiandrogens/cpa"
+    },
+
+    {"id":"cpa-meningioma-risk-zh","type":"diagrams-i18n","subdir":"zh","filename":"cpa-meningioma-risk.webp","width":800,"height":450,
+      "refFile":"cpa-meningioma-risk.webp",
+      "prompt":"Recreate this exact meningioma risk bar chart faithfully with the same layout, bars, colors, and dashed line. Replace ALL English text with Chinese: 'Very Low Risk'→'风险极低', 'Significantly Elevated'→'显著升高', 'Highest Risk'→'最高风险', 'EMA restriction threshold'→'EMA 限制令阈值', 'Meningioma Risk (Odds Ratio)'→'脑膜瘤风险（比值比）', 'Daily CPA Dose'→'CPA 每日剂量'. Keep dose numbers and OR values in original form. Keep everything else identical.",
+      "alt":"CPA 剂量与脑膜瘤风险关系图：≥25mg 后风险急剧升高"},
+    {"id":"cpa-meningioma-risk-ja","type":"diagrams-i18n","subdir":"ja","filename":"cpa-meningioma-risk.webp","width":800,"height":450,
+      "refFile":"cpa-meningioma-risk.webp",
+      "prompt":"Recreate this exact meningioma risk bar chart faithfully with the same layout, bars, colors, and dashed line. Replace ALL English text with Japanese: 'Very Low Risk'→'リスク極めて低い', 'Significantly Elevated'→'有意に上昇', 'Highest Risk'→'最高リスク', 'EMA restriction threshold'→'EMA 制限基準', 'Meningioma Risk (Odds Ratio)'→'髄膜腫リスク（オッズ比）', 'Daily CPA Dose'→'CPA 1日用量'. Keep dose numbers and OR values in original form. Keep everything else identical.",
+      "alt":"CPA用量と髄膜腫リスクの関係図：25mg以上でリスクが急上昇"},
+    {"id":"cpa-meningioma-risk-ko","type":"diagrams-i18n","subdir":"ko","filename":"cpa-meningioma-risk.webp","width":800,"height":450,
+      "refFile":"cpa-meningioma-risk.webp",
+      "prompt":"Recreate this exact meningioma risk bar chart faithfully with the same layout, bars, colors, and dashed line. Replace ALL English text with Korean: 'Very Low Risk'→'위험 매우 낮음', 'Significantly Elevated'→'유의하게 상승', 'Highest Risk'→'최고 위험', 'EMA restriction threshold'→'EMA 제한 기준', 'Meningioma Risk (Odds Ratio)'→'수막종 위험(오즈비)', 'Daily CPA Dose'→'CPA 일일 용량'. Keep dose numbers and OR values in original form. Keep everything else identical.",
+      "alt":"CPA 용량별 수막종 위험도: 25mg 이상에서 위험이 급격히 상승"}
   ]
 }
