@@ -6,7 +6,7 @@
 
 ### Bug Reports / 问题反馈
 
-请通过 [GitHub Issues](https://github.com/Loveil381/yakuten/issues) 提交，使用对应的 Issue 模板。
+请通过 [GitHub Issues](https://github.com/cantascendia/yakuten/issues) 提交，使用对应的 Issue 模板。
 
 ### Content Corrections / 内容纠错
 

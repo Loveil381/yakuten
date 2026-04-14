@@ -108,7 +108,7 @@ Gemini Flash Image       AI-generated medical diagrams (Nano Banana 2)
 
 ```bash
 # Clone
-git clone https://github.com/Loveil381/yakuten.git
+git clone https://github.com/cantascendia/yakuten.git
 cd yakuten
 
 # Install
@@ -182,13 +182,13 @@ scripts/
 - **翻译**：内容校对、本地化质量提升
 - **医学审阅**：如果你是内分泌科 / 跨性别医疗从业者
 - **社区素材**：药物品牌实物照片
-- **Bug 报告**：通过 [Issues](https://github.com/Loveil381/yakuten/issues) 提交
+- **Bug 报告**：通过 [Issues](https://github.com/cantascendia/yakuten/issues) 提交
 
 请阅读 [CONTRIBUTING.md](.github/CONTRIBUTING.md) 了解贡献流程。
 
 ## Related Projects
 
-- [**hananote**](https://github.com/Loveil381/hananote) — Flutter HRT 记录应用（配套工具）
+- [**hananote**](https://github.com/cantascendia/hananote) — Flutter HRT 记录应用（配套工具）
 
 ## Evidence Sources
 
