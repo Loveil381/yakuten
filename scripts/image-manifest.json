@@ -388,6 +388,30 @@
     {"id":"e2-staircase-ko","type":"diagrams-i18n","subdir":"ko","filename":"e2-staircase.webp","width":800,"height":450,
       "refFile":"e2-staircase.webp",
       "prompt":"Recreate this exact E2 staircase chart faithfully with the same layout, curves, shaded zones, and axes. Replace ALL English text with Korean: 'Correct approach'→'올바른 접근', 'Dangerous approach'→'위험한 접근', 'Development window closes'→'발달 창 폐쇄', 'Optimal zone'→'최적 구간', 'Danger zone'→'위험 구간', 'Months'→'개월', 'E2 Level'→'E2 수치'. Keep pg/mL values in original form. Keep everything else identical.",
-      "alt":"E2 수치 비교: 올바른 단계적 접근 vs 발달 창을 닫는 위험한 고용량"}
+      "alt":"E2 수치 비교: 올바른 단계적 접근 vs 발달 창을 닫는 위험한 고용량"},
+
+    {
+      "id": "bica-ar-mechanism",
+      "type": "diagrams",
+      "filename": "bica-ar-mechanism.webp",
+      "width": 800,
+      "height": 500,
+      "prompt": "Clean medical diagram showing how bicalutamide works as an androgen receptor blocker, and why testosterone paradoxically increases. Show a feedback loop diagram with these elements connected by arrows: 1) Hypothalamus at top, arrow down labeled 'GnRH' to 2) Pituitary gland, arrow down labeled 'LH' to 3) Testes, arrow right labeled 'Testosterone (T increases!)' to 4) Androgen Receptor (AR) on a cell. Show bicalutamide as a red X blocking the connection between Testosterone and AR. Then show a dashed feedback arrow going back up from the blocked AR to the Hypothalamus labeled 'No negative feedback' with a broken/crossed line, explaining why the brain keeps producing more T. On the right side show a small arrow from T to 'Aromatase → E2' showing conversion. Simple clean flow chart, white background, educational medical illustration.",
+      "alt": "Bicalutamide mechanism: blocks AR but T rises due to loss of negative feedback to hypothalamus",
+      "page": "/zh/medications/antiandrogens/bicalutamide"
+    },
+
+    {"id":"bica-ar-mechanism-zh","type":"diagrams-i18n","subdir":"zh","filename":"bica-ar-mechanism.webp","width":800,"height":500,
+      "refFile":"bica-ar-mechanism.webp",
+      "prompt":"Recreate this exact bicalutamide mechanism diagram faithfully with the same layout, feedback loop, organs, and arrows. Replace ALL English text with Chinese: 'Hypothalamus'→'下丘脑', 'Pituitary'→'垂体', 'Testes'→'睾丸', 'Testosterone'→'睾酮', 'T increases!'→'T 升高!', 'Androgen Receptor'→'雄激素受体', 'Bicalutamide'→'比卡鲁胺', 'BLOCKED'→'阻断', 'No negative feedback'→'负反馈缺失', 'Aromatase'→'芳香化酶', 'GnRH'→'GnRH', 'LH'→'LH'. Keep everything else identical.",
+      "alt":"比卡鲁胺机制图：阻断雄激素受体但因负反馈缺失导致睾酮反而升高"},
+    {"id":"bica-ar-mechanism-ja","type":"diagrams-i18n","subdir":"ja","filename":"bica-ar-mechanism.webp","width":800,"height":500,
+      "refFile":"bica-ar-mechanism.webp",
+      "prompt":"Recreate this exact bicalutamide mechanism diagram faithfully with the same layout, feedback loop, organs, and arrows. Replace ALL English text with Japanese: 'Hypothalamus'→'視床下部', 'Pituitary'→'下垂体', 'Testes'→'精巣', 'Testosterone'→'テストステロン', 'T increases!'→'T上昇!', 'Androgen Receptor'→'アンドロゲン受容体', 'Bicalutamide'→'ビカルタミド', 'BLOCKED'→'遮断', 'No negative feedback'→'負のフィードバック消失', 'Aromatase'→'アロマターゼ', 'GnRH'→'GnRH', 'LH'→'LH'. Keep everything else identical.",
+      "alt":"ビカルタミドの作用機序：AR遮断により負のフィードバックが消失しT上昇"},
+    {"id":"bica-ar-mechanism-ko","type":"diagrams-i18n","subdir":"ko","filename":"bica-ar-mechanism.webp","width":800,"height":500,
+      "refFile":"bica-ar-mechanism.webp",
+      "prompt":"Recreate this exact bicalutamide mechanism diagram faithfully with the same layout, feedback loop, organs, and arrows. Replace ALL English text with Korean: 'Hypothalamus'→'시상하부', 'Pituitary'→'뇌하수체', 'Testes'→'고환', 'Testosterone'→'테스토스테론', 'T increases!'→'T 상승!', 'Androgen Receptor'→'안드로겐 수용체', 'Bicalutamide'→'비칼루타미드', 'BLOCKED'→'차단', 'No negative feedback'→'음성 피드백 소실', 'Aromatase'→'아로마타제', 'GnRH'→'GnRH', 'LH'→'LH'. Keep everything else identical.",
+      "alt":"비칼루타미드 기전: AR 차단으로 음성 피드백 소실 → T 상승"}
   ]
 }
