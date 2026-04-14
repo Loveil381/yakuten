@@ -220,6 +220,30 @@
     {"id":"gnrh-reconstitution-ko","type":"diagrams-i18n","subdir":"ko","filename":"gnrh-reconstitution.webp","width":900,"height":500,
       "refFile":"gnrh-reconstitution.webp",
       "prompt":"Recreate this exact reconstitution step diagram faithfully with the same layout, vials, syringes, and arrows. Replace ALL English text with Korean: 'Diluent'→'용매', 'Powder'→'동결건조분말', 'Step'→'단계', 'Draw diluent'→'용매 흡입', 'Inject into powder vial'→'분말 바이알에 주입', 'Swirl gently'→'부드럽게 회전', 'Draw solution'→'약액 흡입', 'Ready'→'준비 완료'. Keep everything else identical.",
-      "alt":"GnRH 조제 단계도: 용매 흡입, 분말 바이알에 주입, 용해, 약액 흡입, 주사 준비 완료"}
+      "alt":"GnRH 조제 단계도: 용매 흡입, 분말 바이알에 주입, 용해, 약액 흡입, 주사 준비 완료"},
+
+    {
+      "id": "sublingual-placement",
+      "type": "diagrams",
+      "filename": "sublingual-placement.webp",
+      "width": 800,
+      "height": 450,
+      "prompt": "Clean medical diagram showing how to take sublingual medication. Show a simple side cross-section view of an open human mouth. A small round tablet is placed under the tongue in the sublingual area near the lower gum. Label the tongue, sublingual area, tablet position, and blood vessels under the tongue. Show an arrow indicating drug absorption through the sublingual mucosa into blood vessels. Simple anatomical line drawing, educational medical illustration.",
+      "alt": "Sublingual tablet placement diagram showing correct position under the tongue",
+      "page": "/zh/medications/estrogens/sublingual"
+    },
+
+    {"id":"sublingual-placement-zh","type":"diagrams-i18n","subdir":"zh","filename":"sublingual-placement.webp","width":800,"height":450,
+      "refFile":"sublingual-placement.webp",
+      "prompt":"Recreate this exact sublingual placement diagram faithfully with the same layout, mouth cross-section, and tablet position. Replace ALL English text with Chinese: 'Tongue'→'舌头', 'Tablet'→'药片', 'Sublingual area'→'舌下区域', 'Blood vessels'→'血管', 'Absorption'→'吸收', 'Gum'→'牙龈'. Keep everything else identical.",
+      "alt":"舌下含服位置示意图：药片放在舌下靠近牙龈处，经舌下黏膜血管吸收"},
+    {"id":"sublingual-placement-ja","type":"diagrams-i18n","subdir":"ja","filename":"sublingual-placement.webp","width":800,"height":450,
+      "refFile":"sublingual-placement.webp",
+      "prompt":"Recreate this exact sublingual placement diagram faithfully with the same layout, mouth cross-section, and tablet position. Replace ALL English text with Japanese: 'Tongue'→'舌', 'Tablet'→'錠剤', 'Sublingual area'→'舌下部', 'Blood vessels'→'血管', 'Absorption'→'吸収', 'Gum'→'歯茎'. Keep everything else identical.",
+      "alt":"舌下投与の位置図：錠剤を舌の下、歯茎近くに置き、舌下粘膜の血管から吸収"},
+    {"id":"sublingual-placement-ko","type":"diagrams-i18n","subdir":"ko","filename":"sublingual-placement.webp","width":800,"height":450,
+      "refFile":"sublingual-placement.webp",
+      "prompt":"Recreate this exact sublingual placement diagram faithfully with the same layout, mouth cross-section, and tablet position. Replace ALL English text with Korean: 'Tongue'→'혀', 'Tablet'→'정제', 'Sublingual area'→'설하 부위', 'Blood vessels'→'혈관', 'Absorption'→'흡수', 'Gum'→'잇몸'. Keep everything else identical.",
+      "alt":"설하 투여 위치도: 정제를 혀 아래 잇몸 근처에 놓고 설하 점막 혈관으로 흡수"}
   ]
 }
