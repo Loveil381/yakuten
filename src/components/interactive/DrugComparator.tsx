@@ -1,5 +1,6 @@
 import { useState, useMemo, type ReactNode } from 'react';
 import type { CSSProperties } from 'react';
+import { getDrugPageUrl, getLocaleFromPath } from '../../utils/drugLinks';
 
 type Locale = 'zh' | 'en' | 'ja';
 
@@ -675,6 +676,10 @@ const s: Record<string, CSSProperties> = {
     lineHeight: 1.6,
     fontFamily: 'var(--font-body)',
   },
+  drugLink: {
+    color: 'var(--color-primary-light)',
+    textDecoration: 'none',
+  },
 };
 
 const RESPONSIVE_CSS = `
@@ -687,6 +692,9 @@ const RESPONSIVE_CSS = `
     min-width: 500px;
   }
 }
+.dc-drug-link:hover {
+  text-decoration: underline;
+}
 `;
 
 /* ================================
@@ -695,6 +703,7 @@ const RESPONSIVE_CSS = `
 
 export default function DrugComparator() {
   const locale = getLocale();
+  const linkLocale = getLocaleFromPath();
   const ui = UI_COPY[locale];
   const [drugA, setDrugA] = useState('estradiol-oral');
   const [drugB, setDrugB] = useState('estradiol-injection');
@@ -783,9 +792,18 @@ export default function DrugComparator() {
           <thead>
             <tr>
               <th style={s.th}></th>
-              {selectedDrugs.map(d => (
-                <th key={d.id} style={s.thDrug}>{getName(d)}</th>
-              ))}
+              {selectedDrugs.map(d => {
+                const url = getDrugPageUrl(d.id, linkLocale);
+                return (
+                  <th key={d.id} style={s.thDrug}>
+                    {url ? (
+                      <a href={url} style={s.drugLink} className="dc-drug-link">
+                        {getName(d)}
+                      </a>
+                    ) : getName(d)}
+                  </th>
+                );
+              })}
             </tr>
           </thead>
           <tbody>

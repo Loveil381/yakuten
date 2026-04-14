@@ -1,0 +1,200 @@
+---
+/**
+ * DrugQuickNav — Drug category quick-access grid for the splash homepage.
+ * Three glass-panel columns (estrogens, anti-androgens, progestogens)
+ * with direct links to individual drug pages.
+ *
+ * Design: Penacony "Celestial Pharmacopeia" — glass panels, diagonal clip,
+ * category-colored left accent borders, mono-font drug labels.
+ */
+import { t, getLocale } from '../../i18n/ui';
+
+interface DrugLink {
+  label: string;
+  slug: string;
+}
+
+interface DrugCategory {
+  title: string;
+  color: 'primary' | 'accent' | 'tertiary';
+  drugs: DrugLink[];
+}
+
+const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
+const prefix = `/${locale}`;
+
+const categories: DrugCategory[] = [
+  {
+    title: t(locale, 'drugNav.estrogens'),
+    color: 'primary',
+    drugs: [
+      { label: locale === 'zh' ? '口服（补佳乐）' : locale === 'ja' ? '経口（飲み薬）' : locale === 'ko' ? '경구 (알약)' : 'Oral (Pills)', slug: 'medications/estrogens/oral' },
+      { label: locale === 'zh' ? '舌下含服' : locale === 'ja' ? '舌下投与' : locale === 'ko' ? '설하 투여' : 'Sublingual', slug: 'medications/estrogens/sublingual' },
+      { label: locale === 'zh' ? '凝胶' : locale === 'ja' ? 'ゲル' : locale === 'ko' ? '겔' : 'Gel', slug: 'medications/estrogens/gel' },
+      { label: locale === 'zh' ? '贴片' : locale === 'ja' ? 'パッチ' : locale === 'ko' ? '패치' : 'Patches', slug: 'medications/estrogens/transdermal-patch' },
+      { label: locale === 'zh' ? 'EV 注射' : locale === 'ja' ? 'EV注射' : locale === 'ko' ? 'EV 주사' : 'EV Injection', slug: 'medications/estrogens/injection' },
+    ],
+  },
+  {
+    title: t(locale, 'drugNav.antiandrogens'),
+    color: 'accent',
+    drugs: [
+      { label: locale === 'zh' ? 'CPA（色谱龙）' : locale === 'ja' ? 'CPA（シプロテロン）' : locale === 'ko' ? 'CPA (시프로테론)' : 'CPA (Cyproterone)', slug: 'medications/antiandrogens/cpa' },
+      { label: locale === 'zh' ? '螺内酯' : locale === 'ja' ? 'スピロノラクトン' : locale === 'ko' ? '스피로노락톤' : 'Spironolactone', slug: 'medications/antiandrogens/spironolactone' },
+      { label: locale === 'zh' ? '比卡鲁胺' : locale === 'ja' ? 'ビカルタミド' : locale === 'ko' ? '비칼루타마이드' : 'Bicalutamide', slug: 'medications/antiandrogens/bicalutamide' },
+      { label: locale === 'zh' ? 'GnRH 激动剂' : locale === 'ja' ? 'GnRHアゴニスト' : locale === 'ko' ? 'GnRH 작용제' : 'GnRH Agonists', slug: 'medications/antiandrogens/gnrh-agonists' },
+    ],
+  },
+  {
+    title: t(locale, 'drugNav.progestogens'),
+    color: 'tertiary',
+    drugs: [
+      { label: locale === 'zh' ? '微粒化黄体酮' : locale === 'ja' ? '微粉化プロゲステロン' : locale === 'ko' ? '미분화 프로게스테론' : 'Micronized Progesterone', slug: 'medications/progestogens/progesterone' },
+      { label: locale === 'zh' ? '羟孕酮注射' : locale === 'ja' ? 'ヒドロキシプロゲステロン' : locale === 'ko' ? '하이드록시프로게스테론' : 'Hydroxyprogesterone', slug: 'medications/progestogens/hydroxyprogesterone' },
+    ],
+  },
+];
+
+const colorMap = {
+  primary: 'var(--color-primary)',
+  accent: 'var(--color-accent)',
+  tertiary: 'var(--color-tertiary)',
+};
+---
+
+<section class="drug-nav" aria-label={t(locale, 'drugNav.ariaLabel')}>
+  <h2 class="drug-nav__title">{t(locale, 'drugNav.title')}</h2>
+  <div class="drug-nav__grid">
+    {categories.map((cat) => (
+      <div
+        class="drug-nav__category glass-panel clipped-card"
+        style={`--cat-color: ${colorMap[cat.color]}`}
+      >
+        <h3 class="drug-nav__category-title">{cat.title}</h3>
+        <div class="drug-nav__links">
+          {cat.drugs.map((drug) => (
+            <a href={`${prefix}/${drug.slug}/`} class="drug-nav__link">
+              {drug.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="drug-nav__footer">
+    <a href={`${prefix}/medications/estrogens/overview/`} class="drug-nav__view-all">
+      {t(locale, 'drugNav.viewAll')}
+    </a>
+  </div>
+</section>
+
+<style>
+  .drug-nav {
+    position: relative;
+    z-index: 10;
+    padding: 0 var(--space-lg) var(--space-xl);
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+
+  .drug-nav__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    text-align: center;
+    margin: 0 0 var(--space-xl);
+    letter-spacing: 0.05em;
+  }
+
+  .drug-nav__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  @media (max-width: 900px) {
+    .drug-nav__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 540px) {
+    .drug-nav__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* --- Category card --- */
+  .drug-nav__category {
+    padding: var(--space-lg);
+    border-left: 3px solid var(--cat-color);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    transition: box-shadow var(--transition-normal);
+  }
+
+  .drug-nav__category:hover {
+    box-shadow: 0 0 24px color-mix(in srgb, var(--cat-color) 15%, transparent);
+  }
+
+  .drug-nav__category-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--cat-color);
+    margin: 0;
+    letter-spacing: 0.08em;
+  }
+
+  /* --- Drug links --- */
+  .drug-nav__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-md);
+  }
+
+  .drug-nav__link,
+  :global(.sl-markdown-content) .drug-nav__link {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    padding: 2px 0;
+    border-bottom: 1px solid transparent;
+    transition:
+      color var(--transition-fast),
+      border-color var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .drug-nav__link:hover,
+  :global(.sl-markdown-content) .drug-nav__link:hover {
+    color: var(--color-primary-light);
+    border-bottom-color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  /* --- Footer view-all --- */
+  .drug-nav__footer {
+    text-align: center;
+    margin-top: var(--space-lg);
+  }
+
+  .drug-nav__view-all,
+  :global(.sl-markdown-content) .drug-nav__view-all {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color var(--transition-fast);
+  }
+
+  .drug-nav__view-all:hover,
+  :global(.sl-markdown-content) .drug-nav__view-all:hover {
+    color: var(--color-accent-light);
+    text-decoration: none;
+  }
+</style>

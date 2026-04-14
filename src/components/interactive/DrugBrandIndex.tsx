@@ -1,13 +1,14 @@
 import { useState, useMemo } from 'react';
 import type { CSSProperties } from 'react';
 import brandData from '../../data/drug-brands.json';
+import { getDrugPageUrl, getLocaleFromPath } from '../../utils/drugLinks';
 
 type Locale = 'zh' | 'en' | 'ja';
 
 function getLocale(): Locale {
-  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/en')) return 'en';
-  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/ja')) return 'ja';
-  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/ko')) return 'en';
+  const loc = getLocaleFromPath();
+  if (loc === 'en' || loc === 'ko') return 'en';
+  if (loc === 'ja') return 'ja';
   return 'zh';
 }
 
@@ -369,6 +370,14 @@ const S: Record<string, CSSProperties> = {
     color: 'var(--color-accent, #D4A853)',
     textDecoration: 'none',
   },
+  drugPageLink: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.25rem',
+    fontSize: '0.75rem',
+    color: 'var(--color-primary-light, #e07aa0)',
+    textDecoration: 'none',
+  },
   noResults: {
     textAlign: 'center' as const,
     padding: '3rem 1rem',
@@ -381,6 +390,7 @@ const S: Record<string, CSSProperties> = {
 
 export default function DrugBrandIndex() {
   const locale = getLocale();
+  const rawLocale = getLocaleFromPath();
   const t = UI[locale];
   const allBrands = useMemo(flattenBrands, []);
 
@@ -608,6 +618,16 @@ export default function DrugBrandIndex() {
                     style={S.urlLink}
                   >
                     {t.officialSite} ↗
+                  </a>
+                )}
+
+                {/* Drug documentation page link */}
+                {getDrugPageUrl(b.drugId, rawLocale) && (
+                  <a
+                    href={getDrugPageUrl(b.drugId, rawLocale)!}
+                    style={S.drugPageLink}
+                  >
+                    {locale === 'en' ? 'Drug details →' : locale === 'ja' ? '薬物詳細 →' : '药物详情 →'}
                   </a>
                 )}
               </div>

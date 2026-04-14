@@ -1,15 +1,7 @@
 import { useState, useMemo, useRef, useCallback } from 'react';
 import type { CSSProperties } from 'react';
 import drugData from '../../data/drugs.json';
-
-type Locale = 'zh' | 'en' | 'ja';
-
-function getLocale(): Locale {
-  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/en')) return 'en';
-  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/ja')) return 'ja';
-  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/ko')) return 'en';
-  return 'zh';
-}
+import { getDrugPageUrl, getLocaleFromPath } from '../../utils/drugLinks';
 
 /* ── i18n ── */
 
@@ -261,6 +253,15 @@ const S: Record<string, CSSProperties> = {
     color: 'var(--sl-color-green-high, #5cb85c)',
     fontFamily: 'var(--font-mono, monospace)',
   },
+  detailLink: {
+    fontFamily: 'var(--font-body, sans-serif)',
+    fontSize: '0.75rem',
+    color: 'var(--color-primary-light, #e07aa0)',
+    textDecoration: 'none',
+    display: 'inline-block',
+    marginTop: '0.25rem',
+    transition: 'color 0.15s',
+  },
 };
 
 const BADGE_STYLES: Record<string, CSSProperties> = {
@@ -274,7 +275,8 @@ const BADGE_STYLES: Record<string, CSSProperties> = {
 /* ── Component ── */
 
 export default function DrugCards() {
-  const locale = getLocale();
+  const rawLocale = getLocaleFromPath();
+  const locale = (rawLocale in UI ? rawLocale : 'zh') as keyof typeof UI;
   const t = UI[locale];
   const [category, setCategory] = useState<Category>('all');
 
@@ -403,6 +405,23 @@ export default function DrugCards() {
                   <span style={S.evidenceBadge}>{t.evidence} {r.evidenceLevel}</span>
                 )}
               </div>
+
+              {/* Detail link */}
+              {(() => {
+                const detailUrl = getDrugPageUrl(drug.id, rawLocale);
+                if (!detailUrl) return null;
+                const linkText = rawLocale === 'zh' ? '查看详情 →' : rawLocale === 'ja' ? '詳細を見る →' : rawLocale === 'ko' ? '자세히 보기 →' : 'View details →';
+                return (
+                  <a
+                    href={detailUrl}
+                    style={S.detailLink}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-primary, #C84B7C)'; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-primary-light, #e07aa0)'; }}
+                  >
+                    {linkText}
+                  </a>
+                );
+              })()}
             </div>
           );
         })}

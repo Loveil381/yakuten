@@ -86,6 +86,18 @@ export const ui = {
     'blog.breadcrumb.home': '首页',
     'blog.breadcrumb.blog': '专题文章',
     'blog.disclaimer': '本文仅供参考，不构成医疗建议。具体用药方案请咨询专业医疗人员。',
+
+    // DrugQuickNav
+    'drugNav.title': '药物速查',
+    'drugNav.ariaLabel': '常用药物快速导航',
+    'drugNav.estrogens': '雌激素',
+    'drugNav.antiandrogens': '抗雄激素',
+    'drugNav.progestogens': '孕激素',
+    'drugNav.viewAll': '查看全部 20 种药物 →',
+
+    // HeroSearch
+    'hero.searchPlaceholder': '搜索药物、症状或指南...',
+    'hero.searchLabel': '全站搜索',
   },
 
   en: {
@@ -169,6 +181,18 @@ export const ui = {
     'blog.breadcrumb.home': 'Home',
     'blog.breadcrumb.blog': 'Articles',
     'blog.disclaimer': 'This article is for informational purposes only and does not constitute medical advice. Consult a qualified healthcare provider for treatment decisions.',
+
+    // DrugQuickNav
+    'drugNav.title': 'Quick Drug Lookup',
+    'drugNav.ariaLabel': 'Quick drug navigation',
+    'drugNav.estrogens': 'Estrogens',
+    'drugNav.antiandrogens': 'Anti-Androgens',
+    'drugNav.progestogens': 'Progestogens',
+    'drugNav.viewAll': 'View all 20 medications →',
+
+    // HeroSearch
+    'hero.searchPlaceholder': 'Search drugs, symptoms, or guides...',
+    'hero.searchLabel': 'Site search',
   },
 
   ja: {
@@ -252,6 +276,18 @@ export const ui = {
     'blog.breadcrumb.home': 'ホーム',
     'blog.breadcrumb.blog': '特集記事',
     'blog.disclaimer': 'この記事は情報提供のみを目的としており、医療アドバイスではありません。治療の決定は医療専門家にご相談ください。',
+
+    // DrugQuickNav
+    'drugNav.title': '薬物クイック検索',
+    'drugNav.ariaLabel': '薬物クイックナビゲーション',
+    'drugNav.estrogens': 'エストロゲン',
+    'drugNav.antiandrogens': '抗アンドロゲン',
+    'drugNav.progestogens': 'プロゲストーゲン',
+    'drugNav.viewAll': '全20種の薬物を見る →',
+
+    // HeroSearch
+    'hero.searchPlaceholder': '薬物・症状・ガイドを検索...',
+    'hero.searchLabel': 'サイト内検索',
   },
 
   ko: {
@@ -335,6 +371,18 @@ export const ui = {
     'blog.breadcrumb.home': '홈',
     'blog.breadcrumb.blog': '특집 기사',
     'blog.disclaimer': '이 기사는 정보 제공 목적으로만 작성되었으며 의료 조언이 아닙니다. 치료 결정은 의료 전문가와 상담하세요.',
+
+    // DrugQuickNav
+    'drugNav.title': '약물 빠른 검색',
+    'drugNav.ariaLabel': '약물 빠른 탐색',
+    'drugNav.estrogens': '에스트로겐',
+    'drugNav.antiandrogens': '항안드로겐',
+    'drugNav.progestogens': '프로게스토겐',
+    'drugNav.viewAll': '전체 20종 약물 보기 →',
+
+    // HeroSearch
+    'hero.searchPlaceholder': '약물, 증상 또는 가이드 검색...',
+    'hero.searchLabel': '사이트 검색',
   },
 } as const;
 

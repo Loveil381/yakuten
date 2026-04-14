@@ -22,6 +22,9 @@ const {
   title = t(locale, 'hero.title'),
   slogan = t(locale, 'hero.slogan'),
 } = Astro.props;
+
+const searchPlaceholder = t(locale, 'hero.searchPlaceholder');
+const searchLabel = t(locale, 'hero.searchLabel');
 ---
 
 <section class="hero-section" aria-label="Hero">
@@ -31,11 +34,40 @@ const {
       <span class="hero-gradient-text">{title}</span>
     </h1>
     <p class="hero-section__slogan">{slogan}</p>
+
+    <button
+      class="hero-search"
+      aria-label={searchLabel}
+      id="hero-search-trigger"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8" />
+        <path d="M21 21l-4.35-4.35" />
+      </svg>
+      <span class="hero-search__text">{searchPlaceholder}</span>
+      <kbd class="hero-search__kbd" aria-hidden="true">Ctrl K</kbd>
+    </button>
+
     <div class="hero-section__divider-wrapper" aria-hidden="true">
       <div class="hero-section__divider"></div>
     </div>
   </div>
 </section>
+
+<script>
+  // Open Starlight's built-in Pagefind search dialog when hero search is clicked
+  document.getElementById('hero-search-trigger')?.addEventListener('click', () => {
+    const dialog = document.querySelector('site-search dialog') as HTMLDialogElement | null;
+    if (dialog && !dialog.open) {
+      dialog.showModal();
+      // Focus the search input after dialog opens
+      requestAnimationFrame(() => {
+        const input = dialog.querySelector('input[type="search"], input[name="search"]') as HTMLInputElement | null;
+        input?.focus();
+      });
+    }
+  });
+</script>
 
 <style>
   .hero-section {
@@ -99,5 +131,53 @@ const {
       transparent
     );
     opacity: 0.5;
+  }
+
+  /* --- Hero search trigger (Terminal Style) --- */
+  .hero-search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    max-width: 480px;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--color-outline-20);
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition:
+      border-color var(--transition-fast),
+      color var(--transition-fast);
+    text-align: left;
+  }
+
+  .hero-search:hover,
+  .hero-search:focus-visible {
+    border-bottom-color: var(--color-primary);
+    color: var(--color-text-secondary);
+    outline: none;
+  }
+
+  .hero-search__text {
+    flex: 1;
+  }
+
+  .hero-search__kbd {
+    display: none;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-outline-20);
+    padding: 1px var(--space-xs);
+    letter-spacing: 0.05em;
+  }
+
+  @media (min-width: 768px) {
+    .hero-search__kbd {
+      display: inline-block;
+    }
   }
 </style>
