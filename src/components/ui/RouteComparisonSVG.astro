@@ -32,7 +32,7 @@ const routes = [
 
 const colW = 90;
 const W = 40 + colW * 5;
-const H = 260;
+const H = 280;
 const barMaxH = 60;
 ---
 
@@ -72,21 +72,21 @@ const barMaxH = 60;
             <text x={20} y={baseY + 35 + barMaxH / 2 + 3} text-anchor="end" class="route-cmp__axis">{L.bio}</text>
           )}
 
-          {/* VTE risk dot */}
-          <circle cx={cx} cy={baseY + barMaxH + 60} r="6" fill={vteColor} opacity="0.8" />
-          <text x={cx} y={baseY + barMaxH + 63} text-anchor="middle" class="route-cmp__vte-val">{r.vte.toFixed(1)}×</text>
-          <text x={cx} y={baseY + barMaxH + 78} text-anchor="middle" class="route-cmp__val-sm">{L.vte}</text>
+          {/* VTE risk badge */}
+          <circle cx={cx} cy={baseY + barMaxH + 60} r="10" fill={vteColor} opacity="0.85" />
+          <text x={cx} y={baseY + barMaxH + 64} text-anchor="middle" class="route-cmp__vte-val">{r.vte.toFixed(1)}×</text>
+          <text x={cx} y={baseY + barMaxH + 80} text-anchor="middle" class="route-cmp__val-sm">{L.vte}</text>
 
           {/* Half-life */}
-          <text x={cx} y={baseY + barMaxH + 100} text-anchor="middle" class="route-cmp__val">{r.hl}h</text>
+          <text x={cx} y={baseY + barMaxH + 105} text-anchor="middle" class="route-cmp__val">{r.hl}h</text>
           {i === 0 && (
-            <text x={20} y={baseY + barMaxH + 103} text-anchor="end" class="route-cmp__axis">{L.hl}</text>
+            <text x={20} y={baseY + barMaxH + 108} text-anchor="end" class="route-cmp__axis">{L.hl}</text>
           )}
 
           {/* Frequency */}
-          <text x={cx} y={baseY + barMaxH + 118} text-anchor="middle" class="route-cmp__val-sm">{r.freq}</text>
+          <text x={cx} y={baseY + barMaxH + 123} text-anchor="middle" class="route-cmp__val-sm">{r.freq}</text>
           {i === 0 && (
-            <text x={20} y={baseY + barMaxH + 121} text-anchor="end" class="route-cmp__axis">{L.freq}</text>
+            <text x={20} y={baseY + barMaxH + 126} text-anchor="end" class="route-cmp__axis">{L.freq}</text>
           )}
         </g>
       );
@@ -142,8 +142,12 @@ const barMaxH = 60;
 
   .route-cmp__vte-val {
     font-family: var(--font-mono, monospace);
-    font-size: 7px;
+    font-size: 7.5px;
     font-weight: 700;
+    fill: #fff;
+  }
+
+  [data-theme="light"] .route-cmp__vte-val {
     fill: #fff;
   }
 
