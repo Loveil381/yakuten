@@ -111,6 +111,7 @@ const colorMap = {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-lg);
+    align-items: stretch;
   }
 
   @media (max-width: 900px) {
@@ -133,6 +134,7 @@ const colorMap = {
     flex-direction: column;
     gap: var(--space-md);
     transition: box-shadow var(--transition-normal);
+    height: 100%;
   }
 
   .drug-nav__category:hover {

@@ -96,7 +96,7 @@ function flag(code: string): string {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-lg);
-    align-items: start;
+    align-items: stretch;
   }
 
   @media (min-width: 640px) {
@@ -116,6 +116,7 @@ function flag(code: string): string {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
+    height: 100%;
   }
 
   .brand-card__header {
