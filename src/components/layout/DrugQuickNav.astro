@@ -66,17 +66,19 @@ const colorMap = {
   <h2 class="drug-nav__title">{t(locale, 'drugNav.title')}</h2>
   <div class="drug-nav__grid">
     {categories.map((cat) => (
-      <div
-        class="drug-nav__category glass-panel clipped-card"
-        style={`--cat-color: ${colorMap[cat.color]}`}
-      >
-        <h3 class="drug-nav__category-title">{cat.title}</h3>
-        <div class="drug-nav__links">
-          {cat.drugs.map((drug) => (
-            <a href={`${prefix}/${drug.slug}/`} class="drug-nav__link">
-              {drug.label}
-            </a>
-          ))}
+      <div class="drug-nav__item">
+        <div
+          class="drug-nav__category glass-panel clipped-card"
+          style={`--cat-color: ${colorMap[cat.color]}`}
+        >
+          <h3 class="drug-nav__category-title">{cat.title}</h3>
+          <div class="drug-nav__links">
+            {cat.drugs.map((drug) => (
+              <a href={`${prefix}/${drug.slug}/`} class="drug-nav__link">
+                {drug.label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     ))}
@@ -126,6 +128,13 @@ const colorMap = {
     }
   }
 
+  /* --- Grid item wrapper (no clip-path, allows grid stretch) --- */
+  .drug-nav__item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
   /* --- Category card --- */
   .drug-nav__category {
     padding: var(--space-lg);
@@ -134,7 +143,7 @@ const colorMap = {
     flex-direction: column;
     gap: var(--space-md);
     transition: box-shadow var(--transition-normal);
-    height: 100%;
+    flex: 1;
   }
 
   .drug-nav__category:hover {

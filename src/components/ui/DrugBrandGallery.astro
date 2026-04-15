@@ -45,29 +45,31 @@ function flag(code: string): string {
     <h2 class="brand-gallery__title">{title}</h2>
     <div class="brand-gallery__grid">
       {brands.map((b) => (
-        <div class="brand-card glass-card glass-card--sm glass-card--static">
-          <div class="brand-card__header">
-            <span class="brand-card__flag" aria-hidden="true">{flag(b.country)}</span>
-            <span class="brand-card__country">{b.countryName}</span>
+        <div class="brand-gallery__item">
+          <div class="brand-card glass-card glass-card--sm glass-card--static">
+            <div class="brand-card__header">
+              <span class="brand-card__flag" aria-hidden="true">{flag(b.country)}</span>
+              <span class="brand-card__country">{b.countryName}</span>
+            </div>
+            <h3 class="brand-card__name">{b.name}</h3>
+            <dl class="brand-card__details">
+              <div class="brand-card__row">
+                <dt>厂商</dt>
+                <dd>{b.manufacturer}</dd>
+              </div>
+              <div class="brand-card__row">
+                <dt>规格</dt>
+                <dd>{b.spec}</dd>
+              </div>
+              <div class="brand-card__row">
+                <dt>外观</dt>
+                <dd>{b.appearance}</dd>
+              </div>
+            </dl>
+            {b.notes && (
+              <p class="brand-card__notes">{b.notes}</p>
+            )}
           </div>
-          <h3 class="brand-card__name">{b.name}</h3>
-          <dl class="brand-card__details">
-            <div class="brand-card__row">
-              <dt>厂商</dt>
-              <dd>{b.manufacturer}</dd>
-            </div>
-            <div class="brand-card__row">
-              <dt>规格</dt>
-              <dd>{b.spec}</dd>
-            </div>
-            <div class="brand-card__row">
-              <dt>外观</dt>
-              <dd>{b.appearance}</dd>
-            </div>
-          </dl>
-          {b.notes && (
-            <p class="brand-card__notes">{b.notes}</p>
-          )}
         </div>
       ))}
     </div>
@@ -111,12 +113,19 @@ function flag(code: string): string {
     }
   }
 
+  /* --- Grid item wrapper (no clip-path, allows grid stretch) --- */
+  .brand-gallery__item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
   /* --- Brand card --- */
   .brand-card {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    height: 100%;
+    flex: 1;
   }
 
   .brand-card__header {
