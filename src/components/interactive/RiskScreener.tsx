@@ -530,8 +530,8 @@ const s: Record<string, CSSProperties> = {
   },
   resultsGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: 'var(--space-md)',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+    gap: 'var(--space-lg)',
     marginTop: 'var(--space-lg)',
   },
   resultCard: {
@@ -576,6 +576,23 @@ const s: Record<string, CSSProperties> = {
     fontFamily: 'var(--font-body)',
     marginBottom: 'var(--space-md)',
   },
+  riskBar: {
+    height: '8px',
+    background: 'linear-gradient(to right, var(--color-safe), var(--color-caution), var(--color-danger))',
+    position: 'relative' as const,
+    marginTop: 'var(--space-sm)',
+    marginBottom: 'var(--space-sm)',
+  } as CSSProperties,
+  riskMarker: {
+    position: 'absolute' as const,
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '14px',
+    height: '14px',
+    background: '#fff',
+    borderRadius: '50%',
+    boxShadow: '0 0 6px rgba(0,0,0,0.5)',
+  } as CSSProperties,
   retakeBtn: {
     padding: 'var(--space-sm) var(--space-xl)',
     background: 'var(--color-bg-container)',
@@ -669,6 +686,13 @@ export default function RiskScreener() {
               <div style={s.resultCategory}>{r.category}</div>
               <div style={{ ...s.resultLevel, color: LEVEL_COLORS[r.level] }}>
                 {getRiskLabel(r.level)}
+              </div>
+              {/* Gradient risk bar */}
+              <div style={s.riskBar}>
+                <div style={{
+                  ...s.riskMarker,
+                  left: r.level === 'low' ? '15%' : r.level === 'moderate' ? '45%' : r.level === 'high' ? '70%' : '90%',
+                }} />
               </div>
               {r.factors.length > 0 && (
                 <div style={s.resultFactors}>

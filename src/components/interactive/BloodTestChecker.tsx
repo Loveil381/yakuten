@@ -228,6 +228,8 @@ const s: Record<string, CSSProperties> = {
   label: {
     fontSize: '0.85rem',
     color: 'var(--color-text-secondary)',
+    display: 'flex',
+    alignItems: 'center',
   },
   inputRow: {
     display: 'flex',
@@ -263,6 +265,10 @@ const s: Record<string, CSSProperties> = {
     display: 'flex',
     flexDirection: 'column',
     gap: 4,
+    background: 'var(--color-bg-container)',
+    border: '1px solid var(--color-outline-20)',
+    clipPath: 'var(--clip-corner-sm)',
+    padding: 'var(--space-md)',
   },
   resultLabel: {
     fontSize: '0.8rem',
@@ -581,6 +587,13 @@ function InputField({
     <div style={s.inputGroup}>
       <label style={s.label} htmlFor={`btc-${spec.id}`}>
         {RANGE_LABELS[locale][spec.id as keyof typeof RANGE_LABELS.zh] ?? spec.label}
+        {value && value.trim() !== '' && (() => {
+          const num = parseFloat(value);
+          if (isNaN(num)) return null;
+          const level = evaluate(spec, num);
+          const dotColor = level === 'green' ? 'var(--color-safe)' : level === 'yellow' ? 'var(--color-caution)' : level === 'red' ? 'var(--color-danger)' : 'transparent';
+          return <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: dotColor, marginLeft: '6px', flexShrink: 0 }} />;
+        })()}
       </label>
       <div style={s.inputRow}>
         <input
