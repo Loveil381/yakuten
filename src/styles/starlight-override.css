@@ -14,6 +14,25 @@
   margin-top: 0;
 }
 
+/* ============================================================
+   Global fix: disable Starlight prose margin inside flex/grid
+   ============================================================
+   Starlight applies margin-top to sibling elements in content areas.
+   This breaks ANY flex/grid layout where children must have zero
+   margin for equal sizing. These rules neutralize that margin for
+   all known layout containers in the project.
+   ============================================================ */
+.phase-stats > *,
+.phase-stats > * > *,
+.action-cards__grid > *,
+.risk-grid > *,
+.drug-nav__grid > *,
+.brand-gallery__grid > *,
+.quick-tools__links > *,
+.dose-tags > *,
+.monitor-box__content > * {
+  margin-top: 0 !important;
+}
 
 /* Color overrides */
 :root {
