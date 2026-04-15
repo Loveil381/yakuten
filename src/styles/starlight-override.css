@@ -116,12 +116,20 @@ site-search button[data-open-modal]:hover {
   color: var(--color-text-primary);
 }
 
-/* 搜索模态框 */
+/* 搜索模态框 — 深色（默认） */
 site-search dialog {
-  background: rgba(13, 11, 20, 0.85);
+  background: rgba(13, 11, 20, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(200, 75, 124, 0.2);
+  color: var(--color-text-primary);
+}
+
+/* 搜索模态框 — 浅色 */
+[data-theme="light"] site-search dialog {
+  background: rgba(250, 247, 252, 0.92);
+  border-color: rgba(200, 75, 124, 0.15);
+  color: var(--color-text-primary);
 }
 
 /* 遮罩层 */
@@ -131,9 +139,20 @@ site-search dialog::backdrop {
   -webkit-backdrop-filter: blur(4px);
 }
 
-/* 搜索输入框 */
+[data-theme="light"] site-search dialog::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* 搜索输入框 — 深色 */
 #starlight__search .pagefind-ui__search-input {
   background: rgba(26, 22, 37, 0.8);
+  border-color: rgba(200, 75, 124, 0.2);
+  color: var(--color-text-primary);
+}
+
+/* 搜索输入框 — 浅色 */
+[data-theme="light"] #starlight__search .pagefind-ui__search-input {
+  background: rgba(255, 255, 255, 0.9);
   border-color: rgba(200, 75, 124, 0.2);
   color: var(--color-text-primary);
 }
@@ -142,6 +161,11 @@ site-search dialog::backdrop {
   border-color: var(--color-primary);
   outline: none;
   box-shadow: 0 0 0 2px rgba(200, 75, 124, 0.15);
+}
+
+/* 搜索框内的按钮和文字颜色跟随主题 */
+site-search dialog button {
+  color: var(--color-text-secondary);
 }
 
 /* 搜索结果高亮 */
@@ -158,6 +182,11 @@ site-search dialog::backdrop {
   border-radius: var(--radius-sm);
   padding: var(--space-md);
   margin-bottom: var(--space-sm);
+}
+
+[data-theme="light"] #starlight__search .pagefind-ui__result {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(200, 75, 124, 0.1);
 }
 
 #starlight__search .pagefind-ui__result:hover {
