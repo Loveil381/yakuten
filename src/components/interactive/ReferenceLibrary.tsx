@@ -176,7 +176,7 @@ const s: Record<string, CSSProperties> = {
   },
   tabActive: {
     padding: '4px var(--space-sm)',
-    background: 'rgba(200, 75, 124, 0.15)',
+    background: 'var(--color-primary-alpha-15)',
     color: 'var(--color-primary)',
     borderWidth: '1px',
     borderStyle: 'solid',

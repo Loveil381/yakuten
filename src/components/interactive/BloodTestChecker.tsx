@@ -290,14 +290,14 @@ const s: Record<string, CSSProperties> = {
     background: 'var(--color-text-primary)',
     transform: 'translateX(-50%)',
     zIndex: 2,
-    boxShadow: '0 0 6px rgba(230,224,238,0.6)',
+    boxShadow: '0 0 6px var(--color-text-alpha-60)',
   },
   warningBox: {
     display: 'flex',
     alignItems: 'center',
     gap: 'var(--space-sm)',
     padding: '6px var(--space-sm)',
-    background: 'var(--sl-color-red-low, rgba(244,67,54,0.12))',
+    background: 'var(--color-danger-alpha-10)',
     border: '1px solid var(--color-danger)',
     fontSize: '0.8rem',
     color: 'var(--color-danger)',
@@ -527,7 +527,7 @@ function ResultBar({ spec, value }: { spec: RangeSpec; value: number }) {
             ...s.barSegment,
             left: 0,
             width: '100%',
-            background: 'var(--sl-color-red, rgba(244,67,54,0.5))',
+            background: 'var(--color-danger-alpha-50)',
           }}
         />
         {/* Yellow zone */}
@@ -536,7 +536,7 @@ function ResultBar({ spec, value }: { spec: RangeSpec; value: number }) {
             ...s.barSegment,
             left: `${yellowLeft}%`,
             width: `${yellowRight - yellowLeft}%`,
-            background: 'var(--sl-color-orange, rgba(255,152,0,0.75))',
+            background: 'var(--color-caution-alpha-75)',
           }}
         />
         {/* Green zone */}
@@ -545,7 +545,7 @@ function ResultBar({ spec, value }: { spec: RangeSpec; value: number }) {
             ...s.barSegment,
             left: `${greenLeft}%`,
             width: `${greenRight - greenLeft}%`,
-            background: 'var(--sl-color-green, rgba(76,175,80,0.8))',
+            background: 'var(--color-safe-alpha-80)',
           }}
         />
         {/* Value marker */}

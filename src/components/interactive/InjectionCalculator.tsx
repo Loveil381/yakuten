@@ -277,13 +277,13 @@ const styles: Record<string, CSSProperties> = {
     fontSize: '0.75rem',
     fontWeight: 600,
     fontFamily: 'var(--font-body)',
-    background: 'rgba(200, 75, 124, 0.15)',
+    background: 'var(--color-primary-alpha-15)',
     color: 'var(--color-primary-light)',
     borderRadius: 0,
     clipPath: 'polygon(0 0, 92% 0, 100% 30%, 100% 100%, 8% 100%, 0 70%)',
   },
   warningCaution: {
-    background: 'rgba(255, 152, 0, 0.1)',
+    background: 'var(--color-caution-alpha-10)',
     borderLeft: '4px solid var(--color-caution)',
     padding: 'var(--space-sm) var(--space-md)',
     marginTop: 'var(--space-md)',
@@ -293,7 +293,7 @@ const styles: Record<string, CSSProperties> = {
     fontFamily: 'var(--font-body)',
   },
   warningDanger: {
-    background: 'var(--sl-color-red-low, rgba(244, 67, 54, 0.1))',
+    background: 'var(--color-danger-alpha-10)',
     borderLeft: '4px solid var(--color-danger)',
     padding: 'var(--space-sm) var(--space-md)',
     marginTop: 'var(--space-md)',
@@ -343,7 +343,7 @@ const styles: Record<string, CSSProperties> = {
     fontWeight: 600,
   },
   activeRow: {
-    background: 'rgba(200, 75, 124, 0.08)',
+    background: 'var(--color-primary-alpha-08)',
   },
   sectionDivider: {
     border: 'none',

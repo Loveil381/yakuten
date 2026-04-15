@@ -397,7 +397,7 @@ const s: Record<string, CSSProperties> = {
     color: 'var(--color-accent)',
   },
   disclaimerBar: {
-    background: 'rgba(244, 67, 54, 0.1)',
+    background: 'var(--color-danger-alpha-10)',
     borderLeft: '4px solid var(--color-danger)',
     padding: 'var(--space-sm) var(--space-md)',
     marginBottom: 'var(--space-lg)',
@@ -476,7 +476,7 @@ const s: Record<string, CSSProperties> = {
     display: 'block',
     padding: 'var(--space-sm) var(--space-md)',
     marginBottom: 'var(--space-sm)',
-    background: 'rgba(200, 75, 124, 0.1)',
+    background: 'var(--color-primary-alpha-10)',
     border: '1px solid var(--color-primary)',
     cursor: 'pointer',
     fontFamily: 'var(--font-body)',

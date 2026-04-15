@@ -20,7 +20,7 @@
 | Slogan | 「愿此行，抵达真实的自己」 |
 | 定位声明 | 「循証 · 减害 · 引导就医」— 不是百科，不是论坛，不教"怎么自己用药"。为已经在用药或即将用药的跨性别女性提供基于国际临床指南和同行评审文献的安全底线信息 |
 | ターゲット | 中国語圏を中心とした HRT 実施者（DIY含む）、医療従事者、当事者コミュニティ |
-| 技術スタック | Astro 5 + Starlight + React Islands + MDX |
+| 技術スタック | Astro 6 + Starlight + React Islands + MDX |
 | デプロイ先 | Vercel（静的ホスティング + Edge Functions） |
 | 関連プロジェクト | hananote（Flutter HRT記録アプリ） |
 | 年間コスト | 約 $10-30（ドメイン代のみ。Vercel無料枠で十分） |
@@ -180,7 +180,7 @@
 ### 3.1 架构总览
 
 ```
-Astro 5 (Starlight docs theme)
+Astro 6 (Starlight docs theme)
 ├── MDX 内容层
 │   ├── 8 个主页面 + 3 个附录页
 │   ├── 药物详解子页面（雌激素5篇 + 抗雄4篇 + 孕激素2篇）
@@ -206,134 +206,156 @@ Astro 5 (Starlight docs theme)
 
 ### 3.2 目录结构
 
+> 最终更新: 2026-04-15 — 反映 Astro 6 + Starlight 0.38 实际状态
+
 ```
 yakuten/
 ├── SPEC.md                      # 本文件（技术规范）
 ├── CONTENT.md                   # 内容规范
-├── AGENTS.md                    # AI Agent 指令（从本文第11节提取）
+├── AGENTS.md                    # AI Agent 指令
 ├── README.md
 ├── astro.config.mjs
 ├── package.json
 ├── tsconfig.json
+├── playwright.config.ts         # E2E 测试配置
+├── eslint.config.js             # ESLint 9 flat config
+├── .prettierrc
+├── vercel.json                  # 根路由重定向（/ → /zh/）
 │
 ├── public/
 │   ├── favicon.svg
-│   ├── og-image.png
-│   └── fonts/                   # 自托管字体
+│   ├── og-image.svg
+│   ├── manifest.json
+│   ├── robots.txt
+│   ├── llms.txt
+│   ├── brands/                  # 药品品牌实物照片（11 WebP）
+│   └── images/
+│       ├── diagrams/            # AI生成医学图解（14 × 5 locale = 70 WebP）
+│       └── drugs/               # 药品产品照片（7 WebP）
 │
 ├── src/
-│   ├── assets/
-│   │   ├── logo.svg
-│   │   └── images/
-│   │       ├── tanner-stages.svg    # Tanner分期示意图
-│   │       ├── injection-sites.svg  # 注射部位示意图
-│   │       └── pathway-flow.svg     # 用药路径图底图
-│   │
 │   ├── components/
-│   │   ├── ui/                      # 基础 UI（Astro 组件）
-│   │   │   ├── GlassCard.astro
-│   │   │   ├── EvidenceBadge.astro      # 证据等级标签 A/B/C/X
-│   │   │   ├── DrugInfoBox.astro        # 药物信息卡片
-│   │   │   ├── WarningBox.astro         # 风险警告框（黄色）
+│   │   ├── ui/                      # 医疗内容 UI（27 Astro 组件）
+│   │   │   ├── CitationRef.astro        # 文献引用标注 [n]
 │   │   │   ├── DangerBox.astro          # 危险警告框（红色）
-│   │   │   ├── EmergencyBanner.astro    # 紧急情况横幅
-│   │   │   ├── CitationRef.astro        # 文献引用标注 [1]
+│   │   │   ├── WarningBox.astro         # 风险警告框（黄色）
+│   │   │   ├── EmergencyBanner.astro    # 紧急情况横幅（不可关闭）
+│   │   │   ├── DoseTable.astro          # 剂量表格
+│   │   │   ├── DrugInfoBox.astro        # 药物信息卡片
+│   │   │   ├── EvidenceBadge.astro      # 证据等级标签 A/B/C/X
 │   │   │   ├── BloodTestRange.astro     # 血检参考值范围条
-│   │   │   ├── DoseTable.astro          # 剂量表格组件
+│   │   │   ├── GlassCard.astro          # 毛玻璃卡片
 │   │   │   ├── DecisionNode.astro       # 路径图决策节点
-│   │   │   ├── PhaseBlock.astro         # 阶段色块（绿/黄/红）
-│   │   │   └── CrisisHotline.astro      # 心理危机热线卡片
+│   │   │   ├── PhaseBlock.astro         # 阶段色块
+│   │   │   ├── CrisisHotline.astro      # 心理危机热线
+│   │   │   ├── DrugBrandGallery.astro   # 品牌图片展示
+│   │   │   ├── PKCurveChart.astro       # 药代动力学曲线图
+│   │   │   ├── InjectionSiteSVG.astro   # 注射部位示意图
+│   │   │   ├── HospitalCard.astro       # 友好医院卡片
+│   │   │   └── ...（27 个）
 │   │   │
-│   │   ├── interactive/             # React Islands
-│   │   │   ├── AIAssistant.tsx          # AI 问答
-│   │   │   ├── BloodTestChecker.tsx     # 血检自查（纯前端JS）
+│   │   ├── interactive/             # React Islands（10 TSX）
+│   │   │   ├── AIAssistant.tsx          # AI 问答（client:load）
+│   │   │   ├── FloatingAIChat.tsx       # 浮动 AI 入口
+│   │   │   ├── BloodTestChecker.tsx     # 血检自查（纯前端）
 │   │   │   ├── DoseSimulator.tsx        # 半衰期曲线模拟
 │   │   │   ├── InjectionCalculator.tsx  # 注射剂量换算
-│   │   │   ├── PathwayMap.tsx           # 交互式用药路径图
 │   │   │   ├── DrugComparator.tsx       # 药物对比器
-│   │   │   └── RiskScreener.tsx         # 风险评估筛查
+│   │   │   ├── DrugCards.tsx            # 速查卡片
+│   │   │   ├── DrugBrandIndex.tsx       # 品牌索引
+│   │   │   ├── RiskScreener.tsx         # 风险自评
+│   │   │   └── ReferenceLibrary.tsx     # 文献浏览器
 │   │   │
-│   │   ├── layout/
-│   │   │   ├── Header.astro
+│   │   ├── layout/                  # 首页布局组件
+│   │   │   ├── HeroSection.astro        # Hero + 搜索入口
+│   │   │   ├── ActionCards.astro         # 三张旅程入口卡片
+│   │   │   ├── DrugQuickNav.astro       # 药物速查分类网格
+│   │   │   ├── SplashNav.astro          # 首页水平导航栏
+│   │   │   ├── ParticleBackground.astro # 粒子背景
+│   │   │   ├── MissionStatement.astro   # 使命声明
+│   │   │   ├── SiteFooter.astro         # 站点底部
+│   │   │   └── BlogHeader.astro         # 博客头部
+│   │   │
+│   │   ├── overrides/               # Starlight 组件覆盖
+│   │   │   ├── Head.astro
 │   │   │   ├── Footer.astro
-│   │   │   ├── Sidebar.astro
-│   │   │   └── ParticleBackground.astro
+│   │   │   └── SiteTitle.astro
 │   │   │
 │   │   └── seo/
-│   │       ├── SchemaOrg.astro
-│   │       └── OpenGraph.astro
+│   │       ├── JsonLd.astro             # 结构化数据
+│   │       └── BlogPostJsonLd.astro
 │   │
 │   ├── content/
-│   │   ├── config.ts
+│   │   ├── content.config.ts        # 文档 + 博客 schema
+│   │   ├── blog/zh/                 # 博客（仅中文，11 篇 SEO 文章）
 │   │   └── docs/
-│   │       ├── zh/                  # 中文（主语言）
-│   │       │   ├── index.mdx            # 首页
-│   │       │   ├── before-you-start.mdx # P1: 用药前
-│   │       │   ├── pathway.mdx          # P2: 用药路径图（核心）
-│   │       │   ├── medications/         # P3: 药物详解
-│   │       │   │   ├── estrogens/
-│   │       │   │   │   ├── overview.mdx
-│   │       │   │   │   ├── transdermal-patch.mdx
-│   │       │   │   │   ├── oral.mdx
-│   │       │   │   │   ├── sublingual.mdx
-│   │       │   │   │   ├── gel.mdx
-│   │       │   │   │   ├── injection.mdx        # 日雌完整指南
-│   │       │   │   │   └── banned-estrogens.mdx  # EE/结合雌激素
-│   │       │   │   ├── antiandrogens/
-│   │       │   │   │   ├── overview.mdx
-│   │       │   │   │   ├── cpa.mdx
-│   │       │   │   │   ├── spironolactone.mdx
-│   │       │   │   │   ├── bicalutamide.mdx
-│   │       │   │   │   └── gnrh-agonists.mdx
-│   │       │   │   ├── progestogens/
-│   │       │   │   │   ├── overview.mdx
-│   │       │   │   │   ├── progesterone.mdx
-│   │       │   │   │   └── hydroxyprogesterone.mdx
-│   │       │   │   └── banned-drugs.mdx          # P3.4 绝对禁用
-│   │       │   ├── dose-limits.mdx      # P4: 剂量红线与混用禁忌
-│   │       │   ├── breast-development.mdx # P5: 乳房发育专题
-│   │       │   ├── blood-tests.mdx      # P6: 血检指南
-│   │       │   ├── risks.mdx            # P7: 风险与急症识别
-│   │       │   ├── china-reality.mdx    # P8: 中国现实
-│   │       │   ├── appendix-a.mdx       # 附录A: 竞品批评
-│   │       │   ├── appendix-b.mdx       # 附录B: 参考文献库
-│   │       │   └── about.mdx            # 附录C: 关于本站
-│   │       ├── en/
-│   │       ├── ja/
-│   │       └── ko/
+│   │       ├── zh/                  # 中文（主语言，44 MDX）
+│   │       │   ├── index.mdx            # 首页（splash 模板）
+│   │       │   ├── before-you-start.mdx # 用药前准备
+│   │       │   ├── pathway.mdx          # 用药路径图（核心）
+│   │       │   ├── medications/         # 药物详解
+│   │       │   │   ├── estrogens/       # 雌激素（10 页）
+│   │       │   │   ├── antiandrogens/   # 抗雄激素（5 页）
+│   │       │   │   ├── progestogens/    # 孕激素（6 页）
+│   │       │   │   ├── five-alpha-reductase/  # 5α-还原酶（3 页）
+│   │       │   │   └── banned-drugs.mdx # 绝对禁用
+│   │       │   ├── dose-limits.mdx      # 剂量红线
+│   │       │   ├── breast-development.mdx # 乳房发育专题
+│   │       │   ├── blood-tests.mdx      # 血检指南
+│   │       │   ├── risks.mdx            # 风险与急症
+│   │       │   ├── china-reality.mdx    # 中国 HRT 现实
+│   │       │   ├── tools/               # 交互工具页（9 页）
+│   │       │   ├── about.mdx            # 关于本站
+│   │       │   └── appendix-references.mdx # 参考文献库
+│   │       ├── en/                  # English（44 MDX，完全对等）
+│   │       ├── ja/                  # 日本語（44 MDX，完全对等）
+│   │       └── ko/                  # 한국어（44 MDX，完全对等）
 │   │
 │   ├── data/
-│   │   ├── drugs.json
-│   │   ├── blood-ranges.json
-│   │   ├── hospitals.json
-│   │   ├── references.json
-│   │   └── injection-doses.json     # 注射剂量换算表
+│   │   ├── drugs.json               # 药物结构化数据（20 种）
+│   │   ├── drug-brands.json         # 药品品牌信息（按地区）
+│   │   ├── blood-ranges.json        # 血检参考值（7 项）
+│   │   ├── references.json          # 文献引用数据库（27 条）
+│   │   ├── hospitals.json           # 友好医院（25 家/19 省）
+│   │   ├── hotlines.json            # 危机热线
+│   │   ├── injection-doses.json     # 注射剂量换算表
+│   │   └── og-images.json           # OG 图片配置
+│   │
+│   ├── i18n/
+│   │   └── ui.ts                    # UI 字符串翻译（zh/en/ja/ko）
 │   │
 │   ├── layouts/
-│   │   └── custom.astro
+│   │   └── BlogPostLayout.astro     # 博客文章布局
+│   │
+│   ├── pages/
+│   │   └── zh/blog/                 # 博客路由
+│   │       ├── index.astro
+│   │       └── [slug].astro
 │   │
 │   ├── styles/
-│   │   ├── global.css
-│   │   ├── glass.css
-│   │   ├── particles.css
-│   │   ├── emergency.css            # 紧急横幅/红色警告样式
+│   │   ├── global.css               # CSS 变量系统 + 主题
+│   │   ├── glass.css                # 毛玻璃效果
+│   │   ├── emergency.css            # 紧急横幅样式
 │   │   ├── pathway.css              # 路径图专用样式
-│   │   └── starlight-override.css
+│   │   ├── starlight-override.css   # Starlight 主题覆盖
+│   │   └── blog.css                 # 博客样式
 │   │
 │   └── utils/
-│       ├── citations.ts
-│       ├── drug-data.ts
-│       ├── blood-test-logic.ts      # 红绿灯判断逻辑
-│       ├── dose-calculator.ts       # 剂量换算逻辑
-│       ├── halflife-curve.ts        # 半衰期曲线计算
-│       └── i18n.ts
+│       ├── drugLinks.ts             # 药物 ID → URL 映射
+│       ├── readingTime.ts           # 阅读时间计算
+│       ├── blogHelpers.ts           # 博客辅助函数
+│       └── medicalFormat.ts         # 医学数据格式化
 │
 ├── api/                             # Vercel Edge Functions
-│   └── ai-chat.ts                   # AI 问答代理
+│   └── ai-chat.ts                   # AI 问答代理（Gemini）
 │
 ├── scripts/
-│   └── generate-search.ts
+│   ├── validate-content.mjs         # 构建门禁：引用完整性检查
+│   └── generate-images.mjs          # AI 图片生成脚本
 │
+└── tests/
+    └── critical-paths.spec.ts       # Playwright E2E 测试
+```
 └── vercel.json
 ```
 
@@ -341,7 +363,7 @@ yakuten/
 
 | 决策 | 选择 | 理由 |
 |------|------|------|
-| 框架 | Astro 5 + Starlight | 内容站 SEO 最优，零 JS 默认 |
+| 框架 | Astro 6 + Starlight | 内容站 SEO 最优，零 JS 默认 |
 | 交互组件 | React Islands (client:visible) | 仅AI问答等需要JS，延迟加载不影响首屏 |
 | 内容格式 | MDX | 写文章的同时可嵌入交互组件 |
 | 搜索 | Pagefind | 纯静态，零后端，支持中文分词 |
@@ -694,7 +716,7 @@ const SYSTEM_PROMPT = `你是 HRT药典 的 AI 助手。
 
 ### Phase 1（2周）— 骨架 + 核心内容 + 紧急信息
 
-- [ ] Astro 5 + Starlight 初始化 + 米哈游风格主题
+- [ ] Astro 6 + Starlight 初始化 + 米哈游风格主题
 - [ ] 基础 UI 组件（GlassCard, EvidenceBadge, WarningBox, DangerBox, EmergencyBanner, CitationRef）
 - [ ] 首页（紧急横幅 + 使命陈述 + 三按钮入口）
 - [ ] P1 用药前（基线检查 + 禁忌症）

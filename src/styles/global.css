@@ -111,6 +111,15 @@
   --color-green-alpha-15: rgba(40, 167, 69, 0.15);
   --color-amber-alpha-15: rgba(255, 193, 7, 0.15);
   --glass-bg-85: rgba(26, 22, 37, 0.85);
+  --color-primary-alpha-08: rgba(200, 75, 124, 0.08);
+  --color-primary-alpha-10: rgba(200, 75, 124, 0.1);
+  --color-caution-alpha-10: rgba(255, 152, 0, 0.1);
+  --color-caution-alpha-75: rgba(255, 152, 0, 0.75);
+  --color-safe-alpha-80: rgba(76, 175, 80, 0.8);
+  --color-text-alpha-60: rgba(230, 224, 238, 0.6);
+  --color-black-alpha-40: rgba(0, 0, 0, 0.4);
+  --color-black-alpha-50: rgba(0, 0, 0, 0.5);
+  --color-white-alpha-06: rgba(255, 255, 255, 0.06);
 
   /* 过渡 */
   --transition-fast: 0.15s ease;

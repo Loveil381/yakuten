@@ -24,7 +24,7 @@ const styles: Record<string, CSSProperties> = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '0 4px 20px rgba(200, 75, 124, 0.4)',
+    boxShadow: '0 4px 20px var(--color-primary-alpha-40)',
     transition: 'transform 0.2s, box-shadow 0.2s',
     zIndex: 99999,
   },
@@ -38,7 +38,7 @@ const styles: Record<string, CSSProperties> = {
     maxWidth: 'calc(100vw - 32px)',
     borderRadius: '12px',
     overflow: 'hidden',
-    boxShadow: '0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06)',
+    boxShadow: '0 8px 40px var(--color-black-alpha-50), 0 0 0 1px var(--color-white-alpha-06)',
     zIndex: 99999,
     display: 'flex',
     flexDirection: 'column',
@@ -50,7 +50,7 @@ const styles: Record<string, CSSProperties> = {
   overlay: {
     position: 'fixed',
     inset: 0,
-    background: 'rgba(0,0,0,0.4)',
+    background: 'var(--color-black-alpha-40)',
     zIndex: 99998,
   },
 };
@@ -107,7 +107,7 @@ function FloatingAIChatInner() {
           onMouseLeave={() => setIsHovering(false)}
           style={{
             ...styles.fab,
-            ...(isHovering ? { transform: 'scale(1.08)', boxShadow: '0 6px 28px rgba(200, 75, 124, 0.55)' } : {}),
+            ...(isHovering ? { transform: 'scale(1.08)', boxShadow: '0 6px 28px var(--color-primary-alpha-60)' } : {}),
           }}
           aria-label="打开 AI 问答助手"
           title="AI 问答助手"
