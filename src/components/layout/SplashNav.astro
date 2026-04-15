@@ -84,17 +84,37 @@ const navItems: NavItem[] = [
   }
 
   @media (max-width: 768px) {
+    .splash-nav {
+      padding: 0;
+    }
+
     .splash-nav__inner {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: var(--space-xs);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
       overflow-x: visible;
-      padding: var(--space-xs) 0;
+      padding: 0;
+    }
+
+    /* 隐藏手机端冗余项：用药前准备(1)、剂量红线(4)、工具(7) */
+    .splash-nav__link:nth-child(1),
+    .splash-nav__link:nth-child(4),
+    .splash-nav__link:nth-child(7) {
+      display: none;
     }
 
     .splash-nav__link {
-      font-size: 0.8125rem;
-      padding: var(--space-xs) var(--space-sm);
+      font-size: 0.75rem;
+      padding: var(--space-sm) var(--space-xs);
+      text-align: center;
+      border-bottom: none;
+    }
+
+    /* 竖分隔线（跳过被 display:none 的项） */
+    .splash-nav__link:nth-child(3),
+    .splash-nav__link:nth-child(5),
+    .splash-nav__link:nth-child(6) {
+      border-left: 1px solid var(--color-outline-20);
     }
   }
 </style>
