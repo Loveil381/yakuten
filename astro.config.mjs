@@ -40,6 +40,16 @@ export default defineConfig({
           slug: 'pathway',
         },
         {
+          label: '实操指南',
+          translations: { en: 'Task Guides', ja: '実用ガイド', ko: '실용 가이드' },
+          items: [
+            { label: '总览', translations: { en: 'Overview', ja: '概要', ko: '개요' }, slug: 'guides' },
+            { label: '首次注射', translations: { en: 'First Injection', ja: '初回注射', ko: '첫 주사' }, slug: 'guides/first-injection' },
+            { label: '抗雄切换', translations: { en: 'Switch Antiandrogen', ja: '抗アンドロゲン切り替え', ko: '항안드로겐 전환' }, slug: 'guides/switch-antiandrogen' },
+            { label: '切换 E2 途径', translations: { en: 'Switch E2 Route', ja: 'E2 投与経路の切り替え', ko: 'E2 투여 경로 전환' }, slug: 'guides/switch-e2-route' },
+          ],
+        },
+        {
           label: '药物详解',
           translations: { en: 'Medications', ja: '薬物ガイド', ko: '약물 가이드' },
           items: [

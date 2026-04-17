@@ -18,6 +18,7 @@ export const ui = {
     'nav.bloodTests': '血检指南',
     'nav.risks': '风险急症',
     'nav.tools': '工具',
+    'nav.guides': '实操指南',
     'nav.ariaLabel': '主导航',
 
     // ActionCards
@@ -64,6 +65,7 @@ export const ui = {
     'footer.brand': 'HRT药典',
     'footer.notice': '本站不提供处方、不销售药物、不收集个人信息。',
     'footer.navLabel': '底部链接',
+    'footer.link.guides': '实操指南',
     'footer.link.privacy': '隐私政策',
     'footer.link.disclaimer': '免责声明',
     'footer.link.github': '开源项目',
@@ -115,6 +117,7 @@ export const ui = {
     'nav.bloodTests': 'Blood Tests',
     'nav.risks': 'Risks & Emergencies',
     'nav.tools': 'Tools',
+    'nav.guides': 'Task Guides',
     'nav.ariaLabel': 'Main navigation',
 
     // ActionCards
@@ -161,6 +164,7 @@ export const ui = {
     'footer.brand': 'HRT Yakuten',
     'footer.notice': 'This site does not prescribe medications, sell drugs, or collect personal information.',
     'footer.navLabel': 'Footer links',
+    'footer.link.guides': 'Task Guides',
     'footer.link.privacy': 'Privacy Policy',
     'footer.link.disclaimer': 'Medical Disclaimer',
     'footer.link.github': 'GitHub Project',
@@ -212,6 +216,7 @@ export const ui = {
     'nav.bloodTests': '血液検査',
     'nav.risks': 'リスクと緊急',
     'nav.tools': 'ツール',
+    'nav.guides': '実用ガイド',
     'nav.ariaLabel': 'メインナビゲーション',
 
     // ActionCards
@@ -258,6 +263,7 @@ export const ui = {
     'footer.brand': 'HRT药典',
     'footer.notice': '本サイトは処方箋の発行、薬物の販売、個人情報の収集を一切行いません。',
     'footer.navLabel': 'フッターリンク',
+    'footer.link.guides': '実用ガイド',
     'footer.link.privacy': 'プライバシーポリシー',
     'footer.link.disclaimer': '免責事項',
     'footer.link.github': 'オープンソース',
@@ -309,6 +315,7 @@ export const ui = {
     'nav.bloodTests': '혈액 검사',
     'nav.risks': '위험과 응급',
     'nav.tools': '도구',
+    'nav.guides': '실용 가이드',
     'nav.ariaLabel': '주 내비게이션',
 
     // ActionCards
@@ -355,6 +362,7 @@ export const ui = {
     'footer.brand': 'HRT약전',
     'footer.notice': '이 사이트는 처방전 발급, 약물 판매, 개인 정보 수집을 하지 않습니다.',
     'footer.navLabel': '하단 링크',
+    'footer.link.guides': '실용 가이드',
     'footer.link.privacy': '개인정보 보호정책',
     'footer.link.disclaimer': '면책 조항',
     'footer.link.github': '오픈 소스 프로젝트',

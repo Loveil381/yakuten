@@ -26,6 +26,9 @@ import '../../../styles/pathway.css';
       <a href="#phase2" class="pathway-hero__btn">6-12 个月</a>
       <a href="#phase3" class="pathway-hero__btn">1 年以上</a>
     </div>
+    <p class="pathway-hero__hint">
+      或按具体场景查询（如第一次打针、切换抗雄、切换 E2 途径），见 <a href="/zh/guides/">实操指南</a>。
+    </p>
   </div>
 </div>
 
@@ -66,6 +69,24 @@ import '../../../styles/pathway.css';
   .pathway-hero__btn:hover {
     border-color: var(--color-primary);
     background: rgba(200, 75, 124, 0.08);
+    color: var(--color-primary);
+  }
+  .pathway-hero__hint {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    margin: var(--space-lg) 0 0;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-outline-20);
+  }
+  .pathway-hero__hint a {
+    color: var(--color-primary-light);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-primary);
+    padding-bottom: 1px;
+    transition: color var(--transition-fast);
+  }
+  .pathway-hero__hint a:hover {
     color: var(--color-primary);
   }
 `}</style>
@@ -109,6 +130,9 @@ import '../../../styles/pathway.css';
         空腹血糖 + 血常规
       </li>
     </ul>
+    <p class="phase-block__desc" style="margin-top: var(--space-md); font-size: 0.8125rem;">
+      准备第一针 EV？完整操作步骤见 <a href="/zh/guides/first-injection/" style="color: var(--color-primary-light);">首次注射完整指南</a>。
+    </p>
   </PhaseBlock>
 </div>
 
@@ -153,6 +177,9 @@ import '../../../styles/pathway.css';
         安全警告：身体在此阶段需适应受体改变，严禁在未监测血值前自行加量，防止血栓风险。此阶段不要加量，即使你觉得「没效果」。乳腺发育信号通常在 3–6 个月出现。
       </p>
     </div>
+    <p class="phase-block__desc" style="margin-top: var(--space-md); font-size: 0.8125rem;">
+      想换抗雄或 E2 途径？见 <a href="/zh/guides/switch-antiandrogen/" style="color: var(--color-primary-light);">抗雄切换指南</a> · <a href="/zh/guides/switch-e2-route/" style="color: var(--color-primary-light);">E2 途径切换指南</a>。
+    </p>
   </PhaseBlock>
 </div>
 
@@ -219,6 +246,9 @@ import '../../../styles/pathway.css';
       <span class="dose-tag dose-tag--yellow">肌肉注射 E2V 每周 2–4 mg</span>
       <span class="dose-tag dose-tag--yellow">经皮凝胶每日 3.0–4.5 mg</span>
     </div>
+    <p class="phase-block__desc" style="margin-top: var(--space-md); font-size: 0.8125rem;">
+      滴定阶段最常出现"需要换方案"的决策。见 <a href="/zh/guides/switch-antiandrogen/" style="color: var(--color-primary-light);">抗雄切换指南</a> · <a href="/zh/guides/switch-e2-route/" style="color: var(--color-primary-light);">E2 途径切换指南</a>。
+    </p>
   </PhaseBlock>
 </div>
 
@@ -269,10 +299,14 @@ import '../../../styles/pathway.css';
         E2 &gt;<InlineValue value="200" unit="pg/mL" /> 不会带来更强的女性化，只增加风险<CitationRef id="hembree-2017" num={2} authors="Hembree et al." year={2017} /> (Rec 2.2)
       </p>
     </div>
+    <p class="phase-block__desc" style="margin-top: var(--space-md); font-size: 0.8125rem;">
+      长期维持期仍可能需要调整方案。见 <a href="/zh/guides/switch-antiandrogen/" style="color: var(--color-primary-light);">抗雄切换指南</a> · <a href="/zh/guides/switch-e2-route/" style="color: var(--color-primary-light);">E2 途径切换指南</a>。
+    </p>
   </PhaseBlock>
 </div>
 
 <WarningBox title="接下来你可能需要">
+- [实操指南](/zh/guides/) — 按场景的任务型指引：第一次打针 · 切换抗雄 · 切换 E2 途径
 - [药物详解](/zh/medications/estrogens/overview/) — 每种药的药理、剂量、风险和中国可及性
 - [血检自查工具](/zh/blood-tests/#tool) — 每次复查后对照结果
 - [乳房发育专题](/zh/breast-development/) — 发育预期和孕激素添加时机
