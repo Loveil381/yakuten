@@ -45,9 +45,12 @@
   --glass-blur: blur(12px);
   --glass-border: 1px solid var(--color-outline-20);
 
-  /* 对角切角 — Penacony Geometric Signature */
-  --clip-corner: polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%);
-  --clip-corner-sm: polygon(0 0, 92% 0, 100% 12%, 100% 100%, 8% 100%, 0 88%);
+  /* 对角切角 — Penacony Geometric Signature
+     统一到 Stitch 原案同款 92% / 12% 切角。
+     --clip-corner-sm 保留作别名供既有引用平滑过渡。
+     --clip-corner-accent 为强调变体（大标题/Hero 卡）。 */
+  --clip-corner: polygon(0 0, 92% 0, 100% 12%, 100% 100%, 8% 100%, 0 88%);
+  --clip-corner-sm: var(--clip-corner);
   --clip-corner-accent: polygon(0 0, 85% 0, 100% 15%, 100% 100%, 15% 100%, 0 85%);
 
   /* 字体 — 按 DESIGN.md §3: Noto Serif SC (display) / Manrope (body) / Space Grotesk (data)

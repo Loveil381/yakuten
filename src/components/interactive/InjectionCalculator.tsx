@@ -280,7 +280,7 @@ const styles: Record<string, CSSProperties> = {
     background: 'var(--color-primary-alpha-15)',
     color: 'var(--color-primary-light)',
     borderRadius: 0,
-    clipPath: 'polygon(0 0, 92% 0, 100% 30%, 100% 100%, 8% 100%, 0 70%)',
+    clipPath: 'var(--clip-corner)',
   },
   warningCaution: {
     background: 'var(--color-caution-alpha-10)',

@@ -168,15 +168,8 @@ const ariaDescription = redDirection === 'above'
     background: rgba(26, 22, 37, 0.4);
     backdrop-filter: blur(8px);
     border: 1px solid var(--color-border);
-    border-radius: 8px;
-    clip-path: polygon(
-      0 0,
-      calc(100% - 10px) 0,
-      100% 10px,
-      100% 100%,
-      10px 100%,
-      0 calc(100% - 10px)
-    );
+    border-radius: 0; /* DESIGN.md: no rounded corners */
+    clip-path: var(--clip-corner);
   }
 
   .blood-range__header {

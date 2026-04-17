@@ -238,13 +238,14 @@ const s: Record<string, CSSProperties> = {
   },
   input: {
     flex: 1,
+    minHeight: '44px', // WCAG 2.5.5
     background: 'transparent',
     border: 'none',
     borderBottom: '1px solid var(--color-outline)',
     color: 'var(--color-text-primary)',
     fontFamily: 'var(--font-mono)',
     fontSize: '1rem',
-    padding: '6px 2px',
+    padding: '10px 2px',
     outline: 'none',
     transition: 'border-color var(--transition-fast)',
   },
@@ -333,11 +334,12 @@ const s: Record<string, CSSProperties> = {
     fontFamily: 'var(--font-body)',
   } as CSSProperties,
   clearBtn: {
+    minHeight: '44px', // WCAG 2.5.5
     background: 'none',
     border: '1px solid var(--color-outline-20)',
     color: 'var(--color-text-muted)',
-    fontSize: '0.6875rem',
-    padding: '2px var(--space-sm)',
+    fontSize: '0.75rem',
+    padding: 'var(--space-xs) var(--space-md)',
     cursor: 'pointer',
     fontFamily: 'var(--font-body)',
     transition: 'color 0.15s, border-color 0.15s',
