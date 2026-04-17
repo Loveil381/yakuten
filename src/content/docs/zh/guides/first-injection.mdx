@@ -1,6 +1,6 @@
 ---
 title: 首次注射完整指南
-description: 从「要不要打」到「打完第一针后观察什么」的分步引导。前置血检、针具采购、分步骤操作、首周监测红线、跟医生怎么说。
+description: 从适应性评估到前置血检、药品针具清单、起始剂量与操作、首周监测红线、首次复查和就诊前准备，按时间顺序集中成一页。
 evidenceLevel: A
 sidebar:
   hidden: true
@@ -13,83 +13,95 @@ import DangerBox from '../../../../components/ui/DangerBox.astro';
 import CitationRef from '../../../../components/ui/CitationRef.astro';
 import DoseTable from '../../../../components/ui/DoseTable.astro';
 import EvidenceBadge from '../../../../components/ui/EvidenceBadge.astro';
+import ContraindicationBox from '../../../../components/ui/ContraindicationBox.astro';
+import BaselineChecklist from '../../../../components/ui/BaselineChecklist.astro';
+import InlineValue from '../../../../components/ui/InlineValue.astro';
 
 <EvidenceBadge level="A" />
 
-你要打第一针。这里按时间顺序把事情排好：要不要打 → 打之前做什么血检 → 买什么针具和药 → 怎么扎 → 接下来一周看哪些信号 → 什么时候该做第一次复查。
+第一次打针前，最常踩的坑是信息散在三四个页面：前置血检在 [血检指南](/zh/blood-tests/) 里、针具规格和操作步骤在 [戊酸雌二醇注射液](/zh/medications/estrogens/injection/) 里、首次复查时机在 [用药路径图](/zh/pathway/) 里。本页按时间顺序把从评估到首次复查的一整条路径集中列出。
 
-已经在打针想换方案 → [切换 E2 途径](/zh/guides/switch-e2-route/)。还在纠结要不要选注射 → [雌二醇给药途径总览](/zh/medications/estrogens/overview/)。
+已经在打针想换其他方案，见 [E2 途径切换指南](/zh/guides/switch-e2-route/)。还在不同途径之间权衡，先看 [雌二醇给药途径总览](/zh/medications/estrogens/overview/)。
 
 ---
 
-## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 0</span> 这条路径适合我吗
+## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 0.1</span> 适应性
 
-注射雌二醇的主要优势：
+注射雌二醇在跨性别 HRT 中的主要优势：绕过肝脏首过效应，对肝功能不稳定者更安全；血药浓度可预测；约 <InlineValue value="82.6" unit="%" /> 的注射使用者在合理剂量内可以实现单药治疗（不需要额外抗雄）<CitationRef id="misakian-2025" num={1} authors="Misakian AL et al." year={2025} title="Injectable Estradiol Monotherapy in Transgender Individuals" />。
 
-- **绕过肝脏首过效应**，对肝功能不稳定者更安全
-- **血药浓度可预测**，血检调整直观
-- 约 **82.6% 的注射使用者**可以在合理剂量内实现**单药治疗**（不需要额外抗雄）<CitationRef id="misakian-2025" num={1} authors="Misakian AL et al." year={2025} title="Injectable Estradiol Monotherapy in Transgender Individuals" />
+注射并非首次 HRT 的"默认选项"。口服、舌下、贴片、凝胶各有适用场景。如有 VTE 风险因素（吸烟、肥胖、家族史），经皮途径（贴片 / 凝胶）才是首选。决策逻辑见 [雌二醇给药途径总览](/zh/medications/estrogens/overview/)。
 
-**不适合注射的情况**（绝对禁忌）：
+## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 0.2</span> 绝对禁忌症
 
-- 现患血栓栓塞性疾病
-- 已知对药物或辅料（油溶剂）严重过敏
-- 严重凝血异常
-- 其他 HRT 通用禁忌 → 完整清单见 [用药前准备 §1.2](/zh/before-you-start/#12-绝对禁忌症-absolute)
+<ContraindicationBox type="absolute" title="绝对禁忌症（注射特有）" sectionNum="">
 
-**需要谨慎的情况**（相对禁忌，需医生评估）：
+- 现患血栓栓塞性疾病（深静脉血栓、肺栓塞）
+- 已知对戊酸雌二醇或油溶剂（蓖麻油 / 苯甲酸苄酯）严重过敏
+- 严重凝血功能异常
 
-- 既往有自发流产/静脉曲张/血栓家族史
+HRT 通用绝对禁忌见 [用药前准备 §1.2](/zh/before-you-start/#12-绝对禁忌症-absolute)。
+
+</ContraindicationBox>
+
+## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 0.3</span> 相对禁忌症
+
+<ContraindicationBox type="relative" title="相对禁忌症（注射特有）" sectionNum="">
+
+- 既往自发流产、静脉曲张、或血栓家族史
 - 无法稳定获得药品（注射是连续方案，中途断药比口服更影响血药稳定）
-- 针头恐惧症无法自我注射且无人协助
+- 针头恐惧症且无人协助
 
-<WarningBox title="还在犹豫？">
-注射并非首次 HRT 的「默认选项」。口服、舌下、贴片、凝胶都有各自优势。如果你的 VTE 风险较高（吸烟、肥胖、家族史），透皮途径（贴片/凝胶）才是首选。请先看 [雌二醇给药途径总览](/zh/medications/estrogens/overview/) 再决定。
+</ContraindicationBox>
+
+---
+
+## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 1</span> 前置血检
+
+打第一针前 <InlineValue value="1-2" unit="周" /> 内完成的基线血检。与 [用药前准备](/zh/before-you-start/) 的基线清单一致，注射使用者额外建议加 D-二聚体。
+
+<BaselineChecklist
+  items={[
+    { name: '激素六项', nameEn: 'E2 / T / FSH / LH / PRL / P', tag: 'required' },
+    { name: '肝功能', nameEn: 'ALT / AST / ALP / GGT / 胆红素', tag: 'required' },
+    { name: '肾功能', nameEn: 'Cr / eGFR', tag: 'required' },
+    { name: '凝血功能', nameEn: 'PT / APTT / D-二聚体', tag: 'required' },
+    { name: '血常规', nameEn: 'Full Blood Count', tag: 'required' },
+    { name: '空腹血糖', nameEn: 'Fasting Glucose', tag: 'recommended' },
+    { name: '血脂', nameEn: 'Lipid Panel', tag: 'recommended' },
+  ]}
+  costRange="300 - 600 CNY"
+/>
+
+三甲医院内分泌科或大型体检中心均可做。详细采样时机、结果解读见 [血检指南](/zh/blood-tests/)。
+
+<WarningBox title="基线血检结果异常">
+ALT > 正常上限 2 倍、D-二聚体显著升高、凝血功能异常 —— 应先让医生处理基础问题，暂缓开始 HRT。
 </WarningBox>
 
 ---
 
-## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 1</span> 决定打针后 · 前置血检（打第一针前 1-2 周）
+## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 2</span> 药品、针具、耗材
 
-开始之前必做的基线血检。**缺一不可**：
+### <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 2.1</span> 药品
 
-- **激素六项**（E2、T、FSH、LH、PRL、孕酮）— 作为基线，便于日后判断药效
-- **肝功能**（ALT、AST、ALP、GGT、胆红素）— 肝有问题时选注射本身就是为了绕肝，但基线仍需要
-- **肾功能**（Cr、eGFR）— 后续监测参考
-- **凝血功能**（PT、APTT、D-二聚体）— 识别 VTE 基础风险
-- **血常规** — 血红蛋白、血小板基线
-- 建议加：空腹血糖、血脂、VTE 风险评估（年龄 + 吸烟史 + BMI）
+**戊酸雌二醇注射液（EV）**，规格常见 10 mg/mL × 1 mL 安瓿。中国社区流通的三个版本：
 
-费用约 300–600 CNY，三甲医院内分泌科或大型体检中心都可做。详见 [血检指南](/zh/blood-tests/)。
+- **日雌**：日本富士製薬 Progynon Depot，拜耳授权生产，油状溶液，品控稳定
+- **印雌**：印度 Zydus 拜耳授权版 Progynon Depot，与日雌同配方，价格较低，外观批次间略有差异
+- **德雌**（原研）：德国拜耳原研版本，国内几乎拿不到
 
-> **如果基线血检发现异常怎么办**：ALT >2× 正常上限、D-二聚体明显升高、凝血异常 → 先让医生处理基础问题，不要急着开始 HRT。
-
----
-
-## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 2</span> 打针前 · 采购清单
-
-打第一针需要准备**三类东西**：
-
-### 2.1 药品
-
-**戊酸雌二醇注射液（EV）**，规格常见 10 mg/mL × 1 mL 安瓿。国内社区最常流通的三个版本：
-
-- **日雌**：日本富士製薬 `プロギノン・デポー`（Progynon Depot），拜耳授权 Fuji Pharma 独家生产。油状溶液，品控稳定，是社区最常见的选择之一。
-- **印雌**：印度 Zydus 拜耳授权版 Progynon Depot。与日雌同配方，价格较低，但批次间外观略有差异；购买时确认"Zydus (Cadila)"字样。
-- **德雌**（原研）：德国拜耳原研版本。国内几乎拿不到，价格也显著更高。
-
-更少见的还有**印尼版 Pelangi**（灰色渠道，DIY 社区有流通）、**美雌 Delestrogen**（北美制剂）等。完整品牌对照与渠道注意事项见 [戊酸雌二醇注射液 · 品牌索引](/zh/medications/estrogens/injection/)。
+更少见的还有印尼版 Pelangi（DIY 社区灰色渠道）、北美 Delestrogen。完整品牌对照见 [戊酸雌二醇注射液 · 品牌索引](/zh/medications/estrogens/injection/)。
 
 <WarningBox title="买药前必看">
-- 国内**未批准**任何戊酸雌二醇注射液上市，所有流通渠道均属**跨境代购 / 灰色渠道**。
-- 只要**未开封原厂安瓿**，拒绝分装、拒绝无包装的"散装液"。
-- 油剂必须**透明、无颗粒、无变色**；任何浑浊、絮状物、分层都不能用。
-- 价格离谱地低（比如"日雌 10 元/支"）几乎必假，宁可不用。
+- 国内未批准任何戊酸雌二醇注射液上市，所有流通渠道均属跨境代购或灰色渠道
+- 只接受未开封原厂安瓿，拒绝分装、拒绝无包装的"散装液"
+- 油剂应透明、无颗粒、无变色；任何浑浊、絮状物、分层一律弃用
+- 价格离谱低（如"日雌 10 元/支"）几乎必假
 </WarningBox>
 
-### 2.2 针具
+### <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 2.2</span> 针具
 
-**核心原则：用粗针抽药 + 换细针注射**。粗针抽药后针尖变钝，用粗钝针注射会显著增加疼痛。
+核心原则：粗针抽药，细针注射。粗针抽药后针尖变钝，用粗钝针注射会显著增加疼痛。
 
 <DoseTable
   headers={['途径', '注射器', '抽药针头', '注射针头']}
@@ -99,179 +111,167 @@ import EvidenceBadge from '../../../../components/ui/EvidenceBadge.astro';
   ]}
 />
 
-### 2.3 耗材
+### <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 2.3</span> 耗材
 
 - 酒精棉片（独立包装，≥ 10 片备用）
-- 锐器收集盒（家用型 ≥ 500 mL，可在药店或网上购买）
+- 锐器收集盒（家用型 ≥ 500 mL）
 - 棉签若干
 
-<WarningBox title="不要用过的针头">
-**重复使用针头**是首次使用者的常见错误。针尖使用一次就会变钝，重复使用增加疼痛、感染和断针风险。一次一用。使用过的针头**立即**放入锐器盒，**不要回套针帽**（回套是最常见的针刺伤原因）。
+<WarningBox title="针头一次一用">
+重复使用针头是首次使用者的常见错误。针尖使用一次即变钝，重复使用增加疼痛、感染和断针风险。使用过的针头立即放入锐器盒，不回套针帽（回套是最常见的针刺伤原因）。
 </WarningBox>
 
 ---
 
-## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 3</span> 打第一针 · 剂量 + 操作
+## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 3</span> 起始剂量与操作
 
-### 3.1 起始剂量
+### <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 3.1</span> 起始剂量
 
-**前 1-6 个月：1-2 mg/周**<CitationRef id="hembree-2017" num={2} authors="Hembree WC et al." year={2017} title="Endocrine Treatment of Gender-Dysphoric/Gender-Incongruent Persons" /><CitationRef id="coleman-2022" num={3} authors="Coleman E et al." year={2022} title="Standards of Care v8" />。
-
-为什么不从维持剂量（2-4 mg/周）直接开始？—— **保护乳腺发育**。高剂量过早启动可能导致乳芽过早融合，这是**不可逆的**。详见 [乳房发育专题](/zh/breast-development/)。
+前 1-6 个月：<InlineValue value="1-2" unit="mg/周" /><CitationRef id="hembree-2017" num={2} authors="Hembree WC et al." year={2017} title="Endocrine Treatment of Gender-Dysphoric/Gender-Incongruent Persons" /><CitationRef id="coleman-2022" num={3} authors="Coleman E et al." year={2022} title="Standards of Care v8" />。不直接从维持剂量（2-4 mg/周）开始是为了保护乳腺发育 —— 高剂量过早启动可能导致乳芽过早融合，这是不可逆的。详见 [乳房发育专题](/zh/breast-development/)。
 
 <DoseTable
-  headers={['Progynon Depot 10mg/mL', '抽取体积', '频率']}
+  headers={['周剂量', '抽取体积（10 mg/mL）', '频率']}
   rows={[
-    ['起始 1 mg/周', '0.1 mL', '每 7 天'],
-    ['起始 2 mg/周', '0.2 mL', '每 7 天'],
+    ['1 mg/周', '0.1 mL', '每 7 天'],
+    ['2 mg/周', '0.2 mL', '每 7 天'],
   ]}
 />
 
-### 3.2 选择 SC 还是 IM
+### <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 3.2</span> SC vs IM 选择
 
-**自行注射的首次使用者，强烈推荐 SC（皮下）**：
-- 针头更细、疼痛更轻
-- 无需他人协助
-- 近年研究表明 SC 与 IM 的 E2 吸收与 T 抑制效果**无显著差异**<CitationRef id="herndon-2023" num={4} authors="Herndon JS et al." year={2023} title="Subcutaneous vs Intramuscular Estradiol Valerate" /><CitationRef id="poage-2026" num={5} authors="Poage AC et al." year={2026} title="Subcutaneous vs Intramuscular Estradiol Valerate Injection" />
+自行注射的首次使用者应选 SC（皮下）：针头更细、疼痛更轻、无需他人协助。近年研究表明 SC 与 IM 的 E2 吸收和 T 抑制效果无显著差异<CitationRef id="herndon-2023" num={4} authors="Herndon JS et al." year={2023} title="Subcutaneous vs Intramuscular Estradiol Valerate" /><CitationRef id="poage-2026" num={5} authors="Poage AC et al." year={2026} title="Subcutaneous vs Intramuscular Estradiol Valerate Injection" />。完整对比见 [戊酸雌二醇注射液 · SC vs IM](/zh/medications/estrogens/injection/#sc-vs-im-对比)。
 
-完整对比见 [戊酸雌二醇注射液 · SC vs IM](/zh/medications/estrogens/injection/#sc-vs-im-对比)。
+### <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 3.3</span> 首次最易犯错的 6 点
 
-### 3.3 分步操作
+完整 10 步操作见 [戊酸雌二醇注射液 · 注射操作步骤](/zh/medications/estrogens/injection/#注射操作步骤)。首次使用者最易出错的是以下 6 点：
 
-详细 10 步操作规范见 [戊酸雌二醇注射液 · 注射操作步骤](/zh/medications/estrogens/injection/#注射操作步骤)。这里只列**首次最容易犯错的 6 个点**：
+1. **酒精未干就进针** —— 酒精未挥发时进针会把酒精带入皮下，造成刺痛和局部刺激。消毒后等 15-30 秒自然干燥。
+2. **粗针抽药后直接注射** —— 粗针钝化后注射明显更痛；抽完药必须换细注射针。
+3. **进针角度错** —— SC 用 45° 捏皮进针；IM 用 90° 绷紧皮肤快速进针。
+4. **忘了回抽** —— 推注药前轻微回拉活塞确认无血液回流。如有血液，拔出换部位重新进针。
+5. **推注过快** —— 缓慢匀速推注，约 10 秒推完 0.1-0.2 mL。
+6. **拔针后揉搓** —— 只用干棉片轻压，不揉搓。揉搓会把药液挤散，影响吸收并造成淤青。
 
-1. **酒精没干就扎** — 酒精没挥发时进针会把酒精带入皮下，造成刺痛和局部刺激。消毒后**等 15-30 秒**让酒精自然干燥。
-2. **粗针抽药后直接注射** — 换成细注射针再进针。
-3. **角度错** — SC 用 **45°**捏起皮肤进针；IM 用 **90°**绷紧皮肤快速进针。
-4. **忘了回抽** — 推注药前**轻微回拉活塞**确认无血液回流。如有血液，拔出换部位重新扎。
-5. **推注太快** — 缓慢匀速推注，约 10 秒推完 0.1-0.2 mL。
-6. **拔针后揉搓** — **不要揉**，只用干棉片轻压即可。揉搓会把药液挤散，影响吸收并造成淤青。
+### <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 3.4</span> 剂量换算工具
 
-### 3.4 剂量换算工具
-
-每次抽多少毫升？使用 [注射剂量换算器](/zh/tools/injection-calculator/) 输入你的药瓶浓度和目标剂量，自动算抽药体积。
+每次该抽多少毫升，使用 [注射剂量换算器](/zh/tools/injection-calculator/) 输入药瓶浓度和目标剂量，自动计算抽取体积。
 
 ---
 
-## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 4</span> 首周监测（Day 1 - Day 7）
+## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 4</span> 首周监测
 
-### 4.1 正常反应
+### <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 4.1</span> 正常反应
 
 - **注射部位**：轻微酸胀、局部小淤青 2-5 天内自行消退
-- **情绪**：可能有波动，这是激素水平变化的正常反应
-- **乳房**：通常 2-6 周后才出现胀痛或敏感，**首周没有变化是正常的**
-- **精力/性欲**：可能感觉精力/性欲下降，这也是正常的
+- **情绪**：可能有波动，是激素水平变化的正常反应
+- **乳房**：通常 2-6 周后才出现胀痛或敏感，首周没有变化是正常的
+- **精力 / 性欲**：可能感觉下降，也是正常的
 
-### 4.2 需要留意的情况
+### <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 4.2</span> 应就医排查的情况
 
-以下情况**应就医排查**，但不一定是紧急情况：
+不一定紧急，但应就医确认：
 
-- 注射部位**持续红肿、发热、硬结增大** → 可能感染，去看皮肤科或全科
-- 严重情绪低落或自我伤害念头 → 寻求心理支持或精神科
-- 任何不对劲的新症状 → 记录时间+症状，反馈给医生
+- 注射部位持续红肿、发热、硬结增大（可能感染）
+- 严重情绪低落或自我伤害念头
+- 任何持续数天无法解释的新症状
 
-### 4.3 危险信号 · 立即停药并就医
+### <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 4.3</span> 立即停药并就医
 
-<DangerBox title="首周或任何时候出现以下情况，立即停药并急诊">
+<DangerBox title="出现以下任何一项，立即停药并急诊">
 
-- **单侧小腿肿胀 + 压痛** → 深静脉血栓（DVT）
-- **胸痛 / 呼吸困难 / 咯血** → 肺栓塞
-- **突发严重头痛 + 视力模糊 / 复视 / 视野缺损** → 静脉窦血栓、卒中或脑膜瘤
-- **单侧肢体无力 / 口角歪斜 / 言语不清** → 卒中
-- **皮肤 / 眼白发黄 + 尿色加深** → 急性肝毒性
-- **严重过敏反应**（呼吸困难 + 皮疹 + 喉头水肿）
+- 单侧小腿肿胀 + 压痛 —— 深静脉血栓（DVT）
+- 胸痛、呼吸困难、咯血 —— 肺栓塞
+- 突发严重头痛 + 视力模糊、复视、或视野缺损 —— 静脉窦血栓、卒中、脑膜瘤
+- 单侧肢体无力、口角歪斜、言语不清 —— 卒中
+- 皮肤、眼白发黄 + 尿色加深 —— 急性肝毒性
+- 严重过敏反应（呼吸困难 + 皮疹 + 喉头水肿）
 
-完整的风险与急症识别见 [风险与急症识别](/zh/risks/)。
+完整风险与急症清单见 [风险与急症识别](/zh/risks/)。
 
 </DangerBox>
 
 ---
 
-## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 5</span> 建立节奏 · 首次复查（Day 30 - Day 60）
+## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 5</span> 首次复查与剂量调整
 
-### 5.1 复查时机
+### <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 5.1</span> 复查时机
 
-注射**第 4-6 周**做一次**谷值血检**。"谷值"的定义：**在下次注射前当天早晨**（距上次注射最接近一整个周期结束的时点）采血。这时候的 E2 是这一周期的**最低值**，如果最低值都够，整周都够。
+注射第 4-6 周做一次谷值血检。"谷值"指在下次注射前当天早晨采血（距上次注射最接近一整个周期结束的时点）。谷值是一整个注射周期的最低 E2 浓度 —— 谷值达标，整个周期即达标。
 
-### 5.2 复查项目
+### <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 5.2</span> 复查项目
 
-最小集：**E2、T**。
-加强集：再加 **肝功能（ALT、AST）**、**肾功能（Cr）**、**PRL**。
-完整项目与频率规则见 [血检指南](/zh/blood-tests/)。
+基础集：E2、T。加强集再加肝功能（ALT、AST）、肾功能（Cr）、PRL。详见 [血检指南](/zh/blood-tests/)。
 
-### 5.3 怎么解读和调剂量
+### <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 5.3</span> 根据谷值调剂量
 
-| 谷值 E2 | 谷值 T | 含义 | 处理 |
-|---|---|---|---|
-| 100-200 pg/mL | < 50 ng/dL | **目标达成** | 维持当前方案 |
-| < 50 pg/mL | 任何 | 剂量不足 | 缩短注射间隔（如 7→5 天）或略增单次剂量（仍 ≤ 5 mg/周） |
-| > 200 pg/mL | < 50 ng/dL | **剂量过高** | 减量。E2 超标不会带来更强女性化效果，只增加血栓等风险<CitationRef id="hembree-2017" num={2} authors="Hembree WC et al." year={2017} title="Endocrine Treatment of Gender-Dysphoric/Gender-Incongruent Persons" /> |
-| 100-200 pg/mL | > 50 ng/dL | E2 够但 T 没降 | 考虑加抗雄（而不是继续加 E2 剂量） |
+<DoseTable
+  headers={['谷值 E2', '谷值 T', '含义', '处理']}
+  rows={[
+    ['100-200 pg/mL', '< 50 ng/dL', '目标达成', '维持当前方案'],
+    ['< 50 pg/mL', '任何值', '剂量不足', '缩短间隔（7→5 天）或略增剂量（≤ 5 mg/周）'],
+    ['> 200 pg/mL', '< 50 ng/dL', '剂量过高', '减量'],
+    ['100-200 pg/mL', '> 50 ng/dL', 'E2 够但 T 未降', '加用抗雄，而非继续加 E2'],
+  ]}
+/>
 
-更完整的决策见 [用药路径图 · 1-6 个月阶段](/zh/pathway/#phase1)。
+E2 > 200 pg/mL 不会带来更强女性化效果，只增加血栓等风险<CitationRef id="hembree-2017" num={2} />。更完整的剂量决策见 [用药路径图 · 1-6 个月阶段](/zh/pathway/#phase1)。
 
-<WarningBox title="不要为了「单药治疗」而盲目加大注射剂量">
-单药治疗的前提是**合理剂量范围内（≤ 5 mg/周）** T 能降至 < 50 ng/dL。如果 5 mg/周仍无法充分抑制 T，**正确做法是加用低剂量抗雄，而不是继续增加注射剂量**<CitationRef id="rothman-2024" num={6} authors="Rothman MS et al." year={2024} title="Injectable Estradiol Dosing in Transgender Individuals" />。超过 5 mg/周的单次剂量会导致 E2 峰值过高，显著增加血栓风险。
+<WarningBox title="不要为了「单药治疗」盲目加量">
+单药治疗的前提是在合理剂量范围内（≤ 5 mg/周）谷值 T 能降至 < 50 ng/dL。如果 5 mg/周仍无法充分抑制 T，正确做法是加用低剂量抗雄，而不是继续加注射剂量<CitationRef id="rothman-2024" num={6} authors="Rothman MS et al." year={2024} title="Injectable Estradiol Dosing in Transgender Individuals" />。超过 5 mg/周的单次剂量会导致 E2 峰值过高，显著增加血栓风险。
 </WarningBox>
 
 ---
 
-## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 6</span> 跟医生怎么说
+## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 6</span> 就诊前准备
 
-不同医生对 HRT 熟不熟差别很大。**不要指望医生主动给出完整方案**。进诊室之前，把下面这些准备好：
+医生对 HRT 的熟悉程度差别很大，不应默认医生会主动给出完整方案。进诊室前准备以下项：
 
-- 把**想用的方案**说清楚。例如："想从 EV 1-2 mg/周 SC 开始，6 个月后再调整"。
-- 把**基线血检结果**带去，请医生评估有没有禁忌。
-- 要一个复查时间表：4-6 周、3 个月、6 个月分别查什么。
-- 问清楚出现 §4.3 的危险信号时该找谁。
-- 如果医生不熟悉 HRT，把下面这些权威指南带过去：
-  - [WPATH SOC 8 (Coleman et al. 2022)](https://www.tandfonline.com/doi/full/10.1080/26895269.2022.2100644)
-  - [Endocrine Society 2017 (Hembree et al.)](https://doi.org/10.1210/jc.2017-01658)
+- 把想用的方案说清楚（例：从 EV 1-2 mg/周 SC 开始，6 个月后再调整）
+- 把基线血检结果带去，请医生评估有无禁忌
+- 要一个复查时间表（4-6 周、3 个月、6 个月分别查什么）
+- 问清楚出现 §4.3 危险信号时该找谁
+- 医生不熟悉 HRT 时，提供以下权威指南：
+  - [WPATH SOC 8（Coleman 2022）](https://www.tandfonline.com/doi/full/10.1080/26895269.2022.2100644)
+  - [Endocrine Society 2017（Hembree 等）](https://doi.org/10.1210/jc.2017-01658)
   - [参考文献库](/zh/appendix-references/)
 
-<WarningBox title="本站不能替代医生">
-本页提供的是国际临床指南的**信息底线**，帮助你在与医生沟通时准备得更充分。**任何最终方案都应由合格的医疗人员根据你的具体情况决定**。如果你所在地难以找到友好的医生，参考 [中国 HRT 现实路径图](/zh/china-reality/) 和 [友好医疗资源](/zh/tools/hospital-finder/)。
+<WarningBox title="本页不能替代医生">
+本页提供的是国际临床指南的信息底线，帮助使用者在与医生沟通时准备更充分。最终方案应由合格医疗人员根据具体情况决定。所在地难以找到友好医生，参考 [中国 HRT 现实路径图](/zh/china-reality/) 和 [友好医疗资源](/zh/tools/hospital-finder/)。
 </WarningBox>
 
 ---
 
-## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 7</span> FAQ
+## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 7</span> 常见问题
 
-### 第一针很痛正常吗？
+### 第一针很痛正常吗
 
-轻微刺痛和酸胀正常。如果疼痛**剧烈且持续超过 30 分钟**，检查：
-- 是否用了抽药粗针而不是注射细针？
-- 药液是否刚从冰箱取出（应恢复室温 15-30 分钟）？
-- 推注速度是否太快（应 10 秒）？
+轻微刺痛和酸胀正常。如果疼痛剧烈且持续超过 30 分钟，检查：是否用了抽药粗针而非注射细针；药液是否刚从冰箱取出（应恢复室温 15-30 分钟）；推注速度是否过快（应 10 秒）。
 
-### 注射时有血了怎么办？
+### 注射时有血了怎么办
 
-回抽时看到血液回流：**拔出针头**，换一个部位、新针头重新开始。不要硬推。
-推注后发现注射点有少量血珠：正常，用棉片轻压止血即可。
+回抽时看到血液回流：拔出针头，换新部位、新针头重新开始，不要硬推。推注后发现注射点有少量血珠：正常，用棉片轻压止血即可。
 
-### 忘记打针了怎么办？
+### 忘记打针了怎么办
 
-- 延迟 **≤ 2 天**：想起来就打原定剂量，下次按原日期继续。
-- 延迟 **3-4 天**：打原定剂量，重新按新日期开始节奏。
-- 延迟 **≥ 5 天**：相当于少打了一次，下次打原定剂量（**不要加倍**）。
+延迟 ≤ 2 天：想起就打原定剂量，下次按原日期继续。延迟 3-4 天：打原定剂量，按新日期重新建立节奏。延迟 ≥ 5 天：相当于少打一次，下次打原定剂量，不要加倍。
 
-### 第一个月没感觉变化正常吗？
+### 第一个月没感觉变化正常吗
 
-**非常正常**。主观感受（情绪、性欲、精力）在 1-2 周可能出现；客观变化（皮肤、脂肪重分布、乳房发育）通常 **2-6 个月**才开始可见。**剧烈变化 = 剂量过大的信号**，不是"药效好"。
+非常正常。主观感受（情绪、性欲、精力）在 1-2 周可能出现；客观变化（皮肤、脂肪重分布、乳房发育）通常 2-6 个月才开始可见。剧烈变化是剂量过大的信号，不是"药效好"。
 
-### 我能一个人完整完成注射吗？
+### 能一个人完整完成注射吗
 
-SC 注射完全可以一人完成。IM 如果选**大腿外侧**也可以自己打；如果选**臀部外上象限**通常需要他人协助（除非使用镜子）。**自我注射前强烈建议观看完整教学视频**并在有人陪同的环境下完成第一针。
+SC 注射可以一人完成。IM 选大腿外侧也可以自己打；选臀部外上象限通常需他人协助（除非使用镜子）。自我注射前建议观看完整教学视频，并在有人陪同的环境下完成第一针。
 
 ---
 
 ## 相关资源
 
 - **详细操作与药理**：[戊酸雌二醇注射液](/zh/medications/estrogens/injection/)
-- **还在犹豫选哪种途径**：[雌二醇给药途径总览](/zh/medications/estrogens/overview/)
-- **血检什么、怎么看**：[血检指南](/zh/blood-tests/)
-- **风险识别与急症**：[风险与急症识别](/zh/risks/)
-- **剂量换算工具**：[注射剂量换算器](/zh/tools/injection-calculator/)
+- **其他途径对比**：[雌二醇给药途径总览](/zh/medications/estrogens/overview/)
+- **血检指南**：[血检指南](/zh/blood-tests/)
+- **风险识别**：[风险与急症识别](/zh/risks/)
+- **剂量换算**：[注射剂量换算器](/zh/tools/injection-calculator/)
 - **前期准备**：[用药前：你准备好了吗？](/zh/before-you-start/)
 - **长期规划**：[用药路径图](/zh/pathway/)
 - **找医生**：[中国 HRT 现实路径图](/zh/china-reality/) · [友好医疗资源](/zh/tools/hospital-finder/)
