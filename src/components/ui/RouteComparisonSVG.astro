@@ -106,18 +106,21 @@ const barMaxH = 60;
     width: 100%;
     max-width: 520px;
     height: auto;
-    background: var(--glass-bg-40);
-    border: var(--glass-border);
+    /* Transparent — consistent across dark/light themes */
+    background: transparent;
+    border: none;
     border-radius: 0;
-    padding: var(--space-sm);
+    padding: 0;
     overflow: visible;
   }
 
   .route-cmp__title {
-    font-family: var(--font-display, serif);
+    /* Chart title: sans-serif ui-accent stack so English drug names don't
+       fall back to system serif (Georgia) via the display stack. */
+    font-family: var(--font-ui-accent);
     font-size: 11px;
     font-weight: 600;
-    fill: var(--sl-color-text, var(--color-text-primary, #fff));
+    fill: var(--sl-color-text, var(--color-text-primary));
   }
 
   .route-cmp__name {

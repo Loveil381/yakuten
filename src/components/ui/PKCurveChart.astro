@@ -230,10 +230,12 @@ const L = i18n[locale] ?? i18n.en;
     width: 100%;
     max-width: 500px;
     height: auto;
-    background: var(--glass-bg-40);
-    border: var(--glass-border);
+    /* Transparent — SVG lets the page background show through so it renders
+       correctly in both dark and light themes without any tint layer. */
+    background: transparent;
+    border: none;
     border-radius: 0;
-    padding: var(--space-sm);
+    padding: 0;
   }
 
   .pk-chart__tick {
@@ -257,10 +259,14 @@ const L = i18n[locale] ?? i18n.en;
   }
 
   .pk-chart__title {
-    font-family: var(--font-display, serif);
+    /* Data-label context (chart title): use the sans-serif ui-accent stack
+       (Space Grotesk → Noto Sans SC). Noto Serif SC doesn't cover Latin, so
+       display-font stack would fall back to system serif (Georgia/Songti)
+       and produce a dated Western-serif feel for English drug names. */
+    font-family: var(--font-ui-accent);
     font-size: 10px;
     font-weight: 600;
-    fill: var(--sl-color-text, var(--color-text-primary, #fff));
+    fill: var(--sl-color-text, var(--color-text-primary));
   }
 
   .pk-chart__curve {

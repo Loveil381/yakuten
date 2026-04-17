@@ -77,17 +77,19 @@ const L = {
     width: 100%;
     max-width: 300px;
     height: auto;
-    background: var(--glass-bg-40);
-    border: var(--glass-border);
-    border-radius: 0; /* DESIGN.md: no rounded corners */
-    padding: var(--space-sm);
+    /* Transparent — consistent across dark/light themes */
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
   }
 
   .inj-site__title {
-    font-family: var(--font-display, serif);
+    /* Chart title: sans-serif ui-accent stack. */
+    font-family: var(--font-ui-accent);
     font-size: 11px;
     font-weight: 600;
-    fill: var(--sl-color-text, var(--color-text-primary, #fff));
+    fill: var(--sl-color-text, var(--color-text-primary));
   }
 
   .inj-site__num {
