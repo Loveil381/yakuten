@@ -40,6 +40,10 @@ const {
 </div>
 
 <style>
+  /* Always column-stacked. An earlier row layout at ≥1024px broke inside
+     Starlight doc pages (e.g. /zh/risks/) where the prose column is only
+     ~700px — row mode compressed the long Chinese symptoms list into a
+     vertical one-character-per-line stack. Column works at every width. */
   .emergency-banner__inner {
     display: flex;
     flex-direction: column;
@@ -47,14 +51,6 @@ const {
     gap: var(--space-xs);
     max-width: 80rem;
     margin: 0 auto;
-  }
-
-  @media (min-width: 1024px) {
-    .emergency-banner__inner {
-      flex-direction: row;
-      justify-content: space-between;
-      gap: var(--space-lg);
-    }
   }
 
   .emergency-banner__heading {
@@ -87,6 +83,8 @@ const {
     opacity: 0.92;
     text-align: center;
     line-height: 1.5;
+    max-width: 64rem;
+    overflow-wrap: break-word;
   }
 
   .emergency-banner__cta {
