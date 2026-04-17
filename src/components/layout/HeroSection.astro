@@ -10,6 +10,7 @@
 import { t, getLocale } from '../../i18n/ui';
 
 interface Props {
+  brandTag?: string;
   subtitle?: string;
   title?: string;
   slogan?: string;
@@ -18,6 +19,7 @@ interface Props {
 const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
 
 const {
+  brandTag = t(locale, 'hero.brandTag'),
   subtitle = t(locale, 'hero.subtitle'),
   title = t(locale, 'hero.title'),
   slogan = t(locale, 'hero.slogan'),
@@ -29,7 +31,8 @@ const searchLabel = t(locale, 'hero.searchLabel');
 
 <section class="hero-section" aria-label="Hero">
   <div class="hero-section__inner">
-    <span class="hero-section__subtitle glass-panel">{subtitle}</span>
+    <span class="hero-section__brand-tag glass-panel">{brandTag}</span>
+    <span class="hero-section__subtitle">{subtitle}</span>
     <h1 class="hero-section__title hero-text-glow">
       <span class="hero-gradient-text">{title}</span>
     </h1>
@@ -89,14 +92,25 @@ const searchLabel = t(locale, 'hero.searchLabel');
     gap: var(--space-xl);
   }
 
-  .hero-section__subtitle {
+  /* English brand tag — Stitch "THE CELESTIAL PHARMACOPEIA" eyebrow */
+  .hero-section__brand-tag {
     display: inline-block;
     padding: var(--space-xs) var(--space-md);
     color: var(--color-accent);
-    font-family: var(--font-mono);
-    font-size: 0.875rem;
-    letter-spacing: 0.3em;
+    font-family: var(--font-ui-accent);
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
     text-transform: uppercase;
+    margin-bottom: calc(-1 * var(--space-md));
+  }
+
+  /* Chinese/localized tagline under the brand tag */
+  .hero-section__subtitle {
+    display: inline-block;
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    letter-spacing: 0.12em;
   }
 
   .hero-section__title {

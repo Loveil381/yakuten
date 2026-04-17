@@ -33,6 +33,7 @@ export const ui = {
     'action.ariaLabel': '快速入口',
 
     // HeroSection
+    'hero.brandTag': 'THE CELESTIAL PHARMACOPEIA',
     'hero.subtitle': '循证 · 减害 · 引导就医',
 
     // MissionStatement
@@ -128,6 +129,7 @@ export const ui = {
     'action.ariaLabel': 'Quick start',
 
     // HeroSection
+    'hero.brandTag': 'THE CELESTIAL PHARMACOPEIA',
     'hero.subtitle': 'Evidence-Based · Harm Reduction · Guided Care',
 
     // MissionStatement
@@ -223,6 +225,7 @@ export const ui = {
     'action.ariaLabel': 'クイックスタート',
 
     // HeroSection
+    'hero.brandTag': 'THE CELESTIAL PHARMACOPEIA',
     'hero.subtitle': 'エビデンス · 害軽減 · 医療ガイド',
 
     // MissionStatement
@@ -318,6 +321,7 @@ export const ui = {
     'action.ariaLabel': '빠른 시작',
 
     // HeroSection
+    'hero.brandTag': 'THE CELESTIAL PHARMACOPEIA',
     'hero.subtitle': '근거 기반 · 위해 감소 · 의료 안내',
 
     // MissionStatement
