@@ -487,17 +487,25 @@ export default function AIAssistant({ compact = false, onClose }: AIAssistantPro
             style={{
               background: 'none',
               border: 'none',
-              color: 'var(--color-text-muted)',
+              color: 'var(--color-text-secondary)',
               cursor: 'pointer',
-              padding: '4px',
+              minWidth: 44,
+              minHeight: 44,
+              padding: 'var(--space-xs)',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              marginLeft: '4px',
-              transition: 'color var(--transition-fast)',
+              marginLeft: 'var(--space-xs)',
+              transition: 'color var(--transition-fast), background var(--transition-fast)',
             }}
-            onMouseEnter={e => { e.currentTarget.style.color = 'var(--color-primary)'; }}
-            onMouseLeave={e => { e.currentTarget.style.color = 'var(--color-text-muted)'; }}
+            onMouseEnter={e => {
+              e.currentTarget.style.color = 'var(--color-primary)';
+              e.currentTarget.style.background = 'var(--color-primary-alpha-08)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.color = 'var(--color-text-secondary)';
+              e.currentTarget.style.background = 'none';
+            }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" />
@@ -512,8 +520,15 @@ export default function AIAssistant({ compact = false, onClose }: AIAssistantPro
         {ui.disclaimer}
       </div>
 
-      {/* Messages */}
-      <div ref={messagesAreaRef} style={s.messagesArea}>
+      {/* Messages — aria-live announces assistant responses to SR as they stream in */}
+      <div
+        ref={messagesAreaRef}
+        style={s.messagesArea}
+        role="log"
+        aria-live="polite"
+        aria-atomic="false"
+        aria-relevant="additions text"
+      >
         {messages.length === 0 ? (
           <div style={s.emptyState}>
             <div style={s.emptyIcon} aria-hidden="true">💊</div>

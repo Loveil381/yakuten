@@ -704,7 +704,11 @@ export default function RiskScreener() {
                   ))}
                 </div>
               )}
-              <a href={risksPagePath + r.anchor} style={s.resultLink}>
+              <a
+                href={risksPagePath + r.anchor}
+                style={s.resultLink}
+                aria-label={`${ui.learnMore}: ${r.category}`}
+              >
                 {ui.learnMore} →
               </a>
             </div>
