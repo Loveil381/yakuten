@@ -1,12 +1,16 @@
 ---
 /**
  * 新版首页 —— /sakura/{zh,en,ja,ko}/
- * 用 Claude Design 的视觉，内容从 content collection 读取
+ * 所有文字来源：
+ * - Hero title/subtitle/slogan: src/i18n/ui.ts（和旧版 HeroSection 同源）
+ * - 卡片 title/description: src/content/docs/{locale}/*.mdx 的 frontmatter
+ * 不引入任何设计稿里的虚构品牌字
  */
 import { getEntry } from 'astro:content';
 import SakuraLayout from '../../../layouts/SakuraLayout.astro';
 import InkCard from '../../../components/sakura/InkCard.astro';
 import HibiscusMark from '../../../components/sakura/HibiscusMark.astro';
+import { t, type Locale } from '../../../i18n/ui';
 
 export function getStaticPaths() {
   return [
@@ -18,84 +22,59 @@ export function getStaticPaths() {
 }
 
 const { locale } = Astro.params;
+const loc = (locale && locale in { zh: 1, en: 1, ja: 1, ko: 1 } ? locale : 'zh') as Locale;
 
-// 从 content collection 读 index entry
-const indexEntry = await getEntry('docs', `${locale}/index`);
-const title = indexEntry?.data?.title ?? 'HRT药典';
-const description = indexEntry?.data?.description ?? '';
+// 从 content collection 读 index entry（拿 description）
+const indexEntry = await getEntry('docs', `${loc}/index`);
+const pageTitle = indexEntry?.data?.title ?? t(loc, 'hero.title');
+const pageDescription = indexEntry?.data?.description ?? '';
 
-// 主要入口卡片（从 content collection 的真实数据读取）
-const heroCards: Record<string, Array<{ slug: string; variant: string; icon: string }>> = {
-  zh: [
-    { slug: 'before-you-start', variant: 'flame',    icon: '🌸' },
-    { slug: 'pathway',          variant: 'gold',     icon: '✿' },
-    { slug: 'risks',            variant: 'pink',     icon: '⚠' },
-    { slug: 'dose-limits',      variant: 'mint',     icon: '◆' },
-    { slug: 'blood-tests',      variant: 'sky',      icon: '♡' },
-    { slug: 'china-reality',    variant: 'lavender', icon: '★' },
-  ],
-  en: [
-    { slug: 'before-you-start', variant: 'flame',    icon: '🌸' },
-    { slug: 'pathway',          variant: 'gold',     icon: '✿' },
-    { slug: 'risks',            variant: 'pink',     icon: '⚠' },
-    { slug: 'dose-limits',      variant: 'mint',     icon: '◆' },
-    { slug: 'blood-tests',      variant: 'sky',      icon: '♡' },
-    { slug: 'china-reality',    variant: 'lavender', icon: '★' },
-  ],
-  ja: [
-    { slug: 'before-you-start', variant: 'flame',    icon: '🌸' },
-    { slug: 'pathway',          variant: 'gold',     icon: '✿' },
-    { slug: 'risks',            variant: 'pink',     icon: '⚠' },
-    { slug: 'dose-limits',      variant: 'mint',     icon: '◆' },
-    { slug: 'blood-tests',      variant: 'sky',      icon: '♡' },
-    { slug: 'china-reality',    variant: 'lavender', icon: '★' },
-  ],
-  ko: [
-    { slug: 'before-you-start', variant: 'flame',    icon: '🌸' },
-    { slug: 'pathway',          variant: 'gold',     icon: '✿' },
-    { slug: 'risks',            variant: 'pink',     icon: '⚠' },
-    { slug: 'dose-limits',      variant: 'mint',     icon: '◆' },
-    { slug: 'blood-tests',      variant: 'sky',      icon: '♡' },
-    { slug: 'china-reality',    variant: 'lavender', icon: '★' },
-  ],
-};
+// Hero 文本全部走 i18n（和旧版 HeroSection 一致）
+const heroTitle = t(loc, 'hero.title');
+const heroSubtitle = t(loc, 'hero.subtitle');
+const heroSlogan = t(loc, 'hero.slogan');
 
-const cards = heroCards[locale!] ?? heroCards.zh;
+// 主要入口卡片（从 content collection 真实数据读）
+const cardSlugs = [
+  { slug: 'before-you-start', variant: 'flame' as const },
+  { slug: 'pathway',          variant: 'gold' as const },
+  { slug: 'risks',            variant: 'pink' as const },
+  { slug: 'dose-limits',      variant: 'mint' as const },
+  { slug: 'blood-tests',      variant: 'sky' as const },
+  { slug: 'china-reality',    variant: 'lavender' as const },
+];
 
-// 每张卡从真实 content collection 读标题和描述
-const cardsWithMeta = await Promise.all(cards.map(async (c) => {
-  const entry = await getEntry('docs', `${locale}/${c.slug}`);
+const cards = await Promise.all(cardSlugs.map(async (c) => {
+  const entry = await getEntry('docs', `${loc}/${c.slug}`);
   return {
     ...c,
     title: entry?.data?.title ?? c.slug,
     description: entry?.data?.description ?? '',
-    href: `/sakura/${locale}/${c.slug}/`,
+    href: `/sakura/${loc}/${c.slug}/`,
   };
 }));
 ---
 
-<SakuraLayout title={title} description={description} locale={locale!}>
+<SakuraLayout title={pageTitle} description={pageDescription} locale={loc}>
   <section class="sakura-hero">
     <div class="sakura-hero__mark">
       <HibiscusMark size={96} />
     </div>
+
+    <div class="sakura-hero__subtitle">{heroSubtitle}</div>
+
     <h1 class="sakura-hero__title">
       HRT<span class="gradient-flame">药典</span>
     </h1>
-    <p class="sakura-hero__tagline">
-      {description || '循证 · 减害 · 引导就医 —— 面向跨性别女性的 HRT 安全底线信息站'}
-    </p>
-    <div class="sakura-hero__badges">
-      <span class="sakura-hero__badge sakura-hero__badge--ink">循证 · WPATH SOC 8</span>
-      <span class="sakura-hero__badge sakura-hero__badge--pink">手账 · 绯英</span>
-      <span class="sakura-hero__badge sakura-hero__badge--gold">不处方 · 不销售</span>
-    </div>
+
+    <p class="sakura-hero__slogan">{heroSlogan}</p>
+
+    <p class="sakura-hero__description">{pageDescription}</p>
   </section>
 
   <section class="sakura-grid">
-    {cardsWithMeta.map((c) => (
-      <InkCard variant={c.variant as any} href={c.href} class="sakura-card">
-        <div class="sakura-card__icon">{c.icon}</div>
+    {cards.map((c) => (
+      <InkCard variant={c.variant} href={c.href} class="sakura-card">
         <h3 class="sakura-card__title">{c.title}</h3>
         <p class="sakura-card__desc">{c.description}</p>
       </InkCard>
@@ -106,10 +85,19 @@ const cardsWithMeta = await Promise.all(cards.map(async (c) => {
 <style>
   .sakura-hero {
     text-align: center;
-    padding: 40px 0 48px;
+    padding: 32px 0 40px;
   }
   .sakura-hero__mark {
     display: inline-flex;
+    margin-bottom: 8px;
+  }
+  .sakura-hero__subtitle {
+    font-family: "Plus Jakarta Sans", "Noto Sans SC", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: #E5578B;
+    text-transform: uppercase;
     margin-bottom: 8px;
   }
   .sakura-hero__title {
@@ -120,73 +108,44 @@ const cardsWithMeta = await Promise.all(cards.map(async (c) => {
     color: #4A2838;
     font-weight: 400;
   }
-  .sakura-hero__title::after { display: none; } /* 覆盖 layout 里 h1 的下划线 */
+  .sakura-hero__title::after { display: none; }
   .gradient-flame {
     background: linear-gradient(135deg, #E5578B, #FF8E7F 50%, #F5C842);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .sakura-hero__tagline {
+  .sakura-hero__slogan {
     font-family: "Ma Shan Zheng", "Klee One", cursive;
-    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+    font-size: clamp(1.2rem, 2.6vw, 1.6rem);
+    color: #E5578B;
+    margin: 16px auto 8px;
+  }
+  .sakura-hero__description {
+    font-family: "Noto Sans SC", sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
     color: #7A5568;
-    max-width: 620px;
-    margin: 16px auto 24px;
-  }
-  .sakura-hero__badges {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .sakura-hero__badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 14px;
-    font-family: "Plus Jakarta Sans", sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    border: 2px solid #4A2838;
-    border-radius: 999px;
-    box-shadow: 2px 2px 0 #4A2838;
-  }
-  .sakura-hero__badge--ink {
-    background: #FFFAF0;
-    color: #4A2838;
-  }
-  .sakura-hero__badge--pink {
-    background: #FFA8C5;
-    color: #fff;
-  }
-  .sakura-hero__badge--gold {
-    background: linear-gradient(135deg, #FFE89C, #F5C842);
-    color: #4A2838;
+    max-width: 680px;
+    margin: 12px auto 0;
   }
 
   .sakura-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
-    margin-top: 24px;
+    margin-top: 32px;
   }
 
   .sakura-card {
-    min-height: 180px;
+    min-height: 160px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-  }
-  .sakura-card__icon {
-    font-family: "Fraunces", serif;
-    font-size: 28px;
-    line-height: 1;
-    margin-bottom: 6px;
+    gap: 6px;
   }
   .sakura-card__title {
     font-family: "Noto Serif SC", "Klee One", serif;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 700;
     margin: 0;
     line-height: 1.3;
