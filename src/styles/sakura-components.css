@@ -1,0 +1,300 @@
+/* =========================================================================
+   🌸 Sakura Components — 在 /sakura/ 路由下给旧组件换壳
+   只在 SakuraLayout 内加载，不影响旧版网站。
+   ========================================================================= */
+
+/* ===== 毛玻璃卡片 → 贴纸卡 ===== */
+.glass-card,
+.glass-panel {
+  background: var(--bg-3) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 2px solid var(--ink) !important;
+  border-radius: 14px !important;
+  box-shadow: 4px 4px 0 var(--ink) !important;
+}
+
+.glass-card--sm {
+  padding: 18px !important;
+}
+
+/* 切角卡片在手账风里无效，改成圆角 */
+.clipped-card,
+.clipped-card-sm,
+.clipped-card-accent {
+  clip-path: none !important;
+  border-radius: 14px !important;
+  border: 2px solid var(--ink) !important;
+  box-shadow: 4px 4px 0 var(--ink) !important;
+}
+
+/* ===== DrugInfoBox ===== */
+.drug-info-box {
+  border: 2px solid var(--ink) !important;
+  border-radius: 14px !important;
+  box-shadow: 4px 4px 0 var(--ink) !important;
+  background: var(--bg-3) !important;
+  padding: 20px !important;
+  margin: 20px 0 !important;
+}
+.drug-info-box__category {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  color: var(--sakura-pink-deep) !important;
+  font-weight: 700 !important;
+}
+.drug-info-box__name {
+  font-family: "Fraunces", "Noto Serif SC", serif !important;
+  color: var(--ink) !important;
+}
+.drug-info-box__generic {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  color: var(--ink-soft) !important;
+}
+.drug-info-box__route {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--butter);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 2px 2px 0 var(--ink);
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: var(--ink) !important;
+}
+
+/* ===== WarningBox / DangerBox ===== */
+.warning-box {
+  border: 2px solid var(--ink) !important;
+  border-radius: 14px !important;
+  box-shadow: 4px 4px 0 var(--ink) !important;
+  background: linear-gradient(135deg, var(--butter), var(--honey)) !important;
+  padding: 18px !important;
+  color: var(--ink) !important;
+  margin: 20px 0 !important;
+}
+.warning-box__title {
+  font-family: "Klee One", "Noto Serif SC", serif !important;
+  font-weight: 700 !important;
+  color: var(--ink) !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px !important;
+}
+.warning-box__content {
+  color: var(--ink) !important;
+}
+.warning-box__content p {
+  color: var(--ink) !important;
+}
+
+.danger-box {
+  border: 2px solid var(--ink) !important;
+  border-radius: 14px !important;
+  box-shadow: 4px 4px 0 var(--ink) !important;
+  background: linear-gradient(135deg, var(--sakura-pink-hot), var(--coral)) !important;
+  padding: 18px !important;
+  color: #fff !important;
+  margin: 20px 0 !important;
+}
+.danger-box__title {
+  font-family: "Klee One", "Noto Serif SC", serif !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  text-shadow: 1px 1px 0 var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px !important;
+}
+.danger-box__content,
+.danger-box__content p {
+  color: #fff !important;
+}
+
+/* ===== EvidenceBadge ===== */
+.evidence-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  height: auto !important;
+  padding: 3px 10px !important;
+  border: 2px solid var(--ink) !important;
+  border-radius: 999px !important;
+  box-shadow: 2px 2px 0 var(--ink) !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em;
+  color: var(--ink) !important;
+}
+.evidence-badge--A { background: var(--mint) !important; }
+.evidence-badge--B { background: var(--sky) !important; }
+.evidence-badge--C { background: var(--butter) !important; }
+.evidence-badge--X { background: var(--sakura-blush) !important; }
+
+/* ===== CitationRef ===== */
+.citation-ref,
+a.citation-ref {
+  background: var(--sakura-blush) !important;
+  color: var(--sakura-pink-deep) !important;
+  border: 1px solid var(--ink) !important;
+  border-radius: 4px !important;
+  padding: 1px 6px !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 0.75em !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  box-shadow: 1px 1px 0 var(--ink);
+  background-image: none !important;
+  vertical-align: super;
+  line-height: 1;
+}
+
+/* ===== DoseTable ===== */
+.dose-table-wrapper {
+  margin: 24px 0 !important;
+}
+.dose-table {
+  width: 100%;
+  border: 2px solid var(--ink) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: 3px 3px 0 var(--ink) !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: var(--ivory) !important;
+}
+.dose-table thead {
+  background: var(--sakura-pink) !important;
+}
+.dose-table thead th {
+  color: #fff !important;
+  font-family: "Klee One", serif !important;
+  border: none !important;
+  padding: 10px 14px !important;
+  text-shadow: 1px 1px 0 var(--ink);
+}
+.dose-table tbody tr:nth-child(even) { background: var(--bg-4) !important; }
+.dose-table tbody tr:nth-child(odd)  { background: var(--ivory) !important; }
+.dose-table tbody td {
+  padding: 10px 14px !important;
+  border-top: 1px solid rgba(74, 40, 56, 0.15) !important;
+  border-right: none !important;
+  border-left: none !important;
+  border-bottom: none !important;
+  color: var(--ink) !important;
+}
+.dose-table .dose-value {
+  font-family: "JetBrains Mono", monospace !important;
+  color: var(--sakura-pink-deep) !important;
+  font-weight: 700;
+}
+
+/* ===== EmergencyActions / CrisisHotline / RealityCheck 等通用卡 ===== */
+.emergency-actions,
+.crisis-hotline,
+.reality-check,
+.risk-card,
+.phase-block,
+.contraindication-box,
+.baseline-checklist,
+.decision-branch,
+.decision-node,
+.blood-test-range,
+.hospital-card,
+.drug-brand-gallery {
+  border: 2px solid var(--ink) !important;
+  border-radius: 14px !important;
+  box-shadow: 4px 4px 0 var(--ink) !important;
+  background: var(--bg-3) !important;
+  padding: 18px !important;
+  margin: 20px 0 !important;
+}
+
+.phase-block {
+  background: linear-gradient(135deg, var(--sakura-blush), var(--cream)) !important;
+}
+
+.contraindication-box {
+  background: var(--sakura-blush) !important;
+  color: var(--ink) !important;
+}
+
+.reality-check {
+  background: var(--butter) !important;
+  color: var(--ink) !important;
+}
+
+.crisis-hotline {
+  background: linear-gradient(135deg, var(--sakura-pink), var(--coral)) !important;
+  color: #fff !important;
+}
+.crisis-hotline a,
+.crisis-hotline h3,
+.crisis-hotline h4 {
+  color: #fff !important;
+}
+
+/* ===== RelatedDocs / RelatedBlogPosts ===== */
+.related-docs,
+.related-blog-posts {
+  border: 2px dashed var(--ink) !important;
+  border-radius: 14px !important;
+  background: var(--bg-4) !important;
+  padding: 18px !important;
+  box-shadow: none !important;
+  margin: 24px 0 !important;
+}
+
+/* ===== GuideCTA ===== */
+.guide-cta {
+  border: 2px solid var(--ink) !important;
+  border-radius: 14px !important;
+  background: linear-gradient(135deg, var(--sakura-pink), var(--coral)) !important;
+  box-shadow: 4px 4px 0 var(--ink) !important;
+  color: #fff !important;
+  padding: 20px !important;
+  margin: 24px 0 !important;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.guide-cta:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink) !important;
+}
+.guide-cta * {
+  color: #fff !important;
+}
+
+/* ===== PKCurveChart / RouteComparisonSVG 等 SVG 组件 ===== */
+.pk-curve-chart,
+.route-comparison-svg,
+.injection-site-svg {
+  border: 2px solid var(--ink) !important;
+  border-radius: 14px !important;
+  box-shadow: 3px 3px 0 var(--ink) !important;
+  background: var(--ivory) !important;
+  padding: 16px !important;
+}
+
+/* ===== InlineValue 行内数据 ===== */
+.inline-value {
+  background: var(--butter) !important;
+  color: var(--ink) !important;
+  border: 1.5px solid var(--ink) !important;
+  border-radius: 6px !important;
+  padding: 1px 6px !important;
+  font-family: "JetBrains Mono", monospace !important;
+  font-weight: 700;
+  box-shadow: 1px 1px 0 var(--ink);
+  background-image: none !important;
+}
+
+/* ===== 确保 reduced-motion 下所有过渡被关闭 ===== */
+@media (prefers-reduced-motion: reduce) {
+  .guide-cta {
+    transition: none !important;
+  }
+}

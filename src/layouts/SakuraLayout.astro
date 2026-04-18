@@ -11,6 +11,16 @@ import EmergencyBanner from '../components/sakura/EmergencyBanner.astro';
 import SplashNav from '../components/sakura/SplashNav.astro';
 import SiteFooter from '../components/sakura/SiteFooter.astro';
 
+// —— 载入组件基础 CSS（让 MDX 里的 WarningBox/DangerBox/DoseTable 等仍然有布局） ——
+// 这些 CSS 文件在旧版由 Starlight 自动注入，新版路由不走 Starlight 所以要显式 import
+import '../styles/emergency.css';
+import '../styles/glass.css';
+import '../styles/pathway.css';
+// —— sakura 主题变量（覆盖 --color-* / --glass-bg 等，MDX 组件里 var() 会自动采用） ——
+import '../styles/sakura-theme.css';
+// —— sakura 组件皮肤（把 .warning-box / .danger-box / .dose-table 换成贴纸卡） ——
+import '../styles/sakura-components.css';
+
 interface Props {
   title: string;
   description?: string;
@@ -22,7 +32,7 @@ const siteTitle = `${title} | HRT药典 · Yakuten`;
 ---
 
 <!doctype html>
-<html lang={locale === 'zh' ? 'zh-CN' : locale}>
+<html lang={locale === 'zh' ? 'zh-CN' : locale} class="sakura">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
