@@ -1,15 +1,10 @@
 ---
 /**
- * ThemeToggle — 左下角浮动按钮，跳转到新版设计预览
+ * ThemeToggle — 同页切换 html.sakura class
  *
- * 策略：物理隔离而非 CSS 换肤
- * - 点击按钮 → 跳转到 /sakura-preview.html（Claude Design 原版）
- * - 原网站一行代码都不动
- * - 新版页面有「返回」按钮跳回 /zh/
- *
- * 旧的 html.sakura class 机制保留，但这里不用了；
- * sakura-theme.css / sakura-skin.css 里的规则由于选择器不匹配，
- * 不会产生任何视觉影响。
+ * 不跳转路由。点击 = 当前页用 sakura 视觉重绘。
+ * Starlight 的侧栏/搜索/TOC/面包屑/分页全部保留。
+ * 偏好存 localStorage，跨页保持。
  */
 ---
 
@@ -25,77 +20,98 @@
     padding: 8px 14px;
     font-family: var(--font-body, system-ui, sans-serif);
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--sl-color-text, #e6e0ee);
-    background: rgba(26, 22, 37, 0.6);
+    background: rgba(26, 22, 37, 0.7);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(200, 175, 190, 0.25);
+    border: 1px solid rgba(200, 175, 190, 0.3);
     border-radius: 999px;
     cursor: pointer;
-    text-decoration: none;
     transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.2s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
-
   #sakura-toggle:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-    background: rgba(229, 87, 139, 0.2);
+    background: rgba(229, 87, 139, 0.22);
   }
-
-  #sakura-toggle:active {
-    transform: translateY(0);
-  }
+  #sakura-toggle:active { transform: translateY(0); }
 
   #sakura-toggle .sakura-toggle__icon {
     font-size: 14px;
     line-height: 1;
     transition: transform 0.3s ease;
   }
-
   #sakura-toggle:hover .sakura-toggle__icon {
     transform: rotate(20deg) scale(1.1);
   }
 
-  @media (max-width: 640px) {
-    #sakura-toggle {
-      bottom: 16px;
-      left: 16px;
-      padding: 6px 12px;
-      font-size: 12px;
-    }
+  /* 当 sakura 已开启：按钮变糖果胶囊 */
+  html.sakura #sakura-toggle {
+    background: #FFFAF0;
+    color: #4A2838;
+    border: 2px solid #4A2838;
+    box-shadow: 3px 3px 0 #4A2838;
+  }
+  html.sakura #sakura-toggle:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 #4A2838;
+    background: #FFE4EC;
+  }
+  html.sakura #sakura-toggle .sakura-toggle__label::after {
+    content: " ✓";
+    color: #E5578B;
+    font-weight: 700;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    #sakura-toggle,
-    #sakura-toggle .sakura-toggle__icon {
-      transition: none;
+  @media (max-width: 640px) {
+    #sakura-toggle {
+      bottom: 16px; left: 16px;
+      padding: 6px 12px; font-size: 12px;
     }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #sakura-toggle, #sakura-toggle .sakura-toggle__icon { transition: none; }
   }
 </style>
 
 <script is:inline>
   (function () {
+    var KEY = "sakura-theme";
+    var root = document.documentElement;
+
+    // 进入页面立刻应用偏好（避免闪烁）
+    try {
+      if (localStorage.getItem(KEY) === "on") {
+        root.classList.add("sakura");
+      }
+    } catch (e) {}
+
     function mount() {
       if (document.getElementById("sakura-toggle")) return;
-      var link = document.createElement("a");
-      link.id = "sakura-toggle";
-      // 根据当前 locale 跳转到对应的新版
-      var loc = (location.pathname.match(/^\/(zh|en|ja|ko)(\/|$)/) || [, "zh"])[1];
-      link.href = "/sakura/" + loc + "/";
-      link.setAttribute("aria-label", "切换到新版（测试中）");
-      link.setAttribute("title", "切换到新版（Claude Design 视觉 · 同步正式文案）");
-      link.innerHTML =
+      var btn = document.createElement("button");
+      btn.id = "sakura-toggle";
+      btn.type = "button";
+      btn.setAttribute("aria-label", "切换新版樱粉设计");
+      btn.setAttribute("title", "切换新版樱粉设计（保留侧栏/搜索/TOC 等全部功能）");
+      btn.innerHTML =
         '<span class="sakura-toggle__icon" aria-hidden="true">\uD83C\uDF38</span>' +
         '<span class="sakura-toggle__label">新版</span>';
-      document.body.appendChild(link);
+      btn.addEventListener("click", function () {
+        var on = root.classList.contains("sakura");
+        if (on) {
+          root.classList.remove("sakura");
+          try { localStorage.setItem(KEY, "off"); } catch (e) {}
+        } else {
+          root.classList.add("sakura");
+          try { localStorage.setItem(KEY, "on"); } catch (e) {}
+        }
+      });
+      document.body.appendChild(btn);
     }
 
-    if (document.body) {
-      mount();
-    } else {
-      document.addEventListener("DOMContentLoaded", mount);
-    }
+    if (document.body) mount();
+    else document.addEventListener("DOMContentLoaded", mount);
   })();
 </script>

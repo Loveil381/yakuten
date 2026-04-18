@@ -27,9 +27,10 @@ export default defineConfig({
         './src/styles/emergency.css',
         './src/styles/pathway.css',
         './src/styles/starlight-override.css',
-        // sakura-theme.css / sakura-skin.css intentionally NOT loaded:
-        // the new-version preview is physically isolated at /sakura-preview.html
-        // so the docs site stays byte-for-byte identical to before.
+        // 新版皮肤（只在 <html class="sakura"> 时激活，不影响默认外观）
+        './src/styles/sakura-theme.css',
+        './src/styles/sakura-components.css',
+        './src/styles/sakura-skin.css',
       ],
       sidebar: [
         // ── 开始 ──

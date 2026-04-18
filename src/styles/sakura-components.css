@@ -4,8 +4,8 @@
    ========================================================================= */
 
 /* ===== 毛玻璃卡片 → 贴纸卡 ===== */
-.glass-card,
-.glass-panel {
+html.sakura .glass-card ,
+html.sakura .glass-panel {
   background: var(--bg-3) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -14,14 +14,14 @@
   box-shadow: 4px 4px 0 var(--ink) !important;
 }
 
-.glass-card--sm {
+html.sakura .glass-card--sm {
   padding: 18px !important;
 }
 
 /* 切角卡片在手账风里无效，改成圆角 */
-.clipped-card,
-.clipped-card-sm,
-.clipped-card-accent {
+html.sakura .clipped-card ,
+html.sakura .clipped-card-sm ,
+html.sakura .clipped-card-accent {
   clip-path: none !important;
   border-radius: 14px !important;
   border: 2px solid var(--ink) !important;
@@ -29,7 +29,7 @@
 }
 
 /* ===== DrugInfoBox ===== */
-.drug-info-box {
+html.sakura .drug-info-box {
   border: 2px solid var(--ink) !important;
   border-radius: 14px !important;
   box-shadow: 4px 4px 0 var(--ink) !important;
@@ -37,20 +37,20 @@
   padding: 20px !important;
   margin: 20px 0 !important;
 }
-.drug-info-box__category {
+html.sakura .drug-info-box__category {
   font-family: "Plus Jakarta Sans", sans-serif !important;
   color: var(--sakura-pink-deep) !important;
   font-weight: 700 !important;
 }
-.drug-info-box__name {
+html.sakura .drug-info-box__name {
   font-family: "Fraunces", "Noto Serif SC", serif !important;
   color: var(--ink) !important;
 }
-.drug-info-box__generic {
+html.sakura .drug-info-box__generic {
   font-family: "Plus Jakarta Sans", sans-serif !important;
   color: var(--ink-soft) !important;
 }
-.drug-info-box__route {
+html.sakura .drug-info-box__route {
   display: inline-block;
   padding: 3px 10px;
   background: var(--butter);
@@ -64,7 +64,7 @@
 }
 
 /* ===== WarningBox / DangerBox ===== */
-.warning-box {
+html.sakura .warning-box {
   border: 2px solid var(--ink) !important;
   border-radius: 14px !important;
   box-shadow: 4px 4px 0 var(--ink) !important;
@@ -73,7 +73,7 @@
   color: var(--ink) !important;
   margin: 20px 0 !important;
 }
-.warning-box__title {
+html.sakura .warning-box__title {
   font-family: "Klee One", "Noto Serif SC", serif !important;
   font-weight: 700 !important;
   color: var(--ink) !important;
@@ -82,14 +82,14 @@
   gap: 8px;
   margin-bottom: 8px !important;
 }
-.warning-box__content {
+html.sakura .warning-box__content {
   color: var(--ink) !important;
 }
-.warning-box__content p {
+html.sakura .warning-box__content p {
   color: var(--ink) !important;
 }
 
-.danger-box {
+html.sakura .danger-box {
   border: 2px solid var(--ink) !important;
   border-radius: 14px !important;
   box-shadow: 4px 4px 0 var(--ink) !important;
@@ -98,7 +98,7 @@
   color: #fff !important;
   margin: 20px 0 !important;
 }
-.danger-box__title {
+html.sakura .danger-box__title {
   font-family: "Klee One", "Noto Serif SC", serif !important;
   font-weight: 700 !important;
   color: #fff !important;
@@ -108,13 +108,13 @@
   gap: 8px;
   margin-bottom: 8px !important;
 }
-.danger-box__content,
-.danger-box__content p {
+html.sakura .danger-box__content ,
+html.sakura .danger-box__content p {
   color: #fff !important;
 }
 
 /* ===== EvidenceBadge ===== */
-.evidence-badge {
+html.sakura .evidence-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -130,14 +130,14 @@
   letter-spacing: 0.05em;
   color: var(--ink) !important;
 }
-.evidence-badge--A { background: var(--mint) !important; }
-.evidence-badge--B { background: var(--sky) !important; }
-.evidence-badge--C { background: var(--butter) !important; }
-.evidence-badge--X { background: var(--sakura-blush) !important; }
+html.sakura .evidence-badge--A { background: var(--mint) !important; }
+html.sakura .evidence-badge--B { background: var(--sky) !important; }
+html.sakura .evidence-badge--C { background: var(--butter) !important; }
+html.sakura .evidence-badge--X { background: var(--sakura-blush) !important; }
 
 /* ===== CitationRef ===== */
-.citation-ref,
-a.citation-ref {
+html.sakura .citation-ref ,
+html.sakura a.citation-ref {
   background: var(--sakura-blush) !important;
   color: var(--sakura-pink-deep) !important;
   border: 1px solid var(--ink) !important;
@@ -154,10 +154,10 @@ a.citation-ref {
 }
 
 /* ===== DoseTable ===== */
-.dose-table-wrapper {
+html.sakura .dose-table-wrapper {
   margin: 24px 0 !important;
 }
-.dose-table {
+html.sakura .dose-table {
   width: 100%;
   border: 2px solid var(--ink) !important;
   border-radius: 12px !important;
@@ -167,19 +167,19 @@ a.citation-ref {
   border-spacing: 0 !important;
   background: var(--ivory) !important;
 }
-.dose-table thead {
+html.sakura .dose-table thead {
   background: var(--sakura-pink) !important;
 }
-.dose-table thead th {
+html.sakura .dose-table thead th {
   color: #fff !important;
   font-family: "Klee One", serif !important;
   border: none !important;
   padding: 10px 14px !important;
   text-shadow: 1px 1px 0 var(--ink);
 }
-.dose-table tbody tr:nth-child(even) { background: var(--bg-4) !important; }
-.dose-table tbody tr:nth-child(odd)  { background: var(--ivory) !important; }
-.dose-table tbody td {
+html.sakura .dose-table tbody tr:nth-child(even) { background: var(--bg-4) !important; }
+html.sakura .dose-table tbody tr:nth-child(odd)  { background: var(--ivory) !important; }
+html.sakura .dose-table tbody td {
   padding: 10px 14px !important;
   border-top: 1px solid rgba(74, 40, 56, 0.15) !important;
   border-right: none !important;
@@ -187,25 +187,25 @@ a.citation-ref {
   border-bottom: none !important;
   color: var(--ink) !important;
 }
-.dose-table .dose-value {
+html.sakura .dose-table .dose-value {
   font-family: "JetBrains Mono", monospace !important;
   color: var(--sakura-pink-deep) !important;
   font-weight: 700;
 }
 
 /* ===== EmergencyActions / CrisisHotline / RealityCheck 等通用卡 ===== */
-.emergency-actions,
-.crisis-hotline,
-.reality-check,
-.risk-card,
-.phase-block,
-.contraindication-box,
-.baseline-checklist,
-.decision-branch,
-.decision-node,
-.blood-test-range,
-.hospital-card,
-.drug-brand-gallery {
+html.sakura .emergency-actions ,
+html.sakura .crisis-hotline ,
+html.sakura .reality-check ,
+html.sakura .risk-card ,
+html.sakura .phase-block ,
+html.sakura .contraindication-box ,
+html.sakura .baseline-checklist ,
+html.sakura .decision-branch ,
+html.sakura .decision-node ,
+html.sakura .blood-test-range ,
+html.sakura .hospital-card ,
+html.sakura .drug-brand-gallery {
   border: 2px solid var(--ink) !important;
   border-radius: 14px !important;
   box-shadow: 4px 4px 0 var(--ink) !important;
@@ -214,33 +214,33 @@ a.citation-ref {
   margin: 20px 0 !important;
 }
 
-.phase-block {
+html.sakura .phase-block {
   background: linear-gradient(135deg, var(--sakura-blush), var(--cream)) !important;
 }
 
-.contraindication-box {
+html.sakura .contraindication-box {
   background: var(--sakura-blush) !important;
   color: var(--ink) !important;
 }
 
-.reality-check {
+html.sakura .reality-check {
   background: var(--butter) !important;
   color: var(--ink) !important;
 }
 
-.crisis-hotline {
+html.sakura .crisis-hotline {
   background: linear-gradient(135deg, var(--sakura-pink), var(--coral)) !important;
   color: #fff !important;
 }
-.crisis-hotline a,
-.crisis-hotline h3,
-.crisis-hotline h4 {
+html.sakura .crisis-hotline a ,
+html.sakura .crisis-hotline h3 ,
+html.sakura .crisis-hotline h4 {
   color: #fff !important;
 }
 
 /* ===== RelatedDocs / RelatedBlogPosts ===== */
-.related-docs,
-.related-blog-posts {
+html.sakura .related-docs ,
+html.sakura .related-blog-posts {
   border: 2px dashed var(--ink) !important;
   border-radius: 14px !important;
   background: var(--bg-4) !important;
@@ -250,7 +250,7 @@ a.citation-ref {
 }
 
 /* ===== GuideCTA ===== */
-.guide-cta {
+html.sakura .guide-cta {
   border: 2px solid var(--ink) !important;
   border-radius: 14px !important;
   background: linear-gradient(135deg, var(--sakura-pink), var(--coral)) !important;
@@ -260,18 +260,18 @@ a.citation-ref {
   margin: 24px 0 !important;
   transition: transform 0.15s, box-shadow 0.15s;
 }
-.guide-cta:hover {
+html.sakura .guide-cta:hover {
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0 var(--ink) !important;
 }
-.guide-cta * {
+html.sakura .guide-cta * {
   color: #fff !important;
 }
 
 /* ===== PKCurveChart / RouteComparisonSVG 等 SVG 组件 ===== */
-.pk-curve-chart,
-.route-comparison-svg,
-.injection-site-svg {
+html.sakura .pk-curve-chart ,
+html.sakura .route-comparison-svg ,
+html.sakura .injection-site-svg {
   border: 2px solid var(--ink) !important;
   border-radius: 14px !important;
   box-shadow: 3px 3px 0 var(--ink) !important;
@@ -280,7 +280,7 @@ a.citation-ref {
 }
 
 /* ===== InlineValue 行内数据 ===== */
-.inline-value {
+html.sakura .inline-value {
   background: var(--butter) !important;
   color: var(--ink) !important;
   border: 1.5px solid var(--ink) !important;
@@ -294,7 +294,7 @@ a.citation-ref {
 
 /* ===== 确保 reduced-motion 下所有过渡被关闭 ===== */
 @media (prefers-reduced-motion: reduce) {
-  .guide-cta {
+  html.sakura .guide-cta {
     transition: none !important;
   }
 }
