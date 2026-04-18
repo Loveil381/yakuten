@@ -66,6 +66,29 @@ const siteTitle = `${title} | HRT药典 · Yakuten`;
       <span>返回正式站</span>
       <span class="back-badge">预览中</span>
     </a>
+
+    <!-- 让旧版组件生成的 /{locale}/... 链接自动跳到 /sakura/{locale}/... -->
+    <script is:inline>
+      (function () {
+        var locales = ['zh', 'en', 'ja', 'ko'];
+        document.querySelectorAll('a[href]').forEach(function (a) {
+          var href = a.getAttribute('href');
+          if (!href || !href.startsWith('/')) return;
+          // 已经在 /sakura/ 下或外链 -> 跳过
+          if (href.startsWith('/sakura/')) return;
+          // 返回按钮 -> 跳过
+          if (a.id === 'sakura-back-btn') return;
+          for (var i = 0; i < locales.length; i++) {
+            var prefix = '/' + locales[i] + '/';
+            var bare = '/' + locales[i];
+            if (href === bare || href === prefix || href.startsWith(prefix)) {
+              a.setAttribute('href', '/sakura' + href);
+              return;
+            }
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
 
