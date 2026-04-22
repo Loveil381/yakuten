@@ -1,0 +1,25 @@
+/* TEAM */
+项目:       HRT药典 (HRT Yakuten)
+网址:       https://hrtyaku.com
+使命:       循证 · 减害 · 引导就医 — 面向中文圈跨性别女性的 HRT 安全底线信息站
+联系:       https://wj.qq.com/s2/16576000/5fe5/
+
+/* EDITORIAL */
+编辑立场:   不提供处方、不推销药物、不存储用户健康数据
+证据分级:   A (RCT/Meta) · B (单项RCT/队列) · C (病例/专家) · X (无证据)
+复查周期:   每篇 ≤ 12 个月滚动复查,危险信号页 ≤ 6 个月
+引用标准:   所有医学声明须附 DOI 或国际指南编号 (WPATH SOC 8 / Endocrine Society 2017 / UCSF)
+
+/* THANKS */
+开放数据:   WPATH, Endocrine Society, UCSF Center of Excellence for Transgender Health
+参考实现:   Transfemscience.org, Wikipedia 中文版跨性别条目
+
+/* SITE */
+语言:       简体中文 (主) · English · 日本語 · 한국어
+技术栈:     Astro + Starlight · React Islands · Pagefind · Vercel Edge
+无障碍:     WCAG 2.1 AA
+隐私:       无第三方跟踪 · 血检工具纯前端 · AI 问答不存档
+仓库:       https://github.com/cantascendia/yakuten
+许可:       见 LICENSE
+
+Last updated: 2026-04-19

@@ -13,6 +13,25 @@ import ThemeToggle from '../ThemeToggle.astro';
 const pathname = Astro.url.pathname;
 const site = 'https://hrtyaku.com';
 
+// Per-page authority signals for E-E-A-T (crawler-readable meta)
+const route = Astro.locals.starlightRoute;
+const entryData: Record<string, unknown> = (route?.entry?.data as Record<string, unknown>) ?? {};
+const pageLastReviewed = entryData.lastReviewed
+  ? new Date(entryData.lastReviewed as string | Date).toISOString()
+  : null;
+const pageEvidenceLevel = (entryData.evidenceLevel as string) ?? null;
+const pageRefCount = Array.isArray(entryData.references) ? (entryData.references as string[]).length : 0;
+const pageMedicalReviewer = (entryData.medicalReviewer as string) ?? 'HRT药典 Editorial Team';
+
+// Per-page OG image URL (generated postbuild into dist/og/<locale>/<path>.png).
+// Strip leading/trailing slash, drop locale segment if present (we want parts after /{locale}/).
+const ogPathParts = pathname.replace(/^\//, '').replace(/\/$/, '').split('/');
+const ogPageUrl = ogPathParts.length > 0
+  ? `${site}/og/${ogPathParts.join('/')}.png`
+  : `${site}/og-image.svg`;
+// Fallback to global SVG if page isn't a content page (e.g., tool routes).
+const perPageOgImage = ogPageUrl;
+
 // Build hreflang alternates from current pathname
 // Pattern: /{locale}/rest/of/path/ → extract locale, build alternates
 const localeMap = [
@@ -53,6 +72,27 @@ const alternateOgLocales = Object.values(ogLocaleMap).filter((l) => l !== curren
 {alternateOgLocales.map((loc) => (
   <meta property="og:locale:alternate" content={loc} />
 ))}
+{pageLastReviewed && (
+  <>
+    <meta property="article:modified_time" content={pageLastReviewed} />
+    <meta property="og:updated_time" content={pageLastReviewed} />
+    <meta name="last-reviewed" content={pageLastReviewed.split('T')[0]} />
+  </>
+)}
+{pageEvidenceLevel && <meta name="evidence-level" content={pageEvidenceLevel} />}
+{pageRefCount > 0 && <meta name="citation-count" content={String(pageRefCount)} />}
+<meta name="medical-reviewer" content={pageMedicalReviewer} />
+{/* Per-page OG image override (falls back to global og-image.svg set in astro.config.mjs). */}
+{pageLastReviewed && (
+  <>
+    <meta property="og:image" content={perPageOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta name="twitter:image" content={perPageOgImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </>
+)}
 <ThemeToggle />
 <script is:inline>
   // Dev-mode opt-out for Vercel Analytics & Speed Insights.

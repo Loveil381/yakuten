@@ -1,0 +1,36 @@
+[
+  { "term": "色谱龙", "category": "drug-brand", "target": "/zh/medications/antiandrogens/cpa/" },
+  { "term": "色普龙", "category": "drug-brand-variant", "target": "/zh/medications/antiandrogens/cpa/" },
+  { "term": "醋酸环丙孕酮", "category": "drug-chemical", "target": "/zh/medications/antiandrogens/cpa/" },
+  { "term": "螺内酯", "category": "drug-generic", "target": "/zh/medications/antiandrogens/spironolactone/" },
+  { "term": "安体舒通", "category": "drug-brand", "target": "/zh/medications/antiandrogens/spironolactone/" },
+  { "term": "补佳乐", "category": "drug-brand", "target": "/zh/medications/estrogens/oral/" },
+  { "term": "戊酸雌二醇", "category": "drug-generic", "target": "/zh/medications/estrogens/injection/" },
+  { "term": "爱斯妥", "category": "drug-brand", "target": "/zh/medications/estrogens/gel/" },
+  { "term": "地屈孕酮", "category": "drug-generic", "target": "/zh/medications/progestogens/dydrogesterone/" },
+  { "term": "黄体酮", "category": "drug-generic", "target": "/zh/medications/progestogens/progesterone/" },
+  { "term": "屈螺酮", "category": "drug-generic", "target": "/zh/medications/progestogens/drospirenone/" },
+  { "term": "比卡鲁胺", "category": "drug-generic", "target": "/zh/medications/antiandrogens/bicalutamide/" },
+
+  { "term": "MTF HRT", "category": "protocol", "target": "/zh/before-you-start/" },
+  { "term": "跨性别激素", "category": "protocol", "target": "/zh/before-you-start/" },
+  { "term": "跨性别 HRT", "category": "protocol", "target": "/zh/before-you-start/" },
+  { "term": "DIY HRT", "category": "protocol-sensitive", "target": "/zh/china-reality/" },
+  { "term": "HRT 血检", "category": "monitoring", "target": "/zh/blood-tests/" },
+  { "term": "HRT 风险", "category": "safety", "target": "/zh/risks/" },
+  { "term": "HRT 剂量", "category": "monitoring", "target": "/zh/dose-limits/" },
+  { "term": "HRT 乳房发育", "category": "outcomes", "target": "/zh/breast-development/" },
+
+  { "term": "CPA 脑膜瘤", "category": "safety-longtail", "target": "/zh/medications/antiandrogens/cpa/" },
+  { "term": "螺内酯 高钾", "category": "safety-longtail", "target": "/zh/medications/antiandrogens/spironolactone/" },
+  { "term": "雌二醇 血栓", "category": "safety-longtail", "target": "/zh/risks/" },
+  { "term": "跨性别 友好医院", "category": "access", "target": "/zh/tools/hospital-finder/" },
+
+  { "term": "プロギノンデポー", "category": "drug-brand-ja", "target": "/ja/medications/estrogens/injection/" },
+  { "term": "エストラジオール 個人輸入", "category": "access-ja", "target": "/ja/china-reality/" },
+  { "term": "MTF 血液検査", "category": "monitoring-ja", "target": "/ja/blood-tests/" },
+
+  { "term": "estradiol half life", "category": "pharm-en", "target": "/en/medications/estrogens/oral/" },
+  { "term": "cyproterone acetate dose", "category": "drug-en", "target": "/en/medications/antiandrogens/cpa/" },
+  { "term": "spironolactone transgender", "category": "drug-en", "target": "/en/medications/antiandrogens/spironolactone/" }
+]

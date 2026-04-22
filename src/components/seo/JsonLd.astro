@@ -1,8 +1,28 @@
 ---
 /**
- * JSON-LD Structured Data for SEO & AEO
- * Injects Organization + WebSite + MedicalWebPage schemas on every page.
- * Adds citation ScholarlyArticle schema when references are present.
+ * JSON-LD Structured Data for SEO & AEO.
+ *
+ * Emits a @graph with:
+ *   - Organization (global)
+ *   - WebSite (global, with SearchAction)
+ *   - BreadcrumbList (every page, derived from pathname)
+ *   - Primary page type, chosen by pathname:
+ *       /medications/...   → Drug + MedicalWebPage
+ *       /guides/...        → MedicalGuideline + MedicalWebPage
+ *       /risks|dose-limits|blood-tests|china-reality|pathway|before-you-start
+ *                           → MedicalWebPage (MedicalCondition about)
+ *       otherwise           → MedicalWebPage
+ *   - FAQPage (if frontmatter.faqs is present)
+ *   - ScholarlyArticle entries for referenced citations (capped)
+ *
+ * Frontmatter hooks used:
+ *   - title, description (standard)
+ *   - evidenceLevel: A|B|C|X   → exposed as evidenceLevel on MedicalWebPage / Drug
+ *   - lastReviewed: Date       → dateModified + lastReviewed
+ *   - references: string[]     → ScholarlyArticle graph nodes + citation refs
+ *   - faqs?: { q: string; a: string }[]  → FAQPage Question/Answer
+ *   - drug?: { activeIngredient, mechanismOfAction, atc?, rxnorm? }
+ *            page-type hints for medication pages
  */
 import refData from '../../data/references.json';
 
@@ -11,15 +31,34 @@ const pageUrl = Astro.url.href;
 const pathname = Astro.url.pathname;
 const locale = route?.lang ?? 'zh-CN';
 
-// Extract page frontmatter
+// Frontmatter extraction
 const entry = route?.entry;
-const title = entry?.data?.title ?? 'HRT药典';
-const description = entry?.data?.description ?? '';
-const evidenceLevel = entry?.data?.evidenceLevel ?? 'X';
-const lastReviewed = entry?.data?.lastReviewed
-  ? new Date(entry.data.lastReviewed).toISOString().split('T')[0]
+const data: Record<string, unknown> = (entry?.data as Record<string, unknown>) ?? {};
+const title = (data.title as string) ?? 'HRT药典';
+const description = (data.description as string) ?? '';
+const evidenceLevel = (data.evidenceLevel as string) ?? 'X';
+const lastReviewed = data.lastReviewed
+  ? new Date(data.lastReviewed as string | Date).toISOString().split('T')[0]
   : '2026-04-12';
-const referenceIds: string[] = entry?.data?.references ?? [];
+const referenceIds: string[] = (data.references as string[]) ?? [];
+const faqs: { q: string; a: string }[] = (data.faqs as { q: string; a: string }[]) ?? [];
+const drug = data.drug as
+  | { activeIngredient?: string; mechanismOfAction?: string; atc?: string; rxnorm?: string; nonProprietaryName?: string }
+  | undefined;
+
+// Build reference citations for ScholarlyArticle schema
+type RefEntry = { id: string; authors: string; year: number; title: string; journal: string; doi: string | null; url: string | null };
+const refs = refData as RefEntry[];
+const citedRefs = referenceIds
+  .map((id) => refs.find((r) => r.id === id))
+  .filter((r): r is RefEntry => r !== undefined)
+  .slice(0, 5);
+
+// Page-type detection from pathname (locale-agnostic)
+const pathSegmentsForType = pathname.replace(/^\/(zh|en|ja|ko)\//, '').replace(/\/$/, '').split('/');
+const isDrugPage = pathSegmentsForType[0] === 'medications' && pathSegmentsForType.length >= 2;
+const isGuidePage = pathSegmentsForType[0] === 'guides';
+const isSafetyPage = ['risks', 'dose-limits', 'blood-tests', 'china-reality', 'pathway', 'before-you-start'].includes(pathSegmentsForType[0]);
 
 // ─── Breadcrumb label maps (per locale) ──────────────────────────────
 // Intermediate path segments get localized names; the leaf uses entry.data.title.
@@ -34,6 +73,22 @@ const segmentLabelsMap: Record<string, SegLabels> = {
     tools: '工具',
     guides: '实操指南',
     blog: '专题文章',
+    risks: '风险与急症',
+    'dose-limits': '剂量红线',
+    'blood-tests': '血检指南',
+    'breast-development': '乳房发育',
+    'china-reality': '中国路径',
+    pathway: '用药路径',
+    'before-you-start': '用药前准备',
+    about: '关于',
+    methodology: '方法学',
+    'medical-advisors': '医学顾问',
+    'editorial-policy': '编辑政策',
+    faq: 'FAQ',
+    compare: '对比',
+    'cpa-vs-spironolactone': 'CPA vs 螺内酯',
+    'oral-vs-injection': '口服 vs 注射',
+    'gel-vs-patch': '凝胶 vs 贴片',
   },
   en: {
     medications: 'Medications',
@@ -44,6 +99,22 @@ const segmentLabelsMap: Record<string, SegLabels> = {
     tools: 'Tools',
     guides: 'Guides',
     blog: 'Blog',
+    risks: 'Risks',
+    'dose-limits': 'Dose Limits',
+    'blood-tests': 'Blood Tests',
+    'breast-development': 'Breast Development',
+    'china-reality': 'China Reality',
+    pathway: 'Pathway',
+    'before-you-start': 'Before You Start',
+    about: 'About',
+    methodology: 'Methodology',
+    'medical-advisors': 'Medical Advisors',
+    'editorial-policy': 'Editorial Policy',
+    faq: 'FAQ',
+    compare: 'Compare',
+    'cpa-vs-spironolactone': 'CPA vs Spironolactone',
+    'oral-vs-injection': 'Oral vs Injection',
+    'gel-vs-patch': 'Gel vs Patch',
   },
   ja: {
     medications: '薬物ガイド',
@@ -54,6 +125,12 @@ const segmentLabelsMap: Record<string, SegLabels> = {
     tools: 'ツール',
     guides: 'ガイド',
     blog: 'ブログ',
+    risks: 'リスク',
+    'dose-limits': '用量限界',
+    'blood-tests': '血液検査',
+    'breast-development': '乳房発達',
+    pathway: '治療経路',
+    'before-you-start': '開始前に',
   },
   ko: {
     medications: '약물',
@@ -64,6 +141,12 @@ const segmentLabelsMap: Record<string, SegLabels> = {
     tools: '도구',
     guides: '가이드',
     blog: '블로그',
+    risks: '위험',
+    'dose-limits': '용량 한계',
+    'blood-tests': '혈액 검사',
+    'breast-development': '유방 발달',
+    pathway: '치료 경로',
+    'before-you-start': '시작하기 전에',
   },
 };
 const homeLabelsMap: Record<string, string> = {
@@ -86,7 +169,7 @@ const localePrefix = pathSegments[0] ?? 'zh';
 const contentSegments = pathSegments.slice(1);
 
 type BreadcrumbItem = { name: string; url: string };
-const breadcrumbs: BreadcrumbItem[] = [
+const breadcrumbItems: BreadcrumbItem[] = [
   { name: homeLabel, url: `https://hrtyaku.com/${localePrefix}/` },
 ];
 let accumulatedPath = `/${localePrefix}`;
@@ -96,117 +179,156 @@ contentSegments.forEach((seg, idx) => {
   const name = isLeaf
     ? title
     : (segLabels[seg] ?? seg.charAt(0).toUpperCase() + seg.slice(1));
-  breadcrumbs.push({
+  breadcrumbItems.push({
     name,
     url: `https://hrtyaku.com${accumulatedPath}/`,
   });
 });
 
-// Build reference citations for ScholarlyArticle schema
-type RefEntry = { id: string; authors: string; year: number; title: string; journal: string; doi: string | null; url: string | null };
-const refs = refData as RefEntry[];
-const citedRefs = referenceIds
-  .map((id: string) => refs.find((r: RefEntry) => r.id === id))
-  .filter((r): r is RefEntry => r !== undefined)
-  .slice(0, 5); // Limit to 5 for schema size
-
-// Build the @graph array
+// Graph assembly
 const graph: Record<string, unknown>[] = [
-  // 1. Organization (global)
   {
-    "@type": "Organization",
-    "@id": "https://hrtyaku.com/#organization",
-    "name": "HRT药典",
-    "alternateName": "HRT Yakuten",
-    "url": "https://hrtyaku.com",
-    "description": "Evidence-based harm reduction HRT safety information for transgender women.",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://hrtyaku.com/og-image.svg",
-      "width": 1200,
-      "height": 630
+    '@type': 'Organization',
+    '@id': 'https://hrtyaku.com/#organization',
+    name: 'HRT药典',
+    alternateName: 'HRT Yakuten',
+    url: 'https://hrtyaku.com',
+    description: 'Evidence-based harm reduction HRT safety information for transgender women.',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://hrtyaku.com/og-image.svg',
+      width: 1200,
+      height: 630,
     },
-    "sameAs": ["https://github.com/cantascendia/yakuten"]
+    sameAs: ['https://github.com/cantascendia/yakuten'],
   },
-  // 2. WebSite (global)
   {
-    "@type": "WebSite",
-    "@id": "https://hrtyaku.com/#website",
-    "url": "https://hrtyaku.com",
-    "name": "HRT药典",
-    "alternateName": "HRT Yakuten",
-    "description": "循证 · 减害 · 引导就医 — Evidence-based HRT safety baseline for transgender women",
-    "publisher": { "@id": "https://hrtyaku.com/#organization" },
-    "inLanguage": ["zh-CN", "en", "ja"],
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://hrtyaku.com/zh/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
+    '@type': 'WebSite',
+    '@id': 'https://hrtyaku.com/#website',
+    url: 'https://hrtyaku.com',
+    name: 'HRT药典',
+    alternateName: 'HRT Yakuten',
+    description: '循证 · 减害 · 引导就医 — Evidence-based HRT safety baseline for transgender women',
+    publisher: { '@id': 'https://hrtyaku.com/#organization' },
+    inLanguage: ['zh-CN', 'en', 'ja', 'ko'],
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://hrtyaku.com/zh/?q={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
   },
-  // 3. MedicalWebPage (per-page)
   {
-    "@type": "MedicalWebPage",
-    "url": pageUrl,
-    "name": title,
-    "description": description,
-    "inLanguage": locale,
-    "about": {
-      "@type": "MedicalCondition",
-      "name": "Gender Dysphoria",
-      "code": {
-        "@type": "MedicalCode",
-        "code": "F64.0",
-        "codingSystem": "ICD-10"
-      }
-    },
-    "medicalAudience": {
-      "@type": "MedicalAudience",
-      "audienceType": "Patient"
-    },
-    "lastReviewed": lastReviewed,
-    "reviewedBy": {
-      "@type": "Organization",
-      "name": "HRT药典 Editorial Team"
-    },
-    "isPartOf": { "@id": "https://hrtyaku.com/#website" }
-  }
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbItems.map((b, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: b.name,
+      item: b.url,
+    })),
+  },
 ];
 
-// 4. BreadcrumbList (per-page) — only if there's more than just the home
-if (breadcrumbs.length > 1) {
+// Primary page entity (shared base for all MedicalWebPage variants)
+const basePage = {
+  url: pageUrl,
+  name: title,
+  description,
+  inLanguage: locale,
+  lastReviewed,
+  dateModified: lastReviewed,
+  reviewedBy: {
+    '@type': 'Organization',
+    '@id': 'https://hrtyaku.com/#organization',
+    name: 'HRT药典 Editorial Team',
+  },
+  isPartOf: { '@id': 'https://hrtyaku.com/#website' },
+  medicalAudience: { '@type': 'MedicalAudience', audienceType: 'Patient' },
+  about: {
+    '@type': 'MedicalCondition',
+    name: 'Gender Dysphoria',
+    code: { '@type': 'MedicalCode', code: 'F64.0', codingSystem: 'ICD-10' },
+  },
+};
+
+if (isDrugPage) {
+  // Drug node + MedicalWebPage wrapper
+  const drugNode: Record<string, unknown> = {
+    '@type': 'Drug',
+    name: title,
+    description,
+    nonProprietaryName: drug?.nonProprietaryName ?? drug?.activeIngredient ?? title,
+    ...(drug?.activeIngredient ? { activeIngredient: drug.activeIngredient } : {}),
+    ...(drug?.mechanismOfAction ? { mechanismOfAction: drug.mechanismOfAction } : {}),
+    ...(drug?.atc ? { code: { '@type': 'MedicalCode', code: drug.atc, codingSystem: 'ATC' } } : {}),
+    legalStatus: 'PrescriptionOnly',
+    ...(citedRefs.length > 0
+      ? {
+          guideline: citedRefs.map((r) => ({
+            '@type': 'MedicalGuideline',
+            evidenceLevel: `http://schema.org/EvidenceLevel${evidenceLevel}`,
+            evidenceOrigin: r.journal,
+            ...(r.doi ? { url: `https://doi.org/${r.doi}` } : r.url ? { url: r.url } : {}),
+          })),
+        }
+      : {}),
+  };
+  graph.push(drugNode);
   graph.push({
-    "@type": "BreadcrumbList",
-    "itemListElement": breadcrumbs.map((bc, idx) => ({
-      "@type": "ListItem",
-      "position": idx + 1,
-      "name": bc.name,
-      "item": bc.url,
+    '@type': 'MedicalWebPage',
+    ...basePage,
+    mainContentOfPage: { '@type': 'WebPageElement', cssSelector: 'main' },
+    specialty: 'Endocrinology',
+    aspect: 'Treatment',
+  });
+} else if (isGuidePage) {
+  graph.push({
+    '@type': 'MedicalGuideline',
+    name: title,
+    description,
+    evidenceLevel: `http://schema.org/EvidenceLevel${evidenceLevel}`,
+    evidenceOrigin: 'HRT药典 — WPATH SOC 8 / Endocrine Society 2017 / UCSF 临床路径综合',
+    guidelineDate: lastReviewed,
+    guidelineSubject: { '@type': 'MedicalCondition', name: 'Gender Dysphoria' },
+  });
+  graph.push({ '@type': 'MedicalWebPage', ...basePage, specialty: 'Endocrinology' });
+} else if (isSafetyPage) {
+  graph.push({
+    '@type': 'MedicalWebPage',
+    ...basePage,
+    specialty: 'Endocrinology',
+    aspect: pathSegmentsForType[0] === 'risks' ? 'Causes' : 'Treatment',
+  });
+} else {
+  graph.push({ '@type': 'MedicalWebPage', ...basePage });
+}
+
+// FAQPage (if frontmatter declares faqs)
+if (faqs.length > 0) {
+  graph.push({
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
     })),
   });
 }
 
-// Note: Drug schema intentionally omitted — Google requires offers/review/aggregateRating
-// for Drug type, which doesn't apply to informational pages.
-// MedicalWebPage above already provides medical semantic context.
-
-// 5. Citation schemas (pages with references)
-if (citedRefs.length > 0) {
-  for (const ref of citedRefs) {
-    graph.push({
-      "@type": "ScholarlyArticle",
-      "headline": ref.title,
-      "author": ref.authors,
-      "datePublished": String(ref.year),
-      "isPartOf": { "name": ref.journal },
-      ...(ref.doi ? { "sameAs": `https://doi.org/${ref.doi}` } : {}),
-      ...(ref.url ? { "url": ref.url } : {})
-    });
-  }
+// Citations
+for (const ref of citedRefs) {
+  graph.push({
+    '@type': 'ScholarlyArticle',
+    headline: ref.title,
+    author: ref.authors,
+    datePublished: String(ref.year),
+    isPartOf: { name: ref.journal },
+    ...(ref.doi ? { sameAs: `https://doi.org/${ref.doi}` } : {}),
+    ...(ref.url ? { url: ref.url } : {}),
+  });
 }
 ---
 
 <script is:inline type="application/ld+json" set:html={JSON.stringify({
-  "@context": "https://schema.org",
-  "@graph": graph
+  '@context': 'https://schema.org',
+  '@graph': graph,
 })} />

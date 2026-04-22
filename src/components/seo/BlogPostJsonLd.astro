@@ -11,9 +11,10 @@ interface Props {
   tags: string[];
   url: string;
   locale: string;
+  faqs?: { q: string; a: string }[];
 }
 
-const { title, description, publishDate, updatedDate, tags, url, locale } = Astro.props;
+const { title, description, publishDate, updatedDate, tags, url, locale, faqs } = Astro.props;
 
 const langMap: Record<string, string> = { zh: 'zh-CN', en: 'en', ja: 'ja', ko: 'ko' };
 const inLanguage = langMap[locale] ?? 'zh-CN';
@@ -57,6 +58,17 @@ const graph: Record<string, unknown>[] = [
     "isPartOf": { "@id": "https://hrtyaku.com/#website" }
   }
 ];
+
+if (faqs && faqs.length > 0) {
+  graph.push({
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((f) => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": { "@type": "Answer", "text": f.a },
+    })),
+  });
+}
 ---
 
 <script is:inline type="application/ld+json" set:html={JSON.stringify({
