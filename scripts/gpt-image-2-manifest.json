@@ -1,0 +1,217 @@
+{
+  "_note": "Manually generated via ChatGPT (gpt-image-2) on 2026-04-23. Do not regenerate via scripts/generate-images.mjs — these replace the Gemini i18n versions in scripts/image-manifest.json for zh locale only. If regeneration needed, use ChatGPT web UI with the prompts below.",
+  "provider": "gpt-image-2",
+  "generatedAt": "2026-04-23",
+  "images": [
+    {
+      "id": "tanner-stages-zh",
+      "filename": "tanner-stages.webp",
+      "subdir": "zh",
+      "width": 1600,
+      "height": 640,
+      "source": "01.jpg",
+      "qualityTier": "high",
+      "prompt": "Create a professional medical textbook illustration showing the five Tanner breast development stages (I through V), arranged horizontally from left to right. Style: Clean vector medical illustration, flat design with subtle cel-shading, similar to UpToDate or Endocrine Society educational materials. Off-white background (#FAF7F2). Primary line color deep charcoal (#2D2530). Breast tissue highlighted in rose pink (#C84B7C) at 60% opacity. Subtle gold (#D4A853) horizontal arrow across the top with Chinese label '发育进程'. Five gender-neutral anatomical torso silhouettes, cropped collarbone to upper ribs. Labels below each figure in Chinese Noto Sans SC: 'I期 青春期前', 'II期 乳芽形成', 'III期 乳房隆起', 'IV期 第二隆起', 'V期 成熟形态'. Pure medical educational clarity, not photorealistic.",
+      "alt": "Tanner 乳房发育五期示意图：I期青春期前、II期乳芽形成、III期乳房隆起、IV期第二隆起、V期成熟形态",
+      "page": "/zh/breast-development"
+    },
+    {
+      "id": "duct-branching-zh",
+      "filename": "duct-branching.webp",
+      "subdir": "zh",
+      "width": 1200,
+      "height": 800,
+      "source": "02.png",
+      "qualityTier": "high",
+      "prompt": "Medical infographic comparing low-dose vs high-dose estradiol effects on mammary duct branching. Two symmetrical panels side by side. Both panels show a stylized tree metaphor inside a breast silhouette outline of the same shape. LEFT panel — '✓ 低剂量阶梯方案' (E2 50-150 pg/mL): abundantly branched tree filling space, pink flower-like alveoli at tips, labels '充分分支 导管树完全发育', '腺泡成熟分化', '导管主干'. Bottom: '结果：圆润饱满 · 接近 Tanner V'. RIGHT panel — '✗ 高剂量过早方案' (E2 >300 pg/mL): stunted tree, 2-3 thick branches with oversized burgundy alveoli, small red STOP markers, labels '分支过早终止', '腺泡过早成熟', '未发育区域'. Bottom: '结果：锥形致密 · 停滞 Tanner III'. Clean editorial style, off-white background.",
+      "alt": "乳腺导管分支机制对比：左侧低剂量阶梯方案导致导管充分分支、圆润饱满、接近 Tanner V；右侧高剂量过早方案导致分支过早终止、锥形致密、停滞在 Tanner III",
+      "page": "/zh/breast-development"
+    },
+    {
+      "id": "e2-staircase-zh",
+      "filename": "e2-staircase.webp",
+      "subdir": "zh",
+      "width": 1400,
+      "height": 820,
+      "source": "03.png",
+      "qualityTier": "high",
+      "prompt": "Beautiful editorial-quality data visualization chart in Chinese, comparing two estradiol dosing strategies over 18 months. Title: '雌激素剂量 vs 乳房发育窗口'. X-axis 0-18 months, Y-axis E2 level 0-800 pg/mL. Green '✓ 阶梯方案' staircase line: 75 pg/mL (0-6mo), 125 (6-12mo), 175 (12-18mo). Red '✗ 高剂量方案' line: jumps from 200 to 550 at month 1, stays flat. Vertical dashed marker at month 3 labeled '发育窗口关闭 · 导管分支停止'. Green tint band for '最佳区间' 50-200 pg/mL, red tint for '危险区间' 300+. Clean FT Graphics / Pudding.cool style.",
+      "alt": "雌激素剂量 vs 乳房发育窗口：绿色阶梯方案在 0-18 个月渐进从 50-100 到 150-200 pg/mL；红色危险方案在第 1 个月即跳到 550 pg/mL 导致第 3 个月发育窗口关闭、导管分支停止",
+      "page": "/zh/breast-development"
+    },
+    {
+      "id": "breast-myths-zh",
+      "filename": "breast-myths.webp",
+      "subdir": "zh",
+      "width": 900,
+      "height": 1350,
+      "source": "04.png",
+      "qualityTier": "high",
+      "prompt": "Shareable Chinese-language social media poster debunking 6 common myths about transgender HRT breast development. Vertical orientation for Weibo/WeChat sharing. Dark background (#1A1625) with pink (#C84B7C) and gold (#D4A853) accents. Title: '乳房发育·6个谣言VS真相'. Subtitle: '循证·减害·引导就医'. 6 rows, each with ✗ myth and ✓ fact: (1) 剂量越高长得越快 vs 高E2→导管过早闭合→乳房更小; (2) 朋友一开始大剂量效果很好 vs 幸存者偏差·发育受损者不会分享; (3) 打针后胸部胀起来=在发育 vs 那是水肿和液体潴留·不是腺体; (4) 乳晕变黑=在发育 vs 前3个月明显变黑=E2过高预警; (5) 黄体酮能让胸变大变圆 vs 无对照研究证实·过早加入反而有害; (6) 罩杯比顺女小=药不够 vs 乳房大小主要取决于遗传和体脂. Footer: '本图内容基于 WPATH SOC 8 / Endocrine Society 2017 / UCSF 指南'. Site attribution: 'HRT 药典'.",
+      "alt": "乳房发育六个谣言对比真相海报：剂量越高长得越快（实为导管过早闭合、乳房更小）、朋友大剂量效果好（幸存者偏差）、打针后胀起来（水肿而非腺体）、乳晕变黑（E2 过高预警）、黄体酮能让胸变大（无对照研究）、罩杯小是药不够（主要取决于遗传和体脂）",
+      "page": "/zh/breast-development",
+      "note": "Replaces earlier Gemini-generated 3-myth version. Now contains all 6 myths as social-shareable poster."
+    },
+    {
+      "id": "cis-vs-hrt-timeline-zh",
+      "filename": "cis-vs-hrt-timeline.webp",
+      "subdir": "zh",
+      "width": 1400,
+      "height": 820,
+      "source": "05.png",
+      "qualityTier": "high",
+      "prompt": "Dual-track medical timeline infographic comparing cisgender puberty vs transgender HRT breast development over 5 years. Clean editorial style (NYT Interactive Graphics). Off-white background. Horizontal timeline spanning full width, markers: 0, 6个月, 1年, 2年, 3年, 4年, 5年. TOP TRACK '顺性别青春期' (rose pink #C84B7C): Tanner icons labeled 乳芽 / 轻微隆起 / 明显发育 / 第二隆起 / 成熟. BOTTOM TRACK 'HRT 启动后（跨性别女性）' (gold #D4A853): Tanner icons labeled 乳芽·触痛 / 缓慢进展 / 平台期常见 / 遗传决定上限 / 最终结果. Middle banner: 'HRT 通常比顺性别青春期慢 1-2 期'. Title: '乳房发育时间线对比'. Citation: '数据来源：de Blok CJM 2018 (n=224) · Patel 2021 综述'.",
+      "alt": "顺性别青春期 vs HRT 启动后乳房发育时间线对比：顺性别在 5 年内完成 Tanner II-V 发育；跨性别 HRT 用户通常比顺性别青春期慢 1-2 期，最终结果主要取决于遗传和体脂，数据来自 de Blok 2018 队列（n=224）及 Patel 2021 综述",
+      "page": "/zh/breast-development",
+      "note": "NEW image — was not in original image-manifest.json."
+    },
+    {
+      "id": "needle-gauges-comparison-zh",
+      "filename": "needle-gauges-comparison.webp",
+      "subdir": "zh",
+      "width": 1400,
+      "height": 901,
+      "source": "inj-02.png",
+      "qualityTier": "high",
+      "prompt": "Photorealistic flat-lay clinical product photograph for injection teaching guide. Top-down view of medical injection supplies arranged on sterile off-white fabric surface. Items parallel: 18G green-hub drawing needle, 23G blue-hub IM needle, 25G orange-hub SC needle, 1mL Luer-Lock syringe with 0.1mL markings, unopened amber glass ampoule with golden oily liquid, three sealed alcohol prep pads. Pink leader lines with Chinese labels: '18G 抽药粗针 (绿)', '23G IM 注射针 (蓝)', '25G SC 注射针 (橙)', '1 mL Luer-Lock 注射器', '戊酸雌二醇安瓿 10 mg/mL', '独立包装酒精棉片'. Title '注射器材对照', subtitle '抽药粗针 → 换细针注射 · 一针一用'. Soft diffused lighting, macro focus, MSD Manuals style.",
+      "alt": "注射器材对照图：18G 绿色抽药粗针、23G 蓝色 IM 注射针、25G 橙色 SC 注射针、1 mL Luer-Lock 注射器、戊酸雌二醇 10 mg/mL 安瓿、独立包装酒精棉片",
+      "page": "/zh/guides/first-injection"
+    },
+    {
+      "id": "injection-sites-anatomy-zh",
+      "filename": "injection-sites-anatomy.webp",
+      "subdir": "zh",
+      "width": 1400,
+      "height": 1045,
+      "source": "inj-01.jpg",
+      "qualityTier": "high",
+      "prompt": "Clean medical anatomy illustration showing recommended injection sites for transgender HRT estradiol injection. Front and side view of gender-neutral simplified human body silhouette from neck to mid-thigh. Flat vector anatomy illustration (Netter's Atlas / Mayo Clinic patient education style). Green zones = SC (abdominal flanks avoiding 5cm around navel, upper outer thigh). Blue zones = IM (middle deltoid, vastus lateralis, ventrogluteal). Chinese labels: '皮下注射 (SC)' with '腹部两侧 (避开脐周 5 cm)', '大腿外上 1/3'; '肌肉注射 (IM)' with '三角肌中部', '股外侧肌', '臀中肌'. Title '雌二醇注射部位选择'. Legend bottom-right: 绿色=SC / 蓝色=IM. Off-white background.",
+      "alt": "雌二醇注射部位选择解剖图：SC 皮下注射推荐腹部两侧（避开脐周 5 cm）与大腿外上 1/3；IM 肌肉注射推荐三角肌中部、股外侧肌、臀中肌",
+      "page": "/zh/guides/first-injection"
+    },
+    {
+      "id": "injection-step-01-zh",
+      "filename": "injection-step-01.webp",
+      "subdir": "zh",
+      "width": 1200,
+      "height": 800,
+      "source": "inj-03.png",
+      "qualityTier": "medium",
+      "prompt": "Photorealistic top-down macro of injection prep supplies on clean light-wood counter: closed amber EV ampoule, sealed 1mL Luer-Lock syringe in pouch, two sealed alcohol prep pads, sealed gauze pad, small digital timer showing '15:00', white paper towel work surface. No hands. Top-left overlay Chinese: '第 1 步 · 药液室温回温 · 冰箱取出后静置 15-30 分钟'. Soft warm lighting, shallow DOF.",
+      "alt": "第 1 步：药液室温回温，从冰箱取出后静置 15-30 分钟，配齐安瓿、注射器、酒精棉片、纱布",
+      "page": "/zh/guides/first-injection"
+    },
+    {
+      "id": "injection-step-02-zh",
+      "filename": "injection-step-02.webp",
+      "subdir": "zh",
+      "width": 1200,
+      "height": 800,
+      "source": "inj-04.png",
+      "qualityTier": "medium",
+      "prompt": "Photorealistic close-up macro. Two hands holding amber glass ampoule upright, folded sterile gauze wrapped around neck, thumbs positioned to snap top. Clean off-white countertop, out of focus. Chinese overlay: '第 2 步 · 纱布护手开启安瓿 · 拇指向外用力折断颈部'. Warning: '⚠ 必须用纱布 · 防止玻璃割伤'. Soft clinical lighting.",
+      "alt": "第 2 步：用纱布包住安瓿颈部开启，拇指向外用力折断；必须用纱布护手防止玻璃割伤",
+      "page": "/zh/guides/first-injection"
+    },
+    {
+      "id": "injection-step-03-zh",
+      "filename": "injection-step-03.webp",
+      "subdir": "zh",
+      "width": 1200,
+      "height": 800,
+      "source": "inj-05.png",
+      "qualityTier": "medium",
+      "prompt": "Photorealistic close-up macro. Light blue nitrile gloved hand holding 1mL Luer-Lock syringe with 18G green-hub needle inserted into open amber ampoule tilted at 30°. Clear golden oily liquid drawing into syringe, meniscus at 0.2mL. White countertop OOF. Chinese overlay: '第 3 步 · 18G 粗针抽药 · 倾斜安瓿 · 抽至目标剂量'. Arrow to 0.2mL: '抽取体积 0.2 mL = 2 mg'. Sharp focus on syringe markings.",
+      "alt": "第 3 步：用 18G 粗针抽药，倾斜安瓿抽至目标剂量，例如 0.2 mL = 2 mg",
+      "page": "/zh/guides/first-injection"
+    },
+    {
+      "id": "injection-step-04-zh",
+      "filename": "injection-step-04.webp",
+      "subdir": "zh",
+      "width": 1200,
+      "height": 800,
+      "source": "inj-06.png",
+      "qualityTier": "medium",
+      "prompt": "Photorealistic macro. Light blue gloved hands swapping needles on 1mL syringe. 18G green-hub drawing needle set aside left, new 25G orange-hub injection needle being threaded on. Syringe holds 0.2mL golden liquid. Clear contrast between thick green and thin orange needles. White surgical mat. Chinese overlay: '第 4 步 · 换细针注射 · SC 选 25G · IM 选 23G'. Note: '抽药粗针钝化 · 不换针直接打会明显更痛'.",
+      "alt": "第 4 步：换细针注射，SC 选 25G、IM 选 23G；抽药粗针已钝化，不换针直接打会明显更痛",
+      "page": "/zh/guides/first-injection"
+    },
+    {
+      "id": "injection-step-05-zh",
+      "filename": "injection-step-05.webp",
+      "subdir": "zh",
+      "width": 1200,
+      "height": 800,
+      "source": "inj-07.png",
+      "qualityTier": "medium",
+      "prompt": "Photorealistic close-up. Light blue gloved hand holding 1mL syringe pointed vertically up with 25G orange-hub needle. Small air bubble at needle base. Other hand flicking syringe body. Droplet of golden liquid at needle tip. White surgical drape. Chinese overlay: '第 5 步 · 轻弹排气 · 推至针尖出液 · 确保无气泡'. Arrow: '气泡 → 向针尖移动'.",
+      "alt": "第 5 步：竖持注射器轻弹排气，气泡向针尖移动，推至针尖出液确保无气泡",
+      "page": "/zh/guides/first-injection"
+    },
+    {
+      "id": "injection-step-06-zh",
+      "filename": "injection-step-06.webp",
+      "subdir": "zh",
+      "width": 1200,
+      "height": 800,
+      "source": "inj-08.png",
+      "qualityTier": "medium",
+      "prompt": "Photorealistic top-down of outer thigh (light skin, adult, clinical framing, only outer thigh surface visible). Light blue gloved hand wiping alcohol prep pad in clear spiral motion center-out. Slight motion blur on swab. Cotton bath towel edges as clinical drape. Chinese overlay: '第 6 步 · 由内向外螺旋消毒 · 等待 15-30 秒自然干燥'. Warning: '⚠ 酒精未干就进针会造成刺痛'. Professional nursing demo style, non-sexualized.",
+      "alt": "第 6 步：用酒精棉片由内向外螺旋消毒注射部位，等待 15-30 秒自然干燥；酒精未干就进针会造成明显刺痛",
+      "page": "/zh/guides/first-injection"
+    },
+    {
+      "id": "injection-step-07-zh",
+      "filename": "injection-step-07.webp",
+      "subdir": "zh",
+      "width": 1200,
+      "height": 800,
+      "source": "inj-09.png",
+      "qualityTier": "high",
+      "prompt": "Photorealistic side view close-up. Light blue gloved left hand pinching up fold of outer thigh skin creating SC layer. Right hand holds 1mL syringe with 25G orange-hub needle at precise 45° angle, tip ~2cm from skin, poised to insert but NOT pierced. Dashed line overlay shows 45° with label. Light blue surgical drape OOF. Chinese overlay: '第 7 步 · 捏起皮肤 · 45° 快速进针 · (SC 皮下注射)'. Note: 'IM 肌肉注射 → 绷紧皮肤 · 90° 进针'. Strictly clinical framing, outer thigh and hands only.",
+      "alt": "第 7 步：SC 皮下注射捏起皮肤、45° 快速进针；IM 肌肉注射则绷紧皮肤、90° 进针",
+      "page": "/zh/guides/first-injection"
+    },
+    {
+      "id": "injection-step-08-zh",
+      "filename": "injection-step-08.webp",
+      "subdir": "zh",
+      "width": 1400,
+      "height": 933,
+      "source": "inj-10.png",
+      "qualityTier": "medium",
+      "prompt": "Photorealistic 50/50 side-by-side dual panel. LEFT '推注': gloved thumb pressing plunger of 1mL syringe at 45° resting position, background digital timer '10 秒'. No needle-skin contact shown. RIGHT '拔针按压': dry white gauze pad being pressed on outer thigh injection site, removed syringe held in other hand pointing away. Top label across both: '第 8 步 · 匀速推注 10 秒 → 拔针 → 干棉片轻压 1 分钟 · 不揉搓'. Clean clinical lighting.",
+      "alt": "第 8 步：10 秒匀速推注 → 拔针 → 干棉片轻压 1 分钟；禁止揉搓，揉搓会挤散药液影响吸收并造成淤青",
+      "page": "/zh/guides/first-injection"
+    }
+  ],
+  "_translatedPromptsForFutureGeneration": {
+    "_note": "Ready-to-use translated prompts for en/ja/ko versions of the 5 breast-development images. Generate via ChatGPT web UI when needed, save to scripts/gpt-image-2-raw/ with prefix like en-01.png, then ask Claude to process.",
+    "tanner-stages": {
+      "en": "Create a professional medical textbook illustration showing the five Tanner breast development stages (I through V), arranged horizontally left to right. Style: Clean vector medical illustration, flat design with subtle cel-shading, similar to UpToDate or Endocrine Society educational materials. Off-white background (#FAF7F2). Primary line color deep charcoal (#2D2530). Breast tissue highlighted in rose pink (#C84B7C) at 60% opacity. Subtle gold (#D4A853) horizontal arrow across the top with English label 'Development Progression'. Five gender-neutral anatomical torso silhouettes cropped collarbone to upper ribs. Labels below each in clean sans-serif: 'Stage I - Prepubertal', 'Stage II - Breast Bud', 'Stage III - Mound Formation', 'Stage IV - Secondary Mound', 'Stage V - Mature Form'. Pure medical educational clarity, not photorealistic.",
+      "ja": "5段階のTanner乳房発達分類（I〜V期）を左から右へ横並びで示す専門医学教科書イラストを作成。スタイル: UpToDateやEndocrine Society教育資料に類似した、クリーンなベクター医学イラスト、フラットデザイン、微妙なセルシェーディング。オフホワイト背景 (#FAF7F2)、深いチャコール線 (#2D2530)、バラピンク乳房組織ハイライト (#C84B7C) 60%不透明度。上部に金色 (#D4A853) の水平矢印、日本語ラベル '発達進行'。5つの性別中立的な解剖学的胴体シルエット、鎖骨から上部肋骨まで。各図の下に日本語ラベル: 'I期 思春期前', 'II期 乳芽形成', 'III期 乳房隆起', 'IV期 第二隆起', 'V期 成熟形態'。純粋な医学教育的明瞭さ、写実的ではない。",
+      "ko": "5가지 Tanner 유방 발달 단계(I~V기)를 왼쪽에서 오른쪽으로 가로 배열한 전문 의학 교과서 일러스트를 만드세요. 스타일: UpToDate 또는 Endocrine Society 교육 자료와 유사한 깔끔한 벡터 의학 일러스트, 플랫 디자인, 미묘한 셀 셰이딩. 오프화이트 배경 (#FAF7F2), 짙은 차콜 선 (#2D2530), 로즈 핑크 유방 조직 하이라이트 (#C84B7C) 60% 불투명도. 상단에 골드 (#D4A853) 수평 화살표, 한국어 레이블 '발달 진행'. 5개의 성중립적 해부학적 몸통 실루엣, 쇄골에서 상부 갈비뼈까지. 각 그림 아래 한국어 레이블: 'I기 사춘기 전', 'II기 유방 싹 형성', 'III기 유방 융기', 'IV기 이차 융기', 'V기 성숙 형태'. 순수 의학 교육적 명확성, 사실적이지 않음."
+    },
+    "duct-branching": {
+      "en": "Medical infographic comparing low-dose vs high-dose estradiol effects on mammary duct branching. Two symmetrical panels side by side. LEFT '✓ Low-dose Staircase Protocol' (E2 50-150 pg/mL): abundantly branched tree, pink alveoli at tips, labels 'Full Branching Complete', 'Mature Differentiation', 'Main Duct'. Bottom: 'Result: Round Full Breast · Near Tanner V'. RIGHT '✗ Premature High-dose Protocol' (E2 >300 pg/mL): stunted tree, oversized burgundy alveoli, red STOP markers, labels 'Premature Branch Termination', 'Premature Alveolar Maturation', 'Undeveloped Region'. Bottom: 'Result: Dense Conical Shape · Arrested at Tanner III'. Clean editorial style, off-white background.",
+      "ja": "低用量と高用量エストラジオールの乳管分岐への影響を比較する医学インフォグラフィック。左右対称の2パネル。左 '✓ 低用量階段式プロトコル' (E2 50-150 pg/mL): 豊富に分岐した樹木、先端にピンクの腺房、ラベル '十分な分岐完了', '成熟分化', '主乳管'。下部: '結果: 丸くふくよかな乳房 · Tanner V近似'。右 '✗ 早期高用量プロトコル' (E2 >300 pg/mL): 成長が止まった樹木、過大なバーガンディ腺房、赤いSTOPマーカー、ラベル '早期分岐終止', '早期腺房成熟', '未発達領域'。下部: '結果: 密な円錐形 · Tanner III停滞'。クリーンなエディトリアルスタイル、オフホワイト背景。",
+      "ko": "저용량 vs 고용량 에스트라디올의 유관 분지에 대한 효과를 비교하는 의학 인포그래픽. 좌우 대칭 2개 패널. 왼쪽 '✓ 저용량 계단식 프로토콜' (E2 50-150 pg/mL): 풍부하게 분지된 나무, 끝에 분홍색 선포, 레이블 '충분한 분지 완료', '성숙 분화', '주 유관'. 하단: '결과: 둥글고 풍만한 유방 · Tanner V 근접'. 오른쪽 '✗ 조기 고용량 프로토콜' (E2 >300 pg/mL): 성장이 멈춘 나무, 과대한 버건디 선포, 빨간 STOP 마커, 레이블 '조기 분지 종료', '조기 선포 성숙', '미발달 영역'. 하단: '결과: 조밀한 원뿔형 · Tanner III 정체'. 깔끔한 에디토리얼 스타일, 오프화이트 배경."
+    },
+    "e2-staircase": {
+      "en": "Beautiful editorial-quality data visualization chart in English, comparing two estradiol dosing strategies over 18 months. Title: 'Estrogen Dose vs Breast Development Window'. X-axis 0-18 months, Y-axis E2 level 0-800 pg/mL. Green '✓ Staircase Protocol' line: 75 pg/mL (0-6mo), 125 (6-12mo), 175 (12-18mo). Red '✗ High-Dose Protocol' line: jumps from 200 to 550 at month 1. Vertical dashed marker at month 3 labeled 'Development Window Closes · Duct Branching Arrests'. Green band 'Optimal Range' 50-200, red band 'Danger Range' 300+. FT Graphics / Pudding.cool style.",
+      "ja": "日本語で18ヶ月にわたる2つのエストラジオール投与戦略を比較する高品質エディトリアルデータ可視化チャート。タイトル: 'エストロゲン用量 vs 乳房発達ウィンドウ'。X軸0-18ヶ月、Y軸E2レベル0-800 pg/mL。緑の '✓ 階段式プロトコル' ライン: 75 pg/mL (0-6ヶ月), 125 (6-12ヶ月), 175 (12-18ヶ月)。赤の '✗ 高用量プロトコル' ライン: 1ヶ月目に200から550へ急上昇。3ヶ月目に縦破線マーカー、ラベル '発達ウィンドウ閉鎖 · 乳管分岐停止'。緑帯 '最適範囲' 50-200、赤帯 '危険範囲' 300+。FT Graphics / Pudding.coolスタイル。",
+      "ko": "한국어로 18개월 동안 두 가지 에스트라디올 투여 전략을 비교하는 고품질 에디토리얼 데이터 시각화 차트. 제목: '에스트로겐 용량 vs 유방 발달 창'. X축 0-18개월, Y축 E2 수치 0-800 pg/mL. 녹색 '✓ 계단식 프로토콜' 선: 75 pg/mL (0-6개월), 125 (6-12개월), 175 (12-18개월). 빨간색 '✗ 고용량 프로토콜' 선: 1개월에 200에서 550으로 급등. 3개월에 수직 점선 마커, 레이블 '발달 창 폐쇄 · 유관 분지 정지'. 녹색 대역 '최적 범위' 50-200, 빨간색 대역 '위험 범위' 300+. FT Graphics / Pudding.cool 스타일."
+    },
+    "breast-myths": {
+      "en": "Shareable English-language social media poster debunking 6 common myths about transgender HRT breast development. Vertical for Twitter/Instagram sharing. Dark background (#1A1625) with pink (#C84B7C) and gold (#D4A853) accents. Title: 'Breast Development · 6 Myths VS Facts'. Subtitle: 'Evidence-based · Harm Reduction'. 6 rows, each with ✗ myth and ✓ fact: (1) 'Higher dose = faster growth' vs 'High E2 → premature duct closure → smaller breasts'; (2) 'My friend started high and did fine' vs 'Survivorship bias · harmed users stay silent'; (3) 'Swelling after injection = development' vs 'That is edema and fluid retention · not glandular tissue'; (4) 'Darkening areola = development' vs 'Marked darkening in first 3 months = excess E2 warning'; (5) 'Progesterone makes breasts larger' vs 'No controlled trials · early addition is harmful'; (6) 'Smaller cup = under-dosed' vs 'Size mainly determined by genetics and body fat'. Footer: 'Based on WPATH SOC 8 / Endocrine Society 2017 / UCSF Guidelines'. Attribution: 'HRT Yakuten'.",
+      "ja": "トランスジェンダーHRT乳房発達に関する6つの一般的な誤解を反証する日本語ソーシャルメディアポスター。Twitter/Instagram共有用の縦型。ダークブラックの背景 (#1A1625) にピンク (#C84B7C) とゴールド (#D4A853) アクセント。タイトル: '乳房発達 · 6つの誤解 VS 事実'。サブタイトル: 'エビデンスに基づく · ハームリダクション'。6行、各 ✗ 誤解 と ✓ 事実: (1) '高用量=早く成長' vs '高E2→乳管早期閉鎖→より小さな乳房'; (2) '友人は大量から始めて成功した' vs '生存者バイアス · 被害者は沈黙'; (3) '注射後の腫れ=発達中' vs 'それは浮腫と体液貯留 · 腺組織ではない'; (4) '乳輪が黒くなる=発達' vs '最初の3ヶ月で明らかな黒化=E2過剰警告'; (5) 'プロゲステロンで乳房が大きくなる' vs '対照試験なし · 早期追加は有害'; (6) 'カップ小さい=薬量不足' vs 'サイズは主に遺伝と体脂肪で決まる'。フッター: 'WPATH SOC 8 / Endocrine Society 2017 / UCSFガイドラインに基づく'。帰属: 'HRT薬典'。",
+      "ko": "트랜스젠더 HRT 유방 발달에 대한 6가지 일반적인 오해를 반박하는 한국어 소셜 미디어 포스터. Twitter/Instagram 공유용 세로형. 어두운 배경 (#1A1625)에 분홍색 (#C84B7C)과 금색 (#D4A853) 강조. 제목: '유방 발달 · 6가지 오해 VS 진실'. 부제: '근거 기반 · 피해 감소'. 6행, 각 ✗ 오해 와 ✓ 진실: (1) '고용량 = 빠른 성장' vs '고 E2 → 유관 조기 폐쇄 → 더 작은 유방'; (2) '친구는 고용량으로 시작해 성공함' vs '생존자 편향 · 피해자는 침묵'; (3) '주사 후 부풀음 = 발달 중' vs '그것은 부종과 체액 정체 · 선 조직이 아님'; (4) '유륜 어두워짐 = 발달' vs '첫 3개월 내 뚜렷한 어두움 = E2 과잉 경고'; (5) '프로게스테론이 유방을 크게 함' vs '대조 시험 없음 · 조기 추가는 해로움'; (6) '컵 작음 = 약 부족' vs '크기는 주로 유전과 체지방에 의해 결정됨'. 하단: 'WPATH SOC 8 / Endocrine Society 2017 / UCSF 지침 기반'. 귀속: 'HRT 약전'."
+    },
+    "cis-vs-hrt-timeline": {
+      "en": "Dual-track medical timeline infographic comparing cisgender puberty vs transgender HRT breast development over 5 years. Clean NYT Interactive style. Horizontal timeline, markers: 0, 6mo, 1yr, 2yr, 3yr, 4yr, 5yr. TOP TRACK 'Cisgender Puberty' (rose pink): Tanner icons labeled 'Breast bud', 'Slight mound', 'Clear development', 'Secondary mound', 'Mature'. BOTTOM TRACK 'Post-HRT Initiation (Transgender Women)' (gold): icons labeled 'Breast bud · tenderness', 'Slow progression', 'Plateau common', 'Genetics determines ceiling', 'Final result'. Middle banner: 'HRT typically lags cisgender puberty by 1-2 stages'. Title: 'Breast Development Timeline Comparison'. Citation: 'Data: de Blok CJM 2018 (n=224) · Patel 2021 review'.",
+      "ja": "シスジェンダーの思春期 vs トランスジェンダーHRT乳房発達の5年間比較を示すデュアルトラック医学タイムラインインフォグラフィック。クリーンなNYT Interactiveスタイル。水平タイムライン、マーカー: 0, 6ヶ月, 1年, 2年, 3年, 4年, 5年。上トラック 'シスジェンダーの思春期' (バラピンク): Tannerアイコンラベル '乳芽', '軽度隆起', '明確な発達', '二次隆起', '成熟'。下トラック 'HRT開始後（トランス女性）' (ゴールド): アイコンラベル '乳芽 · 圧痛', '緩徐な進行', 'プラトー一般的', '遺伝的上限', '最終結果'。中央バナー: 'HRTは通常シスジェンダー思春期より1-2段階遅い'。タイトル: '乳房発達タイムライン比較'。引用: 'データ: de Blok CJM 2018 (n=224) · Patel 2021 レビュー'。",
+      "ko": "시스젠더 사춘기 vs 트랜스젠더 HRT 유방 발달 5년간 비교를 보여주는 이중 트랙 의학 타임라인 인포그래픽. 깔끔한 NYT Interactive 스타일. 수평 타임라인, 마커: 0, 6개월, 1년, 2년, 3년, 4년, 5년. 상단 트랙 '시스젠더 사춘기' (로즈 핑크): Tanner 아이콘 레이블 '유방 싹', '약간 융기', '명확한 발달', '이차 융기', '성숙'. 하단 트랙 'HRT 시작 후 (트랜스 여성)' (골드): 아이콘 레이블 '유방 싹 · 압통', '느린 진행', '정체기 흔함', '유전적 상한', '최종 결과'. 중앙 배너: 'HRT는 일반적으로 시스젠더 사춘기보다 1-2단계 느림'. 제목: '유방 발달 타임라인 비교'. 인용: '데이터: de Blok CJM 2018 (n=224) · Patel 2021 리뷰'."
+    }
+  }
+}
