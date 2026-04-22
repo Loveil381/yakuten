@@ -258,6 +258,17 @@ export default defineConfig({
             },
           ],
         },
+        // ── 药物对比 ──
+        {
+          label: '药物对比',
+          translations: { en: 'Comparisons', ja: '薬物比較', ko: '약물 비교' },
+          collapsed: true,
+          items: [
+            { label: 'CPA vs 螺内酯', translations: { en: 'CPA vs Spironolactone', ja: 'CPA vs スピロノラクトン', ko: 'CPA vs 스피로노락톤' }, slug: 'compare/cpa-vs-spironolactone' },
+            { label: '口服 vs 注射', translations: { en: 'Oral vs Injection', ja: '経口 vs 注射', ko: '경구 vs 주사' }, slug: 'compare/oral-vs-injection' },
+            { label: '凝胶 vs 贴片', translations: { en: 'Gel vs Patch', ja: 'ゲル vs パッチ', ko: '겔 vs 패치' }, slug: 'compare/gel-vs-patch' },
+          ],
+        },
         // ── 专题与工具 ──
         {
           label: '专题与工具',
@@ -291,6 +302,9 @@ export default defineConfig({
           collapsed: true,
           items: [
             { label: '关于本站', translations: { en: 'About', ja: 'サイトについて', ko: '사이트 소개' }, slug: 'about' },
+            { label: '内容方法学', translations: { en: 'Methodology', ja: 'コンテンツ方法論', ko: '콘텐츠 방법론' }, slug: 'methodology' },
+            { label: '医学顾问', translations: { en: 'Medical Advisors', ja: '医学顧問', ko: '의학 자문' }, slug: 'medical-advisors' },
+            { label: '编辑政策', translations: { en: 'Editorial Policy', ja: '編集方針', ko: '편집 정책' }, slug: 'editorial-policy' },
             { label: '参考文献库', translations: { en: 'Reference Library', ja: '参考文献ライブラリ', ko: '참고 문헌 라이브러리' }, slug: 'appendix-references' },
           ],
         },

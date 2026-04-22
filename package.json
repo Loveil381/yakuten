@@ -6,14 +6,18 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node scripts/validate-content.mjs && astro build",
+    "build": "node scripts/validate-content.mjs && astro build && node scripts/inject-sitemap-lastmod.mjs && node scripts/generate-og-images.mjs",
     "preview": "astro preview",
     "check": "node scripts/validate-content.mjs && astro check",
     "validate:content": "node scripts/validate-content.mjs",
     "astro": "astro",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "lint": "eslint 'src/**/*.{ts,tsx,js,mjs}'"
+    "lint": "eslint 'src/**/*.{ts,tsx,js,mjs}'",
+    "seo:gsc": "node scripts/seo/fetch-gsc.mjs",
+    "seo:trends": "node scripts/seo/fetch-trends.mjs",
+    "seo:refresh": "node scripts/seo/refresh-keyword-gap.mjs",
+    "seo:all": "npm run seo:trends && npm run seo:gsc && npm run seo:refresh"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.59",
@@ -35,6 +39,8 @@
     "@types/react-dom": "^19.2.3",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
+    "google-trends-api": "^4.9.2",
+    "googleapis": "^171.4.0",
     "prettier": "^3.8.2"
   }
 }
