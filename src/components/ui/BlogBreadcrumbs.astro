@@ -1,25 +1,163 @@
 ---
 /**
- * BlogBreadcrumbs — Breadcrumb navigation for blog pages.
+ * BlogBreadcrumbs — Breadcrumb navigation + reverse anchor links for blog pages.
+ *
+ * Renders two layers:
+ *  1. Breadcrumb trail: 首页 / 专题文章 / {title}
+ *  2. (Optional) Reverse anchor link: ← 返回核心文档：{label} · {label}
+ *     — points readers from blog spoke back to the canonical doc hub.
  */
 import { t, getLocale } from '../../i18n/ui';
 
 interface Props {
   title?: string;
+  relatedDocs?: string[];
 }
 
-const { title } = Astro.props;
+const { title, relatedDocs = [] } = Astro.props;
 const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
+
+/**
+ * Map a doc slug (e.g. "medications/estrogens/oral") to its display label.
+ * Currently only zh has a curated dictionary; other locales fall back to the
+ * last slug segment with separators humanized.
+ */
+const ZH_DOC_LABELS: Record<string, string> = {
+  // Top-level core docs
+  'before-you-start': '用药前准备',
+  'pathway': '用药路径图',
+  'dose-limits': '剂量红线',
+  'blood-tests': '血检指南',
+  'risks': '风险与急症',
+  'breast-development': '乳房发育指南',
+  'about': '关于本站',
+  // Estrogens
+  'medications/estrogens/overview': '雌激素总览',
+  'medications/estrogens/oral': '口服雌二醇',
+  'medications/estrogens/sublingual': '舌下含服雌二醇',
+  'medications/estrogens/gel': '雌二醇凝胶',
+  'medications/estrogens/transdermal-patch': '雌二醇贴片',
+  'medications/estrogens/injection': '注射雌二醇',
+  // Antiandrogens
+  'medications/antiandrogens/overview': '抗雄激素总览',
+  'medications/antiandrogens/cpa': 'CPA（色谱龙）',
+  'medications/antiandrogens/spironolactone': '螺内酯',
+  // Compare
+  'compare/cpa-vs-spironolactone': 'CPA vs 螺内酯',
+  'compare/oral-vs-injection': '口服 vs 注射',
+  'compare/gel-vs-patch': '凝胶 vs 贴片',
+  // Guides
+  'guides/switch-antiandrogen': '抗雄切换指南',
+  'guides/switch-e2-route': '切换 E2 途径',
+  'guides/first-injection': '首次注射指南',
+  // Tools
+  'tools/blood-checker': '血检自查工具',
+  'tools/risk-screener': '风险自评工具',
+};
+
+function labelFor(slug: string): string {
+  if (locale === 'zh' && ZH_DOC_LABELS[slug]) {
+    return ZH_DOC_LABELS[slug];
+  }
+  // Fallback: last segment, humanized
+  const last = slug.split('/').pop() ?? slug;
+  return last
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+const reverseLinks = relatedDocs.map((slug) => ({
+  href: `/${locale}/${slug}/`,
+  label: labelFor(slug),
+}));
+
+const backLabel = locale === 'zh'
+  ? '返回核心文档：'
+  : locale === 'ja'
+    ? '関連文書へ：'
+    : locale === 'ko'
+      ? '관련 문서로:'
+      : 'Back to docs: ';
 ---
 
 <nav class="blog-breadcrumbs" aria-label="Breadcrumb">
-  <a href={`/${locale}/`}>{t(locale, 'blog.breadcrumb.home')}</a>
-  <span class="blog-breadcrumbs__sep" aria-hidden="true">/</span>
-  <a href={`/${locale}/blog/`}>{t(locale, 'blog.breadcrumb.blog')}</a>
-  {title && (
-    <>
-      <span class="blog-breadcrumbs__sep" aria-hidden="true">/</span>
-      <span aria-current="page">{title}</span>
-    </>
+  <ol class="blog-breadcrumbs__crumbs">
+    <li><a href={`/${locale}/`}>{t(locale, 'blog.breadcrumb.home')}</a></li>
+    <li class="blog-breadcrumbs__sep" aria-hidden="true">/</li>
+    <li><a href={`/${locale}/blog/`}>{t(locale, 'blog.breadcrumb.blog')}</a></li>
+    {title && (
+      <>
+        <li class="blog-breadcrumbs__sep" aria-hidden="true">/</li>
+        <li aria-current="page">{title}</li>
+      </>
+    )}
+  </ol>
+
+  {reverseLinks.length > 0 && (
+    <p class="blog-breadcrumbs__back">
+      <span class="blog-breadcrumbs__arrow" aria-hidden="true">←</span>
+      <span class="blog-breadcrumbs__back-label">{backLabel}</span>
+      {reverseLinks.map((doc, i) => (
+        <>
+          {i > 0 && <span class="blog-breadcrumbs__dot" aria-hidden="true"> · </span>}
+          <a href={doc.href}>{doc.label}</a>
+        </>
+      ))}
+    </p>
   )}
 </nav>
+
+<style>
+  .blog-breadcrumbs {
+    margin: 0 0 var(--space-md, 1rem);
+    font-size: 0.875rem;
+    color: var(--color-text-muted, #BFB0C5);
+  }
+  .blog-breadcrumbs__crumbs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4em;
+    align-items: center;
+  }
+  .blog-breadcrumbs__crumbs li {
+    margin: 0;
+  }
+  .blog-breadcrumbs__crumbs a {
+    color: var(--color-link, var(--sl-color-text-accent, #C84B7C));
+    text-decoration: none;
+  }
+  .blog-breadcrumbs__crumbs a:hover,
+  .blog-breadcrumbs__crumbs a:focus-visible {
+    text-decoration: underline;
+  }
+  .blog-breadcrumbs__sep {
+    color: var(--color-text-muted, #BFB0C5);
+    opacity: 0.6;
+  }
+  .blog-breadcrumbs__back {
+    margin: 0.5em 0 0;
+    color: var(--color-text-muted, #BFB0C5);
+    line-height: 1.6;
+  }
+  .blog-breadcrumbs__back a {
+    color: var(--color-link, var(--sl-color-text-accent, #C84B7C));
+    text-decoration: none;
+  }
+  .blog-breadcrumbs__back a:hover,
+  .blog-breadcrumbs__back a:focus-visible {
+    text-decoration: underline;
+  }
+  .blog-breadcrumbs__arrow {
+    margin-right: 0.3em;
+  }
+  .blog-breadcrumbs__back-label {
+    margin-right: 0.2em;
+  }
+  .blog-breadcrumbs__dot {
+    color: var(--color-text-muted, #BFB0C5);
+    opacity: 0.6;
+  }
+</style>
