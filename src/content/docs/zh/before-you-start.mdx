@@ -6,6 +6,7 @@ lastReviewed: 2026-04-07
 references: []
 ---
 
+import { Aside } from '@astrojs/starlight/components';
 import BaselineChecklist from '../../../components/ui/BaselineChecklist.astro';
 import ContraindicationBox from '../../../components/ui/ContraindicationBox.astro';
 import RealityCheck from '../../../components/ui/RealityCheck.astro';
@@ -15,6 +16,16 @@ import RelatedBlogPosts from '../../../components/ui/RelatedBlogPosts.astro';
 不是劝退，而是安全检查。跳过这一步开始用药，等于蒙着眼睛过马路。
 
 ## <span style="font-family: var(--font-mono); color: var(--color-accent);">§ 1.1</span> 基准检查清单 (Baseline Tests)
+
+<img
+  src="/images/diagrams/zh/baseline-tests-nav.webp"
+  alt="HRT 启动前基线检查项目导航卡：血常规、肝肾功能、电解质、凝血、激素六项（E2/T/LH/FSH/PRL/SHBG）、空腹血糖与血脂、ECG/血压，分四组用图标速览"
+  width="1024"
+  height="1024"
+  loading="lazy"
+  decoding="async"
+  style="width:100%;height:auto;border-radius:4px;margin:0 0 var(--space-lg);"
+/>
 
 以下检查在中国任何三甲医院的内分泌科或体检中心可做：
 
@@ -36,6 +47,10 @@ import RelatedBlogPosts from '../../../components/ui/RelatedBlogPosts.astro';
 </WarningBox>
 
 ## <span style="font-family: var(--font-mono); color: var(--color-danger);">§ 1.2</span> 绝对禁忌症 (Absolute)
+
+<Aside type="tip" title="先做 30 秒「风险自评」">
+在阅读下列禁忌列表前，建议先用 [风险自评工具](/zh/tools/risk-screener/) 用 30 秒了解你的 VTE / 肝脏 / 脑膜瘤 / 心血管个人风险概况——再回头看具体条目会更有针对性。
+</Aside>
 
 <ContraindicationBox type="absolute" title="绝对禁忌症" sectionNum="">
 
