@@ -29,6 +29,10 @@ export const collections = {
 						.optional(),
 					// Optional per-page reviewer override (default: Editorial Team).
 					medicalReviewer: z.string().optional(),
+					// Optional per-page noindex flag — emits <meta name="robots" content="noindex,nofollow">.
+					// Used for incomplete translations that should not be indexed by search engines
+					// while still remaining reachable for users who navigate to them.
+					noindex: z.boolean().optional(),
 				})
 				.superRefine((data, ctx) => {
 					if (data.evidenceLevel !== 'X' && data.references.length === 0) {

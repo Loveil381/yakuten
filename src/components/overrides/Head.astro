@@ -4,17 +4,63 @@
  * - Vercel Analytics & Speed Insights
  * - hreflang alternate links (HTML head, complements sitemap hreflang)
  * - x-default hreflang for language negotiation
+ * - Dynamic og:type (article for /blog/, website otherwise)
+ * - Bilingual og:site_name override
+ * - JSON-LD structured data injected on every documentation page
  */
 import Default from '@astrojs/starlight/components/Head.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import ThemeToggle from '../ThemeToggle.astro';
+import JsonLd from '../seo/JsonLd.astro';
 
 const pathname = Astro.url.pathname;
 const site = 'https://hrtyaku.com';
+const canonical = new URL(pathname, site).href;
 
 // Per-page authority signals for E-E-A-T (crawler-readable meta)
 const route = Astro.locals.starlightRoute;
+
+// Override Starlight's hard-coded `og:type = "article"` so non-blog pages
+// expose the correct OpenGraph type. Treat /blog/ AND core medical pages as
+// articles (they are reviewed, dated, citation-bearing content); everything
+// else (home, tools, about) is `website`.
+// Also rewrite `og:site_name` to a locale-aware brand string.
+// We mutate the existing head entries rather than appending new ones to avoid
+// emitting duplicate `<meta property="og:*">` tags.
+const isToolPage = pathname.includes('/tools/');
+const isMedicalPage =
+  pathname.includes('/medications/') ||
+  pathname.includes('/risks') ||
+  pathname.includes('/blood-tests') ||
+  pathname.includes('/dose-limits') ||
+  pathname.includes('/breast-development');
+const isBlogPage = pathname.includes('/blog/');
+const ogType = isBlogPage || isMedicalPage ? 'article' : 'website';
+
+// Locale-aware site_name (preferred by Google for non-English markets).
+const headLocale = pathname.startsWith('/en/')
+  ? 'en'
+  : pathname.startsWith('/ja/')
+    ? 'ja'
+    : pathname.startsWith('/ko/')
+      ? 'ko'
+      : 'zh';
+const siteNames: Record<string, string> = {
+  zh: 'HRT药典',
+  en: 'HRT Yakuten',
+  ja: 'HRT薬典',
+  ko: 'HRT 약전',
+};
+const ogSiteName = siteNames[headLocale];
+if (route?.head) {
+  for (const tag of route.head) {
+    if (tag.tag !== 'meta' || !tag.attrs) continue;
+    if (tag.attrs['property'] === 'og:type') tag.attrs.content = ogType;
+    if (tag.attrs['property'] === 'og:site_name') tag.attrs.content = ogSiteName;
+  }
+}
+const noindex = (route?.entry?.data as Record<string, unknown> | undefined)?.noindex === true;
 const entryData: Record<string, unknown> = (route?.entry?.data as Record<string, unknown>) ?? {};
 const pageLastReviewed = entryData.lastReviewed
   ? new Date(entryData.lastReviewed as string | Date).toISOString()
@@ -66,6 +112,10 @@ const alternateOgLocales = Object.values(ogLocaleMap).filter((l) => l !== curren
 ---
 
 <Default {...Astro.props}><slot /></Default>
+<JsonLd />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+<meta property="og:url" content={canonical} />
 <link rel="manifest" href="/manifest.json" />
 <link rel="alternate" hreflang="x-default" href={xDefault} />
 <meta property="og:locale" content={currentOgLocale} />

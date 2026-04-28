@@ -55,13 +55,17 @@ function injectIntoSitemap(sitemapPath, lastmodMap) {
   let replaced = 0;
   // Remove any pre-existing <lastmod> to be idempotent.
   xml = xml.replace(/<lastmod>[^<]+<\/lastmod>/g, '');
-  // For each <url><loc>...</loc>...</url>, insert <lastmod> before </url>.
+  // For each <url>...<loc>URL</loc>...</url>, insert <lastmod> before </url>.
+  // The Astro / @astrojs/sitemap output is single-line minified XML with no
+  // whitespace between tags, so the regex must NOT require `\s*` between
+  // `<url>` and `<loc>`. Match `<url>...<loc>` lazily instead, and capture
+  // everything between </loc> and </url> as the inner block.
   xml = xml.replace(
-    /<url>\s*<loc>([^<]+)<\/loc>([\s\S]*?)<\/url>/g,
-    (match, loc, inner) => {
+    /<url>([\s\S]*?)<loc>([^<]+)<\/loc>([\s\S]*?)<\/url>/g,
+    (_match, prefix, loc, inner) => {
       const iso = lastmodMap.get(loc) ?? BUILD_TIME;
       replaced++;
-      return `<url><loc>${loc}</loc>${inner}<lastmod>${iso}</lastmod></url>`;
+      return `<url>${prefix}<loc>${loc}</loc>${inner}<lastmod>${iso}</lastmod></url>`;
     },
   );
   fs.writeFileSync(sitemapPath, xml);
