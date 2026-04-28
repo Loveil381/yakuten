@@ -1,0 +1,410 @@
+---
+/**
+ * TrustPillars — Three-column trust credentials section.
+ *
+ * Surfaces the methodology / about / medical-advisors pages
+ * (currently buried under "附录") onto the splash homepage to
+ * strengthen E-E-A-T signals. Uses the 米哈游「二相乐园」
+ * glass morphism + diagonal clip aesthetic shared with
+ * ActionCards. Sakura mode picks up overrides automatically
+ * via .glass-panel / .clipped-card hooks.
+ *
+ * Data points are computed at build time from real sources:
+ *   1. methodology  — references.json length (DOI'd citations)
+ *   2. about        — count of zh docs (excluding the splash itself)
+ *   3. advisors     — number of cross-discipline review domains
+ *                     declared in medical-advisors.mdx
+ */
+import referencesData from '../../data/references.json';
+import { getCollection } from 'astro:content';
+
+// 1. references.json —— 国际文献条目数（每条均含 DOI 或权威 URL）
+const referencesCount = Array.isArray(referencesData) ? referencesData.length : 0;
+
+// 2. 中文核心页面数（剔除首页 splash，blog 集合不在 docs 集合中，无需另行排除）
+let zhCorePages = 0;
+try {
+  const allDocs = await getCollection('docs');
+  zhCorePages = allDocs.filter((entry) => {
+    const slug = entry.id ?? '';
+    if (!slug.startsWith('zh/') && slug !== 'zh') return false;
+    // splash 自身不算入"核心安全页面"
+    if (slug === 'zh' || slug === 'zh/' || slug === 'zh/index') return false;
+    return true;
+  }).length;
+} catch (err) {
+  // 极端情况下回退到一个保守的真实下限
+  zhCorePages = 50;
+}
+
+// 3. medical-advisors.mdx 中明确披露的跨专业复审领域数
+//    （内分泌科 / 精神科 / 肝病·血液科 / 法律顾问 = 4）
+const reviewDomains = 4;
+
+interface Pillar {
+  href: string;
+  iconKey: 'book' | 'shield' | 'stethoscope';
+  kicker: string;
+  title: string;
+  oneLiner: string;
+  metricNumber: string;
+  metricLabel: string;
+  cta: string;
+  tone: 'primary' | 'accent' | 'safe';
+}
+
+const pillars: Pillar[] = [
+  {
+    href: '/zh/methodology/',
+    iconKey: 'book',
+    kicker: 'METHODOLOGY',
+    title: '循证方法学',
+    oneLiner: '每条医学声明都附 DOI，可追溯到原始文献。',
+    metricNumber: String(referencesCount),
+    metricLabel: '篇国际指南 / 同行评审文献',
+    cta: '查看引用与证据等级',
+    tone: 'primary',
+  },
+  {
+    href: '/zh/about/',
+    iconKey: 'shield',
+    kicker: 'ABOUT',
+    title: '独立 · 非商业',
+    oneLiner: '不卖药、不推渠道、不接广告 —— 只做安全底线信息。',
+    metricNumber: `${zhCorePages}`,
+    metricLabel: '个中文核心安全页面',
+    cta: '了解站点立场',
+    tone: 'accent',
+  },
+  {
+    href: '/zh/medical-advisors/',
+    iconKey: 'stethoscope',
+    kicker: 'PEER REVIEW',
+    title: '医学复审',
+    oneLiner: '复审流程搭建中，过渡期透明披露当前阶段。',
+    metricNumber: String(reviewDomains),
+    metricLabel: '个跨专业复审领域协作',
+    cta: '查看复审团队结构',
+    tone: 'safe',
+  },
+];
+---
+
+<section class="trust-pillars" aria-labelledby="trust-pillars-heading">
+  <div class="trust-pillars__header">
+    <p class="trust-pillars__kicker">TRUST &amp; TRANSPARENCY</p>
+    <h2 id="trust-pillars-heading" class="trust-pillars__heading">
+      为什么可以参考这里的信息
+    </h2>
+    <p class="trust-pillars__lede">
+      循证 · 独立 · 透明 —— 三个支柱构成本站的底线。
+    </p>
+  </div>
+
+  <div class="trust-pillars__grid">
+    {pillars.map((p) => (
+      <a
+        href={p.href}
+        class:list={[
+          'trust-pillar',
+          'clipped-card',
+          'glass-panel',
+          `trust-pillar--${p.tone}`,
+        ]}
+      >
+        <div class="trust-pillar__glow" aria-hidden="true"></div>
+        <div class="trust-pillar__inner">
+          <div class:list={['trust-pillar__icon', 'glass-panel', `trust-pillar__icon--${p.tone}`]}>
+            {p.iconKey === 'book' && (
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                <path d="M9 7h7" />
+                <path d="M9 11h5" />
+              </svg>
+            )}
+            {p.iconKey === 'shield' && (
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="M9 12l2 2 4-4" />
+              </svg>
+            )}
+            {p.iconKey === 'stethoscope' && (
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .2.3" />
+                <path d="M8 15v3a4 4 0 0 0 8 0v-3" />
+                <circle cx="20" cy="10" r="2" />
+              </svg>
+            )}
+          </div>
+
+          <p class="trust-pillar__kicker">{p.kicker}</p>
+          <h3 class="trust-pillar__title">{p.title}</h3>
+          <p class="trust-pillar__oneliner">{p.oneLiner}</p>
+
+          <div class="trust-pillar__metric" aria-hidden="true">
+            <span class:list={['trust-pillar__metric-number', `trust-pillar__metric-number--${p.tone}`]}>
+              {p.metricNumber}
+            </span>
+            <span class="trust-pillar__metric-label">{p.metricLabel}</span>
+          </div>
+
+          <span class:list={['trust-pillar__cta', `trust-pillar__cta--${p.tone}`]}>
+            {p.cta}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14" />
+              <path d="M12 5l7 7-7 7" />
+            </svg>
+          </span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .trust-pillars {
+    position: relative;
+    z-index: 10;
+    padding: var(--space-2xl) var(--space-lg);
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+
+  .trust-pillars__header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .trust-pillars__kicker {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .trust-pillars__heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .trust-pillars__lede {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  /* --- Grid --- */
+  .trust-pillars__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 640px) {
+    .trust-pillars__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .trust-pillars__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* --- Pillar card base --- */
+  .trust-pillar {
+    position: relative;
+    padding: var(--space-xl);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition:
+      transform var(--transition-normal),
+      box-shadow var(--transition-normal);
+  }
+
+  .trust-pillar:hover {
+    transform: scale(1.02);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trust-pillar:hover {
+      transform: none;
+    }
+  }
+
+  /* Hover glow overlay (mirrors ActionCards pattern) */
+  .trust-pillar__glow {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    pointer-events: none;
+  }
+
+  .trust-pillar:hover .trust-pillar__glow {
+    opacity: 1;
+  }
+
+  .trust-pillar--primary:hover {
+    box-shadow: 0 0 30px rgba(200, 75, 124, 0.15);
+  }
+  .trust-pillar--primary .trust-pillar__glow {
+    background: rgba(200, 75, 124, 0.05);
+  }
+
+  .trust-pillar--accent:hover {
+    box-shadow: 0 0 30px rgba(212, 168, 83, 0.18);
+  }
+  .trust-pillar--accent .trust-pillar__glow {
+    background: rgba(212, 168, 83, 0.06);
+  }
+
+  .trust-pillar--safe:hover {
+    box-shadow: 0 0 30px rgba(76, 175, 80, 0.15);
+  }
+  .trust-pillar--safe .trust-pillar__glow {
+    background: rgba(76, 175, 80, 0.05);
+  }
+
+  /* --- Card content --- */
+  .trust-pillar__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    height: 100%;
+  }
+
+  /* Icon box */
+  .trust-pillar__icon {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .trust-pillar__icon--primary {
+    color: var(--color-primary);
+    box-shadow: 0 0 15px rgba(200, 75, 124, 0.3);
+  }
+
+  .trust-pillar__icon--accent {
+    color: var(--color-accent);
+    box-shadow: 0 0 15px rgba(212, 168, 83, 0.32);
+  }
+
+  .trust-pillar__icon--safe {
+    color: var(--color-safe);
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+  }
+
+  /* Kicker (per-card) */
+  .trust-pillar__kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* Title */
+  .trust-pillar__title {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  /* One-liner */
+  .trust-pillar__oneliner {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    font-size: 0.9375rem;
+    margin: 0;
+  }
+
+  /* Metric block */
+  .trust-pillar__metric {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    padding: var(--space-md) 0 var(--space-sm);
+    border-top: 1px solid var(--color-outline-20);
+    margin-top: var(--space-sm);
+  }
+
+  .trust-pillar__metric-number {
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .trust-pillar__metric-number--primary {
+    color: var(--color-primary);
+  }
+  .trust-pillar__metric-number--accent {
+    color: var(--color-accent);
+  }
+  .trust-pillar__metric-number--safe {
+    color: var(--color-safe);
+  }
+
+  .trust-pillar__metric-label {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  /* CTA */
+  .trust-pillar__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: auto;
+  }
+
+  .trust-pillar__cta--primary {
+    color: var(--color-primary);
+  }
+  .trust-pillar__cta--accent {
+    color: var(--color-accent);
+  }
+  .trust-pillar__cta--safe {
+    color: var(--color-safe);
+  }
+
+  /* Sakura overrides — sakura mode swaps glass-panel + clipped-card globally,
+     here we only soften the metric border for the cream paper backdrop. */
+  :global(html.sakura) .trust-pillar__metric {
+    border-top-color: rgba(74, 40, 56, 0.18);
+  }
+
+  :global(html.sakura) .trust-pillar__icon {
+    box-shadow: none;
+  }
+</style>

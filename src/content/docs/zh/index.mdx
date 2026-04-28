@@ -19,6 +19,7 @@ import HeroSection from '../../../components/layout/HeroSection.astro';
 import ActionCards from '../../../components/layout/ActionCards.astro';
 import GuideScenarioStrip from '../../../components/layout/GuideScenarioStrip.astro';
 import DrugQuickNav from '../../../components/layout/DrugQuickNav.astro';
+import TrustPillars from '../../../components/layout/TrustPillars.astro';
 import MissionStatement from '../../../components/layout/MissionStatement.astro';
 import SiteFooter from '../../../components/layout/SiteFooter.astro';
 import { getSortedPosts, getCategoryLabel, getBlogUrl } from '../../../utils/blogHelpers';
@@ -41,6 +42,8 @@ export const recentPosts = (await getSortedPosts('zh')).slice(0, 4);
 <GuideScenarioStrip />
 
 <DrugQuickNav />
+
+<TrustPillars />
 
 <section class="recent-blog" aria-label="最近博客">
   <div class="recent-blog__head">
