@@ -19,6 +19,7 @@ export const ui = {
     'nav.risks': '风险急症',
     'nav.tools': '工具',
     'nav.guides': '实操指南',
+    'nav.blog': '博客',
     'nav.ariaLabel': '主导航',
 
     // ActionCards
@@ -31,6 +32,9 @@ export const ui = {
     'action.notStarted.cta': '查看基线检查',
     'action.onHRT.cta': '进入路径图',
     'action.problem.cta': '紧急行动指南',
+    'action.askAI.title': '我有医学问题',
+    'action.askAI.desc': '基于循证文献的 AI 问答助手 24 小时可用，不存对话、不做个人化处方建议。',
+    'action.askAI.cta': '问 AI 助手',
     'action.ariaLabel': '快速入口',
 
     // HeroSection
@@ -118,6 +122,7 @@ export const ui = {
     'nav.risks': 'Risks & Emergencies',
     'nav.tools': 'Tools',
     'nav.guides': 'Task Guides',
+    'nav.blog': 'Blog',
     'nav.ariaLabel': 'Main navigation',
 
     // ActionCards
@@ -130,6 +135,9 @@ export const ui = {
     'action.notStarted.cta': 'Explore Baseline',
     'action.onHRT.cta': 'Trace Pathway',
     'action.problem.cta': 'Emergency Action',
+    'action.askAI.title': 'I have a medical question',
+    'action.askAI.desc': 'Evidence-based AI assistant available 24/7. No conversation storage, no personalized prescriptions.',
+    'action.askAI.cta': 'Ask AI Assistant',
     'action.ariaLabel': 'Quick start',
 
     // HeroSection
@@ -217,6 +225,7 @@ export const ui = {
     'nav.risks': 'リスクと緊急',
     'nav.tools': 'ツール',
     'nav.guides': '実用ガイド',
+    'nav.blog': 'ブログ',
     'nav.ariaLabel': 'メインナビゲーション',
 
     // ActionCards
@@ -229,6 +238,9 @@ export const ui = {
     'action.notStarted.cta': 'ベースラインを確認',
     'action.onHRT.cta': '経路マップへ',
     'action.problem.cta': '緊急対応ガイド',
+    'action.askAI.title': '医学的な質問がある',
+    'action.askAI.desc': 'エビデンスに基づいたAIアシスタントが24時間対応。会話は保存せず、個別の処方提案も行いません。',
+    'action.askAI.cta': 'AIに質問する',
     'action.ariaLabel': 'クイックスタート',
 
     // HeroSection
@@ -316,6 +328,7 @@ export const ui = {
     'nav.risks': '위험과 응급',
     'nav.tools': '도구',
     'nav.guides': '실용 가이드',
+    'nav.blog': '블로그',
     'nav.ariaLabel': '주 내비게이션',
 
     // ActionCards
@@ -328,6 +341,9 @@ export const ui = {
     'action.notStarted.cta': '기초 검사 확인',
     'action.onHRT.cta': '경로 맵으로',
     'action.problem.cta': '응급 대응 가이드',
+    'action.askAI.title': '의학적 질문이 있어요',
+    'action.askAI.desc': '근거 기반 AI 어시스턴트가 24시간 대응. 대화 저장 안함, 개별 처방 제안 안함.',
+    'action.askAI.cta': 'AI에게 질문하기',
     'action.ariaLabel': '빠른 시작',
 
     // HeroSection

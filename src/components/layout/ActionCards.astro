@@ -15,7 +15,7 @@ interface CardData {
   description: string;
   cta: string;
   href: string;
-  color: 'safe' | 'primary' | 'danger';
+  color: 'safe' | 'primary' | 'danger' | 'accent';
   icon: string; // SVG path data or identifier
 }
 
@@ -46,6 +46,14 @@ const cards: CardData[] = [
     href: `${prefix}/risks/`,
     color: 'danger',
     icon: 'alert',
+  },
+  {
+    title: t(locale, 'action.askAI.title'),
+    description: t(locale, 'action.askAI.desc'),
+    cta: t(locale, 'action.askAI.cta'),
+    href: `${prefix}/tools/ai-assistant/`,
+    color: 'accent',
+    icon: 'spark',
   },
 ];
 ---
@@ -87,6 +95,19 @@ const cards: CardData[] = [
                 <line x1="12" y1="17" x2="12.01" y2="17" />
               </svg>
             )}
+            {card.icon === 'spark' && (
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3v3" />
+                <path d="M12 18v3" />
+                <path d="M3 12h3" />
+                <path d="M18 12h3" />
+                <path d="M5.6 5.6l2.1 2.1" />
+                <path d="M16.3 16.3l2.1 2.1" />
+                <path d="M5.6 18.4l2.1-2.1" />
+                <path d="M16.3 7.7l2.1-2.1" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            )}
           </div>
           <h3 class="action-card__title">{card.title}</h3>
           <p class="action-card__desc">{card.description}</p>
@@ -118,9 +139,15 @@ const cards: CardData[] = [
     gap: var(--space-xl);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 640px) {
     .action-cards__grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .action-cards__grid {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 
@@ -180,6 +207,13 @@ const cards: CardData[] = [
     background: rgba(244, 67, 54, 0.05);
   }
 
+  .action-card--accent:hover {
+    box-shadow: 0 0 30px rgba(212, 168, 83, 0.18);
+  }
+  .action-card--accent .action-card__glow {
+    background: rgba(212, 168, 83, 0.06);
+  }
+
   /* --- Card content --- */
   .action-card__content {
     position: relative;
@@ -210,6 +244,11 @@ const cards: CardData[] = [
   .action-card__icon--danger {
     color: var(--color-danger);
     box-shadow: 0 0 15px rgba(244, 67, 54, 0.3);
+  }
+
+  .action-card__icon--accent {
+    color: var(--color-accent);
+    box-shadow: 0 0 15px rgba(212, 168, 83, 0.32);
   }
 
   /* --- Title --- */
@@ -249,5 +288,20 @@ const cards: CardData[] = [
 
   .action-card__cta--danger {
     color: var(--color-danger);
+  }
+
+  .action-card__cta--accent {
+    color: var(--color-accent);
+  }
+
+  /* 4 卡布局下，紧凑标题 / 描述以避免视觉过重 */
+  @media (min-width: 1024px) {
+    .action-card__title {
+      font-size: 1.25rem;
+    }
+    .action-card__desc {
+      font-size: 0.9375rem;
+      line-height: 1.65;
+    }
   }
 </style>

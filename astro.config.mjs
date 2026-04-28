@@ -275,6 +275,11 @@ export default defineConfig({
           translations: { en: 'Topics & Tools', ja: '特集とツール', ko: '특집 및 도구' },
           items: [
             {
+              label: '工具总览',
+              translations: { en: 'All Tools', ja: 'ツール一覧', ko: '도구 모음' },
+              slug: 'tools',
+            },
+            {
               label: '血检自查工具',
               translations: { en: 'Blood Test Checker', ja: '血液検査チェッカー', ko: '혈액 검사 체커' },
               slug: 'tools/blood-checker',
@@ -293,6 +298,18 @@ export default defineConfig({
             { label: '风险自评', translations: { en: 'Risk Screener', ja: 'リスク自己評価', ko: '위험 자가 평가' }, slug: 'tools/risk-screener' },
             { label: '品牌索引', translations: { en: 'Brand Index', ja: 'ブランド索引', ko: '브랜드 색인' }, slug: 'tools/brand-index' },
             { label: '速查卡片', translations: { en: 'Drug Cards', ja: 'クイックカード', ko: '퀵 카드' }, slug: 'tools/drug-cards', badge: { text: { 'zh-CN': '新', en: 'New', ja: '新', ko: '새' }, variant: 'success' } },
+          ],
+        },
+        // ── 专题文章（博客目前仅中文，其他语言可看作"占位" group）──
+        {
+          label: '专题文章',
+          translations: { en: 'Articles', ja: '特集記事', ko: '특집 기사' },
+          items: [
+            {
+              label: '所有博客',
+              translations: { en: 'All Posts (Chinese only)', ja: '全記事（中国語のみ）', ko: '전체 기사 (중국어)' },
+              link: '/zh/blog/',
+            },
           ],
         },
         // ── 附录 ──

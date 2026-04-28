@@ -18,12 +18,13 @@ const prefix = `/${locale}`;
 const navItems: NavItem[] = [
   { label: t(locale, 'nav.before'), href: `${prefix}/before-you-start/`, mobileHide: true },
   { label: t(locale, 'nav.pathway'), href: `${prefix}/pathway/` },
-  { label: t(locale, 'nav.medications'), href: `${prefix}/medications/estrogens/overview/` },
   { label: t(locale, 'nav.guides'), href: `${prefix}/guides/` },
+  { label: t(locale, 'nav.tools'), href: `${prefix}/tools/`, mobileHide: true },
+  { label: t(locale, 'nav.blog'), href: `${prefix}/blog/` },
+  { label: t(locale, 'nav.medications'), href: `${prefix}/medications/estrogens/overview/` },
   { label: t(locale, 'nav.doseLimits'), href: `${prefix}/dose-limits/`, mobileHide: true },
   { label: t(locale, 'nav.bloodTests'), href: `${prefix}/blood-tests/`, mobileHide: true },
   { label: t(locale, 'nav.risks'), href: `${prefix}/risks/` },
-  { label: t(locale, 'nav.tools'), href: `${prefix}/tools/blood-checker/`, mobileHide: true },
 ];
 ---
 
