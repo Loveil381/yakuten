@@ -6,12 +6,22 @@ lastReviewed: 2026-04-07
 references: [canonico-2018, coleman-2022, hembree-2017, patel-2021, prior-2019, vinogradova-2019]
 sidebar:
   order: 1
+noindex: true
 ---
 
+import { Aside } from '@astrojs/starlight/components';
 import DangerBox from '../../../../../components/ui/DangerBox.astro';
 import WarningBox from '../../../../../components/ui/WarningBox.astro';
 import CitationRef from '../../../../../components/ui/CitationRef.astro';
 import DoseTable from '../../../../../components/ui/DoseTable.astro';
+
+{/* ko-translation-freeze-v1 */}
+<Aside type="caution" title="Korean translation paused / 한국어 번역 일시 중지">
+The Korean translation of this page is currently incomplete and may contain untranslated English content. For accurate medical information, please use the [Chinese version](/zh/) or [English version](/en/).
+
+본 페이지의 한국어 번역은 현재 불완전하며 번역되지 않은 영어 내용이 포함될 수 있습니다. 정확한 의료 정보는 [중국어](/zh/) 또는 [영어](/en/) 버전을 이용해 주시기 바랍니다.
+</Aside>
+
 
 Progestogens remain one of the most fiercely debated topics in transgender female HRT. Unlike estrogen and anti-androgens, progestogens are **not a mandatory component** of feminizing hormone therapy. The major international clinical guidelines maintain a highly cautious stance regarding their widespread use<CitationRef id="hembree-2017" num={1} authors="Hembree WC et al." year={2017} title="Endocrine Treatment of Gender-Dysphoric/Gender-Incongruent Persons" /><CitationRef id="coleman-2022" num={2} authors="Coleman E et al." year={2022} title="Standards of Care for the Health of Transgender and Gender Diverse People, Version 8" />.
 

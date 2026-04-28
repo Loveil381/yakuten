@@ -4,13 +4,23 @@ description: HRT 위험성 종합 안내 - 정맥 혈전색전증(VTE), 간 기�
 evidenceLevel: B
 lastReviewed: 2026-04-07
 references: [canonico-2018, coleman-2022, ema-2020, hembree-2017, hudelist-2026, lee-2022, meyer-2020]
+noindex: true
 ---
 
+import { Aside } from '@astrojs/starlight/components';
 import CitationRef from '../../../components/ui/CitationRef.astro';
 import EvidenceBadge from '../../../components/ui/EvidenceBadge.astro';
 import EmergencyBanner from '../../../components/ui/EmergencyBanner.astro';
 import RiskCard from '../../../components/ui/RiskCard.astro';
 import WarningBox from '../../../components/ui/WarningBox.astro';
+
+{/* ko-translation-freeze-v1 */}
+<Aside type="caution" title="Korean translation paused / 한국어 번역 일시 중지">
+The Korean translation of this page is currently incomplete and may contain untranslated English content. For accurate medical information, please use the [Chinese version](/zh/) or [English version](/en/).
+
+본 페이지의 한국어 번역은 현재 불완전하며 번역되지 않은 영어 내용이 포함될 수 있습니다. 정확한 의료 정보는 [중국어](/zh/) 또는 [영어](/en/) 버전을 이용해 주시기 바랍니다.
+</Aside>
+
 
 <EmergencyBanner />
 

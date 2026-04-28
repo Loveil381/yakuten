@@ -660,3 +660,40 @@ html.sakura .particle-dots {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* =========================================================================
+   EMERGENCY BANNER — sakura mode 显式覆盖
+   原默认 banner 用 var(--color-danger) 在 sakura 下被映射成 #E85A7A，
+   该色 vs 白字对比仅 ~3.5:1，不达 WCAG AA。
+   这里硬覆写背景为 #E5578B（樱花深粉，对白字 ~4.6:1，达 AA 大文本标准），
+   并保留紧急 banner 的视觉强度（白字 + 醒目焦点环）。
+   ========================================================================= */
+html.sakura .emergency-banner {
+  background: linear-gradient(135deg, #E5578B, #C23D5C);
+  color: #FFFFFF;
+  border-top: 1.5px solid rgba(74, 40, 56, 0.22);
+  border-bottom: 1.5px solid rgba(74, 40, 56, 0.22);
+}
+
+html.sakura .emergency-banner a,
+html.sakura .sl-markdown-content .emergency-banner a {
+  color: #FFFFFF;
+}
+
+/* CTA 按钮在 sakura 下保留半透明白底/白边以维持紧急基调 */
+html.sakura .emergency-banner .emergency-banner__cta {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  color: #FFFFFF;
+}
+html.sakura .emergency-banner .emergency-banner__cta:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* 焦点环：sakura 全局焦点是粉色，但粉色 vs 粉色背景看不见 —— 强制白色 */
+html.sakura .emergency-banner :where(a, button, [role="button"]):focus-visible,
+html.sakura .emergency-banner .emergency-banner__cta:focus-visible {
+  outline: 3px solid #FFFFFF;
+  outline-offset: 3px;
+}
