@@ -1,0 +1,101 @@
+---
+title: Methodology
+description: How HRT Pharmacopoeia content is produced, from literature search to publication — clinical guideline alignment, DOI citations, evidence grading A/B/C/X, two-person cross-checking, medical-advisor review, and rolling quarterly review.
+evidenceLevel: X
+lastReviewed: 2026-04-19
+references: []
+sidebar:
+  order: 101
+---
+
+import BylineCard from '../../../components/ui/BylineCard.astro';
+import EvidenceBadge from '../../../components/ui/EvidenceBadge.astro';
+import WarningBox from '../../../components/ui/WarningBox.astro';
+
+<BylineCard
+  author="HRT Pharmacopoeia Editorial Team"
+  lastReviewed="2026-04-19"
+  nextReview="2026-10-19"
+  locale="en"
+/>
+
+This page describes how every piece of HRT Pharmacopoeia content is written, reviewed, and updated. It is our commitment to readers: **text that has not gone through this process does not ship**.
+
+## 1. Three Core Principles
+
+1. **No claim without a citation**: every medical claim must carry at least one DOI or international guideline reference; if a claim cannot be sourced, it is either marked <EvidenceBadge level="X" /> or removed.
+2. **Cross-source dosing data**: prescription doses must appear in at least two independent authoritative sources (WPATH SOC 8 · Endocrine Society 2017 · UCSF · EMA, and similar).
+3. **Avoid absolute language**: skip "must / always / never" in favor of "typically / suggested / in the vast majority of cases".
+
+## 2. Full Workflow
+
+### 1. Topic selection
+- Topics are chosen based on search demand, reader questions, guideline updates, and major safety alerts (EMA/FDA)
+- Each page lists the 3–7 specific questions it must answer
+- The target audience (patient / primary care clinician / family member) is defined up front
+
+### 2. Literature search
+- Primary channels: PubMed, Cochrane, official guideline sites, Transfemscience reviews
+- Excluded: anonymous forum posts, commercial sites, blogs without peer review
+- Every key claim records its original citation (DOI preferred; otherwise journal publication info)
+
+### 3. Evidence grading
+Graded by study design strength:
+
+| Level | Meaning | Example evidence |
+|---|---|---|
+| <EvidenceBadge level="A" /> | Strong | Multiple RCTs, systematic reviews / meta-analyses, explicit international guideline recommendation |
+| <EvidenceBadge level="B" /> | Moderate | Single RCT, multiple prospective cohorts |
+| <EvidenceBadge level="C" /> | Weak | Case reports, retrospective studies, expert opinion |
+| <EvidenceBadge level="X" /> | None | Community lore, personal experience, inference |
+
+### 4. Drafting
+- Use shared components: `<DrugInfoBox>`, `<DoseTable>`, `<CitationRef>`, `<WarningBox>`, `<EmergencyBanner>`, etc.
+- Frontmatter records `evidenceLevel`, `lastReviewed`, and `references` (enforced by CI)
+- Dose tables automatically validate upper limits and contraindicated combinations
+
+### 5. Two-person cross-check
+- Author finishes a draft → a second editor independently verifies every `<CitationRef>` against the primary source
+- Mismatches or overreaches → returned for revision
+- If the original source has been retracted or corrected → site-wide search and replace
+
+### 6. Medical advisor review
+- Endocrinology / psychiatry / legal advisors are assigned by topic
+- Review records, including dissent and final decisions, are archived
+- If no qualified reviewer can be reached, the topic does not ship
+
+### 7. Publication and accessibility QA
+- `npm run astro check` + Lighthouse (SEO ≥ 95 / A11y ≥ 95)
+- Color contrast, keyboard reachability, screen-reader semantics validated
+- Mobile breakpoints and `prefers-reduced-motion` fallback verified
+
+### 8. Rolling review
+- Default re-review every **12 months**, refreshing `lastReviewed`
+- High-risk pages (risks, dose red lines, emergencies) are re-reviewed every **6 months**
+- A major guideline change → incremental update within 48 hours
+
+## 3. Error Correction
+
+When readers find factual errors, citation drift, or outdated content:
+
+1. Submit through the [feedback form](https://wj.qq.com/s2/16576000/5fe5/) or GitHub Issue
+2. Initial reply within 72 hours
+3. Once confirmed as a factual error, an **erratum notice** is added to the top of the page, and version history records the original error and correction date
+4. Major corrections are pushed to email / RSS / Telegram subscribers
+
+## 4. Conflict-of-Interest Statement
+
+- This site has no commercial sponsorship, no drug advertising, and no purchase commissions
+- Operating costs are paid out of pocket by volunteers; we accept open-source community donations
+- Editors and medical advisors sign conflict-of-interest disclosures; medications with active prescribing relationships are not independently reviewed by the conflicted party
+
+<WarningBox>
+This site offers evidence-based reference material and **does not constitute medical advice**. Consult a qualified healthcare professional before changing your medication, and seek emergency care immediately for acute symptoms.
+</WarningBox>
+
+## Related Documents
+
+- [About this site](/en/about/)
+- [Medical Advisors](/en/medical-advisors/)
+- [Editorial Policy](/en/editorial-policy/)
+- [Reference Library](/en/appendix-references/)

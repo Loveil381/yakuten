@@ -1,0 +1,210 @@
+---
+title: "Oral vs Injectable Estradiol: Clinical Comparison of Routes"
+description: A side-by-side comparison of oral estradiol (Progynova) and estradiol valerate injection (EV) covering pharmacokinetics, VTE risk, onset speed, plasma-level stability, availability in mainland China, and the self-injection learning curve.
+evidenceLevel: A
+lastReviewed: 2026-04-19
+references: [canonico-2018, coleman-2022, hembree-2017, kuhl-2005, aly-2021, ucsf-2016]
+faqs:
+  - q: "Which is better, oral or injectable estradiol?"
+    a: "Both can hit target levels for most users. Injection VTE risk is near baseline; oral is 2-4x baseline. International guidelines preferentially recommend non-oral routes (injection / gel / patch) for users aged 40+, smokers, those who are obese, or those with clotting disorders. Young, healthy users may choose either."
+  - q: "Do I have to inject estradiol myself?"
+    a: "Hospitals in mainland China usually do not provide routine HRT IM injection services; most users self-inject or have a friend assist. The learning curve is moderate, but for the first injection you should have someone present or video guidance, plus disinfection supplies and a plan for vasovagal reactions."
+  - q: "Will switching from oral to injection cause a rebound?"
+    a: "Short-term transitional fluctuation is possible: oral plasma levels clear within 24 hours after the last dose, while injections take 2-3 doses to reach steady state. Overlap for 1-2 weeks during the switch and confirm steady state with bloodwork before fully discontinuing oral."
+  - q: "How large is the VTE risk from oral estradiol?"
+    a: "The absolute risk remains low: baseline VTE in young, healthy MTF users is ~1-2/1000 person-years; oral estradiol raises it to ~3-6/1000 person-years. Injection/transdermal is roughly baseline. Smoking, obesity, and age stack the absolute risk substantially."
+  - q: "Does sublingual count as oral or transdermal?"
+    a: "It sits between the two. Sublingual mucosal absorption partially bypasses hepatic first-pass, so VTE risk may be lower than swallowed oral, but the evidence is weaker than for injection/transdermal. Plasma levels show high peaks and deep troughs, less stable than patch/gel/injection."
+sidebar:
+  order: 11
+---
+
+import BylineCard from '../../../../components/ui/BylineCard.astro';
+import EvidenceBadge from '../../../../components/ui/EvidenceBadge.astro';
+import CitationRef from '../../../../components/ui/CitationRef.astro';
+import WarningBox from '../../../../components/ui/WarningBox.astro';
+import GuideCTA from '../../../../components/ui/GuideCTA.astro';
+
+<BylineCard
+  author="HRT Pharmacopoeia Editorial Team"
+  lastReviewed="2026-04-19"
+  nextReview="2026-10-19"
+  evidenceLevel="A"
+  refCount={6}
+  locale="en"
+/>
+
+Oral estradiol (Progynova / estradiol valerate tablets) and intramuscular estradiol valerate (EV) injection are the two most common E2 routes in the Chinese-speaking MTF community. This page compares pharmacokinetics, safety, and practical barriers, **without giving a universal recommendation**.
+
+:::note[30-Second Decision Matrix]
+| If your situation is → | Recommended choice |
+|---|---|
+| You want the lowest VTE risk / age ≥40 / smoker / BMI>30 | **Injectable EV** · bypasses hepatic first-pass, RR ≈ 1 |
+| Needle-phobic / chaotic schedule / unwilling to learn the procedure | **Oral Progynova** · zero learning curve |
+| History of VTE / migraine with aura / Factor V Leiden | **Injectable EV** (or transdermal) · oral contraindicated |
+| Easy access in mainland China + low effort | **Oral Progynova** · stocked in OB/GYN |
+| Monotherapy goal (no antiandrogen) | **Injectable EV** · ~82% reach T &lt;50 ng/dL |
+| Inconsistent injection intervals / want intra-day stability | **Oral BID** · injection peak-to-trough ~3-4:1 |
+| Pregnancy / breastfeeding / under 18 | Neither recommended; please see a clinician |
+
+> Not sure? Read on for the detailed comparison, or use the [risk self-screener](/en/tools/risk-screener/) for help.
+:::
+
+## At a Glance
+
+| Dimension | Oral (Progynova) | Injection (estradiol valerate, EV) |
+|---|---|---|
+| **Hepatic first-pass** | Yes (passes through) | No (bypassed) |
+| **VTE risk** | 2-4x baseline | ~baseline |
+| **Dosing frequency** | 1-3 times per day | Every 5-10 days |
+| **Plasma-level stability** | Intra-day peaks/troughs | Inter-dose fluctuation |
+| **Onset** | Hours to peak | Peaks in 24-48 hours |
+| **Evidence level** | <EvidenceBadge level="A" /> | <EvidenceBadge level="A" /> |
+| **Availability in mainland China** | Prescription-only; common in OB/GYN and endocrinology | Prescription-only; some hospitals reluctant to prescribe |
+| **Monthly cost** | ~20-60 RMB | ~30-100 RMB |
+| **Practical barrier** | Zero | Self-IM learning curve |
+
+## Pharmacokinetics
+
+### Oral: hepatic first-pass shapes the curve
+
+Oral estradiol or estradiol valerate is absorbed in the small intestine, enters the liver via the portal vein, and **loses 50-70% to first-pass metabolism**<CitationRef id="kuhl-2005" />. The systemic effective dose is only 30-50% of the swallowed dose, and the liver is "soaked" in high concentrations of E2/E1.
+
+- Oral 2-4 mg → plasma peak ~50-150 pg/mL, falls back after 4-8 hours
+- Half-life ~12-14 hours (as E2), but E1/E2 ratio is skewed high
+- Hepatic production of SHBG, clotting factors, and CRP rises → elevated VTE / cholestasis risk<CitationRef id="canonico-2018" />
+
+### Injection: muscular slow-release, flatter curve
+
+After IM EV injection, the oily vehicle forms a depot in the muscle and the ester bond hydrolyzes slowly to release E2<CitationRef id="aly-2021" />:
+
+- 4 mg EV IM → peaks 24-48 hours later at ~300-600 pg/mL, then declines exponentially
+- Half-life ~4-5 days; falls to 100-150 pg/mL by 5-7 days
+- **Completely bypasses hepatic first-pass**; coagulation effects approximate physiological estradiol
+
+## VTE Risk Comparison
+
+Based on large MTF cohorts and postmenopausal HRT studies<CitationRef id="canonico-2018" /><CitationRef id="coleman-2022" />:
+
+| Route | Relative VTE risk vs baseline |
+|---|---|
+| Oral estradiol | **2-4x** |
+| Conjugated equine estrogens (CEE, obsolete) | 4-6x |
+| Sublingual | Possibly 1.5-3x (limited evidence) |
+| Transdermal gel / patch | **1x (baseline)** |
+| IM estradiol valerate | **1x (baseline)** |
+
+**Absolute risk is still low**: baseline VTE in young, healthy MTF users is ~1-2/1000 person-years. Smoking + obesity + age >40 stack to substantially raise absolute risk.
+
+**Guideline position**<CitationRef id="coleman-2022" /><CitationRef id="hembree-2017" />:
+- Age ≥40 + any risk factor → prefer non-oral
+- History of VTE → avoid oral; prefer transdermal/injection + anticoagulation evaluation
+- 2-4 weeks pre-surgery → switch to transdermal or pause
+
+## Plasma Stability
+
+<img
+  src="/images/diagrams/zh/oral-vs-injection-curves.webp"
+  alt="Oral vs intramuscular E2 plasma-level comparison waveform: oral twice daily shows intra-day peak-trough fluctuation (100-400 pg/mL); weekly injection shows a slow decline from peak ~600 pg/mL to trough ~150 pg/mL across the week"
+  width="1536"
+  height="1024"
+  loading="lazy"
+  decoding="async"
+  style="width:100%;height:auto;border-radius:4px;margin:0 0 var(--space-lg);"
+/>
+
+| Route | Intra-day variation | Inter-day variation | Symptom impact |
+|---|---|---|---|
+| Oral once daily | Peak/trough ~3:1 | Small | Mood swings · cyclical edema feeling |
+| Oral twice daily | Peak/trough ~2:1 | Small | More even |
+| Injection every 7 days | None | Peak/trough ~3-4:1 | "Post-injection high" for a few days |
+| Injection every 5 days | None | Peak/trough ~2:1 | Better steady state |
+| Patch / gel | Small | Small | Most stable |
+
+**Selection logic**: users seeking stable mood and embodiment prefer patch / gel / short-interval injection; users sensitive to dose flexibility prefer oral.
+
+## Onset and Switching
+
+### Oral onset
+
+- Peak at 2-4 hours after dose; tissue responses (breast development, skin changes) appear at 1-3 months
+- Steady-state T suppression ~4-8 weeks (with antiandrogen)
+
+### Injection onset
+
+- First injection peaks in 24-48 hours but cannot reach steady state
+- After 2-3 doses (~10-20 days) approaches steady state
+- During transition, overlap is recommended: keep oral going for 1-2 weeks before the first injection, then taper
+
+### Switching between routes
+
+**Oral → injection**:
+1. Calculate equivalent dose: oral 2-4 mg/day ≈ EV 4-8 mg every 7 days
+2. Maintain oral for 2-4 days after the first injection, then taper
+3. Check trough E2 at 4-6 weeks post-injection to confirm steady state
+
+**Injection → oral**:
+1. Stop the last injection; wait 5-7 days for plasma levels to fall
+2. Start oral; initial dose is often 1-1.5x the steady-state injection equivalent (to compensate for hepatic first-pass)
+3. Re-check bloodwork at 2-4 weeks for adjustment
+
+## Practical Barriers
+
+### Oral
+
+- Zero barrier; just take on schedule
+- Note: Progynova is estradiol valerate 2 mg per tablet, equivalent to "estradiol 2 mg" — no conversion needed
+- Missed dose: take it within 12 hours; skip if more than 12 hours late
+
+### Self-injection
+
+- Oily IM injection: 23G 1-1.5 inch needle (~25-38 mm), 21G for drawing
+- Injection sites: dorsogluteal (upper outer quadrant), anterior lateral thigh, deltoid (small volumes)
+- Disinfection: 70% alcohol; wipe vial stopper for 30 seconds, swab injection site in a circular motion
+- Technique: bleed air bubbles, push slowly (10-30 seconds), press the site for 30 seconds after withdrawal
+
+<WarningBox>
+**Strongly recommended for the first injection**: have a friend present · keep emergency phone numbers handy · observe for 30 minutes for allergic or vasovagal reactions. See our [first-injection guide](/en/guides/first-injection/) for the detailed flow.
+</WarningBox>
+
+### Subcutaneous (SC) alternative
+
+Oily EV can be **injected subcutaneously** (abdomen, anterior thigh) with less pain and a slightly longer half-life. Needle 25G × 5/8 inch (16 mm). Evidence is moderate; some guidelines now accept it<CitationRef id="aly-2021" />.
+
+## Availability in Mainland China
+
+| Channel | Oral (Progynova) | Injection (EV) |
+|---|---|---|
+| OB/GYN | Stocked, easy to prescribe | Some hospitals decline |
+| Endocrinology | Easy | Depends on physician attitude |
+| Reproductive medicine | Very easy | Common in ovarian-stimulation protocols |
+| Psychiatry (trans clinic) | Available | Available |
+| Cost | 20 mg × 30 tabs ~40 RMB | 5 mg/mL × 10 amps ~60-100 RMB |
+| Insurance | Partial reimbursement | Partial reimbursement |
+
+## How to Choose (Clinical Decision Framework)
+
+**Prefer oral when**:
+- Young, no VTE risk factors, unwilling to learn IM injection
+- Injection access is difficult or physicians refuse to prescribe
+- Short-term bridge that will switch in a few months
+- High acceptance of "daily medication" form
+
+**Prefer injection when**:
+- Age ≥40 or VTE risk factors (smoking/obesity/family history)
+- Inconsistent oral absorption (GI surgery history, IBD)
+- Seeking a flatter plasma profile
+- Willing to learn self-injection
+
+**Prefer patch / gel** (not compared on this page, but often optimal):
+- VTE history or high risk
+- Want to avoid needles entirely
+- Sensitive to fine dose adjustment
+
+## Related Pages
+
+- [Oral estradiol detailed entry](/en/medications/estrogens/oral/)
+- [Estradiol valerate injection detailed entry](/en/medications/estrogens/injection/)
+- [Estrogens overview and selection guide](/en/medications/estrogens/overview/)
+- [First-injection guide](/en/guides/first-injection/)
+- [E2 route-switching guide](/en/guides/switch-e2-route/)

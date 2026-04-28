@@ -1,0 +1,97 @@
+---
+title: Editorial Policy
+description: HRT Pharmacopoeia's editorial principles, error correction process, copyright and citation standards, complaints and appeals channels, and conflict-of-interest disclosure.
+evidenceLevel: X
+lastReviewed: 2026-04-19
+references: []
+sidebar:
+  order: 103
+---
+
+import BylineCard from '../../../components/ui/BylineCard.astro';
+import WarningBox from '../../../components/ui/WarningBox.astro';
+import DangerBox from '../../../components/ui/DangerBox.astro';
+
+<BylineCard
+  author="HRT Pharmacopoeia Editorial Team"
+  lastReviewed="2026-04-19"
+  nextReview="2026-10-19"
+  locale="en"
+/>
+
+## Absolute Prohibitions
+
+HRT Pharmacopoeia will never publish any of the following:
+
+<DangerBox>
+- Personalized prescription advice ("you should take X mg")
+- Drug purchase links, sales agents, or referral/commission QR codes
+- Wording that weakens recognition of medical emergencies (DVT, hepatotoxicity, meningioma, etc.)
+- Medical claims without a DOI or citation
+- Third-party tracking scripts or storage of user health data
+- Configurations that bypass AI disclaimers or safety warnings
+</DangerBox>
+
+## Language and Tone
+
+- **Avoid absolutes**: prefer "we suggest / typically / in most cases" over "must / always / never"
+- **Address the reader directly**: write "you can choose A or B" rather than "patients should choose A"
+- **State uncertainty plainly**: conclusions at evidence level B/C/X must be tagged with "data are limited" or "expert opinion"
+- **Reduce stigma**: use community-affirming language and avoid outdated or overly clinical terms
+
+## Citations and Copyright
+
+- Every medical claim is sourced via the `CitationRef` component (IDs map to entries in `src/data/references.json`)
+- DOIs are preferred; where no DOI exists, cite journal publication info plus a stable URL
+- Figures and diagrams are original or sourced from Creative Commons / public domain works; reproductions are credited
+- Original site content is released under CC BY-SA 4.0; code is governed by the repository LICENSE
+
+## Error Correction
+
+Readers can submit reports via the [feedback form](https://wj.qq.com/s2/16576000/5fe5/) or [GitHub Issues](https://github.com/cantascendia/yakuten/issues):
+
+| Type | Response time | Handling |
+|---|---|---|
+| Factual error | Initial reply within 72 hours | **Erratum notice** at the top of the page + change log |
+| Citation drift | 72 hours | Replace the citation and publish a public correction log |
+| Outdated information | 7 days | Incremental update + refresh `lastReviewed` |
+| Dangerous advice | 24-hour emergency takedown | Repair or keep offline pending review |
+
+Major corrections are also propagated to:
+
+- Version history at `/en/appendix-references/`
+- RSS / Telegram / email subscribers
+
+## Complaints and Appeals
+
+- **Content complaints**: [feedback form](https://wj.qq.com/s2/16576000/5fe5/)
+- **Legal / copyright**: open a GitHub Issue with the `legal` label, or contact the repository maintainers
+- **Privacy**: this site does not collect personally identifiable information; any reported privacy leak is handled within 24 hours
+
+## Conflict-of-Interest Disclosure
+
+- **No commercial sponsorship, no drug advertising, no purchase commissions**
+- Operating costs are covered by volunteer contributions and open-source community donations
+- Editors and medical advisors sign conflict-of-interest disclosures; topics with directly related prescribing or commercial relationships are recused
+- No external links carry affiliate identifiers; only community-vetted hospital and hotline resources are listed
+
+## Review Cycle
+
+| Page type | Default review interval |
+|---|---|
+| Emergency recognition, dosing red lines, danger warnings | **6 months** |
+| Drug monographs and guides | **12 months** |
+| Tools, policies, methodology | **12 months** |
+| Blog posts | Verified once 12 months after publication |
+
+A major guideline change (EMA/FDA safety alert, new WPATH / Endocrine Society edition) triggers an **incremental update within 48 hours**.
+
+<WarningBox>
+This page is a public commitment to editorial self-governance. **If you find us violating any clause above, please call it out publicly** — that accountability is the only way we keep faith with our readers.
+</WarningBox>
+
+## Related Documents
+
+- [About this site](/en/about/)
+- [Methodology](/en/methodology/)
+- [Medical Advisors](/en/medical-advisors/)
