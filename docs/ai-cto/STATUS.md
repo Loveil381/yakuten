@@ -1,193 +1,83 @@
 # STATUS
 
-**Last Updated:** 2026-04-12
-**Current Version:** v1.0.0
+**Last Updated:** 2026-04-23
+**Current Version:** v1.1.x (Phase 11 in flight)
 **Git Tag:** —
 
 ---
 
-## 当前阶段：Phase 10 完成（韩语 + 视觉升级 + 速查卡片 + E2E 测试 + PWA）
+## 当前阶段：Phase 11 — 内容深化 + SEO 自动化 + 高质量配图
 
-Phase 10 实现四语覆盖（新增韩语 44 页）、SVG 医学可视化（PK 曲线 + 注射部位 + 途径对比）、药物速查卡片、28 项 Playwright E2E 测试、PWA 支持、内容新鲜度检测。
-全站 177 页（zh 44 + en 44 + ja 44 + ko 44 + 共享），药物品牌 58 条，交互工具 10 个，SVG 插图 3 个。
+Phase 10 (2026-04-12) 已完成四语 177 页 + 视觉升级 + E2E + PWA。
+Phase 11 在 Phase 10 基础上推进三条主线：
+
+1. **中文内容纵深扩展** — 新增博客系统、对比页（Compare hub）、编辑/方法论/医学顾问治理页面，zh locale 从 44 页 → 55 页（+11 页）。
+2. **SEO 自动化基础设施** — `scripts/seo/` 三件套（GSC + Trends + keyword-gap 刷新）、月度 GitHub Actions workflow、JsonLd / BlogPostJsonLd / FaqSchema 三个结构化数据组件、自动 sitemap lastmod 注入、自动 OG 图像生成。
+3. **高质量医学配图（gpt-image-2 流水线）** — 2026-04-23 当日单批次产出 15 张人工生成配图（5 张乳房发育主题 + 10 步首次注射图文教程），并补齐 16 张图解（pathway-timeline、routes-vte-comparison、cpa-meningioma-risk、antiandrogens-matrix、dangerous-combinations、china-availability-heatmap、vte-risk-stacking、oral-vs-injection-curves、monitoring-gantt、progestogen-decision-tree、spironolactone-potassium、diane-35-vs-hrt、dose-diminishing-returns、baseline-tests-nav、mood-monitoring、breast-surgery-comparison）。
+
+全站 187 页（zh 55 + en 44 + ja 44 + ko 44），交互工具 10 个，结构化数据组件 3 个，SEO 自动化脚本 4 条。
+
+> ⚠ **i18n 平价警告**：blog / compare / editorial-policy / methodology / medical-advisors 当前仅有 zh 版本，en/ja/ko 暂未跟进，是 Phase 11 末期需评估的内容债。
 
 ---
 
 ## 功能完成度
 
-### 已发布（Vercel 生产环境）
+### 本期（Phase 11）新增
 
 | 功能 | 状态 | 质量 |
 |------|------|------|
-| 中文核心文档（9 页 + 20 药物详解页） | ✅ | 优秀（全部有内联 CitationRef + DOI 链接） |
-| 英文完整文档（44 页，含药物详解 + about + tools） | ✅ | 优秀 |
-| 日文完整文档（43 页，含药物详解 + about + tools） | ✅ | 优秀 |
-| 用药路径时间线 | ✅ | 良好 |
-| 乳房发育专题 | ✅ | 良好 |
-| 中国现实页 | ✅ | 良好 |
-| 血检指南 | ✅ | 良好 |
-| 血检自查工具 | ✅ | 良好 |
-| 注射剂量计算器 | ✅ | 良好 |
-| 剂量模拟器 | ✅ | 良好 |
-| 注射雌二醇酯类扩展（EC/EEn/EU） | ✅ | 良好（3 种注射酯类 PK 对比，三语） |
-| 5α-还原酶抑制剂（非那雄胺/度他雄胺） | ✅ | 良好（全新药物类别，三语） |
-| 地屈孕酮 + 屈螺酮 | ✅ | 良好（孕激素替代选项，三语） |
-| 不推荐孕激素 (MPA) | ✅ | 完整（警告页面，三语） |
-| 药物比较器（DrugComparator） | ✅ | 良好（18 药物对比，三语） |
-| 风险自评工具（RiskScreener） | ✅ | 良好（7 问卷 → 4 维度评分，三语） |
-| 参考文献库（ReferenceLibrary） | ✅ | 良好（22 条文献，搜索 + 分类过滤，三语） |
-| AI 问答助手（Gemini Flash） | ✅ | 良好 |
-| 友好医疗资源数据库（15 家） | ✅ | 良好（全国主要区域覆盖，全部验证至 2026-04-12） |
-| **品牌索引（DrugBrandIndex）** | ✅ | **良好（58 品牌，搜索 + 地区/类别筛选，三语）** |
-| 品牌图鉴（DrugBrandGallery） | ✅ | 良好（58 品牌，各药物页底部展示 + 索引页链接） |
-| **GnRH 激动剂完整指南** | ✅ | **优秀（6 种药物对比、注射操作指南、Flare 管理、拮抗剂、三语 ~280 行/语）** |
-| 引用系统（DOI 可点击跳转） | ✅ | 优秀（22 条文献，18 条有 DOI） |
-| **SEO/AEO 完整体系** | ✅ | **优秀（页面级 JSON-LD Drug/ScholarlyArticle、llms.txt、hreflang + x-default、og:locale）** |
-| **GitHub 项目展示** | ✅ | **完整（README + LICENSE + CONTRIBUTING + Issue 模板 + CI）** |
-| **GitHub Actions CI** | ✅ | **完整（内容验证 + TypeScript 检查 + 构建）** |
-| 米哈游视觉主题 | ✅ | 优秀 |
-| **浅色主题兼容** | ✅ | **良好（所有交互工具使用 CSS 变量，深浅自适应）** |
-| **侧边栏分组优化** | ✅ | **良好（给药途径分组 + badge + 6 个折叠组）** |
-| **Footer 法律声明** | ✅ | **完整（免责声明 + 隐私 + GitHub + 反馈链接）** |
-| **韩语 locale（44 页完整覆盖）** | ✅ | **良好（frontmatter 韩语化，工具 UI fallback 英文）** |
-| **药物速查卡片（DrugCards）** | ✅ | **良好（20 张卡片，分类筛选，微信可分享）** |
-| **SVG PK 曲线图（PKCurveChart）** | ✅ | **优秀（动画绘制 + 目标区域 + 深浅主题 + i18n）** |
-| **SVG 注射部位图（InjectionSiteSVG）** | ✅ | **良好（4 点位轮换 + 避开区域标注）** |
-| **SVG 途径对比图（RouteComparisonSVG）** | ✅ | **良好（5 途径 × 4 指标可视化对比）** |
-| **Playwright E2E 测试（28 项）** | ✅ | **完整（导航/SEO/工具/内容/Footer 全覆盖）** |
-| **PWA manifest.json** | ✅ | **完整（standalone + 深色主题 + SVG 图标）** |
-| **内容新鲜度 90 天告警** | ✅ | **完整（validate-content.mjs 集成）** |
-| 多语言 UI 字符串 | ✅ | 良好（四语：zh/en/ja/ko） |
-| Pagefind 搜索（四语索引） | ✅ | 良好 |
-| Google Fonts 非阻塞加载 | ✅ | 优秀（preload + swap） |
-| CSS 变量系统 | ✅ | 完整（零硬编码颜色） |
-| **ESLint + Prettier** | ✅ | **完整（ESLint 9 flat config + Prettier）** |
-| 禁用药物页 | ✅ | 完整 |
-| About 页面（三语，含 hananote 集成） | ✅ | 完整 |
-| 反馈入口（Footer） | ✅ | 完整（腾讯问卷已上线） |
+| 博客系统（`src/content/blog/zh/` + `src/pages/zh/blog/`） | ✅ | 良好（14 篇 zh 博客上线，含 BlogPostLayout + BlogHeader + BlogPostJsonLd + 自动 OG 图） |
+| 30 秒决策矩阵（Compare hub） | ✅ | 良好（3 篇 zh：cpa-vs-spironolactone / gel-vs-patch / oral-vs-injection） |
+| 编辑治理三页（zh） | ✅ | 完整（editorial-policy / methodology / medical-advisors） |
+| 乳房发育页 SEO 重写 + 5 张 gpt-image-2 配图 | ✅ | 优秀（Tanner / 导管分支 / E2 阶梯曲线 / 谣言海报 / 时间线） |
+| 首次注射 10 步图文教程（gpt-image-2） | ✅ | 优秀（injection-step-01..08 + injection-sites-anatomy + needle-gauges-comparison） |
+| Codex 配图批量交付（16 张高质量图解） | ✅ | 优秀（pathway/VTE/CPA/抗雄/危险组合/可及性/剂量曲线/监测甘特/孕激素决策树/钾监测/达英对比/收益递减/基线导航/情绪监测/隆胸对比） |
+| SEO 自动化脚本套件 | ✅ | 良好（`scripts/seo/fetch-gsc.mjs` + `fetch-trends.mjs` + `refresh-keyword-gap.mjs`） |
+| GitHub Actions `seo-refresh.yml` | ✅ | 完整（每月 1 号 02:30 UTC 触发，自动开 PR） |
+| 结构化数据组件 | ✅ | 完整（`JsonLd.astro` + `BlogPostJsonLd.astro` + `FaqSchema.astro`） |
+| 自动 sitemap lastmod 注入 | ✅ | 完整（`scripts/inject-sitemap-lastmod.mjs`，构建钩子） |
+| 自动 OG 图像生成 | ✅ | 完整（`scripts/generate-og-images.mjs`，构建钩子） |
+| 自动 FAQ frontmatter 注入 | ✅ | 完整（`scripts/inject-faqs-frontmatter.mjs`） |
+| 自动 compare 交叉链接注入 | ✅ | 完整（`scripts/inject-compare-links.mjs`） |
+| Sakura 手账皮肤（CSS toggle） | ✅ | 良好（`html.sakura` 类切换 → 三层 CSS：sakura-theme/skin/components） |
+| 血检手账 v3.2（BloodTestCheckerRouter + blood-b32） | ✅ | 良好（sakura 模式专用追踪器） |
+| 信任支柱 + 风险筛查器跳卡（首页） | ✅ | 良好（TrustPillars + before-you-start Aside） |
+| 多 H1 修复 + llms.txt GEO 扩展 | ✅ | 完整（4 个首页修复 + LLM 引导文件扩写） |
+| Bing/Google SEO 元数据重写 | ✅ | 完整（20 个 zh tier-1 页面 title/description） |
+| Vercel Analytics 开发模式 opt-out | ✅ | 完整（`localStorage['yakuten-dev']`） |
+| WCAG AA 站内对比度修复 | ✅ | 完整 |
+| 安全：硬编码 API key 移除 | ✅ | 完整（强制走环境变量） |
+| Breadcrumb schema + 每机器人 robots | ✅ | 完整（SEO Phase 3 P0） |
+| 博客面包屑 + 倒序锚点 + 每文 OG 图 | ✅ | 良好 |
 
-### 未完成（暂缓）
+### 已发布（沿用 Phase 10）
 
-| 功能 | 优先级 | 备注 |
+| 功能 | 状态 |
+|------|------|
+| 中文核心文档（before-you-start / pathway / risks / dose-limits / blood-tests / china-reality / breast-development） | ✅ |
+| 英/日/韩文档（44 页 × 3） | ✅ |
+| 用药路径时间线 / 中国现实页 / 血检指南 | ✅ |
+| 交互工具（血检自查 / 注射计算器 / 剂量模拟器 / AI 助手 / 风险筛查 / 药物对比 / 文献库 / 药物速查卡 / 品牌索引 / 医院查找） | ✅ |
+| AI 问答（Gemini 3 Flash Preview，Vercel Edge） | ✅ |
+| 友好医疗资源数据库（15 家） | ✅ |
+| 引用系统 + 22 条文献（18 条有 DOI） | ✅ |
+| SVG 医学可视化（PKCurveChart / InjectionSiteSVG / RouteComparisonSVG） | ✅ |
+| 28 项 Playwright E2E | ✅ |
+| PWA manifest + 内容新鲜度 90 天告警 | ✅ |
+| Pagefind 四语全文搜索 | ✅ |
+| ESLint 9 flat + Prettier + GitHub Actions CI | ✅ |
+
+### 未完成 / 已知缺口
+
+| 项目 | 优先级 | 备注 |
 |------|--------|------|
-| 品牌图鉴实物图片 | P3 | 需要社区贡献素材 |
+| blog / compare / editorial-policy / methodology / medical-advisors 的 en/ja/ko 翻译 | P1 | 内容平价回归到 Phase 9 之前的水平 |
+| Sakura 皮肤的 zh 之外 locale 覆盖 | P2 | 当前主要在 zh 路径验证 |
+| 品牌图鉴实物图片 | P3 | 需社区贡献素材 |
 | 韩语交互工具 UI 本地化 | P3 | 当前 fallback 到英文 |
-| 更多 SVG 插图（分子结构、Tanner 分期） | P3 | 可用 Servier Medical Art CC BY 4.0 |
 | 儿科/青少年内容 | P3 | CONTENT.md 已规划未实施 |
-| API 速率限制持久化 | P3 | 当前 in-memory，Vercel Edge 冷启动后重置 |
-
----
-
-## Phase 10 完成记录
-
-### Sprint 1 — 韩语 locale ✅
-
-| 任务 | 结果 |
-|------|------|
-| astro.config + i18n | 新增 ko locale，UI 字符串完整韩语化 |
-| 44 个 MDX 页面 | 全部 frontmatter 韩语翻译，body 复用英文内容 |
-| Head.astro | hreflang + og:locale 四语支持 |
-| 交互组件 | getLocale() 添加 /ko/ 检测（fallback EN） |
-
-### Sprint 2 — SVG 医学可视化 ✅
-
-| 任务 | 结果 |
-|------|------|
-| PKCurveChart.astro | 纯 SVG PK 曲线（动画绘制 1.5s + 目标区域 + 危险线 + i18n） |
-| InjectionSiteSVG.astro | 腹部注射部位示意图（4 编号点 + 避开区域 + 轮换标注） |
-| RouteComparisonSVG.astro | 5 途径对比信息图（生物利用度条 + VTE 指示 + 半衰期） |
-| 16 个 MDX 嵌入 | 口服/注射雌二醇 + 概述 + GnRH × 4 语 |
-
-### Sprint 3 — 速查卡片 + PWA + 测试 ✅
-
-| 任务 | 结果 |
-|------|------|
-| DrugCards.tsx | 20 张药物速查卡片（分类筛选 + 微信分享提示 + 品牌标识） |
-| 四语 MDX 页面 | zh/en/ja/ko tools/drug-cards.mdx |
-| PWA manifest.json | standalone + 深色主题 + SVG 图标 |
-| 28 项 E2E 测试 | Playwright（导航/SEO/工具/内容/Footer 全覆盖，全部通过） |
-| 内容新鲜度 | validate-content.mjs 90 天告警 |
-| 移动端审计 | 375px 视口全部工具通过 |
-
----
-
-## Phase 9 完成记录
-
-### Sprint 1 — GitHub 项目展示 ✅
-
-| 任务 | 结果 |
-|------|------|
-| README.md | 精美项目首页（徽章 + 功能表格 + Quick Start + 项目结构） |
-| LICENSE | 双协议（MIT 代码 + CC BY-NC-SA 4.0 内容） |
-| CONTRIBUTING.md | 贡献指南（翻译/代码/医学审阅） |
-| Issue 模板 | bug_report.yml + content_correction.yml + feature_request.yml |
-| FUNDING.yml | 赞助链接占位 |
-
-### Sprint 2 — 药物品牌索引 ✅
-
-| 任务 | 结果 |
-|------|------|
-| drug-brands.json 扩展 | 39→58 品牌，新增字段（activeIngredient, status, url） |
-| DrugBrandIndex.tsx | React 交互组件（搜索 + 地区/类别筛选 + 状态 badge） |
-| 三语 MDX 页面 | zh/en/ja tools/brand-index.mdx |
-| DrugBrandGallery 链接 | 各药物页底部新增「查看全部品牌索引 →」 |
-
-### Sprint 3 — 侧边栏重构 ✅
-
-| 任务 | 结果 |
-|------|------|
-| 雌二醇分组 | 按给药途径（口服/透皮/注射），注射变体折叠 |
-| Badge 系统 | 常用/首选/慎用/非必需/⚠ 三语 badge |
-| 折叠优化 | 孕激素/5αRI/工具/附录默认折叠（35→23 可见行） |
-
-### Sprint 4 — SEO/AEO 升级 ✅
-
-| 任务 | 结果 |
-|------|------|
-| llms.txt | AI 引擎发现文件（站点结构 + 证据标准 + 引用格式） |
-| JsonLd.astro 重构 | 页面级 Drug + ScholarlyArticle schema |
-| hreflang | HTML head 三语 + x-default |
-| og:locale | zh_CN/en_US/ja_JP + alternate |
-| Meta description | 10 个核心页面扩展至 130-160 字符 |
-
-### Sprint 5 — GnRH 激动剂重写 ✅
-
-| 任务 | 结果 |
-|------|------|
-| 三语页面 | 100-170 行 → ~280 行/语 |
-| 药物覆盖 | 3→6 种（+布舍瑞林鼻喷/那法瑞林/组氨瑞林植入棒） |
-| 使用方法 | 皮下注射 7 步操作 + 鼻喷使用 + 植入棒说明 |
-| Flare 管理 | 时间线表 + 抗雄覆盖方案 |
-| GnRH 拮抗剂 | 地加瑞克 + 瑞卢戈利介绍 |
-| 品牌数据 | 2→7 个（+Zoladex/贝依/Suprefact/Supprelin LA） |
-
-### Sprint 6 — 审计修复 ✅
-
-| 任务 | 结果 |
-|------|------|
-| 浅色主题 | BloodTestChecker/DoseSimulator/InjectionCalculator/DrugBrandIndex → CSS 变量 |
-| Footer 法律声明 | 免责声明 + GitHub/反馈链接 |
-| 医院验证 | 4 家过期记录刷新至 2026-04-12 |
-| CI/CD | GitHub Actions（内容验证 + TS 检查 + 构建） |
-| 代码质量 | ESLint 9 flat config + Prettier |
-
----
-
-## Phase 7-8 完成记录
-
-### Phase 7 — 工具 + 反馈
-
-- DrugComparator（18 药物对比）
-- RiskScreener（7 问卷 → 4 维度评分）
-- ReferenceLibrary（22 文献检索）
-- 反馈入口 + hananote 介绍
-
-### Phase 8 — 药物覆盖扩展
-
-- 注射雌二醇酯类（EC/EEn/EU）
-- 5α-还原酶抑制剂（非那雄胺/度他雄胺）
-- 孕激素扩展（地屈孕酮/屈螺酮/MPA）
-- 药物覆盖 13→20 种
+| API 速率限制持久化 | P3 | 当前 in-memory，Edge 冷启动后重置 |
 
 ---
 
@@ -195,27 +85,29 @@ Phase 10 实现四语覆盖（新增韩语 44 页）、SVG 医学可视化（PK 
 
 | 维度 | 评分 | 变化 |
 |------|------|------|
-| 产品完整性 | 9.8/10 | ↑ from 9.5（四语 + 速查卡片 + PWA + E2E） |
-| 技术质量 | 9.5/10 | —（CI/CD + ESLint + 28 项 E2E） |
-| 内容质量 | 9.5/10 | —（GnRH 重写 + 58 品牌 + 速查卡片） |
-| 视觉设计 | 9.5/10 | ↑ from 9（3 个 SVG 医学可视化组件） |
+| 产品完整性 | 9.7/10 | ↑ from 9.5（博客 + Compare hub + gpt-image-2 配图） |
+| 技术质量 | 9.6/10 | ↑ from 9.5（SEO 自动化 + 结构化数据 + 安全修复） |
+| 内容质量 | 9.7/10 | ↑ from 9.5（11 篇博客 + 3 篇决策矩阵 + 16 张医学图解） |
+| 视觉设计 | 9.7/10 | ↑ from 9.5（5 张 gpt-image-2 高质量手绘 + 10 步注射真人级配图 + Sakura 皮肤） |
 | 性能 | 9/10 | — |
-| SEO/AEO | 9.5/10 | —（四语 hreflang + og:locale） |
-| i18n 完整性 | 10/10 | ↑ from 9.5（四语完整覆盖 zh/en/ja/ko） |
-| UX 导航 | 9/10 | — |
-| **综合** | **9.5/10** | ↑ from 9.4 |
+| SEO/AEO | 9.8/10 | ↑ from 9.5（自动化套件 + JsonLd 三件套 + breadcrumb + FAQ schema + llms.txt 扩展） |
+| i18n 完整性 | 8.5/10 | ↓ from 10（Phase 11 zh-only 内容拉低）|
+| UX 导航 | 9.3/10 | ↑（首页信任支柱 + 风险筛查跳卡 + 交叉链接） |
+| **综合** | **9.5–9.7/10** | 持平/微升（i18n 缺口被 SEO + 内容深度抵消） |
 
 ---
 
 ## 页面统计
 
-| Locale | 页面数 |
-|--------|--------|
-| zh | 44 |
-| en | 44 |
-| ja | 44 |
-| ko | 44 |
-| **总计** | **177** |
+| Locale | 页面数 | 新增（Phase 11） |
+|--------|--------|------------------|
+| zh | 55 | +11（blog 14 篇通过路由聚合 / compare 3 / editorial-policy / methodology / medical-advisors） |
+| en | 44 | 0 |
+| ja | 44 | 0 |
+| ko | 44 | 0 |
+| **总计** | **187** | +10（净增） |
+
+> 注：博客 14 篇通过 `src/pages/zh/blog/[slug].astro` 动态渲染，不计入 Starlight `src/content/docs/zh` 的 55 页。若计入，zh 实际公开 URL 数 ≈ 69。
 
 ---
 
@@ -223,11 +115,24 @@ Phase 10 实现四语覆盖（新增韩语 44 页）、SVG 医学可视化（PK 
 
 | 数据文件 | 条目数 | 备注 |
 |---------|--------|------|
-| drugs.json | 20 种药物 | 全覆盖 |
-| drug-brands.json | 58 品牌 | 16 类药物，13 国 |
-| references.json | 22 条文献 | 18 条有 DOI |
-| hospitals.json | 15 家医院 | 全部验证至 2026-04-12 |
-| blood-ranges.json | 7 项指标 | E2/T/PRL/ALT/K+/Hb/D-dimer |
+| `drugs.json` | 20 种药物 | 全覆盖 |
+| `drug-brands.json` | 58 品牌 | 16 类药物，13 国 |
+| `references.json` | 22 条文献 | 18 条有 DOI |
+| `hospitals.json` | 15 家医院 | 全部验证至 2026-04-12 |
+| `blood-ranges.json` | 7 项指标 | E2/T/PRL/ALT/K+/Hb/D-dimer |
+| `gpt-image-2-manifest.json` | 15 条 prompt | 2026-04-23 一次性产出，禁止脚本重生成 |
+| `image-manifest.json` | 多语言图像清单 | Gemini 流水线（zh 已被 gpt-image-2 替换） |
+
+---
+
+## 当日（2026-04-23）落地
+
+- `feat(blood-checker): add v3.2 「血检手账」 sakura-mode tracker`
+- `chore(config): astro + vercel + deps updates + GEMINI agent doc`
+- `chore(scripts): gpt-image-2 manifest + ignore raw PNG staging folder`
+- 16 张 `images: add #N` 图解提交（codex handoff 批次）
+- `blog: breadcrumbs + reverse anchors + per-post auto-generated OG images`
+- `content: 30-second decision matrices on compare pages + cross-link callouts`
 
 ---
 
@@ -235,6 +140,8 @@ Phase 10 实现四语覆盖（新增韩语 44 页）、SVG 医学可视化（PK 
 
 | 问题 | 严重性 | 状态 |
 |------|--------|------|
+| Phase 11 内容（blog / compare / 治理三页）i18n 平价回退 | 中 | P1，需在 Phase 12 评估翻译策略 |
 | API 速率限制仅 in-memory | 低 | Vercel Edge 冷启动后重置 |
 | 品牌图鉴暂无实物图片 | 低 | 需社区素材 |
 | 韩语交互工具 UI 未完全本地化 | 低 | fallback 英文，功能正常 |
+| en/ja/ko 主题图依然使用 Gemini 流水线产物 | 低 | gpt-image-2 仅 zh 替换 |

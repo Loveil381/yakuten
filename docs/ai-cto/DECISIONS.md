@@ -1,6 +1,6 @@
 # DECISIONS
 
-**Last Updated:** 2026-04-08
+**Last Updated:** 2026-04-23
 
 关键技术决策记录。
 
@@ -8,30 +8,41 @@
 
 ## D001 — 选择 Astro + Starlight 而非 Next.js
 
-**决策**：使用 Astro 5 + Starlight 替代 Next.js + 自定义 docs 系统
+**决策**：使用 Astro 6 + Starlight 0.38 替代 Next.js + 自定义 docs 系统
 
 **理由**：
 - Starlight 提供开箱即用的多语言文档框架（侧边栏、i18n 路由、Pagefind 搜索）
 - Astro 零 JS 默认，对静态医疗内容站完全合适
 - 相比 Next.js，减少约 60% 的基础架构代码量
-- MDX 支持允许嵌入自定义医疗组件（CitationRef、DangerBox 等）
+- MDX 支持允许嵌入自定义医疗组件（CitationRef、DangerBox、JsonLd 等）
 
-**代价**：Starlight 的 CSS 覆盖复杂（需要 `:root[data-theme]` 选择器），视觉定制难度较高。
+**代价**：Starlight 的 CSS 覆盖复杂（需要 `:root[data-theme]` 选择器），视觉定制难度较高（已通过 Sakura 副皮肤验证可解 — 见 D010）。
+
+**状态**：已落地，无回退打算。
 
 ---
 
-## D002 — AI 模型选择（待迁移）
+## D002 — AI 模型：锁定 Google Gemini
 
-**当前状态**：使用 Google Gemini Flash（`gemini-2.0-flash-preview`）
+**决策**：AI 问答 Edge Function 长期使用 Google Gemini，**不迁移到 Claude / OpenAI**。
 
-**问题**：
-- CLAUDE.md 明确指定应使用 Claude Sonnet（`claude-sonnet-4-6`）
-- Gemini 对跨性别医疗领域的回答质量低于 Claude
-- 当前模型 ID 可能已过时
+**当前模型**：`gemini-3-flash-preview`（via `@ai-sdk/google` + `ai` SDK）
 
-**决策**：Phase 4B 中将 `api/ai-chat.ts` 迁移至 Anthropic SDK + Claude Sonnet
+**理由**：
+- Vercel + `@ai-sdk/google` 集成成熟，Edge Function 冷启动延迟可接受
+- Gemini Flash 系列免费配额 + 低成本，适合公益项目
+- 实际产品质量在 references.json 系统提示注入下足够（不需要 Claude 级别推理）
+- CLAUDE.md 中 "claude-sonnet-4-6" 是历史草稿，已弃用
 
-**影响文件**：`api/ai-chat.ts`，Vercel 环境变量（`GEMINI_API_KEY` → `ANTHROPIC_API_KEY`）
+**风险与缓解**：
+- 模型 ID 漂移 → 通过 `cto-models` 命令周期性核对
+- 答案质量不稳 → 系统提示强制引用 references.json + 拒绝个人化处方
+
+**环境变量**：`GOOGLE_GENERATIVE_AI_API_KEY`（Vercel；2026-04 已修复硬编码泄漏，强制走 env）
+
+**影响文件**：`api/ai-chat.ts`，`vercel.json`
+
+> **变更**：本条原标 "待迁移 Claude API"。Phase 9 起项目实际锁定 Gemini，2026-04-23 正式更新决策为已settled。
 
 ---
 
@@ -45,11 +56,13 @@
 - 减少服务器成本和维护复杂度
 - 静态页面便于 Pagefind 全文索引
 
-**例外**：`api/ai-chat.ts` 是 Vercel Edge Function（动态）
+**例外**：
+- `api/ai-chat.ts` — Vercel Edge Function（动态流式响应）
+- `src/pages/zh/blog/[slug].astro` — 动态路由但仍构建期生成
 
 ---
 
-## D004 — 医院数据结构设计
+## D004 — 医院数据结构：community-verified vs community-reported
 
 **决策**：使用 `verificationLevel: 'community-verified' | 'community-reported'` 区分数据质量
 
@@ -58,7 +71,7 @@
 - 避免直接声明"已核实"但实际可能过时
 - 用户可据此判断就诊前是否需要额外核实
 
-**数据文件**：`src/data/hospitals.json`（8 家医院，6 省市）
+**数据文件**：`src/data/hospitals.json`（15 家医院，全部验证至 2026-04-12）
 
 ---
 
@@ -70,6 +83,7 @@
 - 米哈游毛玻璃风格需要复杂的 CSS（clip-path、backdrop-filter、渐变），Tailwind utility 不擅长
 - CSS Variables 允许在 Starlight 主题系统内优雅覆盖
 - Astro component scoped styles 减少样式冲突
+- Sakura 副皮肤通过 `html.sakura` 类前缀实现物理隔离（见 D010），CSS variables 比 Tailwind 类切换更干净
 
 ---
 
@@ -84,14 +98,23 @@
 
 ---
 
-## D007 — i18n 内容策略
+## D007 — i18n 内容策略（修订）
 
-**决策**：中文为完整内容，英日为核心 5 页子集
+**原决策**（2026-04-08）：中文为完整内容，英日为核心 5 页子集
 
-**理由**：
-- 主要用户是中文读者，优先保证中文内容质量
-- 英文/日文翻译成本高，先覆盖最高流量页面（首页、用药路径、风险、剂量限制）
-- 医药详解页面翻译复杂（含引用、专业术语），推迟到 Phase 5
+**Phase 9-10 调整**：扩展到四语 44 页平价（zh/en/ja/ko 全部 44 页核心覆盖）
+
+**Phase 11 现状**（2026-04-23）：
+- 主体（before-you-start / pathway / risks / dose-limits / blood-tests / 20 药物 / 工具）保持四语 44 页平价
+- **新增 zh-only 内容**：博客 14 篇 / compare 决策矩阵 3 篇 / editorial-policy / methodology / medical-advisors
+- 韩语交互工具 UI 字符串 fallback 英文（功能正常，文案未本地化）
+
+**理据**：
+- 主用户群是中文 DIY 用户，深度内容优先 zh 验证产品-市场契合
+- 翻译成本（医疗术语 + 引用 + 文化适配）高，验证 zh 内容效果后再批量翻译
+- en/ja/ko 主体 44 页足以保证 SEO + 国际可访问性
+
+**Phase 12 计划**：translate compare 决策矩阵 + 治理三页 + top 5 博客到 en/ja/ko（P1 内容债）
 
 ---
 
@@ -106,12 +129,92 @@
 
 ---
 
-## D009 — Pathway 时间线布局选择
+## D009 — Pathway 时间线布局
 
 **决策**：使用左对齐单列时间线，放弃两列交替设计
 
-**背景**：原设计尝试左列标签 + 右列内容的两列交替布局，因 Starlight 内容区宽度约 720px，两列各 360px 太窄，无法容纳内容。CSS `order` 属性在网格布局中无法实现真正的交替效果（需要 JavaScript）。
+**背景**：原设计尝试左列标签 + 右列内容的两列交替布局，因 Starlight 内容区宽度约 720px，两列各 360px 太窄。CSS `order` 属性在网格布局中无法实现真正交替（需 JS）。
 
-**解决方案**：左边线 + 节点标记 + 完整内容卡片，类似传统垂直时间轴。
+**解决方案**：左边线 + 节点标记 + 完整内容卡片（传统垂直时间轴）
 
-**影响文件**：`src/styles/pathway.css`，`src/content/docs/zh/pathway.mdx`（及 en/ja 版）
+**影响文件**：`src/styles/pathway.css`，`src/content/docs/{zh,en,ja,ko}/pathway.mdx`
+
+---
+
+## D010 — Sakura 副皮肤：物理隔离而非 CSS skin
+
+**决策**（Phase 10/11）：Sakura「手账」皮肤通过 `html.sakura` 类前缀实现，所有样式以 `html.sakura ` 开头，与默认米哈游皮肤物理隔离。
+
+**背景**：早期尝试在原 CSS 上叠 sakura skin，污染了基础组件、破坏了 Starlight 的 sidebar / search / TOC（多次回滚 — 见 commits `41a991d`, `54fb28b`, `09b0cea`）。
+
+**最终方案**：
+- 三层 CSS：`sakura-theme.css`（令牌）→ `sakura-skin.css`（DOM 重塑）→ `sakura-components.css`（组件）
+- 所有规则前缀 `html.sakura`，默认状态零侵入
+- `BloodTestCheckerRouter.tsx` 在 sakura 模式下路由到 `blood-b32/` 子树（v3.2 「血检手账」追踪器）
+
+**理由**：
+- 默认米哈游皮肤已通过用户验证，不能为了二皮肤回退
+- CSS 类切换比 fork 整个站点便宜
+- 物理隔离让两套设计可独立演化
+
+---
+
+## D011 — 图像生成双流水线
+
+**决策**：保留 Gemini 自动流水线 + 引入 gpt-image-2 人工流水线，按 locale 分流。
+
+**背景**（2026-04-23）：Gemini 自动生成的多语图解在医学场景下质量参差（解剖比例、Tanner 分期、注射部位精度不足）。重要 zh 页面（乳房发育 / 首次注射）需更高质量。
+
+**方案**：
+- **Gemini 流水线**（`scripts/generate-images.mjs` + `image-manifest.json`）：保持，覆盖 en/ja/ko 主要图解
+- **gpt-image-2 流水线**（ChatGPT 网页 + `scripts/gpt-image-2-manifest.json`）：人工产出，仅替换 zh 主要图，2026-04-23 单批 15 张（5 张乳房发育 + 10 步首次注射）
+- `gpt-image-2-manifest.json` 显式标注 "Do not regenerate via scripts/generate-images.mjs"
+
+**代价**：i18n 配图质量分化（zh 高于 en/ja/ko）。可接受，因主用户群是 zh。
+
+---
+
+## D012 — SEO 自动化：月度快照 + PR 决策
+
+**决策**（Phase 11）：通过 GitHub Actions `seo-refresh.yml` 每月自动拉取 Google Trends + GSC 数据，刷新 `docs/seo-keyword-gap.md` AUTO-SNAPSHOT 块，自动开 PR。
+
+**理由**：
+- SEO 数据观察周期长（月级），手动跑容易漏
+- 用 PR 形式让人类审阅 striking-distance 词，决定是否补内容
+- GSC 凭证用 base64 secret 注入，临时落盘 `.gsc-credentials.json`，always 清理
+
+**实现**：
+- `scripts/seo/fetch-gsc.mjs`（googleapis）
+- `scripts/seo/fetch-trends.mjs`（google-trends-api，无需凭证）
+- `scripts/seo/refresh-keyword-gap.mjs`（合成 markdown）
+- `peter-evans/create-pull-request@v6` 开 PR 到 `seo/auto-snapshot` 分支
+
+**影响**：`.github/workflows/seo-refresh.yml`、`docs/seo-keyword-gap.md`、`docs/data/trends-*.json`
+
+---
+
+## D013 — 结构化数据：三组件独立可组合
+
+**决策**（Phase 11）：把结构化数据拆成 `JsonLd.astro` / `BlogPostJsonLd.astro` / `FaqSchema.astro` 三个独立 Astro 组件，按页面类型组合。
+
+**理由**：
+- 主体文档页用 `JsonLd.astro`（Drug / ScholarlyArticle / MedicalCondition / Breadcrumb）
+- 博客用 `BlogPostJsonLd.astro`（Article schema，含 headline / datePublished / author）
+- 任意页可加 `FaqSchema.astro`（驱动来源：frontmatter `faqs:[]` — 由 `inject-faqs-frontmatter.mjs` 半自动维护）
+
+**代价**：组件数量增加。可接受，关注点分离换可维护性。
+
+---
+
+## D014 — 安全：API key 必须走环境变量
+
+**决策**（2026-04-12 后强化）：所有第三方 API key（Google AI / GSC）严禁硬编码在源码或 `astro.config.mjs`，必须通过环境变量。
+
+**背景**：commit `bc4d481 security: remove hardcoded Google API key, require env var` — 历史 Google API key 出现在源码中，已轮换并移除。
+
+**强制点**：
+- `api/ai-chat.ts`：`GOOGLE_GENERATIVE_AI_API_KEY` 环境变量（Vercel）
+- `scripts/seo/fetch-gsc.mjs`：从 `.gsc-credentials.json` 读取（gitignored；CI 用 secret）
+- `.gitignore` 包含 `.gsc-credentials.json`、`.env*`
+
+**审计**：`scripts/audit-seo-meta.mjs` 不涉及凭证，但提醒任何 SEO 脚本扩展不可硬编码。

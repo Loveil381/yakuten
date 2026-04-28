@@ -51,7 +51,7 @@ const scenarios: Scenario[] = [
       {scenarios.map((s) => {
         const isLive = s.status === 'live';
         const Tag = isLive ? 'a' : 'div';
-        const props = isLive ? { href: s.href } : { 'aria-disabled': 'true' };
+        const props = isLive ? { href: s.href } : { 'aria-disabled': true as const };
         return (
           <Tag
             class:list={['guide-strip__card', 'glass-panel', 'clipped-card', !isLive && 'guide-strip__card--planned']}
