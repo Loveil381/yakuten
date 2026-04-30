@@ -9,6 +9,9 @@ pagefind: false
 
 import BloodTestChecker from '../../../../components/interactive/BloodTestCheckerRouter.tsx';
 import RelatedBlogPosts from '../../../../components/ui/RelatedBlogPosts.astro';
+import ToolDisclaimer from '../../../../components/ui/ToolDisclaimer.astro';
+
+<ToolDisclaimer privacy="local-only" />
 
 ## 使用说明
 
@@ -18,14 +21,8 @@ import RelatedBlogPosts from '../../../../components/ui/RelatedBlogPosts.astro';
 - **黄色** — 需要关注
 - **红色** — 建议停药就医
 
-:::caution[免责声明]
-本工具仅作为初步参考，**不能替代专业医生的判读**。参考范围基于 HRT 背景下的常见临床指南，个体差异可能很大。如果你对任何指标有疑虑，请直接就医咨询。
-:::
-
-:::note[隐私保护]
-所有计算在你的浏览器中本地完成，不会传输到任何服务器。
-
-- **经典模式（默认）**：单次查询，不保存任何数据。
+:::note[关于两种模式]
+- **经典模式（默认）**：单次查询，不保存任何数据，仅在当前会话中存在。
 - **新版「血检手账」模式**（点击左下角 🌸 新版 开启）：记录保存在你本机浏览器的 localStorage 里，可追踪历次血检变化。清除浏览器数据或点设置里的「清空所有记录」即可彻底删除。
 :::
 

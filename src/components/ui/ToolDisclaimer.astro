@@ -1,0 +1,153 @@
+---
+/**
+ * ToolDisclaimer — 工具页统一免责声明
+ *
+ * 三要素：
+ *   1. 不替代医生（教育与决策辅助）
+ *   2. 隐私承诺（按工具不同：local-only / no-storage / ai-no-history）
+ *   3. 紧急情况引导（120 / 急诊）
+ *
+ * 视觉：玻璃 morphism + 左侧金色色带（米哈游「二相乐园」），
+ * sakura 模式下色带自动跟随 --color-accent 重新映射。
+ */
+interface Props {
+  privacy?: 'local-only' | 'no-storage' | 'ai-no-history';
+  compact?: boolean;
+}
+
+const { privacy = 'no-storage', compact = false } = Astro.props;
+
+const privacyText = {
+  'local-only':
+    '本工具数据仅保存在你的浏览器 localStorage，永不上传服务器；清除浏览器数据即可清空。',
+  'no-storage':
+    '本工具不保存任何输入或结果，数据仅在你当前页面会话中存在，关闭页面即清空。',
+  'ai-no-history':
+    'AI 问答不存储对话内容，每次提问独立处理；问题与回答都不会被保留或用于训练。',
+}[privacy];
+---
+
+<aside
+  class:list={['tool-disclaimer', { 'tool-disclaimer--compact': compact }]}
+  role="note"
+  aria-label="工具使用须知"
+>
+  <ul>
+    <li>
+      <span class="tool-disclaimer__badge tool-disclaimer__badge--medical" aria-hidden="true">⚕</span>
+      <span><strong>不替代医生：</strong>本工具仅供教育和决策辅助，不构成医学诊断或处方建议。</span>
+    </li>
+    <li>
+      <span class="tool-disclaimer__badge tool-disclaimer__badge--privacy" aria-hidden="true">🔒</span>
+      <span><strong>隐私：</strong>{privacyText}</span>
+    </li>
+    <li>
+      <span class="tool-disclaimer__badge tool-disclaimer__badge--emergency" aria-hidden="true">⚠</span>
+      <span>
+        <strong>紧急情况：</strong>出现胸痛、单侧腿肿、视力突变、严重黄疸或自杀意念等紧急症状时，立即拨打
+        <a href="tel:120">120</a> 或就近急诊。
+      </span>
+    </li>
+  </ul>
+</aside>
+
+<style>
+  .tool-disclaimer {
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-outline-20);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 12px;
+    padding: var(--space-md);
+    margin: 0 0 var(--space-lg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .tool-disclaimer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .tool-disclaimer li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6em;
+    line-height: 1.6;
+    font-size: 0.9rem;
+    color: var(--color-text-primary);
+  }
+
+  .tool-disclaimer strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .tool-disclaimer__badge {
+    flex-shrink: 0;
+    width: 1.6em;
+    height: 1.6em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 1em;
+    line-height: 1;
+  }
+
+  .tool-disclaimer__badge--medical {
+    background: var(--color-primary-alpha-15, rgba(200, 75, 124, 0.15));
+    color: var(--color-primary);
+  }
+
+  .tool-disclaimer__badge--privacy {
+    background: var(--color-accent-alpha-10, rgba(212, 168, 83, 0.12));
+    color: var(--color-accent);
+  }
+
+  .tool-disclaimer__badge--emergency {
+    background: var(--color-danger-alpha-10, rgba(244, 67, 54, 0.15));
+    color: var(--color-danger, #F44336);
+  }
+
+  .tool-disclaimer a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .tool-disclaimer a:hover,
+  .tool-disclaimer a:focus-visible {
+    color: var(--color-primary-light, var(--color-primary));
+  }
+
+  .tool-disclaimer--compact ul {
+    gap: var(--space-xs);
+  }
+
+  .tool-disclaimer--compact li {
+    font-size: 0.85rem;
+  }
+
+  /* 小屏：badge 和文本仍并排，但允许文本完整换行 */
+  @media (max-width: 480px) {
+    .tool-disclaimer {
+      padding: var(--space-sm) var(--space-md);
+    }
+    .tool-disclaimer li {
+      font-size: 0.85rem;
+    }
+  }
+
+  /* sakura 模式：手账风更柔和的圆角与影子 */
+  :global(html.sakura) .tool-disclaimer {
+    border-radius: var(--b32-r-lg, 20px);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 2px 6px rgba(74, 40, 56, 0.08);
+  }
+</style>

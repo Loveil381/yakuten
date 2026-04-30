@@ -8,6 +8,9 @@ pagefind: false
 ---
 
 import RiskScreener from '../../../../components/interactive/RiskScreener.tsx';
+import ToolDisclaimer from '../../../../components/ui/ToolDisclaimer.astro';
+
+<ToolDisclaimer privacy="local-only" />
 
 ## HRT 风险因素自我评估
 
@@ -22,12 +25,12 @@ import RiskScreener from '../../../../components/interactive/RiskScreener.tsx';
 
 <RiskScreener client:visible />
 
-## 重要说明
+## 如何理解你的评分
 
 <div class="warning-box">
-<div class="warning-box__title">⚠ 不是医学诊断</div>
+<div class="warning-box__title">⚠ 风险评分的边界</div>
 
-本工具**不能替代**专业的医疗评估。风险评分基于已知的群体统计数据，无法反映你的完整个人健康状况。请将评估结果带给你的医疗服务提供者，作为讨论的起点。
+风险评分基于已知的群体统计数据，无法反映你的完整个人健康状况。请将评估结果带给你的医疗服务提供者，作为讨论的起点。
 
 **高风险不意味着不能使用 HRT**，而是意味着可能需要更频繁的监测、不同的给药途径、或特定的预防措施。
 </div>

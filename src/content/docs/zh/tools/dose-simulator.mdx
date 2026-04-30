@@ -8,6 +8,9 @@ pagefind: false
 ---
 
 import DoseSimulator from '../../../../components/interactive/DoseSimulator.tsx';
+import ToolDisclaimer from '../../../../components/ui/ToolDisclaimer.astro';
+
+<ToolDisclaimer privacy="no-storage" />
 
 ## 血药浓度曲线模拟
 
@@ -29,12 +32,12 @@ import DoseSimulator from '../../../../components/interactive/DoseSimulator.tsx'
 - **波动幅度**：(峰值-谷值)/峰值。波动越大，症状感受越不稳定
 - **稳态**：经过约 5 个半衰期后，峰谷范围趋于稳定
 
-## 重要提醒
+## 模型的边界
 
 <div class="warning-box">
-<div class="warning-box__title">⚠ 仅供参考</div>
+<div class="warning-box__title">⚠ 不代替血检</div>
 
-本模拟器**不**代替血检。曲线显示的是**相对浓度趋势**，不是实际的 pg/mL 数值。影响实际血药浓度的因素包括但不限于：个体代谢速率、体重、体脂比例、注射部位、肝功能状态等。
+曲线显示的是**相对浓度趋势**，不是实际的 pg/mL 数值。影响实际血药浓度的因素包括但不限于：个体代谢速率、体重、体脂比例、注射部位、肝功能状态等。
 
 **请始终以实际血检结果为准调整方案。**
 </div>

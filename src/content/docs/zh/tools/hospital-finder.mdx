@@ -10,6 +10,7 @@ import HospitalCard from '../../../../components/ui/HospitalCard.astro';
 import WarningBox from '../../../../components/ui/WarningBox.astro';
 import DangerBox from '../../../../components/ui/DangerBox.astro';
 import GlassCard from '../../../../components/ui/GlassCard.astro';
+import ToolDisclaimer from '../../../../components/ui/ToolDisclaimer.astro';
 
 import hospitalsRaw from '../../../../data/hospitals.json';
 
@@ -22,6 +23,8 @@ export const hospitalsByCity = cityOrder
   }))
   .filter(({ hospitals: cityHospitals }) => cityHospitals.length > 0);
 export const cityCount = hospitalsByCity.length;
+
+<ToolDisclaimer privacy="no-storage" />
 
 <WarningBox title="信息时效性提示">
 以下医疗资源信息基于社区成员的就诊反馈和公开渠道核实，**可能随时发生变化**（医生调动、科室调整、政策变化等）。**就诊前请通过医院官方渠道确认出诊信息和挂号方式。**

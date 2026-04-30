@@ -9,6 +9,9 @@ pagefind: false
 
 import DrugComparator from '../../../../components/interactive/DrugComparator.tsx';
 import GuideCTA from '../../../../components/ui/GuideCTA.astro';
+import ToolDisclaimer from '../../../../components/ui/ToolDisclaimer.astro';
+
+<ToolDisclaimer privacy="no-storage" />
 
 <GuideCTA
   eyebrow="已在用药"
@@ -38,7 +41,7 @@ import GuideCTA from '../../../../components/ui/GuideCTA.astro';
 - **监测项目**：使用该药物期间需要定期检查的血检指标
 
 <div class="warning-box">
-<div class="warning-box__title">⚠ 仅供参考</div>
+<div class="warning-box__title">⚠ 选药决策的边界</div>
 
-本工具不构成用药建议。药物选择需综合考虑个人病史、风险因素、可及性和经济条件。**请在医疗专业人员指导下做出决定。**
+药物选择需综合考虑个人病史、风险因素、可及性和经济条件。本对比表只提供参数差异，不能替代医生根据你完整健康档案做出的处方判断。**请在医疗专业人员指导下做出决定。**
 </div>
