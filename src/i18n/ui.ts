@@ -20,6 +20,7 @@ export const ui = {
     'nav.tools': '工具',
     'nav.guides': '实操指南',
     'nav.blog': '博客',
+    'nav.search': '搜索',
     'nav.ariaLabel': '主导航',
 
     // ActionCards
@@ -123,6 +124,7 @@ export const ui = {
     'nav.tools': 'Tools',
     'nav.guides': 'Task Guides',
     'nav.blog': 'Blog',
+    'nav.search': 'Search',
     'nav.ariaLabel': 'Main navigation',
 
     // ActionCards
@@ -226,6 +228,7 @@ export const ui = {
     'nav.tools': 'ツール',
     'nav.guides': '実用ガイド',
     'nav.blog': 'ブログ',
+    'nav.search': '検索',
     'nav.ariaLabel': 'メインナビゲーション',
 
     // ActionCards
@@ -329,6 +332,7 @@ export const ui = {
     'nav.tools': '도구',
     'nav.guides': '실용 가이드',
     'nav.blog': '블로그',
+    'nav.search': '검색',
     'nav.ariaLabel': '주 내비게이션',
 
     // ActionCards

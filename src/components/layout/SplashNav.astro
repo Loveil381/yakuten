@@ -3,43 +3,124 @@
  * SplashNav — 首页水平导航栏
  * 在 Starlight splash 页面中替代侧边栏，提供主要页面入口。
  * 玻璃面板样式，固定在 header 下方。
+ *
+ * 实现要点：
+ * - 桌面端：所有 nav 项 + 搜索按钮（icon + ⌘K）水平居中。
+ * - 移动端 (< 768px)：所有 nav 项保留可见，启用水平滚动 (overflow-x: auto + scroll-snap)，
+ *   搜索按钮固定在右侧 sticky，仅显示 icon。
+ * - 搜索按钮通过 dispatch Cmd/Ctrl+K KeyboardEvent 触发 Starlight 全局搜索 modal
+ *   (Starlight 在 window 上挂了 keydown 监听，参见 node_modules/@astrojs/starlight/components/Search.astro)。
  */
 import { t, getLocale } from '../../i18n/ui';
 
 interface NavItem {
   label: string;
   href: string;
-  mobileHide?: boolean;  // hidden on mobile (covered by other homepage sections)
 }
 
 const locale = getLocale(Astro.currentLocale, Astro.url.pathname);
 const prefix = `/${locale}`;
 
 const navItems: NavItem[] = [
-  { label: t(locale, 'nav.before'), href: `${prefix}/before-you-start/`, mobileHide: true },
+  { label: t(locale, 'nav.before'), href: `${prefix}/before-you-start/` },
   { label: t(locale, 'nav.pathway'), href: `${prefix}/pathway/` },
   { label: t(locale, 'nav.guides'), href: `${prefix}/guides/` },
-  { label: t(locale, 'nav.tools'), href: `${prefix}/tools/`, mobileHide: true },
+  { label: t(locale, 'nav.tools'), href: `${prefix}/tools/` },
   { label: t(locale, 'nav.blog'), href: `${prefix}/blog/` },
   { label: t(locale, 'nav.medications'), href: `${prefix}/medications/estrogens/overview/` },
-  { label: t(locale, 'nav.doseLimits'), href: `${prefix}/dose-limits/`, mobileHide: true },
-  { label: t(locale, 'nav.bloodTests'), href: `${prefix}/blood-tests/`, mobileHide: true },
+  { label: t(locale, 'nav.doseLimits'), href: `${prefix}/dose-limits/` },
+  { label: t(locale, 'nav.bloodTests'), href: `${prefix}/blood-tests/` },
   { label: t(locale, 'nav.risks'), href: `${prefix}/risks/` },
 ];
+
+const searchLabel = t(locale, 'nav.search');
 ---
 
 <nav class="splash-nav glass-panel" aria-label={t(locale, 'nav.ariaLabel')}>
   <div class="splash-nav__inner">
-    {navItems.map((item) => (
-      <a
-        href={item.href}
-        class:list={['splash-nav__link', { 'splash-nav__link--mobile-hide': item.mobileHide }]}
+    <div class="splash-nav__links" role="list">
+      {navItems.map((item) => (
+        <a href={item.href} class="splash-nav__link" role="listitem">
+          {item.label}
+        </a>
+      ))}
+    </div>
+
+    <button
+      type="button"
+      class="splash-nav__search"
+      data-splash-search-trigger
+      aria-label={searchLabel}
+      aria-keyshortcuts="Control+K Meta+K"
+    >
+      <svg
+        class="splash-nav__search-icon"
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       >
-        {item.label}
-      </a>
-    ))}
+        <circle cx="11" cy="11" r="7" />
+        <path d="m21 21-4.35-4.35" />
+      </svg>
+      <span class="splash-nav__search-label">{searchLabel}</span>
+      <kbd class="splash-nav__search-kbd" aria-hidden="true">
+        <kbd>Ctrl</kbd><kbd>K</kbd>
+      </kbd>
+    </button>
   </div>
 </nav>
+
+<script is:inline>
+  // 触发 Starlight 内置搜索 modal。
+  // Starlight 已在 window 上挂载了 Cmd/Ctrl+K 全局监听 (Search.astro 第 119–124 行)，
+  // 这里 dispatch 同样的 KeyboardEvent 即可，不依赖任何内部 selector。
+  // 同时把按钮文案改为 ⌘K（Apple 设备）。
+  (() => {
+    const triggers = document.querySelectorAll('[data-splash-search-trigger]');
+    if (!triggers.length) return;
+
+    const isApple = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
+    if (isApple) {
+      triggers.forEach((btn) => {
+        const kbd = btn.querySelector('.splash-nav__search-kbd');
+        if (kbd) {
+          const first = kbd.querySelector('kbd');
+          if (first) first.textContent = '⌘';
+        }
+      });
+    }
+
+    const open = () => {
+      // 优先：找到 Starlight 自己的搜索按钮直接 click（最稳，避免重复 dispatch 干扰其它监听器）。
+      const slBtn = document.querySelector('site-search button[data-open-modal]');
+      if (slBtn instanceof HTMLButtonElement && !slBtn.disabled) {
+        slBtn.click();
+        return;
+      }
+      // 回退：dispatch Cmd/Ctrl+K，Starlight 全局监听器会响应。
+      const ev = new KeyboardEvent('keydown', {
+        key: 'k',
+        code: 'KeyK',
+        bubbles: true,
+        cancelable: true,
+        metaKey: isApple,
+        ctrlKey: !isApple,
+      });
+      window.dispatchEvent(ev);
+    };
+
+    triggers.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        open();
+      });
+    });
+  })();
+</script>
 
 <style>
   .splash-nav {
@@ -56,13 +137,22 @@ const navItems: NavItem[] = [
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: var(--space-sm);
+  }
+
+  .splash-nav__links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: var(--space-xs);
+    flex: 1 1 auto;
+    min-width: 0;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
 
-  .splash-nav__inner::-webkit-scrollbar {
+  .splash-nav__links::-webkit-scrollbar {
     display: none;
   }
 
@@ -89,33 +179,136 @@ const navItems: NavItem[] = [
     text-decoration: none;
   }
 
+  /* —— 搜索按钮：米哈游玻璃质感 —— */
+  .splash-nav__search {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 6px var(--space-md);
+    height: 2.25rem;
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1;
+    background: var(--color-primary-alpha-08, rgba(200, 75, 124, 0.08));
+    border: 1px solid var(--color-outline-20);
+    border-radius: 0;
+    /* 对角 clip-path（米哈游风） */
+    clip-path: polygon(
+      0 0,
+      calc(100% - 10px) 0,
+      100% 10px,
+      100% 100%,
+      10px 100%,
+      0 calc(100% - 10px)
+    );
+    cursor: pointer;
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      border-color var(--transition-fast);
+  }
+
+  .splash-nav__search:hover,
+  .splash-nav__search:focus-visible {
+    color: var(--color-primary-light);
+    background: var(--color-primary-alpha-15, rgba(200, 75, 124, 0.15));
+    border-color: var(--color-primary);
+    box-shadow: 0 0 12px var(--color-primary-alpha-25, rgba(200, 75, 124, 0.25));
+    outline: none;
+  }
+
+  .splash-nav__search-icon {
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+  }
+
+  .splash-nav__search-label {
+    white-space: nowrap;
+  }
+
+  .splash-nav__search-kbd {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin-inline-start: var(--space-xs);
+    padding: 0;
+    font-family: var(--font-mono, "JetBrains Mono", monospace);
+    font-size: 0.6875rem;
+    background: transparent;
+    border: 0;
+  }
+
+  .splash-nav__search-kbd kbd {
+    display: inline-block;
+    min-width: 1rem;
+    padding: 1px 4px;
+    color: var(--color-text-secondary);
+    background: var(--color-outline-20);
+    border: 1px solid var(--color-outline-20);
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: 1.2;
+  }
+
+  /* —— 移动端：横滚 nav 链接，搜索按钮缩为 icon-only —— */
   @media (max-width: 768px) {
     .splash-nav {
       padding: 0;
     }
 
     .splash-nav__inner {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
       gap: 0;
-      overflow-x: visible;
-      padding: 0;
+      padding-inline-end: var(--space-xs);
     }
 
-    .splash-nav__link--mobile-hide {
-      display: none;
+    .splash-nav__links {
+      justify-content: flex-start;
+      gap: 0;
+      padding: 0 var(--space-xs);
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
     }
 
     .splash-nav__link {
       font-size: 0.75rem;
-      padding: var(--space-sm) var(--space-xs);
+      padding: var(--space-sm) var(--space-sm);
       text-align: center;
       border-bottom: none;
+      scroll-snap-align: center;
+      flex: 0 0 auto;
     }
 
-    /* 竖分隔线：可见的非首个项 */
-    .splash-nav__link:not(.splash-nav__link--mobile-hide) ~ .splash-nav__link:not(.splash-nav__link--mobile-hide) {
+    /* 竖分隔线：相邻链接之间 */
+    .splash-nav__link + .splash-nav__link {
       border-left: 1px solid var(--color-outline-20);
+    }
+
+    /* 搜索按钮：移动端只显示 icon */
+    .splash-nav__search {
+      padding: 0;
+      width: 2.25rem;
+      height: 2.25rem;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .splash-nav__search-label,
+    .splash-nav__search-kbd {
+      display: none;
+    }
+  }
+
+  /* —— 高对比度模式补充（可访问性） —— */
+  @media (prefers-reduced-motion: reduce) {
+    .splash-nav__search,
+    .splash-nav__link {
+      transition: none;
     }
   }
 </style>
