@@ -1,3 +1,11 @@
+---
+name: cto-release
+description: 发布前全面检查（§24）— 八维审核 + 性能预算 + WCAG 2.2 + 隐私合规 + Constitution 一致性
+argument-hint: "[版本号]"
+allowed-tools: ["Read", "Glob", "Grep", "Bash(*)"]
+model: opus
+disable-model-invocation: false
+---
 # 发布前全面检查
 
 项目即将发布，执行发布前全面检查。

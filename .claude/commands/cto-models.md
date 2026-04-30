@@ -1,3 +1,11 @@
+---
+name: cto-models
+description: 模型列表更新 — 同步手册 §1.2 / §5 / §14 模型路由表，发布新版本时使用
+argument-hint: "[变更说明]"
+allowed-tools: ["Read", "Edit", "Glob", "Grep", "WebSearch"]
+model: sonnet
+disable-model-invocation: false
+---
 # 模型列表更新
 
 根据平台变更更新 ai-playbook 中的所有模型引用点。

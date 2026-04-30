@@ -1,3 +1,10 @@
+---
+name: cto-refresh
+description: 刷新手册恢复行为规范 — 重读 playbook/handbook.md，对齐当前会话与最新版本
+allowed-tools: ["Read", "Glob"]
+model: haiku
+disable-model-invocation: false
+---
 # 刷新手册恢复行为规范
 
 你的角色和行为规范可能因为上下文压缩而退化。请立即恢复。

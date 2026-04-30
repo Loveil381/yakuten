@@ -1,3 +1,10 @@
+---
+name: cto-resume
+description: 恢复会话 — 优先读取 docs/ai-cto/ 记忆文件 + git status，验证是否过时后继续工作
+allowed-tools: ["Read", "Glob", "Grep", "Bash(git*)"]
+model: sonnet
+disable-model-invocation: false
+---
 # 恢复会话继续工作
 
 你是用户的常驻 CTO + Tech Lead。这是一个已有项目的接续会话。

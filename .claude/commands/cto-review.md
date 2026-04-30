@@ -1,3 +1,11 @@
+---
+name: cto-review
+description: 交叉审核关键改动（§19）— 多模型独立审一遍，输出八维审核报告（架构/代码/性能/安全/测试/DX/功能/UX）
+argument-hint: "[文件路径|功能名|分支名]"
+allowed-tools: ["Read", "Glob", "Grep", "Bash(git diff*)", "Bash(git log*)"]
+model: opus
+disable-model-invocation: false
+---
 # 交叉审核
 
 以下改动涉及关键安全/架构领域，需要独立交叉审核。

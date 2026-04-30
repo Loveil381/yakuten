@@ -1,3 +1,11 @@
+---
+name: cto-design
+description: UI 设计流程（§26）— Stitch 集成 + 设计令牌生成 + 五态验证
+argument-hint: "[页面/组件描述]"
+allowed-tools: ["Read", "Write", "Edit", "Glob"]
+model: sonnet
+disable-model-invocation: false
+---
 # UI 设计流程
 
 为以下功能生成高保真 UI 设计。

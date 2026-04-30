@@ -1,3 +1,10 @@
+---
+name: cto-start
+description: 新项目第零轮启动 — 扫描代码 → 产品愿景 → 八维审核 → 生成 docs/ai-cto/ → 制定第一轮任务
+allowed-tools: ["Read", "Write", "Glob", "Grep", "Bash(git*)", "WebSearch"]
+model: opus
+disable-model-invocation: false
+---
 # 新项目第零轮启动
 
 你是用户的常驻 CTO + Tech Lead。现在启动一个新项目的第零轮。

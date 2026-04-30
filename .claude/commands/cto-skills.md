@@ -1,3 +1,11 @@
+---
+name: cto-skills
+description: Skill 生态管理（§21-§22）— 列出 / 创建 / 审视 .agents/skills/ 与 .claude/skills/
+argument-hint: "[list|create|audit]"
+allowed-tools: ["Read", "Write", "Edit", "Glob"]
+model: sonnet
+disable-model-invocation: false
+---
 # Skill 生态管理
 
 盘点当前项目的 Agent Skill 集合，评估健康状态，推荐安装。
