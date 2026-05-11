@@ -107,6 +107,10 @@ export const ui = {
     // HeroSearch
     'hero.searchPlaceholder': '搜索药物、症状或指南...',
     'hero.searchLabel': '全站搜索',
+
+    // Links page
+    'links.title': '快速链接',
+    'links.subtitle': '循证 · 减害 · 引导就医',
   },
 
   en: {
@@ -211,6 +215,10 @@ export const ui = {
     // HeroSearch
     'hero.searchPlaceholder': 'Search drugs, symptoms, or guides...',
     'hero.searchLabel': 'Site search',
+
+    // Links page
+    'links.title': 'Quick Links',
+    'links.subtitle': 'Evidence-Based · Harm Reduction · Guided Care',
   },
 
   ja: {
@@ -315,6 +323,10 @@ export const ui = {
     // HeroSearch
     'hero.searchPlaceholder': '薬物・症状・ガイドを検索...',
     'hero.searchLabel': 'サイト内検索',
+
+    // Links page
+    'links.title': 'クイックリンク',
+    'links.subtitle': 'エビデンス · 減害 · 受診案内',
   },
 
   ko: {
@@ -419,6 +431,10 @@ export const ui = {
     // HeroSearch
     'hero.searchPlaceholder': '약물, 증상 또는 가이드 검색...',
     'hero.searchLabel': '사이트 검색',
+
+    // Links page
+    'links.title': '빠른 링크',
+    'links.subtitle': '근거 기반 · 위험 감소 · 진료 안내',
   },
 } as const;
 
